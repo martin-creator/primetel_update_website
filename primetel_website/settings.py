@@ -29,6 +29,7 @@ ALLOWED_HOSTS = ['*']  # Change this to your domain in production
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',  # Local development
+    'https://primetel.onrender.com',  # Production domain
 
 ]
 

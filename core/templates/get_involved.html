@@ -1,0 +1,838 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Involved | Primetel Tanzania</title>
+    <meta name="description" content="Join Primetel Tanzania's movement for health equity as a funder, volunteer, partner, fellow, or brand ally.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=stylesheet" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0056B3',
+                        secondary: '#E63946',
+                        accent: '#FFD700',
+                        darkblue: '#0A1F44',
+                        lightblue: '#E6F0FF'
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient-shift': 'gradientShift 5s ease infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        gradientShift: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(10, 31, 68, 0.95) 0%, rgba(0, 86, 179, 0.9) 100%);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #E63946;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover אחרי {
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0056B3 0%, #003366 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 86, 179, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 86, 179, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #E63946 0%, #C1121F 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
+        }
+        
+        .btn-fellowship {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .btn-fellowship:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        .btn-partner {
+            background: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+        
+        .btn-partner:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+        
+        .hover-3d {
+            transition: transform 0.5s ease;
+        }
+        
+        .hover-3d:hover {
+            transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+        }
+        
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            color: transparent;
+        }
+        
+        .floating-shape {
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .floating-shape-2 {
+            animation: float 6s ease-in-out infinite reverse;
+            animation-delay: 1s;
+        }
+        
+        .floating-shape-3 {
+            animation: float 7s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+        
+        .involve-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .involve-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 86, 179, 0.1) 0%, rgba(230, 57, 70, 0.1) 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .involve-card:hover::before {
+            opacity: 1;
+        }
+        
+        .involve-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .header-gradient {
+            background: linear-gradient(90deg, #0056B3, #E63946);
+            background-size: 200% 200%;
+            animation: gradient-shift 5s ease infinite;
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        @media (max-width: 1023px) {
+            .parallax-bg {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-white text-gray-900">
+    <!-- Navigation -->
+    <header class="fixed w-full z-50 bg-darkblue/95 backdrop-blur-md shadow-sm text-white">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
+                        <i class="fas fa-heartbeat text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-serif font-bold text-white">Primetel</span>
+                </div>
+                
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="{% url 'home' %}" class="nav-link text-white/90 hover:text-white font-medium">Home</a>
+                    <a href="{% url 'about' %}" class="nav-link text-white/90 hover:text-white font-medium">About</a>
+                    <a href="{% url 'services' %}" class="nav-link text-white/90 hover:text-white font-medium">Services</a>
+                    <a href="{% url 'impact' %}" class="nav-link text-white/90 hover:text-white font-medium">Impact</a>
+                    <a href="{% url 'get_involved' %}" class="nav-link text-white font-semibold border-b-2 border-secondary">Get Involved</a>
+                    <a href="{% url 'contact_us' %}" class="nav-link text-white font-semibold font-medium">Contact</a>
+                </nav>
+                
+                <button id="mobile-menu-button" class="lg:hidden text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-darkblue shadow-lg">
+            <div class="container mx-auto px-6 py-4 space-y-4 text-white">
+                <a href="{% url 'home' %}" class="block hover:text-secondary">Home</a>
+                <a href="{% url 'about' %}" class="block hover:text-secondary">About</a>
+                <a href="{% url 'services' %}" class="block hover:text-secondary">Services</a>
+                <a href="{% url 'impact' %}" class="block hover:text-secondary">Impact</a>
+                <a href="{% url 'get_involved' %}" class="block text-secondary border-l-4 border-secondary pl-4">Get Involved</a>
+                <a href="{% url 'contact_us' %}" class="block hover:text-secondary">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
+        <!-- 3D Background Animation -->
+        <div id="threejs-bg" class="absolute inset-0 z-0 opacity-20"></div>
+        
+        <!-- Floating Shapes -->
+        <div class="absolute top-20 left-10 w-16 h-16 rounded-full bg-secondary/20 floating-shape"></div>
+        <div class="absolute bottom-1/4 right-20 w-24 h-24 rounded-lg bg-accent/20 floating-shape-2"></div>
+        <div class="absolute top-1/3 right-1/4 w-20 h-20 rounded-full bg-white/10 floating-shape-3"></div>
+        
+        <div class="container mx-auto px-6 py-20 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-6 animate-fade-in">
+                    <span class="text-stroke">Join</span> Our <span class="text-accent">Movement</span>
+                </h1>
+                <p class="text-xl text-white/80 mb-8 animate-fade-in" style="animation-delay: 0.2s">
+                    Together, we can make quality healthcare accessible to every Tanzanian
+                </p>
+                <div class="animate-fade-in" style="animation-delay: 0.4s">
+                    <a href="#contact-form" class="btn-secondary text-white px-8 py-4 rounded-full font-medium flex items-center justify-center mx-auto w-max">
+                        <i class="fas fa-handshake mr-2"></i> Connect With Us
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
+            <i class="fas fa-chevron-down text-white text-xl"></i>
+        </div>
+    </section>
+
+    <!-- For Funders Section -->
+    <section id="funders" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto involve-card p-8 animate-fade-in-up">
+                <div class="flex flex-col lg:flex-row items-center">
+                    <div class="lg:w-2/3">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center text-primary text-2xl mr-6">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                            <h2 class="text-3xl font-serif font-bold text-primary">For Funders</h2>
+                        </div>
+                        <p class="text-lg text-gray-600 mb-4">Invest in proven, data-driven healthcare that reaches Tanzania's most underserved.</p>
+                        <ul class="list-disc pl-6 space-y-2 text-lg text-gray-600 mb-6">
+                            <li>$20 provides care for a family of five for an entire month</li>
+                            <li>$3,000 expands mobile outreach to a new community for six months</li>
+                            <li>$18,000 scales our USSD platform to reach 5,000+ users</li>
+                            <li>$50,000 upgrades an entire rural health corridor</li>
+                        </ul>
+                        <p class="text-lg text-gray-600 italic mb-6">Transparent reporting. Real impact. Every dollar tracked and celebrated.</p>
+                        <a href="#contact-form" class="btn-primary text-white px-8 py-4 rounded-full font-medium inline-flex items-center">
+                            <i class="fas fa-donate mr-2"></i> Become a Funder Partner
+                        </a>
+                    </div>
+                    <div class="lg:w-1/3 mt-8 lg:mt-0 lg:pl-8">
+                        <div class="relative h-64 rounded-xl overflow-hidden hover-3d">
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                 alt="Funders" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-primary/90 text-white p-4 text-center">
+                                <i class="fas fa-quote-left text-accent mr-2"></i>
+                                <span class="font-medium">"Our partnership with Primetel has delivered measurable impact"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Volunteers Section -->
+    <section id="volunteers" class="py-20 bg-lightblue">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto involve-card p-8 animate-fade-in-up" style="animation-delay: 0.2s">
+                <div class="flex flex-col lg:flex-row items-center">
+                    <div class="lg:w-2/3">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary text-2xl mr-6">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                            <h2 class="text-3xl font-serif font-bold text-secondary">For Volunteers</h2>
+                        </div>
+                        <p class="text-lg text-gray-600 mb-4">Your skills. Our mission. Let's serve together.</p>
+                        <p class="text-lg text-gray-600 mb-4">We welcome:</p>
+                        <ul class="list-disc pl-6 space-y-2 text-lg text-gray-600 mb-6">
+                            <li>Medical professionals</li>
+                            <li>Mental health practitioners</li>
+                            <li>University interns (public health, M&E, tech)</li>
+                            <li>Outreach mobilizers</li>
+                            <li>Content creators & storytellers</li>
+                        </ul>
+                        <p class="text-lg text-gray-600 italic mb-6">"I joined for one summer. I stayed because I found purpose." — Linda, Volunteer Nurse</p>
+                        <a href="#contact-form" class="btn-secondary text-white px-8 py-4 rounded-full font-medium inline-flex items-center">
+                            <i class="fas fa-user-plus mr-2"></i> Apply to Volunteer
+                        </a>
+                    </div>
+                    <div class="lg:w-1/3 mt-8 lg:mt-0 lg:pl-8">
+                        <div class="relative h-64 rounded-xl overflow-hidden hover-3d">
+                            <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                 alt="Volunteers" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-secondary/90 text-white p-4 text-center">
+                                <i class="fas fa-quote-left text-accent mr-2"></i>
+                                <span class="font-medium">"The most rewarding experience of my career"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Partners Section -->
+    <section id="partners" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto involve-card p-8 animate-fade-in-up" style="animation-delay: 0.4s">
+                <div class="flex flex-col lg:flex-row items-center">
+                    <div class="lg:w-2/3">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center text-primary text-2xl mr-6">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <h2 class="text-3xl font-serif font-bold text-primary">For Partners</h2>
+                        </div>
+                        <p class="text-lg text-gray-600 mb-4">We co-create programs with schools, clinics, nonprofits, tech companies, and universities. If you care about youth, mental health, maternal care, or tech-for-health—let's talk.</p>
+                        <p class="text-lg text-gray-600 mb-4">Potential collaborations:</p>
+                        <ul class="list-disc pl-6 space-y-2 text-lg text-gray-600 mb-6">
+                            <li>Research partnerships</li>
+                            <li>Digital health innovation</li>
+                            <li>In-kind donations (devices, medications, airtime)</li>
+                            <li>Curriculum co-development</li>
+                            <li>Joint outreach programs</li>
+                        </ul>
+                        <a href="#contact-form" class="btn-partner text-white px-8 py-4 rounded-full font-medium inline-flex items-center">
+                            <i class="fas fa-link mr-2"></i> Partner With Primetel
+                        </a>
+                    </div>
+                    <div class="lg:w-1/3 mt-8 lg:mt-0 lg:pl-8">
+                        <div class="relative h-64 rounded-xl overflow-hidden hover-3d">
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                 alt="Partners" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-purple-600/90 text-white p-4 text-center">
+                                <i class="fas fa-quote-left text-accent mr-2"></i>
+                                <span class="font-medium">"Collaborating with Primetel has been transformative"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fellowship Section -->
+    <section id="fellowship" class="py-20 bg-lightblue">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto involve-card p-8 animate-fade-in-up" style="animation-delay: 0.6s">
+                <div class="flex flex-col lg:flex-row items-center">
+                    <div class="lg:w-2/3">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center text-accent text-2xl mr-6">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <h2 class="text-3xl font-serif font-bold text-accent">Join Our Fellowship</h2>
+                        </div>
+                        <p class="text-lg text-gray-600 mb-4">Are you a Tanzanian changemaker under 35? The Primetel Public Health Fellowship selects 10 emerging leaders each year for a hands-on experience in health innovation, outreach, and advocacy.</p>
+                        <p class="text-lg text-gray-600 mb-4">Fellows receive:</p>
+                        <ul class="list-disc pl-6 space-y-2 text-lg text-gray-600 mb-6">
+                            <li>Monthly stipend</li>
+                            <li>Professional mentorship</li>
+                            <li>National exposure</li>
+                            <li>A chance to lead real programs</li>
+                        </ul>
+                        <a href="#contact-form" class="btn-fellowship text-darkblue px-8 py-4 rounded-full font-medium inline-flex items-center">
+                            <i class="fas fa-file-alt mr-2"></i> Apply to the Fellowship
+                        </a>
+                    </div>
+                    <div class="lg:w-1/3 mt-8 lg:mt-0 lg:pl-8">
+                        <div class="relative h-64 rounded-xl overflow-hidden hover-3d">
+                            <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                 alt="Fellowship" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-accent/90 text-darkblue p-4 text-center">
+                                <i class="fas fa-quote-left text-secondary mr-2"></i>
+                                <span class="font-medium">"The fellowship shaped my career in public health"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Ally Section -->
+    <section id="brand-ally" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto involve-card p-8 animate-fade-in-up" style="animation-delay: 0.8s">
+                <div class="flex flex-col lg:flex-row items-center">
+                    <div class="lg:w-2/3">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary text-2xl mr-6">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <h2 class="text-3xl font-serif font-bold text-secondary">Become a Brand Ally</h2>
+                        </div>
+                        <p class="text-lg text-gray-600 mb-6">Show the world that your company cares about health justice. CSR collaborations welcome.</p>
+                        <p class="text-lg text-gray-600 mb-6">We proudly co-brand campaigns and offer visibility across events, USSD screens, and our media platforms.</p>
+                        <a href="#contact-form" class="btn-secondary text-white px-8 py-4 rounded-full font-medium inline-flex items-center">
+                            <i class="fas fa-briefcase mr-2"></i> Partner Through CSR
+                        </a>
+                    </div>
+                    <div class="lg:w-1/3 mt-8 lg:mt-0 lg:pl-8">
+                        <div class="relative h-64 rounded-xl overflow-hidden hover-3d">
+                            <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                                 alt="Brand Ally" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 bg-secondary/90 text-white p-4 text-center">
+                                <i class="fas fa-quote-left text-accent mr-2"></i>
+                                <span class="font-medium">"Aligning with Primetel strengthened our brand purpose"</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Other Ways Section -->
+    <section id="other-ways" class="py-20 bg-lightblue">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto involve-card p-8 animate-fade-in-up" style="animation-delay: 1s">
+                <h2 class="text-3xl font-serif font-bold text-center text-primary mb-8">Other Ways to Get Involved</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary text-xl mr-4 mt-1">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Speak Up</h3>
+                            <p class="text-gray-600">Share our stories online and help spread awareness</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary text-xl mr-4 mt-1">
+                            <i class="fas fa-user-friends"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Refer Someone</h3>
+                            <p class="text-gray-600">Send a friend to our care team who might need support</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary text-xl mr-4 mt-1">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Host a Talk</h3>
+                            <p class="text-gray-600">Invite us to your school, community, or workplace</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary text-xl mr-4 mt-1">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">Fundraise</h3>
+                            <p class="text-gray-600">Set up a birthday, team, or campus campaign</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 bg-darkblue text-white parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1579684453423-f84349ef60b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80')">
+        <div class="absolute inset-0 bg-darkblue/80"></div>
+        <div class="container mx-auto px-6 relative">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">
+                    Our <span class="text-accent">Community</span> Impact
+                </h2>
+                <p class="text-xl text-white/80 max-w-3xl mx-auto">
+                    The measurable difference made possible by people like you
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.1s">
+                    <div class="text-4xl font-bold mb-2">3</div>
+                    <div class="text-white/80">Regions Active</div>
+                </div>
+                <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.2s">
+                    <div class="text-4xl font-bold mb-2">35,000+</div>
+                    <div class="text-white/80">People Reached</div>
+                </div>
+                <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.3s">
+                    <div class="text-4xl font-bold mb-2">200+</div>
+                    <div class="text-white/80">Volunteers</div>
+                </div>
+                <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.4s">
+                    <div class="text-4xl font-bold mb-2">15</div>
+                    <div class="text-white/80">Strategic Partners</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact-form" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-xl animate-fade-in-up" style="animation-delay: 1.2s">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">
+                        Ready to <span class="text-secondary">Connect</span>?
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                        Fill out the form below and we'll get back to you within 48 hours
+                    </p>
+                </div>
+                
+                {% if messages %}
+                <div class="mb-6 text-center bg-green-100 border border-green-300 text-green-700 px-4 py-3 rounded-lg">
+                    {% for message in messages %}
+                    <p class="text-lg font-medium">{{ message }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <form method="post" action="{% url 'get_involved' %}" class="space-y-6">
+                    {% csrf_token %}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="{{ get_involved_form.name.id_for_label }}" class="block text-lg font-medium text-gray-700 mb-2">Name</label>
+                            {{ get_involved_form.name|add_class:"w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary" }}
+                            {% if get_involved_form.name.errors %}
+                            <p class="text-red-500 text-sm mt-1">{{ get_involved_form.name.errors.as_text }}</p>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <label for="{{ get_involved_form.email.id_for_label }}" class="block text-lg font-medium text-gray-700 mb-2">Email</label>
+                            {{ get_involved_form.email|add_class:"w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary" }}
+                            {% if get_involved_form.email.errors %}
+                            <p class="text-red-500 text-sm mt-1">{{ get_involved_form.email.errors.as_text }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="{{ get_involved_form.organization.id_for_label }}" class="block text-lg font-medium text-gray-700 mb-2">Organization (optional)</label>
+                        {{ get_involved_form.organization|add_class:"w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary" }}
+                        {% if get_involved_form.organization.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ get_involved_form.organization.errors.as_text }}</p>
+                        {% endif %}
+                    </div>
+                    
+                    <div>
+                        <label for="{{ get_involved_form.how_involved.id_for_label }}" class="block text-lg font-medium text-gray-700 mb-2">How would you like to get involved?</label>
+                        {{ get_involved_form.how_involved|add_class:"w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary" }}
+                        {% if get_involved_form.how_involved.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ get_involved_form.how_involved.errors.as_text }}</p>
+                        {% endif %}
+                    </div>
+                    
+                    <div>
+                        <label for="{{ get_involved_form.message.id_for_label }}" class="block text-lg font-medium text-gray-700 mb-2">Message</label>
+                        {{ get_involved_form.message|add_class:"w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary h-32" }}
+                        {% if get_involved_form.message.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ get_involved_form.message.errors.as_text }}</p>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="flex justify-center">
+                        <button type="submit" class="btn-primary text-white px-12 py-4 rounded-full font-medium flex items-center">
+                            <i class="fas fa-paper-plane mr-2"></i> Send Message
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="mt-12 text-center">
+                    <p class="text-xl font-serif italic text-primary">
+                        "The power of Primetel is not just in our reach—it's in our roots. We grow because people like you say yes."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darkblue text-white pt-20 pb-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
+                            <i class="fas fa-heartbeat text-white text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-serif font-bold">Primetel</span>
+                    </div>
+                    <p class="text-white/80 mb-6">
+                        Transforming healthcare delivery through innovation and community engagement.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'home' %}" class="text-white/80 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="{% url 'about' %}" class="text-white/80 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="{% url 'services' %}" class="text-white/80 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="{% url 'impact' %}" class="text-white/80 hover:text-white transition-colors">Impact</a></li>
+                        <li><a href="{% url 'get_involved' %}" class="text-white/80 hover:text-white transition-colors">Get Involved</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Ways to Engage</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'get_involved' %}#funders" class="text-white/80 hover:text-white transition-colors">Donate</a></li>
+                        <li><a href="{% url 'get_involved' %}#volunteers" class="text-white/80 hover:text-white transition-colors">Volunteer</a></li>
+                        <li><a href="{% url 'get_involved' %}#partners" class="text-white/80 hover:text-white transition-colors">Partner</a></li>
+                        <li><a href="{% url 'get_involved' %}#fellowship" class="text-white/80 hover:text-white transition-colors">Fellowship</a></li>
+                        <li><a href="{% url 'get_involved' %}#brand-ally" class="text-white/80 hover:text-white transition-colors">CSR Opportunities</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Contact Us</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">Monduli, Arusha, Tanzania</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">+255 XXX XXX XXX</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">info@primetel.co.tz</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-globe text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">www.primetel.co.tz</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-white/60 text-sm mb-4 md:mb-0">
+                    &copy; 2023 Primetel. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 3D Background Animation
+        const threeContainer = document.getElementById('threejs-bg');
+        if (threeContainer) {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            threeContainer.appendChild(renderer.domElement);
+            
+            // Create a torus knot geometry
+            const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+            const material = new THREE.MeshBasicMaterial({ 
+                color: 0xE63946, 
+                wireframe: true,
+                transparent: true,
+                opacity: 0.5
+            });
+            const knot = new THREE.Mesh(geometry, material);
+            scene.add(knot);
+            
+            camera.position.z = 30;
+            
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                knot.rotation.x += 0.005;
+                knot.rotation.y += 0.005;
+                renderer.render(scene, camera);
+            }
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+        
+        // GSAP animations for elements
+        gsap.from(".animate-fade-in", {
+            opacity: 0,
+            y: 20,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power2.out"
+        });
+        
+        gsap.from(".animate-fade-in-up", {
+            opacity: 0,
+            y: 40,
+            duration: 1,
+            stagger: 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: ".animate-fade-in-up",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

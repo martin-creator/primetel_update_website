@@ -1,0 +1,779 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Impact | Primetel Healthcare</title>
+    <meta name="description" content="See how Primetel is transforming healthcare access in Tanzania through measurable impact and real stories">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0056B3',
+                        secondary: '#E63946',
+                        accent: '#FFD700',
+                        darkblue: '#0A1F44',
+                        lightblue: '#E6F0FF'
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient-x': 'gradientX 8s ease infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        gradientX: {
+                            '0%, 100%': { 'background-position': '0% 50%' },
+                            '50%': { 'background-position': '100% 50%' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+        
+        .impact-hero {
+            background: linear-gradient(135deg, rgba(10, 31, 68, 0.95) 0%, rgba(0, 86, 179, 0.9) 100%), 
+                       url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #E63946;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0056B3 0%, #003366 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 86, 179, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 86, 179, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #E63946 0%, #C1121F 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
+        }
+        
+        .hover-3d {
+            transition: transform 0.5s ease;
+        }
+        
+        .hover-3d:hover {
+            transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+        }
+        
+        .impact-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .impact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .impact-stat {
+            background: linear-gradient(135deg, rgba(0, 86, 179, 0.1) 0%, rgba(230, 57, 70, 0.1) 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .impact-stat:hover {
+            background: linear-gradient(135deg, rgba(0, 86, 179, 0.2) 0%, rgba(230, 57, 70, 0.2) 100%);
+            transform: scale(1.05);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #0056B3, #E63946);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradient-x 8s ease infinite;
+            background-size: 200% 200%;
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 4rem;
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0.75rem;
+            top: 0;
+            bottom: -4rem;
+            width: 2px;
+            background: linear-gradient(to bottom, #0056B3, #E63946);
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+        
+        .timeline-dot::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            animation: pulse-slow 2s infinite;
+        }
+        
+        @media (max-width: 1023px) {
+            .parallax-bg {
+                background-attachment: scroll;
+            }
+            
+            .timeline-item::before {
+                bottom: -2rem;
+            }
+        }
+
+        /* Added styles for chart containers */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body class="font-sans bg-white text-gray-900">
+    <!-- Navigation -->
+    <header class="fixed w-full z-50 bg-darkblue/95 backdrop-blur-md shadow-sm text-white">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
+                        <i class="fas fa-heartbeat text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-serif font-bold text-white">Primetel</span>
+                </div>
+                
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="{% url 'home' %}" class="nav-link text-white/90 hover:text-white font-medium">Home</a>
+                    <a href="{% url 'about' %}" class="nav-link text-white/90 hover:text-white font-medium">About</a>
+                    <a href="{% url 'services' %}" class="nav-link text-white/90 hover:text-white font-medium">Services</a>
+                    <a href="{% url 'impact' %}" class="nav-link text-white/90 hover:text-white border-b-2 border-secondary">Impact</a>
+                    <a href="{% url 'news_list' %}" class="nav-link text-white font-semibold font-medium">News</a>
+                    <a href="{% url 'contact_us' %}" class="nav-link text-white font-semibold font-medium">Contact</a>
+                </nav>
+                
+                <button id="mobile-menu-button" class="lg:hidden text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-darkblue shadow-lg">
+            <div class="container mx-auto px-6 py-4 space-y-4 text-white">
+                <a href="{% url 'home' %}" class="block hover:text-secondary">Home</a>
+                <a href="{% url 'about' %}" class="block hover:text-secondary">About</a>
+                <a href="{% url 'services' %}" class="block hover:text-secondary">Services</a>
+                <a href="{% url 'impact' %}" class="block hover:text-secondary">Impact</a>
+                <a href="{% url 'news_list' %}" class="block text-secondary border-l-4 border-secondary pl-4">News</a>
+                <a href="{% url 'contact_us' %}" class="block hover:text-secondary">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="impact-hero text-white min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-darkblue/70"></div>
+        <div class="container mx-auto px-6 py-20 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-6 animate-fade-in">
+                    Transforming <span class="gradient-text">Healthcare Access</span> in Tanzania
+                </h1>
+                <p class="text-xl md:text-2xl text-white/80 mb-10 animate-fade-in" style="animation-delay: 0.2s">
+                    Measuring our impact through lives touched, communities transformed, and healthcare barriers broken
+                </p>
+                <a href="#stats" class="btn-secondary text-white px-8 py-4 rounded-full font-medium animate-fade-in" style="animation-delay: 0.4s">
+                    <i class="fas fa-chart-line mr-2"></i> See Our Impact
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
+            <i class="fas fa-chevron-down text-white text-xl"></i>
+        </div>
+    </section>
+
+    <!-- Impact Stats Section -->
+    <section id="stats" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-fade-in">
+                <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">By The Numbers</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">
+                    Our <span class="text-primary">Impact</span> in 2025
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    The measurable difference we're making across Tanzania
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="impact-stat p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.1s">
+                    <div class="text-4xl font-bold text-primary mb-2">35,000+</div>
+                    <p class="text-lg text-gray-600">People Reached</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                </div>
+                
+                <div class="impact-stat p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.2s">
+                    <div class="text-4xl font-bold text-primary mb-2">12,400</div>
+                    <p class="text-lg text-gray-600">Counseling Sessions</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                </div>
+                
+                <div class="impact-stat p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.3s">
+                    <div class="text-4xl font-bold text-primary mb-2">10,000+</div>
+                    <p class="text-lg text-gray-600">Students Sensitized</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                </div>
+                
+                <div class="impact-stat p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.4s">
+                    <div class="text-4xl font-bold text-primary mb-2">3</div>
+                    <p class="text-lg text-gray-600">Regions Served</p>
+                    <div class="mt-4 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center animate-fade-in-up" style="animation-delay: 0.5s">
+                <p class="text-lg text-gray-600 italic">Data collected and verified through our digital health records system</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Timeline Section -->
+    <section class="py-20 bg-lightblue">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-fade-in">
+                <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Our Journey</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">
+                    Impact <span class="text-primary">Timeline</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    How our reach and effectiveness have grown over the years
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="impact-card bg-white p-6 rounded-xl shadow-md animate-fade-in-up" style="animation-delay: 0.1s">
+                        <div class="text-3xl font-bold text-primary mb-2">2018</div>
+                        <div class="h-1 bg-primary rounded-full mb-4"></div>
+                        <p class="text-gray-600">Founded in Monduli with mental health outreach to 5 schools</p>
+                    </div>
+                    
+                    <div class="impact-card bg-white p-6 rounded-xl shadow-md animate-fade-in-up" style="animation-delay: 0.2s">
+                        <div class="text-3xl font-bold text-primary mb-2">2019</div>
+                        <div class="h-1 bg-primary rounded-full mb-4"></div>
+                        <p class="text-gray-600">Launched mobile clinics serving 5 rural communities</p>
+                    </div>
+                    
+                    <div class="impact-card bg-white p-6 rounded-xl shadow-md animate-fade-in-up" style="animation-delay: 0.3s">
+                        <div class="text-3xl font-bold text-primary mb-2">2020</div>
+                        <div class="h-1 bg-primary rounded-full mb-4"></div>
+                        <p class="text-gray-600">Introduced USSD health platform reaching 420 users</p>
+                    </div>
+                    
+                    <div class="impact-card bg-white p-6 rounded-xl shadow-md animate-fade-in-up" style="animation-delay: 0.4s">
+                        <div class="text-3xl font-bold text-primary mb-2">2021</div>
+                        <div class="h-1 bg-primary rounded-full mb-4"></div>
+                        <p class="text-gray-600">Expanded to Kilimanjaro and Manyara regions</p>
+                    </div>
+                    
+                    <div class="impact-card bg-white p-6 rounded-xl shadow-md animate-fade-in-up" style="animation-delay: 0.5s">
+                        <div class="text-3xl font-bold text-primary mb-2">2022</div>
+                        <div class="h-1 bg-primary rounded-full mb-4"></div>
+                        <p class="text-gray-600">Reached 10,000+ students with mental health education</p>
+                    </div>
+                    
+                    <div class="impact-card bg-white p-6 rounded-xl shadow-md animate-fade-in-up" style="animation-delay: 0.6s">
+                        <div class="text-3xl font-bold text-primary mb-2">2023</div>
+                        <div class="h-1 bg-primary rounded-full mb-4"></div>
+                        <p class="text-gray-600">Partnered with Ministry of Health to scale our model</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stories Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-fade-in">
+                <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Real Impact</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">
+                    Stories of <span class="text-primary">Transformation</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    The real people behind our statistics
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="impact-card bg-white rounded-xl shadow-xl overflow-hidden animate-fade-in-up" style="animation-delay: 0.1s">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                             alt="Rehema" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-3 h-3 rounded-full bg-secondary mr-2"></div>
+                            <span class="text-sm font-medium text-secondary">Student, Monduli</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Rehema's Story</h3>
+                        <p class="text-gray-600 italic mb-4">"Before Primetel's school visits I thought sadness was just weakness. The counselor taught us about depression, and I got help. I'm back in class and leading the debate club."</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">Mental Health Program</span>
+                            <span class="text-sm font-medium text-primary">2024</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="impact-card bg-white rounded-xl shadow-xl overflow-hidden animate-fade-in-up" style="animation-delay: 0.3s">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                             alt="Mzee Juma" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-3 h-3 rounded-full bg-secondary mr-2"></div>
+                            <span class="text-sm font-medium text-secondary">Maasai Elder</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Mzee Juma's Story</h3>
+                        <p class="text-gray-600 italic mb-4">"A doctor entered my boma for the first time in 64 years. They treated my ulcers and explained my tablets in Maa. I feel seen."</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">Mobile Clinic</span>
+                            <span class="text-sm font-medium text-primary">2023</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="impact-card bg-white rounded-xl shadow-xl overflow-hidden animate-fade-in-up" style="animation-delay: 0.5s">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                             alt="Fatuma" 
+                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-3 h-3 rounded-full bg-secondary mr-2"></div>
+                            <span class="text-sm font-medium text-secondary">Mother of Four</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Fatuma's Story</h3>
+                        <p class="text-gray-600 italic mb-4">"The outreach team showed me how to give my child asthma medicine properly. Emergency nights are now rare."</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">Community Outreach</span>
+                            <span class="text-sm font-medium text-primary">2025</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 animate-fade-in-up" style="animation-delay: 0.7s">
+                <a href="#" class="inline-flex items-center text-primary font-medium group">
+                    View More Stories
+                    <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Visualization Section -->
+    <section class="py-20 bg-lightblue">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-fade-in">
+                <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Data Insights</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">
+                    Impact <span class="text-primary">Visualized</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Key metrics that demonstrate our growing reach and effectiveness
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-fade-in-up" style="animation-delay: 0.1s">
+                    <div class="bg-white p-8 rounded-2xl shadow-xl hover-3d">
+                        <h3 class="text-xl font-bold mb-4 text-primary">People Reached by Year</h3>
+                        <div class="chart-container">
+                            <canvas id="peopleReachedChart"></canvas>
+                        </div>
+                        <p class="text-gray-600 mt-4">Our reach has grown exponentially since our founding, with particular acceleration after introducing mobile clinics and digital services.</p>
+                    </div>
+                </div>
+                
+                <div class="animate-fade-in-up" style="animation-delay: 0.3s">
+                    <div class="bg-white p-8 rounded-2xl shadow-xl hover-3d">
+                        <h3 class="text-xl font-bold mb-4 text-primary">Service Breakdown</h3>
+                        <div class="chart-container">
+                            <canvas id="serviceBreakdownChart"></canvas>
+                        </div>
+                        <p class="text-gray-600 mt-4">While mental health remains our core focus, we've expanded to provide comprehensive primary care and health education services.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-fade-in">
+                <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Collaboration</span>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">
+                    Our <span class="text-primary">Partners</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Working together to amplify our impact
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 animate-fade-in-up">
+                <div class="impact-card bg-white p-8 rounded-xl shadow-md flex items-center justify-center hover-3d">
+                    <img src="https://via.placeholder.com/150x80/0A1F44/FFFFFF?text=MoHCDGEC" alt="Ministry of Health" class="h-12 object-contain">
+                </div>
+                
+                <div class="impact-card bg-white p-8 rounded-xl shadow-md flex items-center justify-center hover-3d" style="animation-delay: 0.2s">
+                    <img src="https://via.placeholder.com/150x80/0A1F44/FFFFFF?text=AMREF" alt="AMREF Health Africa" class="h-12 object-contain">
+                </div>
+                
+                <div class="impact-card bg-white p-8 rounded-xl shadow-md flex items-center justify-center hover-3d" style="animation-delay: 0.4s">
+                    <img src="https://via.placeholder.com/150x80/0A1F44/FFFFFF?text=StrongMinds" alt="StrongMinds" class="h-12 object-contain">
+                </div>
+                
+                <div class="impact-card bg-white p-8 rounded-xl shadow-md flex items-center justify-center hover-3d" style="animation-delay: 0.6s">
+                    <img src="https://via.placeholder.com/150x80/0A1F44/FFFFFF?text=Orkeeswa" alt="Orkeeswa" class="h-12 object-contain">
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 animate-fade-in-up" style="animation-delay: 0.8s">
+                <a href="#" class="btn-primary text-white px-8 py-4 rounded-full font-medium">
+                    <i class="fas fa-handshake mr-2"></i> Become a Partner
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-darkblue text-white parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1579684453423-f84349ef60b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80')">
+        <div class="absolute inset-0 bg-darkblue/80"></div>
+        <div class="container mx-auto px-6 relative">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6 animate-fade-in">
+                    Join Us in <span class="text-accent">Transforming Healthcare</span>
+                </h2>
+                <p class="text-xl text-white/80 mb-10 animate-fade-in" style="animation-delay: 0.2s">
+                    Your support helps us reach more communities and break down barriers to healthcare access
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in" style="animation-delay: 0.4s">
+                    <a href="#" class="btn-secondary text-white px-8 py-4 rounded-full font-medium">
+                        <i class="fas fa-donate mr-2"></i> Donate Now
+                    </a>
+                    <a href="#" class="border border-white/20 hover:border-white/40 text-white px-8 py-4 rounded-full font-medium transition-all duration-300">
+                        <i class="fas fa-users mr-2"></i> Volunteer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darkblue text-white pt-20 pb-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
+                            <i class="fas fa-heartbeat text-white text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-serif font-bold">Primetel</span>
+                    </div>
+                    <p class="text-white/80 mb-6">
+                        Transforming healthcare delivery through innovation and community engagement.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'home' %}" class="text-white/80 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="{% url 'about' %}" class="text-white/80 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="{% url 'services' %}" class="text-white/80 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="{% url 'impact' %}" class="text-white/80 hover:text-white transition-colors">Impact</a></li>
+                        <li><a href="{% url 'get_involved' %}" class="text-white/80 hover:text-white transition-colors">Get Involved</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'services' %}#mental-health" class="text-white/80 hover:text-white transition-colors">Mental Health</a></li>
+                        <li><a href="{% url 'services' %}#primary-care" class="text-white/80 hover:text-white transition-colors">Primary Care</a></li>
+                        <li><a href="{% url 'services' %}#mobile-clinics" class="text-white/80 hover:text-white transition-colors">Mobile Clinics</a></li>
+                        <li><a href="{% url 'services' %}#school-programs" class="text-white/80 hover:text-white transition-colors">School Programs</a></li>
+                        <li><a href="{% url 'services' %}#community-outreach" class="text-white/80 hover:text-white transition-colors">Community Outreach</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Contact Us</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">Monduli, Arusha, Tanzania</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">+255 XXX XXX XXX</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">info@primetel.co.tz</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-globe text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">www.primetel.co.tz</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-white/60 text-sm mb-4 md:mb-0">
+                    &copy; 2023 Primetel. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // Chart.js initialization
+        // People Reached by Year (Bar Chart)
+        const peopleReachedCtx = document.getElementById('peopleReachedChart').getContext('2d');
+        new Chart(peopleReachedCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+                datasets: [{
+                    label: 'People Reached',
+                    data: [500, 2000, 5000, 8000, 12000, 20000, 28000, 35000],
+                    backgroundColor: ['#0056B3', '#0056B3', '#0056B3', '#0056B3', '#0056B3', '#0056B3', '#E63946', '#E63946'],
+                    borderColor: ['#003366', '#003366', '#003366', '#003366', '#003366', '#003366', '#C1121F', '#C1121F'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of People',
+                            color: '#0A1F44'
+                        },
+                        grid: {
+                            color: 'rgba(10, 31, 68, 0.1)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Year',
+                            color: '#0A1F44'
+                        },
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Service Breakdown (Doughnut Chart)
+        const serviceBreakdownCtx = document.getElementById('serviceBreakdownChart').getContext('2d');
+        new Chart(serviceBreakdownCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Mental Health', 'Primary Care', 'Education'],
+                datasets: [{
+                    data: [45, 35, 20],
+                    backgroundColor: ['#0056B3', '#E63946', '#FFD700'],
+                    borderColor: ['#003366', '#C1121F', '#CCAC00'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#0A1F44',
+                            padding: 20
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

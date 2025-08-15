@@ -1,0 +1,591 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Updates | Primetel Healthcare</title>
+    <meta name="description" content="Stay updated with Primetel's latest news, stories, and healthcare impact in Tanzania">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0056B3',
+                        secondary: '#E63946',
+                        accent: '#FFD700',
+                        darkblue: '#0A1F44',
+                        lightblue: '#E6F0FF'
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(10, 31, 68, 0.95) 0%, rgba(0, 86, 179, 0.9) 100%);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #E63946;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0056B3 0%, #003366 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 86, 179, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 86, 179, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #E63946 0%, #C1121F 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
+        }
+        
+        .hover-3d {
+            transition: transform 0.5s ease;
+        }
+        
+        .hover-3d:hover {
+            transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+        }
+        
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            color: transparent;
+        }
+        
+        .floating-shape {
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .floating-shape-2 {
+            animation: float 6s ease-in-out infinite reverse;
+            animation-delay: 1s;
+        }
+        
+        .floating-shape-3 {
+            animation: float 7s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+        
+        .news-card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-chip {
+            transition: all 0.3s ease;
+        }
+        
+        .category-chip:hover {
+            transform: translateY(-2px);
+        }
+        
+        .search-bar {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .search-bar:focus-within {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        @media (max-width: 1023px) {
+            .parallax-bg {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-white text-gray-900">
+    <!-- Navigation -->
+    <header class="fixed w-full z-50 bg-darkblue/95 backdrop-blur-md shadow-sm text-white">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
+                        <i class="fas fa-heartbeat text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-serif font-bold text-white">Primetel</span>
+                </div>
+                
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="{% url 'home' %}" class="nav-link text-white/90 hover:text-white font-medium">Home</a>
+                    <a href="{% url 'about' %}" class="nav-link text-white/90 hover:text-white font-medium">About</a>
+                    <a href="{% url 'services' %}" class="nav-link text-white/90 hover:text-white font-medium">Services</a>
+                    <a href="{% url 'impact' %}" class="nav-link text-white/90 hover:text-white font-medium">Impact</a>
+                    <a href="{% url 'news_list' %}" class="nav-link text-white font-semibold border-b-2 border-secondary">News</a>
+                    <a href="{% url 'contact_us' %}" class="nav-link text-white/90 hover:text-white font-medium">Contact</a>
+                </nav>
+                
+                <button id="mobile-menu-button" class="lg:hidden text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-darkblue shadow-lg">
+            <div class="container mx-auto px-6 py-4 space-y-4 text-white">
+                <a href="{% url 'home' %}" class="block hover:text-secondary">Home</a>
+                <a href="{% url 'about' %}" class="block hover:text-secondary">About</a>
+                <a href="{% url 'services' %}" class="block hover:text-secondary">Services</a>
+                <a href="{% url 'impact' %}" class="block hover:text-secondary">Impact</a>
+                <a href="{% url 'news_list' %}" class="block text-secondary border-l-4 border-secondary pl-4">News</a>
+                <a href="{% url 'contact_us' %}" class="block hover:text-secondary">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
+        <!-- 3D Background Animation -->
+        <div id="threejs-bg" class="absolute inset-0 z-0 opacity-20"></div>
+        
+        <!-- Floating Shapes -->
+        <div class="absolute top-20 left-10 w-16 h-16 rounded-full bg-secondary/20 floating-shape"></div>
+        <div class="absolute bottom-1/4 right-20 w-24 h-24 rounded-lg bg-accent/20 floating-shape-2"></div>
+        <div class="absolute top-1/3 right-1/4 w-20 h-20 rounded-full bg-white/10 floating-shape-3"></div>
+        
+        <div class="container mx-auto px-6 py-20 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-6 animate-fade-in">
+                    <span class="text-stroke">Latest</span> News & <span class="text-accent">Updates</span>
+                </h1>
+                <p class="text-xl text-white/80 mb-8 animate-fade-in" style="animation-delay: 0.2s">
+                    Stories of impact, innovation, and healthcare transformation across Tanzania
+                </p>
+                
+                <!-- Search Bar -->
+                <div class="max-w-2xl mx-auto animate-fade-in" style="animation-delay: 0.4s">
+                    <div class="relative search-bar rounded-full bg-white/10 backdrop-blur-sm">
+                        <form method="get">
+                            <input type="text" name="search" placeholder="Search news articles..." value="{{ request.GET.search|default_if_none:'' }}" class="w-full bg-transparent border-none text-white py-4 px-6 pr-12 focus:outline-none focus:ring-0 placeholder-white/70">
+                            <button type="submit" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/70 hover:text-white">
+                                <i class="fas fa-search text-xl"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
+            <i class="fas fa-chevron-down text-white text-xl"></i>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-12 bg-lightblue">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="{% url 'news_list' %}" class="category-chip bg-white text-primary px-6 py-2 rounded-full font-medium hover:bg-primary hover:text-white {% if not request.GET.category %}bg-primary text-white{% endif %}">
+                    <i class="fas fa-newspaper mr-2"></i> All News
+                </a>
+                {% for category_value, category_name in categories %}
+                <a href="{% url 'news_list' %}?category={{ category_value }}" class="category-chip bg-dark text-primary px-6 py-2 rounded-full font-medium hover:bg-primary hover:text-white {% if request.GET.category == category_value %}bg-primary text-white{% endif %}">
+                    <i class="fas fa-{% if category_value == 'health_updates' %}heartbeat{% elif category_value == 'community_stories' %}users{% elif category_value == 'education' %}graduation-cap{% elif category_value == 'technology' %}mobile-alt{% else %}hand-holding-heart{% endif %} mr-2"></i> {{ category_name }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Article -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            {% if news_list %}
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden news-card hover-3d animate-fade-in-up">
+                <div class="flex flex-col lg:flex-row">
+                    <div class="lg:w-1/2">
+                        <img src="{% if news_list.0.image %}{{ news_list.0.image.url }}{% else %}https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80{% endif %}" 
+                             alt="{{ news_list.0.title }}" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="lg:w-1/2 p-8">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-medium">Featured</span>
+                            <span class="ml-4 text-gray-500"><i class="far fa-calendar-alt mr-1"></i> {{ news_list.0.date|date:"F j, Y" }}</span>
+                        </div>
+                        <h2 class="text-3xl font-serif font-bold mb-4">{{ news_list.0.title }}</h2>
+                        <p class="text-lg text-gray-600 mb-6">{{ news_list.0.content|truncatewords:30 }}</p>
+                        <div class="flex items-center">
+                            <img src="{% if news_list.0.image %}{{ news_list.0.image.url }}{% else %}https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80{% endif %}" 
+                                 alt="{{ news_list.0.author }}" 
+                                 class="w-10 h-10 rounded-full mr-3">
+                            <div>
+                                <p class="font-medium">{{ news_list.0.author }}</p>
+                                <p class="text-sm text-gray-500">Founder & CEO</p>
+                            </div>
+                        </div>
+                        <a href="{% url 'news_detail' news_list.0.slug %}" class="btn-primary text-white px-6 py-3 rounded-full font-medium mt-6 inline-flex items-center">
+                            Read Full Story <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Latest News Grid -->
+    <section class="py-16 bg-lightblue">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-serif font-bold mb-12 text-center text-primary">Recent Updates</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% load math_filters %}
+                {% for news in news_list|slice:"1:" %}
+                <div class="bg-white rounded-xl shadow-md overflow-hidden news-card animate-fade-in-up" style="animation-delay: {{ forloop.counter0|mul:0.1 }}s">
+                    <img src="{% if news.image %}{{ news.image.url }}{% else %}https://images.unsplash.com/photo-1581056771107-24ca5f033842?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80{% endif %}" 
+                         alt="{{ news.title }}" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-{% if news.category == 'partnerships' %}accent{% elif news.category == 'community_stories' %}secondary{% else %}primary{% endif %}/10 text-{% if news.category == 'partnerships' %}accent{% elif news.category == 'community_stories' %}secondary{% else %}primary{% endif %} px-2 py-1 rounded text-xs font-medium">{{ news.get_category_display }}</span>
+                            <span class="ml-3 text-gray-500 text-sm"><i class="far fa-calendar-alt mr-1"></i> {{ news.date|date:"F j, Y" }}</span>
+                        </div>
+                        <h3 class="text-xl font-serif font-bold mb-3">{{ news.title }}</h3>
+                        <p class="text-gray-600 mb-4">{{ news.content|truncatewords:20 }}</p>
+                        <a href="{% url 'news_detail' news.slug %}" class="text-primary font-medium inline-flex items-center">
+                            Read More <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-center text-gray-600 col-span-3">No news articles available.</p>
+                {% endfor %}
+            </div>
+            
+            <!-- Pagination -->
+            {% if is_paginated %}
+            <div class="text-center mt-12">
+                <div class="inline-flex space-x-2">
+                    {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}" class="px-4 py-2 rounded-full bg-primary text-white hover:bg-primary/80">Previous</a>
+                    {% endif %}
+                    {% for num in page_obj.paginator.page_range %}
+                    <a href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}" class="px-4 py-2 rounded-full {% if page_obj.number == num %}bg-primary text-white{% else %}bg-gray-100 text-gray-700{% endif %} hover:bg-primary hover:text-white">{{ num }}</a>
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}" class="px-4 py-2 rounded-full bg-primary text-white hover:bg-primary/80">Next</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Related Blogs Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-serif font-bold mb-12 text-center text-primary">Related Blogs</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for news in related_blogs %}
+                <div class="bg-white rounded-xl shadow-md overflow-hidden news-card animate-fade-in-up" style="animation-delay: {{ forloop.counter0|mul:0.1 }}s">
+                    <img src="{% if news.image %}{{ news.image.url }}{% else %}https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80{% endif %}" 
+                         alt="{{ news.title }}" 
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-center mb-3">
+                            <span class="bg-{% if news.category == 'partnerships' %}accent{% elif news.category == 'community_stories' %}secondary{% else %}primary{% endif %}/10 text-{% if news.category == 'partnerships' %}accent{% elif news.category == 'community_stories' %}secondary{% else %}primary{% endif %} px-2 py-1 rounded text-xs font-medium">{{ news.get_category_display }}</span>
+                            <span class="ml-3 text-gray-500 text-sm"><i class="far fa-calendar-alt mr-1"></i> {{ news.date|date:"F j, Y" }}</span>
+                        </div>
+                        <h3 class="text-xl font-serif font-bold mb-3">{{ news.title }}</h3>
+                        <p class="text-gray-600 mb-4">{{ news.content|truncatewords:20 }}</p>
+                        <a href="{% url 'news_detail' news.slug %}" class="text-primary font-medium inline-flex items-center">
+                            Read Blog <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-center text-gray-600 col-span-3">No related blogs available.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+   <!-- Newsletter Section -->
+<section class="py-16 bg-darkblue text-white parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1579684453423-f84349ef60b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80')">
+    <div class="absolute inset-0 bg-darkblue/80"></div>
+    <div class="container mx-auto px-6 relative">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-serif font-bold mb-6">Stay Updated With Our Work</h2>
+            <p class="text-xl text-white/80 mb-8">Subscribe to our newsletter for the latest news, stories, and impact reports</p>
+            
+            {% if messages %}
+            <div class="mb-6 bg-green-100 border border-green-300 text-green-700 px-4 py-3 rounded-lg">
+                {% for message in messages %}
+                <p class="text-lg font-medium">{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            <form method="post" action="{% url 'news_list' %}">
+                {% csrf_token %}
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    {{ newsletter_form.email|add_class:"w-full sm:w-96 px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary text-gray-900" }}
+                    <button type="submit" class="btn-secondary text-white px-8 py-4 rounded-full font-medium whitespace-nowrap">
+                        Subscribe
+                    </button>
+                </div>
+            </form>
+            
+            <p class="mt-4 text-white/70 text-sm">We respect your privacy. Unsubscribe at any time.</p>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="bg-darkblue text-white pt-20 pb-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
+                            <i class="fas fa-heartbeat text-white text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-serif font-bold">Primetel</span>
+                    </div>
+                    <p class="text-white/80 mb-6">
+                        Transforming healthcare delivery through innovation and community engagement.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'home' %}" class="text-white/80 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="{% url 'about' %}" class="text-white/80 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="{% url 'services' %}" class="text-white/80 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="{% url 'impact' %}" class="text-white/80 hover:text-white transition-colors">Impact</a></li>
+                        <li><a href="{% url 'news_list' %}" class="text-white/80 hover:text-white transition-colors">News</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Categories</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'news_list' %}?category=health_updates" class="text-white/80 hover:text-white transition-colors">Health Updates</a></li>
+                        <li><a href="{% url 'news_list' %}?category=community_stories" class="text-white/80 hover:text-white transition-colors">Community Stories</a></li>
+                        <li><a href="{% url 'news_list' %}?category=education" class="text-white/80 hover:text-white transition-colors">Education</a></li>
+                        <li><a href="{% url 'news_list' %}?category=technology" class="text-white/80 hover:text-white transition-colors">Technology</a></li>
+                        <li><a href="{% url 'news_list' %}?category=partnerships" class="text-white/80 hover:text-white transition-colors">Partnerships</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Contact Us</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">Monduli, Arusha, Tanzania</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">+255 XXX XXX XXX</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">info@primetel.co.tz</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-globe text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">www.primetel.co.tz</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-white/60 text-sm mb-4 md:mb-0">
+                    &copy; 2023 Primetel. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 3D Background Animation
+        const threeContainer = document.getElementById('threejs-bg');
+        if (threeContainer) {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            threeContainer.appendChild(renderer.domElement);
+            
+            // Create a torus knot geometry
+            const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+            const material = new THREE.MeshBasicMaterial({ 
+                color: 0xE63946, 
+                wireframe: true,
+                transparent: true,
+                opacity: 0.5
+            });
+            const knot = new THREE.Mesh(geometry, material);
+            scene.add(knot);
+            
+            camera.position.z = 30;
+            
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                knot.rotation.x += 0.005;
+                knot.rotation.y += 0.005;
+                renderer.render(scene, camera);
+            }
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+        
+        // GSAP animations for elements
+        gsap.from(".animate-fade-in", {
+            opacity: 0,
+            y: 20,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power2.out"
+        });
+        
+        gsap.from(".animate-fade-in-up", {
+            opacity: 0,
+            y: 40,
+            duration: 1,
+            stagger: 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: ".animate-fade-in-up",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
+        });
+    </script>
+</body>
+</html>

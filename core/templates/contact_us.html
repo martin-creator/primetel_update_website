@@ -1,0 +1,772 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Primetel Healthcare</title>
+    <meta name="description" content="Get in touch with Primetel Healthcare for inquiries, partnerships, or support in Tanzania">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0056B3',
+                        secondary: '#E63946',
+                        accent: '#FFD700',
+                        darkblue: '#0A1F44',
+                        lightblue: '#E6F0FF'
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(10, 31, 68, 0.95) 0%, rgba(0, 86, 179, 0.9) 100%);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #E63946;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0056B3 0%, #003366 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 86, 179, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 86, 179, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #E63946 0%, #C1121F 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
+        }
+        
+        .hover-3d {
+            transition: transform 0.5s ease;
+        }
+        
+        .hover-3d:hover {
+            transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+        }
+        
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            color: transparent;
+        }
+        
+        .floating-shape {
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .floating-shape-2 {
+            animation: float 6s ease-in-out infinite reverse;
+            animation-delay: 1s;
+        }
+        
+        .floating-shape-3 {
+            animation: float 7s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+        
+        .contact-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-input {
+            transition: all 0.3s ease;
+            border: 1px solid #ddd;
+        }
+        
+        .form-input:focus {
+            border-color: #0056B3;
+            box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        @media (max-width: 1023px) {
+            .parallax-bg {
+                background-attachment: scroll;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-white text-gray-900">
+    <!-- Navigation -->
+    <header class="fixed w-full z-50 bg-darkblue/95 backdrop-blur-md shadow-sm text-white">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
+                        <i class="fas fa-heartbeat text-white text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-serif font-bold text-white">Primetel</span>
+                </div>
+                
+                <nav class="hidden lg:flex items-center space-x-8">
+                    <a href="{% url 'home' %}" class="nav-link text-white/90 hover:text-white font-medium">Home</a>
+                    <a href="{% url 'about' %}" class="nav-link text-white/90 hover:text-white font-medium">About</a>
+                    <a href="{% url 'services' %}" class="nav-link text-white/90 hover:text-white font-medium">Services</a>
+                    <a href="{% url 'impact' %}" class="nav-link text-white/90 hover:text-white font-medium">Impact</a>
+                    <a href="{% url 'get_involved' %}" class="nav-link text-white/90 hover:text-white font-medium">Get Involved</a>
+                    <a href="{% url 'contact_us' %}" class="nav-link text-white font-semibold border-b-2 border-secondary">Contact</a>
+                </nav>
+                
+                <button id="mobile-menu-button" class="lg:hidden text-white focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-darkblue shadow-lg">
+            <div class="container mx-auto px-6 py-4 space-y-4 text-white">
+                <a href="{% url 'home' %}" class="block hover:text-secondary">Home</a>
+                <a href="{% url 'about' %}" class="block hover:text-secondary">About</a>
+                <a href="{% url 'services' %}" class="block hover:text-secondary">Services</a>
+                <a href="{% url 'impact' %}" class="block hover:text-secondary">Impact</a>
+                <a href="{% url 'get_involved' %}" class="block hover:text-secondary">Get Involved</a>
+                <a href="{% url 'contact_us' %}" class="block text-secondary border-l-4 border-secondary pl-4">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
+        <!-- 3D Background Animation -->
+        <div id="threejs-bg" class="absolute inset-0 z-0 opacity-20"></div>
+        
+        <!-- Floating Shapes -->
+        <div class="absolute top-20 left-10 w-16 h-16 rounded-full bg-secondary/20 floating-shape"></div>
+        <div class="absolute bottom-1/4 right-20 w-24 h-24 rounded-lg bg-accent/20 floating-shape-2"></div>
+        <div class="absolute top-1/3 right-1/4 w-20 h-20 rounded-full bg-white/10 floating-shape-3"></div>
+        
+        <div class="container mx-auto px-6 py-20 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-6 animate-fade-in">
+                    <span class="text-stroke">Get</span> In <span class="text-accent">Touch</span>
+                </h1>
+                <p class="text-xl text-white/80 mb-8 animate-fade-in" style="animation-delay: 0.2s">
+                    We'd love to hear from you. Reach out for inquiries, partnerships, or support.
+                </p>
+                <div class="animate-fade-in" style="animation-delay: 0.4s">
+                    <a href="#contact-form" class="btn-secondary text-white px-8 py-4 rounded-full font-medium flex items-center justify-center mx-auto w-max">
+                        <i class="fas fa-paper-plane mr-2"></i> Send Us a Message
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
+            <i class="fas fa-chevron-down text-white text-xl"></i>
+        </div>
+    </section>
+
+    <!-- Contact Methods -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Contact Card 1 -->
+                <div class="contact-card bg-white p-8 rounded-xl animate-fade-in-up" style="animation-delay: 0.1s">
+                    <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center text-primary text-2xl mb-6">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-4">Our Location</h3>
+                    <p class="text-gray-600 mb-4">
+                        Primetel Healthcare Headquarters<br>
+                        Monduli Road, Arusha<br>
+                        Tanzania
+                    </p>
+                    <a href="#" class="text-primary font-medium inline-flex items-center">
+                        View on Map <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <!-- Contact Card 2 -->
+                <div class="contact-card bg-white p-8 rounded-xl animate-fade-in-up" style="animation-delay: 0.3s">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary text-2xl mb-6">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-4">Call Us</h3>
+                    <p class="text-gray-600 mb-2">
+                        <span class="font-medium">General Inquiries:</span><br>
+                        +255 123 456 789
+                    </p>
+                    <p class="text-gray-600">
+                        <span class="font-medium">Emergency Support:</span><br>
+                        +255 987 654 321
+                    </p>
+                </div>
+                
+                <!-- Contact Card 3 -->
+                <div class="contact-card bg-white p-8 rounded-xl animate-fade-in-up" style="animation-delay: 0.5s">
+                    <div class="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center text-accent text-2xl mb-6">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-4">Email Us</h3>
+                    <p class="text-gray-600 mb-2">
+                        <span class="font-medium">General:</span><br>
+                        info@primetel.co.tz
+                    </p>
+                    <p class="text-gray-600 mb-2">
+                        <span class="font-medium">Partnerships:</span><br>
+                        partnerships@primetel.co.tz
+                    </p>
+                    <p class="text-gray-600">
+                        <span class="font-medium">Support:</span><br>
+                        support@primetel.co.tz
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section id="contact-form" class="py-20 bg-lightblue">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-xl shadow-lg animate-fade-in-up">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">Send Us a Message</h2>
+                    <p class="text-xl text-gray-600">Fill out the form below and we'll get back to you within 24 hours</p>
+                </div>
+                
+                {% if messages %}
+                <div class="mb-6 text-center bg-green-100 border border-green-300 text-green-700 px-4 py-3 rounded-lg">
+                    {% for message in messages %}
+                    <p class="text-lg font-medium">{{ message }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <form method="post" action="{% url 'contact_us' %}" class="space-y-6">
+                    {% csrf_token %}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="{{ contact_form.name.id_for_label }}" class="block text-lg font-medium text-gray-700 mb-2">Full Name</label>
+                            {{ contact_form.name|add_class:"w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary" }}
+                            {% if contact_form.name.errors %}
+                            <p class="text-red-500 text-sm mt-1">{{ contact_form.name.errors.as_text }}</p>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <label for="{{ contact_form.email.id_for_label }}" class="block text-lg font-medium text-gray-700 mb-2">Email Address</label>
+                            {{ contact_form.email|add_class:"w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary" }}
+                            {% if contact_form.email.errors %}
+                            <p class="text-red-500 text-sm mt-1">{{ contact_form.email.errors.as_text }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="{{ contact_form.subject.id_for_label }}" class="block text-lg font-medium text-gray-700 mb-2">Subject</label>
+                        {{ contact_form.subject|add_class:"w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary" }}
+                        {% if contact_form.subject.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ contact_form.subject.errors.as_text }}</p>
+                        {% endif %}
+                    </div>
+                    
+                    <div>
+                        <label for="{{ contact_form.department.id_for_label }}" class="block text-lg font-medium text-gray-700 mb-2">Department</label>
+                        {{ contact_form.department|add_class:"w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary" }}
+                        {% if contact_form.department.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ contact_form.department.errors.as_text }}</p>
+                        {% endif %}
+                    </div>
+                    
+                    <div>
+                        <label for="{{ contact_form.message.id_for_label }}" class="block text-lg font-medium text-gray-700 mb-2">Your Message</label>
+                        {{ contact_form.message|add_class:"w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary h-32" }}
+                        {% if contact_form.message.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ contact_form.message.errors.as_text }}</p>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="flex items-center">
+                        {{ contact_form.consent|add_class:"h-5 w-5 text-primary focus:ring-primary border-gray-300 rounded" }}
+                        <label for="{{ contact_form.consent.id_for_label }}" class="ml-2 text-lg text-gray-600">I agree to Primetel's <a href="#" class="text-primary hover:underline">Privacy Policy</a></label>
+                        {% if contact_form.consent.errors %}
+                        <p class="text-red-500 text-sm mt-1">{{ contact_form.consent.errors.as_text }}</p>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="text-center">
+                        <button type="submit" class="btn-primary text-white px-12 py-4 rounded-full font-medium inline-flex items-center">
+                            <i class="fas fa-paper-plane mr-2"></i> Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regional Offices -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">Our Regional Offices</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Find Primetel teams across Tanzania ready to serve your community</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Office 1 -->
+                <div class="contact-card bg-white p-8 rounded-xl shadow-md hover-3d animate-fade-in-up" style="animation-delay: 0.1s">
+                    <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center text-primary text-2xl mb-6">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-4">Arusha Office</h3>
+                    <p class="text-gray-600 mb-4">
+                        123 Health Plaza<br>
+                        Sokoine Road<br>
+                        Arusha, Tanzania
+                    </p>
+                    <p class="text-gray-600 mb-2">
+                        <span class="font-medium">Phone:</span> +255 27 123 4567
+                    </p>
+                    <p class="text-gray-600">
+                        <span class="font-medium">Email:</span> arusha@primetel.co.tz
+                    </p>
+                </div>
+                
+                <!-- Office 2 -->
+                <div class="contact-card bg-white p-8 rounded-xl shadow-md hover-3d animate-fade-in-up" style="animation-delay: 0.3s">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary text-2xl mb-6">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-4">Kilimanjaro Office</h3>
+                    <p class="text-gray-600 mb-4">
+                        456 Uhuru Tower<br>
+                        Moshi Town<br>
+                        Kilimanjaro, Tanzania
+                    </p>
+                    <p class="text-gray-600 mb-2">
+                        <span class="font-medium">Phone:</span> +255 27 234 5678
+                    </p>
+                    <p class="text-gray-600">
+                        <span class="font-medium">Email:</span> kilimanjaro@primetel.co.tz
+                    </p>
+                </div>
+                
+                <!-- Office 3 -->
+                <div class="contact-card bg-white p-8 rounded-xl shadow-md hover-3d animate-fade-in-up" style="animation-delay: 0.5s">
+                    <div class="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center text-accent text-2xl mb-6">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <h3 class="text-xl font-serif font-bold mb-4">Manyara Office</h3>
+                    <p class="text-gray-600 mb-4">
+                        789 Community Center<br>
+                        Babati Main Street<br>
+                        Manyara, Tanzania
+                    </p>
+                    <p class="text-gray-600 mb-2">
+                        <span class="font-medium">Phone:</span> +255 27 345 6789
+                    </p>
+                    <p class="text-gray-600">
+                        <span class="font-medium">Email:</span> manyara@primetel.co.tz
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="py-0 bg-gray-100">
+        <div class="container mx-auto px-0">
+            <div class="h-96 w-full">
+                <!-- Embedded Google Map -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.234567890123!2d36.12345678901234!3d-3.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwMDcnMjQuNCJTIDM2wrAwNyczNi4wIkU!5e0!3m2!1sen!2stz!4v1234567890123!5m2!1sen!2stz" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-lightblue">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-primary mb-4">Frequently Asked Questions</h2>
+                    <p class="text-xl text-gray-600">Quick answers to common questions about contacting Primetel</p>
+                </div>
+                
+                <div class="space-y-6">
+                    <!-- FAQ 1 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md animate-fade-in-up" style="animation-delay: 0.1s">
+                        <button class="faq-button flex justify-between items-center w-full text-left">
+                            <h3 class="text-lg font-serif font-bold text-primary">How quickly can I expect a response to my inquiry?</h3>
+                            <i class="fas fa-chevron-down text-primary ml-4 transition-transform"></i>
+                        </button>
+                        <div class="mt-4 text-gray-600 hidden">
+                            <p>We aim to respond to all inquiries within 24 hours during business days (Monday-Friday). For urgent matters, please call our emergency support line for immediate assistance.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 2 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md animate-fade-in-up" style="animation-delay: 0.2s">
+                        <button class="faq-button flex justify-between items-center w-full text-left">
+                            <h3 class="text-lg font-serif font-bold text-primary">What are your office hours?</h3>
+                            <i class="fas fa-chevron-down text-primary ml-4 transition-transform"></i>
+                        </button>
+                        <div class="mt-4 text-gray-600 hidden">
+                            <p>Our main offices are open from 8:00 AM to 5:00 PM EAT, Monday through Friday. Our emergency support line operates 24/7 for urgent healthcare matters.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 3 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md animate-fade-in-up" style="animation-delay: 0.3s">
+                        <button class="faq-button flex justify-between items-center w-full text-left">
+                            <h3 class="text-lg font-serif font-bold text-primary">Do you have WhatsApp for business inquiries?</h3>
+                            <i class="fas fa-chevron-down text-primary ml-4 transition-transform"></i>
+                        </button>
+                        <div class="mt-4 text-gray-600 hidden">
+                            <p>Yes! You can reach our business team on WhatsApp at +255 123 456 789. For general inquiries, please use our contact form or email address.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 4 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md animate-fade-in-up" style="animation-delay: 0.4s">
+                        <button class="faq-button flex justify-between items-center w-full text-left">
+                            <h3 class="text-lg font-serif font-bold text-primary">How can I partner with Primetel?</h3>
+                            <i class="fas fa-chevron-down text-primary ml-4 transition-transform"></i>
+                        </button>
+                        <div class="mt-4 text-gray-600 hidden">
+                            <p>We welcome partnerships with organizations, donors, and volunteers. Please email partnerships@primetel.co.tz or fill out our partnership form available on the <a href="{% url 'get_involved' %}" class="text-primary hover:underline">"Get Involved" page</a> of our website.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ 5 -->
+                    <div class="bg-white p-6 rounded-xl shadow-md animate-fade-in-up" style="animation-delay: 0.5s">
+                        <button class="faq-button flex justify-between items-center w-full text-left">
+                            <h3 class="text-lg font-serif font-bold text-primary">Where can I send donations or support materials?</h3>
+                            <i class="fas fa-chevron-down text-primary ml-4 transition-transform"></i>
+                        </button>
+                        <div class="mt-4 text-gray-600 hidden">
+                            <p>Physical donations can be sent to our headquarters in Arusha. For monetary donations, please visit our donation portal or contact our finance team at donations@primetel.co.tz for wire transfer instructions.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <p class="text-lg text-gray-600 mb-6">Still have questions? We're here to help!</p>
+                    <a href="#contact-form" class="btn-secondary text-white px-8 py-4 rounded-full font-medium inline-flex items-center">
+                        <i class="fas fa-question-circle mr-2"></i> Ask Your Question
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-darkblue text-white parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1579684453423-f84349ef60b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80')">
+        <div class="absolute inset-0 bg-darkblue/80"></div>
+        <div class="container mx-auto px-6 relative">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl font-serif font-bold mb-6">Stay Connected</h2>
+                <p class="text-xl text-white/80 mb-8">Subscribe to our newsletter for updates, stories, and health tips</p>
+                
+                {% if messages %}
+                <div class="mb-6 bg-green-100 border border-green-300 text-green-700 px-4 py-3 rounded-lg">
+                    {% for message in messages %}
+                    {% if 'newsletter' in message.tags %}
+                    <p class="text-lg font-medium">{{ message }}</p>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <form method="post" action="{% url 'news_list' %}" class="flex flex-col sm:flex-row gap-4 justify-center">
+                    {% csrf_token %}
+                    {{ newsletter_form.email|add_class:"w-full sm:w-96 px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary text-gray-900" }}
+                    {% if newsletter_form.email.errors %}
+                    <p class="text-red-400 text-sm mt-1">{{ newsletter_form.email.errors.as_text }}</p>
+                    {% endif %}
+                    <button type="submit" name="newsletter_submit" class="btn-secondary text-white px-8 py-4 rounded-full font-medium whitespace-nowrap">
+                        Subscribe
+                    </button>
+                </form>
+                
+                <p class="mt-4 text-white/70 text-sm">We respect your privacy. Unsubscribe at any time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darkblue text-white pt-20 pb-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
+                            <i class="fas fa-heartbeat text-white text-xl"></i>
+                        </div>
+                        <span class="text-2xl font-serif font-bold">Primetel</span>
+                    </div>
+                    <p class="text-white/80 mb-6">
+                        Transforming healthcare delivery through innovation and community engagement.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'home' %}" class="text-white/80 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="{% url 'about' %}" class="text-white/80 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="{% url 'services' %}" class="text-white/80 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="{% url 'impact' %}" class="text-white/80 hover:text-white transition-colors">Impact</a></li>
+                        <li><a href="{% url 'get_involved' %}" class="text-white/80 hover:text-white transition-colors">Get Involved</a></li>
+                        <li><a href="{% url 'contact_us' %}" class="text-white/80 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="{% url 'services' %}#mental-health" class="text-white/80 hover:text-white transition-colors">Mental Health</a></li>
+                        <li><a href="{% url 'services' %}#primary-care" class="text-white/80 hover:text-white transition-colors">Primary Care</a></li>
+                        <li><a href="{% url 'services' %}#mobile-clinics" class="text-white/80 hover:text-white transition-colors">Mobile Clinics</a></li>
+                        <li><a href="{% url 'services' %}#school-programs" class="text-white/80 hover:text-white transition-colors">School Programs</a></li>
+                        <li><a href="{% url 'services' %}#community-outreach" class="text-white/80 hover:text-white transition-colors">Community Outreach</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6">Contact Us</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">Monduli, Arusha, Tanzania</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">+255 XXX XXX XXX</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">info@primetel.co.tz</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-globe text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">www.primetel.co.tz</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-white/60 text-sm mb-4 md:mb-0">
+                    &copy; 2023 Primetel. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 3D Background Animation
+        const threeContainer = document.getElementById('threejs-bg');
+        if (threeContainer) {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            threeContainer.appendChild(renderer.domElement);
+            
+            // Create a torus knot geometry
+            const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+            const material = new THREE.MeshBasicMaterial({ 
+                color: 0xE63946, 
+                wireframe: true,
+                transparent: true,
+                opacity: 0.5
+            });
+            const knot = new THREE.Mesh(geometry, material);
+            scene.add(knot);
+            
+            camera.position.z = 30;
+            
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                knot.rotation.x += 0.005;
+                knot.rotation.y += 0.005;
+                renderer.render(scene, camera);
+            }
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+        
+        // GSAP animations for elements
+        gsap.from(".animate-fade-in", {
+            opacity: 0,
+            y: 20,
+            duration: 1,
+            ease: "power2.out",
+            stagger: 0.2
+        });
+
+        // FAQ accordion functionality with jQuery
+        $(document).ready(function() {
+            $('.faq-button').click(function() {
+                const $this = $(this);
+                const $answer = $this.next();
+                const $icon = $this.find('i');
+                
+                // Toggle the answer with slide animation
+                $answer.slideToggle(300);
+                
+                // Rotate the chevron icon
+                $icon.toggleClass('rotate-180');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

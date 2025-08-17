@@ -196,6 +196,7 @@
                     <a href="{% url 'services' %}" class="nav-link text-white/90 hover:text-white border-b-2 border-secondary">Services</a>
                     <a href="{% url 'impact' %}" class="nav-link text-white/90 hover:text-white font-medium">Impact</a>
                     <a href="{% url 'news_list' %}" class="nav-link text-white font-semibold font-medium">News</a>
+                    <a href="{% get_involved %}" class="nav-link text-white font-semibold font-medium">Get Involved</a>
                     <a href="{% url 'contact_us' %}" class="nav-link text-white font-semibold font-medium">Contact</a>
                 </nav>
                 
@@ -213,6 +214,7 @@
                 <a href="{% url 'services' %}" class="block hover:text-secondary">Services</a>
                 <a href="{% url 'impact' %}" class="block hover:text-secondary">Impact</a>
                 <a href="{% url 'news_list' %}" class="block text-secondary border-l-4 border-secondary pl-4">News</a>
+                <a href="{% get_involved %}" class="block hover:text-secondary">Get Involved</a>
                 <a href="{% url 'contact_us' %}" class="block hover:text-secondary">Contact</a>
             </div>
         </div>
@@ -340,7 +342,7 @@
             <!-- Primary Care -->
             <div class="service-card bg-white p-8 rounded-2xl shadow-lg mb-12 animate-fade-in-up" style="animation-delay: 0.1s">
                 <div class="flex flex-col lg:flex-row items-center">
-                    <div class="lg:w-1/3 mb-8 lg:mb-0 lg:pr-8">
+                    <div class="lg:w-1/3 mb-8 lg:mb-0 lg:pr-8" id="primary-care">
                         <div class="relative">
                             <img src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                  alt="Primary Care" 
@@ -395,7 +397,7 @@
             <!-- Mental Health -->
             <div class="service-card bg-white p-8 rounded-2xl shadow-lg mb-12 animate-fade-in-up" style="animation-delay: 0.2s">
                 <div class="flex flex-col lg:flex-row items-center">
-                    <div class="lg:w-1/3 mb-8 lg:mb-0 lg:pr-8">
+                    <div class="lg:w-1/3 mb-8 lg:mb-0 lg:pr-8" id="mental-health">
                         <div class="relative">
                             <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                  alt="Mental Health" 
@@ -450,7 +452,7 @@
             <!-- Community Outreach -->
             <div class="service-card bg-white p-8 rounded-2xl shadow-lg mb-12 animate-fade-in-up" style="animation-delay: 0.3s">
                 <div class="flex flex-col lg:flex-row items-center">
-                    <div class="lg:w-1/3 mb-8 lg:mb-0 lg:pr-8">
+                    <div class="lg:w-1/3 mb-8 lg:mb-0 lg:pr-8" id="community-outreach">
                         <div class="relative">
                             <img src="https://images.unsplash.com/photo-1527613426441-4da17471b66d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                  alt="Community Outreach" 
@@ -504,7 +506,7 @@
             
             <!-- Youth Programs -->
             <div class="service-card bg-white p-8 rounded-2xl shadow-lg mb-12 animate-fade-in-up" style="animation-delay: 0.4s">
-                <div class="flex flex-col lg:flex-row items-center">
+                <div class="flex flex-col lg:flex-row items-center" id="school-health">
                     <div class="lg:w-1/3 mb-8 lg:mb-0 lg:pr-8">
                         <div class="relative">
                             <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
@@ -560,7 +562,7 @@
             <!-- Telehealth -->
             <div class="service-card bg-white p-8 rounded-2xl shadow-lg mb-12 animate-fade-in-up" style="animation-delay: 0.5s">
                 <div class="flex flex-col lg:flex-row items-center">
-                    <div class="lg:w-1/3 mb-8 lg:mb-0 lg:pr-8">
+                    <div class="lg:w-1/3 mb-8 lg:mb-0 lg:pr-8" id ="telehealth-service">
                         <div class="relative">
                             <img src="https://images.unsplash.com/photo-1581093450021-4a7360e9a8f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                                  alt="Telehealth" 
@@ -725,16 +727,16 @@
                         Delivering compassionate, innovative healthcare solutions across Tanzania.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-white/70 hover:text-white transition-colors">
+                        <!-- <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
                             <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="text-white/70 hover:text-white transition-colors">
+                        </a> -->
+                        <!-- <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
                             <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="text-white/70 hover:text-white transition-colors">
+                        </a> -->
+                        <a href="https://www.instagram.com/primetel_health/" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors" target="_blank">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="#" class="text-white/70 hover:text-white transition-colors">
+                        <a href="https://www.linkedin.com/company/primetel-health/" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </div>
@@ -767,20 +769,20 @@
                     <h3 class="text-lg font-bold mb-6">Contact Us</h3>
                     <ul class="space-y-3">
                         <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-primary"></i>
-                            <span class="text-white/80">123 Health Street, Dar es Salaam, Tanzania</span>
+                            <i class="fas fa-map-marker-alt text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">Monduli, Arusha, Tanzania</span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-phone-alt mr-3 text-primary"></i>
-                            <span class="text-white/80">+255 123 456 789</span>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">+255762629046</span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-envelope mr-3 text-primary"></i>
-                            <span class="text-white/80">info@primetelhealth.org</span>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">primetelhealth@gmail.com</span>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-clock mr-3 text-primary"></i>
-                            <span class="text-white/80">Mon-Fri: 8AM - 6PM</span>
+                        <li class="flex items-start">
+                            <i class="fas fa-globe text-primary mr-3 mt-1"></i>
+                            <span class="text-white/80">www.primetel.tech</span>
                         </li>
                     </ul>
                 </div>
@@ -788,7 +790,7 @@
             
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
                 <p class="text-white/60 mb-4 md:mb-0">
-                    &copy; 2023 Primetel Healthcare. All rights reserved.
+                    &copy; 2025-2026 Primetel. All rights reserved.
                 </p>
                 <div class="flex space-x-6">
                     <a href="#" class="text-white/60 hover:text-white transition-colors">Privacy Policy</a>

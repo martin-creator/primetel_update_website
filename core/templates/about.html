@@ -303,7 +303,7 @@
                     <a href="{% url 'services' %}" class="nav-link text-white/90 hover:text-white font-medium">Services</a>
                     <a href="{% url 'impact' %}" class="nav-link text-white/90 hover:text-white font-medium">Impact</a>
                     <a href="{% url 'news_list' %}" class="nav-link text-white font-semibold font-medium">News</a>
-                    <a href="{% url 'get_involved' %}" class="btn-primary text-white px-6 py-2 rounded-full hover:bg-secondary transition-all duration-300">Get Involved</a>
+                    <a href="{% url 'get_involved' %}" class="nav-link text-white font-semibold font-medium">Get Involved</a>
                     <a href="{% url 'contact_us' %}" class="nav-link text-white font-semibold font-medium">Contact</a>
                 </nav>
                 
@@ -321,7 +321,7 @@
                 <a href="{% url 'services' %}" class="block hover:text-secondary">Services</a>
                 <a href="{% url 'impact' %}" class="block hover:text-secondary">Impact</a>
                 <a href="{% url 'news_list' %}" class="block text-secondary border-l-4 border-secondary pl-4">News</a>
-                <a href="{% url 'get_involved' %}" class="block bg-primary text-white font-semibold px-4 py-2 rounded-full hover:bg-secondary transition-all duration-300">Get Involved</a>
+                <a href="{% url 'get_involved' %}" class="block text-secondary border-l-4 border-secondary">Get Involved</a>
                 <a href="{% url 'contact_us' %}" class="block text-white font-semibold font-medium">Contact </a>
             </div>
         </div>
@@ -359,8 +359,8 @@
                 <div class="lg:w-1/2 flex justify-center animate-fade-in" style="animation-delay: 0.2s">
                     <div class="relative">
                         <div class="w-full max-w-md h-96 bg-white/10 rounded-3xl overflow-hidden glass-card hover-3d">
-                            <img src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                                 alt="Healthcare team" 
+                            <img src="{% static 'images/primetel_about_header_men.jpg' %}"
+                                 alt="Primetel Healthcare"
                                  class="w-full h-full object-cover">
                         </div>
                         <div class="absolute -bottom-6 -left-6 bg-white text-darkblue p-4 rounded-xl shadow-xl">
@@ -369,12 +369,12 @@
                                 <span class="font-bold">35,000+ Lives Touched</span>
                             </div>
                         </div>
-                        <div class="absolute -top-6 -right-6 bg-accent text-darkblue p-4 rounded-xl shadow-xl rotate-6">
+                        <!-- <div class="absolute -top-6 -right-6 bg-accent text-darkblue p-4 rounded-xl shadow-xl rotate-6">
                             <div class="flex items-center">
                                 <i class="fas fa-map-marker-alt mr-2"></i>
                                 <span class="font-bold">3 Regions Served</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -415,11 +415,11 @@
                 
                 <div class="animate-fade-in-up" style="animation-delay: 0.3s">
                     <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                             alt="Community healthcare" 
+                        <img src="{% static 'images/primetel_story.jpg' %}" 
+                             alt="Primetel Story" 
                              class="w-full rounded-2xl shadow-xl hover-3d">
                         <div class="absolute -bottom-6 -right-6 bg-secondary text-white p-6 rounded-xl shadow-lg">
-                            <div class="text-3xl font-bold">2018</div>
+                            <div class="text-3xl font-bold">2020</div>
                             <div class="text-sm">Founded in Monduli</div>
                         </div>
                     </div>
@@ -558,86 +558,86 @@
                 <!-- Team Member 1 -->
                 <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="1" style="animation-delay: 0.1s">
                     <div class="h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                        <img src="{% static 'images/emmanuel_bio.jpg' %}"
                              alt="Emmanuel Christopher Samwel" 
                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold mb-1">Emmanuel Christopher Samwel</h3>
                         <p class="text-secondary font-medium mb-4">Founder & CEO</p>
-                        <p class="text-gray-600 text-sm">
+                        <!-- <p class="text-gray-600 text-sm">
                             Public health specialist with 10+ years experience in community healthcare and social innovation.
-                        </p>
-                        <div class="mt-4 flex space-x-3">
+                        </p> -->
+                        <!-- <div class="mt-4 flex space-x-3">
                             <a href="#" class="text-primary hover:text-secondary">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
                             <a href="#" class="text-primary hover:text-secondary">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 
                 <!-- Team Member 2 -->
                 <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="2" style="animation-delay: 0.2s">
                     <div class="h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                             alt="Dr. Neema Mwambene" 
+                        <img src="{% static 'images/moshi_bio.jpg' %}" 
+                             alt="Dr Epiphania Simon Moshi"
                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-1">Dr. Neema Mwambene</h3>
-                        <p class="text-secondary font-medium mb-4">Medical Director</p>
-                        <p class="text-gray-600 text-sm">
+                        <h3 class="text-xl font-bold mb-1">Dr Epiphania Simon Moshi</h3>
+                        <p class="text-secondary font-medium mb-4">Medical in Charge </p>
+                        <!-- <p class="text-gray-600 text-sm">
                             Physician with expertise in rural healthcare delivery. Leads our clinical services and quality assurance.
-                        </p>
-                        <div class="mt-4 flex space-x-3">
+                        </p> -->
+                        <!-- <div class="mt-4 flex space-x-3">
                             <a href="#" class="text-primary hover:text-secondary">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
                             <a href="#" class="text-primary hover:text-secondary">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 
                 <!-- Team Member 3 -->
                 <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="3" style="animation-delay: 0.3s">
                     <div class="h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                             alt="James Kilewo" 
+                        <img src="{% static 'images/ellymartin_bio.jpg' %}"
+                             alt="Dr.Gy Elly Martin" 
                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-1">James Kilewo</h3>
-                        <p class="text-secondary font-medium mb-4">Technology Lead</p>
-                        <p class="text-gray-600 text-sm">
+                        <h3 class="text-xl font-bold mb-1">Dr.Gy Elly Martin</h3>
+                        <p class="text-secondary font-medium mb-4">Medical Doctor</p>
+                        <!-- <p class="text-gray-600 text-sm">
                             Digital health innovator overseeing our USSD platform and telehealth initiatives.
-                        </p>
-                        <div class="mt-4 flex space-x-3">
+                        </p> -->
+                        <!-- <div class="mt-4 flex space-x-3">
                             <a href="#" class="text-primary hover:text-secondary">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
                             <a href="#" class="text-primary hover:text-secondary">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 
                 <!-- Team Member 4 -->
                 <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="4" style="animation-delay: 0.4s">
                     <div class="h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                             alt="Sarah Mwakasege" 
+                        <img src="{% static 'images/kenneth_bio.jpg' %}" 
+                             alt="Dr. Keneth H. Masao"
                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-1">Sarah Mwakasege</h3>
-                        <p class="text-secondary font-medium mb-4">Operations Director</p>
-                        <p class="text-gray-600 text-sm">
+                        <h3 class="text-xl font-bold mb-1">Dr. Keneth H. Masao</h3>
+                        <p class="text-secondary font-medium mb-4">Medical Doctor</p>
+                        <!-- <p class="text-gray-600 text-sm">
                             Healthcare administrator with 8 years experience in managing clinical operations.
                         </p>
                         <div class="mt-4 flex space-x-3">
@@ -647,21 +647,21 @@
                             <a href="#" class="text-primary hover:text-secondary">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 
                 <!-- Team Member 5 -->
                 <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="5" style="animation-delay: 0.5s">
                     <div class="h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                             alt="Dr. Joseph Kimaro" 
+                        <img src="{% static 'images/gigwa_bio.jpg' %}" 
+                             alt="Gigwa Godfrey Mbaga" 
                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-1">Dr. Joseph Kimaro</h3>
-                        <p class="text-secondary font-medium mb-4">Mental Health Lead</p>
-                        <p class="text-gray-600 text-sm">
+                        <h3 class="text-xl font-bold mb-1">Gigwa Godfrey Mbaga</h3>
+                        <p class="text-secondary font-medium mb-4">Counseling Psychologist</p>
+                        <!-- <p class="text-gray-600 text-sm">
                             Psychiatrist specializing in community mental health interventions.
                         </p>
                         <div class="mt-4 flex space-x-3">
@@ -671,21 +671,21 @@
                             <a href="#" class="text-primary hover:text-secondary">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 
                 <!-- Team Member 6 -->
                 <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="6" style="animation-delay: 0.6s">
                     <div class="h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                             alt="Grace Mboya" 
+                        <img src="{% static 'images/rumas_bio.jpg' %}" 
+                             alt="Rumas" 
                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-1">Grace Mboya</h3>
-                        <p class="text-secondary font-medium mb-4">Community Engagement</p>
-                        <p class="text-gray-600 text-sm">
+                        <h3 class="text-xl font-bold mb-1">Rumas</h3>
+                        <p class="text-secondary font-medium mb-4">Outreach Coordinator</p>
+                        <!-- <p class="text-gray-600 text-sm">
                             Social worker connecting communities with healthcare resources.
                         </p>
                         <div class="mt-4 flex space-x-3">
@@ -695,36 +695,36 @@
                             <a href="#" class="text-primary hover:text-secondary">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 
                 <!-- Team Member 7 -->
                 <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="7" style="animation-delay: 0.7s">
                     <div class="h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                             alt="Michael Shayo" 
+                        <img src="{% static 'images/einoth_bio.jpg' %}" 
+                             alt="Einoth Saitoti" 
                              class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-1">Michael Shayo</h3>
-                        <p class="text-secondary font-medium mb-4">Finance Director</p>
-                        <p class="text-gray-600 text-sm">
+                        <h3 class="text-xl font-bold mb-1">Einoth Saitoti</h3>
+                        <p class="text-secondary font-medium mb-4">Customer Support Lead</p>
+                        <!-- <p class="text-gray-600 text-sm">
                             Financial strategist ensuring sustainable healthcare delivery.
-                        </p>
-                        <div class="mt-4 flex space-x-3">
+                        </p> -->
+                        <!-- <div class="mt-4 flex space-x-3">
                             <a href="#" class="text-primary hover:text-secondary">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
                             <a href="#" class="text-primary hover:text-secondary">
                                 <i class="fab fa-twitter"></i>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 
                 <!-- Team Member 8 -->
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="8" style="animation-delay: 0.8s">
+                <!-- <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="8" style="animation-delay: 0.8s">
                     <div class="h-64 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                              alt="Dr. Amina Juma" 
@@ -746,9 +746,9 @@
                         </div>
                     </div>
                 </div>
-                
+                 -->
                 <!-- Team Member 9 -->
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="9" style="animation-delay: 0.9s">
+                <!-- <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="9" style="animation-delay: 0.9s">
                     <div class="h-64 overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                              alt="Fatuma Hassan" 
@@ -769,7 +769,7 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
@@ -780,7 +780,7 @@
             <div class="popup-close"><i class="fas fa-times"></i></div>
             <div class="grid grid-cols-1 lg:grid-cols-2">
                 <div class="h-full">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                    <img src="{% static 'images/emmanuel_bio.jpg' %}"
                          alt="Emmanuel Christopher Samwel" 
                          class="w-full h-full object-cover">
                 </div>
@@ -788,12 +788,12 @@
                     <h3 class="text-2xl font-bold mb-2">Emmanuel Christopher Samwel</h3>
                     <p class="text-secondary font-medium mb-4">Founder & CEO</p>
                     <p class="text-gray-600 mb-6">
-                        Emmanuel is a public health specialist with over 10 years of experience in community healthcare and social innovation. He founded Primetel in 2018 after witnessing firsthand the healthcare disparities in rural Tanzania. His vision for equitable healthcare access has driven the organization's growth from a small mental health initiative to a comprehensive healthcare provider serving thousands across multiple regions.
+                        Emmanuel Samwel is a health advocate, digital innovator, and youth development champion dedicated to redefining healthcare access in Tanzania. As the Founder and CEO of Primetel Health, his work blends the art of community health systems, the science of technology delivery, and the discipline of impact entrepreneurship. He has contributed to digital health initiatives with Doctors Without Borders and advised early-stage ventures such as Mkaa Safi and Banana Fibre Seedbag, helping them grow catalytic grant funding and build sustainable models.
                     </p>
                     <p class="text-gray-600 mb-6">
-                        Emmanuel holds a Master's in Public Health from the University of Dar es Salaam and has been recognized with several awards for his innovative approach to community health, including the Tanzanian Health Innovation Award in 2021.
+                        An African Leadership University graduate and African Leadership Academy alumnus, Emmanuel has earned recognition as a Millennium Fellow, an Innovate for Good Winner, and a Regional Finalist in the Hult Prize. Certified in mHealth, HRH systems, and mobile tech for health, he is well positioned to lead scalable, low-tech health innovations in resource-limited settings. Beyond health, Emmanuel is also a certified music producer, intentionally bridging creativity, rhythm, and purpose-driven leadership.
                     </p>
-                    <div class="flex space-x-4">
+                    <!-- <div class="flex space-x-4">
                         <a href="#" class="text-primary hover:text-secondary">
                             <i class="fab fa-linkedin-in text-xl"></i>
                         </a>
@@ -803,7 +803,7 @@
                         <a href="#" class="text-primary hover:text-secondary">
                             <i class="fas fa-envelope text-xl"></i>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -814,20 +814,20 @@
             <div class="popup-close"><i class="fas fa-times"></i></div>
             <div class="grid grid-cols-1 lg:grid-cols-2">
                 <div class="h-full">
-                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                         alt="Dr. Neema Mwambene" 
+                    <img src="{% static 'images/moshi_bio.jpg' %}"
+                         alt="Dr Epiphania Simon Moshi" 
                          class="w-full h-full object-cover">
                 </div>
                 <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-2">Dr. Neema Mwambene</h3>
-                    <p class="text-secondary font-medium mb-4">Medical Director</p>
+                    <h3 class="text-2xl font-bold mb-2"> Dr Epiphania Simon Moshi</h3>
+                    <p class="text-secondary font-medium mb-4">Medical in Charge</p>
                     <p class="text-gray-600 mb-6">
-                        Dr. Mwambene is a physician with extensive expertise in rural healthcare delivery. She oversees all clinical services and quality assurance programs across Primetel's regions of operation. With a background in both clinical medicine and public health, she has been instrumental in designing our community-based healthcare model.
+                        Dr. Epiphania Simon Moshi is a dedicated Medical Doctor with comprehensive training and hands-on experience in both hospital and clinical settings. She earned her Doctor of Medicine (MD) degree from Kilimanjaro Christian Medical University College in 2020 and has since built a strong clinical background through service at leading health institutions in Tanzania.
                     </p>
                     <p class="text-gray-600 mb-6">
-                        Before joining Primetel, Dr. Mwambene worked with the Ministry of Health in Tanzania, focusing on primary healthcare systems strengthening. She holds an MD from Muhimbili University of Health and Allied Sciences and a Master's in Global Health Delivery from the University of Global Health Equity.
+                        Dr. Moshi completed her medical internship at Mt. Meru Regional Referral Hospital, where she gained experience managing both inpatient and outpatient cases, conducting thorough clinical assessments, and performing a wide range of medical and surgical procedures. These included obstetric care—ranging from normal deliveries to cesarean sections—as well as procedures such as lumbar punctures, chest tube insertions, ascitic and pleural tapping, herniorrhaphy, and trauma management.
                     </p>
-                    <div class="flex space-x-4">
+                    <!-- <div class="flex space-x-4">
                         <a href="#" class="text-primary hover:text-secondary">
                             <i class="fab fa-linkedin-in text-xl"></i>
                         </a>
@@ -837,7 +837,7 @@
                         <a href="#" class="text-primary hover:text-secondary">
                             <i class="fas fa-envelope text-xl"></i>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -848,20 +848,20 @@
             <div class="popup-close"><i class="fas fa-times"></i></div>
             <div class="grid grid-cols-1 lg:grid-cols-2">
                 <div class="h-full">
-                    <img src="https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                         alt="James Kilewo" 
+                    <img src="{% static 'images/ellymartin_bio.jpg' %}" 
+                         alt="Dr. Gy Elly Martin" 
                          class="w-full h-full object-cover">
                 </div>
                 <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-2">James Kilewo</h3>
-                    <p class="text-secondary font-medium mb-4">Technology Lead</p>
+                    <h3 class="text-2xl font-bold mb-2">Dr. Gy Elly Martin</h3>
+                    <p class="text-secondary font-medium mb-4">Medical Doctor</p>
                     <p class="text-gray-600 mb-6">
-                        James is a digital health innovator who oversees Primetel's USSD platform and telehealth initiatives. With a background in software engineering and healthcare technology, he has been pivotal in developing accessible digital solutions that reach even the most remote communities.
+                        Gy Elly Martin is an experienced Clinical Officer with over five years of service in primary and specialized healthcare. A graduate of Machame Health Training Institution, he has built a strong clinical foundation that combines both technical expertise and a deep commitment to patient-centered care.
                     </p>
                     <p class="text-gray-600 mb-6">
-                        Before joining Primetel, James worked with several tech startups in East Africa, focusing on mobile health applications. He holds a degree in Computer Science from the University of Nairobi and has completed specialized training in digital health systems from the Johns Hopkins Bloomberg School of Public Health.
+                        Throughout his career, Gy Elly has demonstrated proficiency in diagnosing, treating, and managing a wide range of medical conditions across outpatient and inpatient settings. His hands-on experience includes conducting comprehensive patient assessments, administering appropriate treatment plans, and supporting preventive health initiatives within the community. He is also skilled in performing essential clinical procedures, providing emergency care, and ensuring timely referrals for advanced management when needed.
                     </p>
-                    <div class="flex space-x-4">
+                    <!-- <div class="flex space-x-4">
                         <a href="#" class="text-primary hover:text-secondary">
                             <i class="fab fa-linkedin-in text-xl"></i>
                         </a>
@@ -871,7 +871,7 @@
                         <a href="#" class="text-primary hover:text-secondary">
                             <i class="fas fa-envelope text-xl"></i>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -882,20 +882,21 @@
             <div class="popup-close"><i class="fas fa-times"></i></div>
             <div class="grid grid-cols-1 lg:grid-cols-2">
                 <div class="h-full">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                         alt="Sarah Mwakasege" 
+                    <img src="{% static 'images/kenneth_bio.jpg' %}" 
+                         alt="Dr. Keneth H. Masao" 
                          class="w-full h-full object-cover">
                 </div>
                 <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-2">Sarah Mwakasege</h3>
-                    <p class="text-secondary font-medium mb-4">Operations Director</p>
+                    <h3 class="text-2xl font-bold mb-2">Dr. Keneth H. Masao</h3>
+                    <p class="text-secondary font-medium mb-4">Medical Doctor</p>
                     <p class="text-gray-600 mb-6">
-                        Sarah is a healthcare administrator with 8 years of experience in managing clinical operations. She ensures the smooth running of Primetel's mobile clinics, community programs, and administrative functions across all regions.
+                        Keneth H. Masao is a committed Enrolled Nurse with over five years of frontline healthcare experience, serving patients across both facility and community settings. With formal nursing training and a strong track record of practice, he has honed his expertise in delivering compassionate, high-quality care to diverse patient populations.
+
                     </p>
                     <p class="text-gray-600 mb-6">
-                        Her expertise in healthcare logistics and supply chain management has been crucial in maintaining consistent service delivery even in challenging environments. Sarah holds a Bachelor's in Healthcare Administration from St. Augustine University of Tanzania and has completed advanced training in health systems management.
+                        Keneth’s professional background spans a wide range of responsibilities, including patient assessment, basic clinical procedures, medication administration, wound care, and support for maternal, child, and adult health services. His experience also extends to health education and counseling, where he has played an important role in sensitizing patients and communities on preventive healthcare, treatment adherence, and healthy lifestyle practices.
                     </p>
-                    <div class="flex space-x-4">
+                    <!-- <div class="flex space-x-4">
                         <a href="#" class="text-primary hover:text-secondary">
                             <i class="fab fa-linkedin-in text-xl"></i>
                         </a>
@@ -904,8 +905,8 @@
                         </a>
                         <a href="#" class="text-primary hover:text-secondary">
                             <i class="fas fa-envelope text-xl"></i>
-                        </a>
-                    </div>
+                        </a> -->
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
@@ -916,20 +917,20 @@
             <div class="popup-close"><i class="fas fa-times"></i></div>
             <div class="grid grid-cols-1 lg:grid-cols-2">
                 <div class="h-full">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                         alt="Dr. Joseph Kimaro" 
+                    <img src="{% static 'images/gigwa_bio.jpg' %}" 
+                         alt="Gigwa Godfrey Mbaga" 
                          class="w-full h-full object-cover">
                 </div>
                 <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-2">Dr. Joseph Kimaro</h3>
-                    <p class="text-secondary font-medium mb-4">Mental Health Lead</p>
+                    <h3 class="text-2xl font-bold mb-2">Gigwa Godfrey Mbaga</h3>
+                    <p class="text-secondary font-medium mb-4">Counseling Psychologist</p>
                     <p class="text-gray-600 mb-6">
-                        Dr. Kimaro is a psychiatrist specializing in community mental health interventions. He leads Primetel's mental health programs, which have reached over 10,000 students and community members with awareness and support services.
+                        Gigwa Godfrey Mbaga is a compassionate and dedicated Counseling Psychologist with a strong foundation in mental health practice and community support. She holds a Bachelor’s degree in Counseling Psychology from the University of Iringa, complemented by a Diploma in Counseling Psychology and additional training in law.
                     </p>
                     <p class="text-gray-600 mb-6">
-                        With a passion for destigmatizing mental health in Tanzania, Dr. Kimaro has developed culturally appropriate counseling approaches that resonate with local communities. He holds an MD from Muhimbili University and specialized in Psychiatry at the University of Cape Town.
+                        Gigwa has gained extensive practical experience through clinical placements and professional roles at leading institutions, including Iringa Regional Referral Hospital, Lugalo General Military Hospital, and the Ubungo Municipal Council. In these roles, she provided psychological education, facilitated mental health awareness sessions, and offered counseling across diverse settings such as pediatric, psychiatric, reproductive health, and voluntary counseling and testing (VCT) wards. Her work also extended to marriage counseling, child support interventions, and psychological support for vulnerable populations, including street children and single parents.
                     </p>
-                    <div class="flex space-x-4">
+                    <!-- <div class="flex space-x-4">
                         <a href="#" class="text-primary hover:text-secondary">
                             <i class="fab fa-linkedin-in text-xl"></i>
                         </a>
@@ -939,7 +940,7 @@
                         <a href="#" class="text-primary hover:text-secondary">
                             <i class="fas fa-envelope text-xl"></i>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -950,20 +951,22 @@
             <div class="popup-close"><i class="fas fa-times"></i></div>
             <div class="grid grid-cols-1 lg:grid-cols-2">
                 <div class="h-full">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                         alt="Grace Mboya" 
+                    <img src="{% static 'images/rumas_bio.jpg' %}" 
+                         alt="Rumas" 
                          class="w-full h-full object-cover">
                 </div>
                 <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-2">Grace Mboya</h3>
-                    <p class="text-secondary font-medium mb-4">Community Engagement</p>
+                    <h3 class="text-2xl font-bold mb-2">Rumas</h3>
+                    <p class="text-secondary font-medium mb-4">Outreach Coordinator</p>
                     <p class="text-gray-600 mb-6">
-                        Grace is a social worker who bridges the gap between communities and healthcare resources. Her deep understanding of cultural dynamics ensures that Primetel's services are accessible and appropriate for diverse populations.
+                        Rumas is the Outreach Coordinator at Primetel, bringing more than 15 years of experience as a Community Health Worker with specialized training in mental health. He provides strategic leadership to Primetel’s outreach team, spearheading the design and execution of high-impact sensitization campaigns that promote health awareness and improve access to care in underserved communities.
+
                     </p>
                     <p class="text-gray-600 mb-6">
-                        With experience working in both urban and rural settings across Tanzania, Grace has developed innovative approaches to community mobilization and health education. She holds a degree in Social Work from the University of Dodoma and has trained in participatory community development methods.
+                        In addition to coordinating outreach activities, Rumas plays a central role in forging and strengthening partnerships with community groups, institutions, and development partners. His ability to bridge grassroots realities with organizational goals has made him instrumental in expanding Primetel’s footprint and ensuring alignment with community needs.
+
                     </p>
-                    <div class="flex space-x-4">
+                    <!-- <div class="flex space-x-4">
                         <a href="#" class="text-primary hover:text-secondary">
                             <i class="fab fa-linkedin-in text-xl"></i>
                         </a>
@@ -973,7 +976,7 @@
                         <a href="#" class="text-primary hover:text-secondary">
                             <i class="fas fa-envelope text-xl"></i>
                         </a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -984,18 +987,19 @@
             <div class="popup-close"><i class="fas fa-times"></i></div>
             <div class="grid grid-cols-1 lg:grid-cols-2">
                 <div class="h-full">
-                    <img src="https://images.unsplash.com/photo-1557862921-37829c790f19?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                         alt="Michael Shayo" 
+                    <img src="{% static 'images/einoth_bio.jpg' %}" 
+                         alt="Einoth Saitoti" 
                          class="w-full h-full object-cover">
                 </div>
                 <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-2">Michael Shayo</h3>
-                    <p class="text-secondary font-medium mb-4">Finance Director</p>
+                    <h3 class="text-2xl font-bold mb-2">Einoth Saitoti</h3>
+                    <p class="text-secondary font-medium mb-4">Customer Support Lead</p>
                     <p class="text-gray-600 mb-6">
-                        Michael is a financial strategist who ensures Primetel's sustainable healthcare delivery through sound fiscal management. He oversees budgeting, financial planning, and resource allocation across all programs and regions.
+                        Einoth Saitoti serves as the Customer Support Lead at Primetel, where she oversees client engagement and support for users across the country who access Primetel’s services through its USSD application. In this role, she is responsible for receiving and managing customer requests, resolving inquiries, and ensuring that clients receive timely and effective assistance.
+
                     </p>
                     <p class="text-gray-600 mb-6">
-                        With a background in both corporate finance and nonprofit management, Michael brings a unique perspective to healthcare financing. He holds an MBA in Finance from the University of Dar es Salaam and has completed specialized training in health economics.
+                        Einoth plays a vital role in maintaining a seamless link between the community and Primetel’s health services, helping users navigate the platform and access the care and information they need. Her dedication to responsiveness, empathy, and problem-solving ensures that every customer interaction reinforces trust in Primetel’s mission to deliver accessible and inclusive healthcare solutions.
                     </p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-primary hover:text-secondary">
@@ -1132,7 +1136,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-20 bg-darkblue text-white parallax-bg" style="background-image: url('https://images.unsplash.com/photo-1579684453423-f84349ef60b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80')">
+    <section class="py-20 bg-darkblue bg-opacity-75 text-white parallax-bg" style="background-image: url('{% static 'images/about_bg.jpg' %}')">
         <div class="absolute inset-0 bg-darkblue/80"></div>
         <div class="container mx-auto px-6 relative">
             <div class="text-center mb-16">
@@ -1146,20 +1150,20 @@
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.1s">
-                    <div class="text-4xl font-bold mb-2">3</div>
-                    <div class="text-white/80">Regions Active</div>
+                    <div class="text-4xl font-bold mb-2" id="stat-1">2500+</div>
+                    <div class="text-white/80">Active USSD Users</div>
                 </div>
                 <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.2s">
-                    <div class="text-4xl font-bold mb-2">35,000+</div>
+                    <div class="text-4xl font-bold mb-2" id="stat-2">35,000+</div>
                     <div class="text-white/80">People Reached</div>
                 </div>
                 <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.3s">
-                    <div class="text-4xl font-bold mb-2">12,400+</div>
+                    <div class="text-4xl font-bold mb-2" id="stat-3">500+</div>
                     <div class="text-white/80">Counseling Sessions</div>
                 </div>
                 <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.4s">
-                    <div class="text-4xl font-bold mb-2">10,000+</div>
-                    <div class="text-white/80">Students Sensitized</div>
+                    <div class="text-4xl font-bold mb-2" id="stat-4">10,000+</div>
+                    <div class="text-white/80">Students Reached</div>
                 </div>
             </div>
         </div>
@@ -1185,7 +1189,7 @@
                             </p>
                         </div>
                         <div class="lg:w-1/3 flex justify-center lg:justify-end">
-                            <a href="#" class="btn-secondary text-white px-8 py-4 rounded-full font-medium whitespace-nowrap">
+                            <a href="{% url 'contact_us' %}" class="btn-secondary text-white px-8 py-4 rounded-full font-medium whitespace-nowrap">
                                 <i class="fas fa-paper-plane mr-2"></i> Get In Touch
                             </a>
                         </div>

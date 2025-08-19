@@ -244,8 +244,9 @@
                         <a href="#services-list" class="btn-secondary text-white px-8 py-4 rounded-full font-medium flex items-center justify-center">
                             <i class="fas fa-list-ul mr-2"></i> Explore Services
                         </a>
-                        <a href="#consultation" class="border border-white/20 hover:border-white/40 text-white px-8 py-4 rounded-full font-medium transition-all duration-300 flex items-center justify-center">
-                            <i class="fas fa-calendar-check mr-2"></i> Book Appointment
+                        <a href="{% url 'get_involved' %}" class="border border-white/20 hover:border-white/40 text-white px-8 py-4 rounded-full font-medium transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-handshake mr-2"> </i>Become a Partner
+
                         </a>
                     </div>
                 </div>
@@ -253,7 +254,7 @@
                 <div class="lg:w-1/2 flex justify-center animate-fade-in" style="animation-delay: 0.2s">
                     <div class="relative">
                         <div class="w-full max-w-md h-96 bg-white/10 rounded-3xl overflow-hidden glass-card hover-3d">
-                            <img src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                            <img src="{% static 'images/header_our_services.jpg' %}" 
                                  alt="Healthcare services" 
                                  class="w-full h-full object-cover">
                         </div>
@@ -263,12 +264,12 @@
                                 <span class="font-bold">5 Core Services</span>
                             </div>
                         </div>
-                        <div class="absolute -top-6 -right-6 bg-accent text-darkblue p-4 rounded-xl shadow-xl rotate-6">
+                        <!-- <div class="absolute -top-6 -right-6 bg-accent text-darkblue p-4 rounded-xl shadow-xl rotate-6">
                             <div class="flex items-center">
                                 <i class="fas fa-map-marker-alt mr-2"></i>
                                 <span class="font-bold">3 Regions Served</span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

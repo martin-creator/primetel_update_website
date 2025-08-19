@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Impact | Primetel Healthcare</title>
     <meta name="description" content="See how Primetel is transforming healthcare access in Tanzania through measurable impact and real stories">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -636,24 +642,24 @@
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 animate-fade-in-up">
                 <div class="impact-card bg-white p-8 rounded-xl shadow-md flex items-center justify-center hover-3d">
-                    <img src="{% static 'images/moh_logo.jpg'}" alt="Ministry of Health" class="h-12 object-contain">
+                    <img src="{% static 'images/moh_logo.jpg' %}" alt="Ministry of Health" class="h-24 object-contain">
                 </div>
                 
                 <div class="impact-card bg-white p-8 rounded-xl shadow-md flex items-center justify-center hover-3d" style="animation-delay: 0.2s">
-                    <img src="https://via.placeholder.com/150x80/0A1F44/FFFFFF?text=AMREF" alt="AMREF Health Africa" class="h-12 object-contain">
+                    <img src="{% static 'images/orkeeswa_logo.jpg' %}" alt="Orkeeswa" class="h-24 object-contain">
                 </div>
                 
                 <div class="impact-card bg-white p-8 rounded-xl shadow-md flex items-center justify-center hover-3d" style="animation-delay: 0.4s">
-                    <img src="https://via.placeholder.com/150x80/0A1F44/FFFFFF?text=StrongMinds" alt="StrongMinds" class="h-12 object-contain">
+                    <img src="{% static 'images/pfq_logo.png' %}" alt="Partners for Equity" class="h-12 object-contain">
                 </div>
                 
-                <div class="impact-card bg-white p-8 rounded-xl shadow-md flex items-center justify-center hover-3d" style="animation-delay: 0.6s">
+                <!-- <div class="impact-card bg-white p-8 rounded-xl shadow-md flex items-center justify-center hover-3d" style="animation-delay: 0.6s">
                     <img src="https://via.placeholder.com/150x80/0A1F44/FFFFFF?text=Orkeeswa" alt="Orkeeswa" class="h-12 object-contain">
-                </div>
+                </div> -->
             </div>
             
             <div class="text-center mt-12 animate-fade-in-up" style="animation-delay: 0.8s">
-                <a href="#" class="btn-primary text-white px-8 py-4 rounded-full font-medium">
+                <a href="{% url 'get_involved'%}" class="btn-primary text-white px-8 py-4 rounded-full font-medium">
                     <i class="fas fa-handshake mr-2"></i> Become a Partner
                 </a>
             </div>

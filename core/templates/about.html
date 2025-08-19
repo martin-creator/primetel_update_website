@@ -291,12 +291,13 @@
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
-                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
-                        <i class="fas fa-heartbeat text-white text-xl"></i>
+                    <div class="w-36 h-12 rounded-md bg-white flex items-center justify-center p-1">
+                        <a href="{% url 'home' %}">
+                        <img src="https://i.ibb.co/6cw7cwGP/primetel-logos.png" alt="primetel-logo" class="w-full h-full object-contain">
+                        </a>
                     </div>
-                    <span class="text-2xl font-serif font-bold text-white">Primetel</span>
                 </div>
-                
+    
                 <nav class="hidden lg:flex items-center space-x-8">
                     <a href="{% url 'home' %}" class="nav-link text-white/90 hover:text-white font-medium">Home</a>
                     <a href="{% url 'about' %}" class="nav-link text-white/90 hover:text-white border-b-2 border-secondary">About</a>
@@ -322,7 +323,7 @@
                 <a href="{% url 'impact' %}" class="block hover:text-secondary">Impact</a>
                 <a href="{% url 'news_list' %}" class="block text-secondary border-l-4 border-secondary pl-4">News</a>
                 <a href="{% url 'get_involved' %}" class="block text-secondary border-l-4 border-secondary">Get Involved</a>
-                <a href="{% url 'contact_us' %}" class="block text-white font-semibold font-medium">Contact </a>
+                <a href="{% url 'contact_us' %}" class="block text-white font-semibold font-medium">Contact</a>
             </div>
         </div>
     </header>

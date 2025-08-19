@@ -240,10 +240,11 @@
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
-                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
-                        <i class="fas fa-heartbeat text-white text-xl"></i>
+                    <div class="w-36 h-12 rounded-md bg-white flex items-center justify-center p-1">
+                        <a href="{% url 'home' %}">
+                        <img src="https://i.ibb.co/6cw7cwGP/primetel-logos.png" alt="primetel-logo" class="w-full h-full object-contain">
+                        </a>
                     </div>
-                    <span class="text-2xl font-serif font-bold text-white">Primetel</span>
                 </div>
                 
                 <nav class="hidden lg:flex items-center space-x-8">
@@ -635,7 +636,7 @@
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 animate-fade-in-up">
                 <div class="impact-card bg-white p-8 rounded-xl shadow-md flex items-center justify-center hover-3d">
-                    <img src="https://via.placeholder.com/150x80/0A1F44/FFFFFF?text=MoHCDGEC" alt="Ministry of Health" class="h-12 object-contain">
+                    <img src="{% static 'images/moh_logo.jpg'}" alt="Ministry of Health" class="h-12 object-contain">
                 </div>
                 
                 <div class="impact-card bg-white p-8 rounded-xl shadow-md flex items-center justify-center hover-3d" style="animation-delay: 0.2s">

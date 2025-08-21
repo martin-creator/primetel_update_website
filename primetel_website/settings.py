@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,6 +31,8 @@ ALLOWED_HOSTS = ['*']  # Change this to your domain in production
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',  # Local development
     'https://primetel.onrender.com',  # Production domain
+    'https://primetel-app-gch8e3gahfdhggfc.canadacentral-01.azurewebsites.net',  # Azure production domain
+    'https://primetel.tech',  # Custom domain
 
 ]
 
@@ -83,7 +86,8 @@ WSGI_APPLICATION = 'primetel_website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join('/home', 'site', 'db.sqlite3'),
+        # 'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

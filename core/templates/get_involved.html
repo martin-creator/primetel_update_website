@@ -564,20 +564,20 @@
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.1s">
-                    <div class="text-4xl font-bold mb-2">3</div>
-                    <div class="text-white/80">Regions Active</div>
+                    <div class="text-4xl font-bold mb-2" id="stat-1">2500+</div>
+                    <div class="text-white/80">Active USSD Users</div>
                 </div>
                 <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.2s">
-                    <div class="text-4xl font-bold mb-2">35,000+</div>
+                    <div class="text-4xl font-bold mb-2" id="stat-2">35,000+</div>
                     <div class="text-white/80">People Reached</div>
                 </div>
                 <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.3s">
-                    <div class="text-4xl font-bold mb-2">200+</div>
-                    <div class="text-white/80">Volunteers</div>
+                    <div class="text-4xl font-bold mb-2" id="stat-3">500+</div>
+                    <div class="text-white/80">Counseling Sessions</div>
                 </div>
                 <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.4s">
-                    <div class="text-4xl font-bold mb-2">15</div>
-                    <div class="text-white/80">Strategic Partners</div>
+                    <div class="text-4xl font-bold mb-2" id="stat-4">10,000+</div>
+                    <div class="text-white/80">Students Reached</div>
                 </div>
             </div>
         </div>
@@ -842,6 +842,61 @@
                 }
             });
         });
+
+        // Animate stats on scroll
+function animateStats() {
+    const stats = [
+        { id: 'stat-1', target: 2500, duration: 2000 },
+        { id: 'stat-2', target: 35000, duration: 2000 },
+        { id: 'stat-3', target: 500, duration: 2000 },
+        { id: 'stat-4', target: 10000, duration: 2000 }
+    ];
+
+    stats.forEach(stat => {
+        const element = document.getElementById(stat.id);
+        if (!element) return; // Skip if element not found
+        let start = 0;
+        const increment = stat.target / (stat.duration / 16); // Approx 60fps
+        let current = start;
+
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= stat.target) {
+                clearInterval(timer);
+                current = stat.target;
+                element.textContent = formatNumber(stat.id, current);
+            } else {
+                element.textContent = formatNumber(stat.id, current);
+            }
+        }, 16);
+    });
+}
+
+// Helper function to format numbers based on stat ID
+function formatNumber(id, value) {
+    if (id === 'stat-2') {
+        return Math.floor(value).toLocaleString() + '+';
+    } else if (id === 'stat-3' || id === 'stat-4') {
+        return Math.floor(value).toLocaleString() + '+';
+    } else {
+        return Math.floor(value).toLocaleString() + '+';
+    }
+}
+
+// Initialize counters when stats section is in view
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateStats();
+            statsObserver.unobserve(entry.target); // Stop observing after animation
+        }
+    });
+}, { threshold: 0.5 });
+
+const statsSection = document.querySelector('.parallax-bg');
+if (statsSection) {
+    statsObserver.observe(statsSection);
+}
     </script>
 </body>
 </html>

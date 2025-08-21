@@ -748,78 +748,86 @@
         });
         
         // Consultation form toggle
-        const consultationButtons = [
-            document.getElementById('consultation-btn'),
-            document.getElementById('mobile-consultation-btn'),
-            document.getElementById('hero-consultation-btn'),
-            document.getElementById('cta-consultation-btn')
-        ];
+        // const consultationButtons = [
+        //     document.getElementById('consultation-btn'),
+        //     document.getElementById('mobile-consultation-btn'),
+        //     document.getElementById('hero-consultation-btn'),
+        //     document.getElementById('cta-consultation-btn')
+        // ];
         
-        const consultationForm = document.getElementById('consultation-form');
-        const closeFormButton = document.getElementById('close-form');
+        // const consultationForm = document.getElementById('consultation-form');
+        // const closeFormButton = document.getElementById('close-form');
         
-        consultationButtons.forEach(button => {
-            if (button) {
-                button.addEventListener('click', () => {
-                    consultationForm.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
-            }
-        });
+        // consultationButtons.forEach(button => {
+        //     if (button) {
+        //         button.addEventListener('click', () => {
+        //             consultationForm.classList.add('active');
+        //             document.body.style.overflow = 'hidden';
+        //         });
+        //     }
+        // });
         
-        closeFormButton.addEventListener('click', () => {
-            consultationForm.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-        
+        // closeFormButton.addEventListener('click', () => {
+        //     consultationForm.classList.remove('active');
+        //     document.body.style.overflow = '';
+        // });
+
         // Animate stats on scroll
-        function animateStats() {
-            const stats = [
-                { id: 'stat-1', target: 3, duration: 1000 },
-                { id: 'stat-2', target: 35, duration: 2000 },
-                { id: 'stat-3', target: 12.4, duration: 2000 },
-                { id: 'stat-4', target: 10, duration: 2000 }
-            ];
-            
-            stats.forEach(stat => {
-                const element = document.getElementById(stat.id);
-                let start = 0;
-                const increment = stat.target / (stat.duration / 16);
-                let current = start;
-                
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= stat.target) {
-                        clearInterval(timer);
-                        current = stat.target;
-                        if (stat.id === 'stat-2') element.textContent = Math.floor(current) + ',000+';
-                        else if (stat.id === 'stat-3') element.textContent = current.toFixed(1) + 'k+';
-                        else if (stat.id === 'stat-4') element.textContent = current + 'k+';
-                        else element.textContent = Math.floor(current);
-                    } else {
-                        if (stat.id === 'stat-2') element.textContent = Math.floor(current) + ',000+';
-                        else if (stat.id === 'stat-3') element.textContent = current.toFixed(1) + 'k+';
-                        else if (stat.id === 'stat-4') element.textContent = current.toFixed(1) + 'k+';
-                        else element.textContent = Math.floor(current);
-                    }
-                }, 16);
-            });
+function animateStats() {
+    const stats = [
+        { id: 'stat-1', target: 2500, duration: 2000 },
+        { id: 'stat-2', target: 35000, duration: 2000 },
+        { id: 'stat-3', target: 500, duration: 2000 },
+        { id: 'stat-4', target: 10000, duration: 2000 }
+    ];
+
+    stats.forEach(stat => {
+        const element = document.getElementById(stat.id);
+        if (!element) return; // Skip if element not found
+        let start = 0;
+        const increment = stat.target / (stat.duration / 16); // Approx 60fps
+        let current = start;
+
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= stat.target) {
+                clearInterval(timer);
+                current = stat.target;
+                element.textContent = formatNumber(stat.id, current);
+            } else {
+                element.textContent = formatNumber(stat.id, current);
+            }
+        }, 16);
+    });
+}
+
+// Helper function to format numbers based on stat ID
+function formatNumber(id, value) {
+    if (id === 'stat-2') {
+        return Math.floor(value).toLocaleString() + '+';
+    } else if (id === 'stat-3' || id === 'stat-4') {
+        return Math.floor(value).toLocaleString() + '+';
+    } else {
+        return Math.floor(value).toLocaleString() + '+';
+    }
+}
+
+// Initialize counters when stats section is in view
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateStats();
+            statsObserver.unobserve(entry.target); // Stop observing after animation
         }
+    });
+}, { threshold: 0.5 });
+
+const statsSection = document.querySelector('.parallax-bg');
+if (statsSection) {
+    statsObserver.observe(statsSection);
+}
         
-        // Initialize counters when stats section is in view
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateStats();
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
         
-        const statsSection = document.querySelector('.parallax-bg');
-        if (statsSection) {
-            statsObserver.observe(statsSection);
-        }
         
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {

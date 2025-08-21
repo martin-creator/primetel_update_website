@@ -33,7 +33,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://primetel.onrender.com',  # Production domain
     'https://primetel-app-gch8e3gahfdhggfc.canadacentral-01.azurewebsites.net',  # Azure production domain
     'https://primetel.tech',  # Custom domain
-    'https://health.primetel.tech/', 
+    'https://health.primetel.tech/',  # Health subdomain
 
 ]
 

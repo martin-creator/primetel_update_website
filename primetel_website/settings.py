@@ -34,6 +34,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://primetel-app-gch8e3gahfdhggfc.canadacentral-01.azurewebsites.net',  # Azure production domain
     'https://primetel.tech',  # Custom domain
     'https://health.primetel.tech',  # Health subdomain
+    'https://primetel-update-website.onrender.com',
 
 ]
 
@@ -87,8 +88,8 @@ WSGI_APPLICATION = 'primetel_website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join('/home', 'site', 'db.sqlite3'),
-        # 'NAME': BASE_DIR / 'db.sqlite3',
+        #'NAME': os.path.join('/home', 'site', 'db.sqlite3'),
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -137,8 +138,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'core/static']
 MEDIA_URL = '/media/'
-# MEDIA_ROOT = BASE_DIR / 'media'
-MEDIA_ROOT = os.path.join('/home', 'site', 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
+#MEDIA_ROOT = os.path.join('/home', 'site', 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

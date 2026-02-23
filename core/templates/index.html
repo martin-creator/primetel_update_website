@@ -1,935 +1,470 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Primetel | Healthcare Innovation</title>
-    <meta name="description" content="Transforming healthcare delivery through innovative solutions in Tanzania">
-    
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
+{% load math_filters %}
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#0056B3',
-                        secondary: '#E63946',
-                        accent: '#FFD700',
-                        darkblue: '#0A1F44',
-                        lightblue: '#E6F0FF'
-                    },
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'fade-in': 'fadeIn 1s ease-out forwards',
-                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-15px)' }
-                        },
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' }
-                        },
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(30px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <style>
-        body {
-            overflow-x: hidden;
-        }
-        
-        .hero-gradient {
-            background: linear-gradient(135deg, rgba(10, 31, 68, 0.95) 0%, rgba(0, 86, 179, 0.9) 100%);
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-        }
-        
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: #E63946;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover:after {
-            width: 100%;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #0056B3 0%, #003366 100%);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 86, 179, 0.3);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 86, 179, 0.4);
-        }
-        
-        .btn-secondary {
-            background: linear-gradient(135deg, #E63946 0%, #C1121F 100%);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
-        }
-        
-        .btn-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
-        }
-        
-        .service-card {
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            perspective: 1000px;
-            transform-style: preserve-3d;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .hidden-form {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.65, 0, 0.35, 1);
-        }
-        
-        .hidden-form.active {
-            max-height: 1000px;
-            opacity: 1;
-        }
-        
-        .floating-shape {
-            animation: float 8s ease-in-out infinite;
-        }
-        
-        .floating-shape-2 {
-            animation: float 6s ease-in-out infinite reverse;
-            animation-delay: 1s;
-        }
-        
-        .floating-shape-3 {
-            animation: float 7s ease-in-out infinite;
-            animation-delay: 2s;
-        }
-        
-        .hover-3d {
-            transition: transform 0.5s ease;
-        }
-        
-        .hover-3d:hover {
-            transform: rotateY(10deg) rotateX(5deg) scale(1.05);
-        }
-        
-        .text-stroke {
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-            color: transparent;
-        }
-        
-        .parallax-bg {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        
-        @media (max-width: 1023px) {
-            .parallax-bg {
-                background-attachment: scroll;
-            }
-        }
-    </style>
-</head>
-<body class="font-sans bg-white text-gray-900">
-    <!-- Navigation -->
-    <header class="fixed w-full z-50 bg-darkblue/95 backdrop-blur-md shadow-sm text-white">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
-                    <div class="w-36 h-12 rounded-md bg-white flex items-center justify-center p-1">
-                        <a href="{% url 'home' %}">
-                        <img src="https://i.ibb.co/6cw7cwGP/primetel-logos.png" alt="primetel-logo" class="w-full h-full object-contain">
-                        </a>
-                    </div>
-                </div>
-                
-                <nav class="hidden lg:flex items-center space-x-8">
-                    <a href="{% url 'home' %}" class="nav-link text-white/90 hover:text-white border-b-2 border-secondary">Home</a>
-                    <a href="{% url 'about' %}" class="nav-link text-white/90 hover:text-white font-medium">About</a>
-                    <a href="{% url 'services' %}" class="nav-link text-white/90 hover:text-white font-medium">Services</a>
-                    <a href="{% url 'impact' %}" class="nav-link text-white/90 hover:text-white font-medium">Impact</a>
-                    <a href="{% url 'news_list' %}" class="nav-link text-white font-semibold font-medium">News</a>
-                    <a href="{% url 'get_involved' %}" class="nav-link text-white/90 hover:text-white font-medium">Get Involved</a>
-                    <a href="{% url 'contact_us' %}" class="nav-link text-white font-semibold font-medium">Contact </a>
-                </nav>
-                
-                <button id="mobile-menu-button" class="lg:hidden text-white focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-darkblue shadow-lg">
-            <div class="container mx-auto px-6 py-4 space-y-4 text-white">
-                <a href="{% url 'home' %}" class="block hover:text-secondary">Home</a>
-                <a href="{% url 'about' %}" class="block hover:text-secondary">About</a>
-                <a href="{% url 'services' %}" class="block hover:text-secondary">Services</a>
-                <a href="{% url 'impact' %}" class="block hover:text-secondary">Impact</a>
-                <a href="{% url 'news_list' %}" class="block text-secondary border-l-4 border-secondary pl-4">News</a>
-                <a href="{% url 'get_involved' %}" class="block hover:text-secondary">Get Involved</a>
-                <a href="{% url 'contact_us' %}" class="block hover:text-secondary">Contact</a>
-            </div>
-        </div>
-    </header>
+{% block title %}Primetel Health | Innovating Healthcare Delivery in Tanzania{% endblock %}
+{% block meta_description %}Bridging the gap between communities and quality healthcare through technology and compassionate service in Monduli, Arusha, Tanzania.{% endblock %}
 
-    <!-- Hero Section -->
-    <section class="hero-gradient text-white min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
-        <!-- 3D Background Animation -->
-        <div id="threejs-bg" class="absolute inset-0 z-0 opacity-20"></div>
-        
-        <!-- Floating Shapes -->
-        <div class="absolute top-20 left-10 w-16 h-16 rounded-full bg-secondary/20 floating-shape"></div>
-        <div class="absolute bottom-1/4 right-20 w-24 h-24 rounded-lg bg-accent/20 floating-shape-2"></div>
-        <div class="absolute top-1/3 right-1/4 w-20 h-20 rounded-full bg-white/10 floating-shape-3"></div>
-        
-        <div class="container mx-auto px-6 py-20 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center">
-                <div class="lg:w-1/2 mb-12 lg:mb-0 animate-fade-in">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-6">
-                        <span class="text-stroke">Innovating</span> Healthcare <span class="text-accent">Delivery</span> in Tanzania
-                    </h1>
-                    <p class="text-xl text-white/80 mb-8">
-                        Bridging the gap between communities and quality healthcare through technology and compassionate service.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button id="hero-consultation-btn" class="btn-secondary text-white px-8 py-4 rounded-full font-medium flex items-center justify-center">
-                            <a href="{% url 'get_involved' %}">
-                            <i class="fas fa-handshake mr-2"></i> Partner With Us
-                            </a>
-                        </button>
-                        <a href="https://www.youtube.com/watch?v=-WbS28O_JLY&t=23s" class="border border-white/20 hover:border-white/40 text-white px-8 py-4 rounded-full font-medium transition-all duration-300 flex items-center justify-center" target="_blank">
-                            <i class="fas fa-play-circle mr-2"></i> Watch Our Story
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="lg:w-1/2 flex justify-center animate-fade-in" style="animation-delay: 0.2s">
-                    <div class="relative">
-                        <div class="w-full max-w-md h-96 bg-white/10 rounded-3xl overflow-hidden glass-card hover-3d">
-                            <img src="{% static 'images/primetel_doctor_homepage.jpg' %}" alt="Primetel Healthcare Worker">
-                                 alt="Healthcare worker" 
-                                 class="w-full h-full object-cover">
-                        </div>
-                        <div class="absolute -bottom-6 -left-6 bg-white text-darkblue p-4 rounded-xl shadow-xl">
-                            <div class="flex items-center">
-                                <div class="w-3 h-3 rounded-full bg-secondary mr-2 animate-pulse"></div>
-                                <span class="font-bold">35,000+ Lives Reached</span>
-                            </div>
-                        </div>
-                        <div class="absolute -top-6 -right-6 bg-secondary text-white p-4 rounded-xl shadow-xl rotate-6">
-                            <div class="flex items-center">
-                                <i class="fas fa-map-marker-alt mr-2"></i>
-                                <span class="font-bold">Monduli, Arusha</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
-            <i class="fas fa-chevron-down text-white text-xl"></i>
-        </div>
-    </section>
-
-    <!-- Consultation Form (Hidden by default) -->
-    <!-- <section id="consultation-form" class="hidden-form bg-lightblue py-0">
-        <div class="container mx-auto px-6 py-12">
-            <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-12">
-                <div class="flex justify-between items-center mb-8">
-                    <h2 class="text-3xl font-serif font-bold text-darkblue">Book a Consultation</h2>
-                    <button id="close-form" class="text-gray-500 hover:text-secondary text-2xl">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                
-                <form method="post" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {% csrf_token %}
-                    <input type="hidden" name="consultation_submit" value="1">
-                    <div>
-                        <label for="id_name" class="block text-gray-700 mb-2">Full Name</label>
-                        {{ consultation_form.name }}
-                    </div>
-                    <div>
-                        <label for="id_phone" class="block text-gray-700 mb-2">Phone Number</label>
-                        {{ consultation_form.phone }}
-                    </div>
-                    <div>
-                        <label for="id_service" class="block text-gray-700 mb-2">Service Needed</label>
-                        {{ consultation_form.service }}
-                    </div>
-                    <div>
-                        <label for="id_preferred_date" class="block text-gray-700 mb-2">Preferred Date</label>
-                        {{ consultation_form.preferred_date }}
-                    </div>
-                    <div class="md:col-span-2">
-                        <label for="id_additional_info" class="block text-gray-700 mb-2">Additional Information</label>
-                        {{ consultation_form.additional_info }}
-                    </div>
-                    <div class="md:col-span-2">
-                        <button type="submit" class="btn-primary text-white px-8 py-4 rounded-full font-medium w-full">
-                            Submit Request
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section> -->
-
-    <!-- Services Section -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 animate-fade-in">
-                <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Our Services</span>
-                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">
-                    Comprehensive <span class="text-primary">Healthcare Solutions</span>
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Delivering quality care through innovative approaches tailored to community needs
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="service-card bg-white p-8 rounded-2xl shadow-md border border-gray-100 animate-fade-in-up" style="animation-delay: 0.1s">
-                    <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-6 text-primary text-2xl">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Mental Health Services</h3>
-                    <p class="text-gray-600 mb-6">
-                        Counseling, crisis support, and wellness programs for individuals of all ages.
-                    </p>
-                    <a href="{% url 'services' %}#mental-health" class="inline-flex items-center text-primary font-medium group">
-                        Learn More
-                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
-                
-                <!-- Service 2 -->
-                <div class="service-card bg-white p-8 rounded-2xl shadow-md border border-gray-100 animate-fade-in-up" style="animation-delay: 0.2s">
-                    <div class="w-16 h-16 bg-secondary/10 rounded-xl flex items-center justify-center mb-6 text-secondary text-2xl">
-                        <i class="fas fa-user-md"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Primary Healthcare</h3>
-                    <p class="text-gray-600 mb-6">
-                        Comprehensive medical consultations, screenings, and treatment services.
-                    </p>
-                    <a href="{% url 'services' %}#primary-care" class="inline-flex items-center text-primary font-medium group">
-                        Learn More
-                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
-                
-                <!-- Service 3 -->
-                <div class="service-card bg-white p-8 rounded-2xl shadow-md border border-gray-100 animate-fade-in-up" style="animation-delay: 0.3s">
-                    <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-6 text-primary text-2xl">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Mobile Health Access</h3>
-                    <p class="text-gray-600 mb-6">
-                        Healthcare services delivered directly to your community via mobile units.
-                    </p>
-                    <a href="{% url 'services' %}#community-outreach" class="inline-flex items-center text-primary font-medium group">
-                        Learn More
-                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
-                
-                <!-- Service 4 -->
-                <div class="service-card bg-white p-8 rounded-2xl shadow-md border border-gray-100 animate-fade-in-up" style="animation-delay: 0.4s">
-                    <div class="w-16 h-16 bg-secondary/10 rounded-xl flex items-center justify-center mb-6 text-secondary text-2xl">
-                        <i class="fas fa-school"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">School Health Programs</h3>
-                    <p class="text-gray-600 mb-6">
-                        Education and screenings for students to promote lifelong wellness.
-                    </p>
-                    <a href="{% url 'services' %}#school-health" class="inline-flex items-center text-primary font-medium group">
-                        Learn More
-                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
-                
-                <!-- Service 5 -->
-                <div class="service-card bg-white p-8 rounded-2xl shadow-md border border-gray-100 animate-fade-in-up" style="animation-delay: 0.5s">
-                    <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mb-6 text-primary text-2xl">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Community Outreach</h3>
-                    <p class="text-gray-600 mb-6">
-                        Bringing healthcare education and services directly to underserved areas.
-                    </p>
-                    <a href="{% url 'services' %}#community-outreach" class="inline-flex items-center text-primary font-medium group">
-                        Learn More
-                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
-                
-                <!-- Service 6 -->
-                <div class="service-card bg-white p-8 rounded-2xl shadow-md border border-gray-100 animate-fade-in-up" style="animation-delay: 0.6s">
-                    <div class="w-16 h-16 bg-secondary/10 rounded-xl flex items-center justify-center mb-6 text-secondary text-2xl">
-                        <i class="fas fa-laptop-medical"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Telemedicine</h3>
-                    <p class="text-gray-600 mb-6">
-                        Remote consultations with healthcare professionals via digital platforms.
-                    </p>
-                    <a href="{% url 'services' %}#telehealth-service" class="inline-flex items-center text-primary font-medium group">
-                        Learn More
-                        <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="py-20 bg-darkblue text-white parallax-bg" style="background-image: url('{% static 'images/homepage_bak_stats.jpg' %}');">
-        <div class="absolute inset-0 bg-darkblue/80"></div>
-        <div class="container mx-auto px-6 relative">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.1s">
-                    <div class="text-4xl font-bold mb-2" id="stat-1">2500+</div>
-                    <div class="text-white/80">Active USSD Users</div>
-                </div>
-                <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.2s">
-                    <div class="text-4xl font-bold mb-2" id="stat-2">35,000+</div>
-                    <div class="text-white/80">People Reached</div>
-                </div>
-                <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.3s">
-                    <div class="text-4xl font-bold mb-2" id="stat-3">500+</div>
-                    <div class="text-white/80">Counseling Sessions</div>
-                </div>
-                <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.4s">
-                    <div class="text-4xl font-bold mb-2" id="stat-4">10,000+</div>
-                    <div class="text-white/80">Students Reached</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 animate-fade-in">
-                <span class="inline-block bg-secondary/10 text-secondary px-4 py-1 rounded-full text-sm font-medium mb-4">Testimonials</span>
-                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">
-                    Stories of <span class="text-primary">Impact</span>
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Hear from those whose lives we've touched through our healthcare services
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
-                <div class="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-secondary hover-3d animate-fade-in-up" style="animation-delay: 0.1s">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
-                            <img src="{% static 'images/rabia_testimonial.jpg' %}" 
-                                 alt="Rabia"
-                                 class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-bold">Rabia</h4>
-                            <p class="text-gray-500">Community Member, Monduli</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic mb-6">
-                        "When I look at people such as Eliasi in my community who found
-                        purpose through Primetel, I get motivated to keep supporting
-                        Primetel’s works. Every time I help someone take that first step
-                        towards healing, I know I am part of something bigger.
-                        "
-                    </p>
-                    <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 2 -->
-                <div class="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-primary hover-3d animate-fade-in-up" style="animation-delay: 0.2s">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
-                            <img src="{% static 'images/lazier_testimonial.jpg' %}" 
-                                 alt="Pastor Laizer" 
-                                 class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-bold">Pastor Laizer</h4>
-                            <p class="text-gray-500">Pastor at Community Church</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic mb-6">
-                        "When I met Einoth from Primetel, her message on mental health moved me to invite Primetel to train my church, and the life-changing impact on our members showed me how deeply such support is needed.
-                        "
-                    </p>
-                    <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                
-                <!-- Testimonial 3 -->
-                <div class="bg-white p-8 rounded-2xl shadow-lg border-l-4 border-accent hover-3d animate-fade-in-up" style="animation-delay: 0.3s">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
-                            <img src="{% static 'images/anonymous.png' %}"
-                                 alt="Anonymous"
-                                 class="w-full h-full object-cover">
-                        </div>
-                        <div>
-                            <h4 class="font-bold">Anonymous</h4>
-                            <p class="text-gray-500">Community Member</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 italic mb-6">
-                        "I witnessed my niece come back to life, and it felt like a weight had
-                        been lifted off my heart. I could not keep this to myself. I needed to
-                        share this gift with others. If this can heal my niece, it can help
-                        "
-                    </p>
-                    <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-20 bg-lightblue">
-        <div class="container mx-auto px-6">
-            <div class="bg-primary text-white rounded-2xl p-8 md:p-12 shadow-xl relative overflow-hidden">
-                <!-- Floating 3D Elements -->
-                <div class="absolute -top-20 -left-20 w-40 h-40 rounded-full bg-white/10"></div>
-                <div class="absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-secondary/20"></div>
-                <div class="absolute top-1/4 right-1/4 w-16 h-16 rounded-lg bg-accent/30 rotate-45"></div>
-                
-                <div class="relative z-10">
-                    <div class="flex flex-col lg:flex-row items-center">
-                        <div class="lg:w-2/3 mb-8 lg:mb-0">
-                            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4">
-                                Ready to Transform Healthcare in Your Community?
-                            </h2>
-                            <p class="text-xl text-white/90">
-                                Join us in making quality healthcare accessible to all Tanzanians.
-                            </p>
-                        </div>
-                        <div class="lg:w-1/3 flex justify-center lg:justify-end">
-                            <button id="cta-consultation-btn" class="btn-secondary text-white px-8 py-4 rounded-full font-medium whitespace-nowrap">
-                                <a href="{% url 'get_involved' %}" class="flex items-center justify-center">
-                                <i class="fas fa-handshake mr-2"></i> Partner With Us
-                                </a>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- News Section -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 animate-fade-in">
-                <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Latest Updates</span>
-                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">
-                    News & <span class="text-primary">Updates</span>
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Stay informed about our latest initiatives and healthcare advancements
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {% load math_filters %}
-                {% for news in latest_news %}
-                <div class="bg-white rounded-2xl shadow-md overflow-hidden hover-3d animate-fade-in-up" style="animation-delay: {{ forloop.counter0|mul:0.1 }}s">
-                    <div class="h-48 overflow-hidden">
-                        {% if news.image %}
-                        <img src="{{ news.image.url }}" 
-                             alt="{{ news.title }}" 
-                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                        {% else %}
-                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                             alt="{{ news.title }}" 
-                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                        {% endif %}
-                    </div>
-                    <div class="p-6">
-                        <span class="inline-block bg-{% if news.category == 'partnerships' %}accent{% else %}primary{% endif %}/10 text-{% if news.category == 'partnerships' %}accent{% else %}primary{% endif %} text-xs px-2 py-1 rounded mb-2">{{ news.get_category_display }}</span>
-                        <h3 class="text-xl font-bold mb-2">{{ news.title }}</h3>
-                        <p class="text-gray-600 text-sm mb-4">
-                            {{ news.content|truncatewords:20 }}
-                        </p>
-                        <a href="{% url 'news_detail' news.slug %}" class="inline-flex items-center text-primary font-medium text-sm group">
-                            Read More
-                            <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                        </a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            
-            <div class="text-center mt-12">
-                <a href="{% url 'news_list' %}" class="inline-flex items-center text-primary font-medium group">
-                    View All News
-                    <i class="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-darkblue text-white pt-20 pb-12">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                <div>
-                    <div class="flex items-center mb-6">
-                        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
-                            <i class="fas fa-heartbeat text-white text-xl"></i>
-                        </div>
-                        <span class="text-2xl font-serif font-bold">Primetel</span>
-                    </div>
-                    <p class="text-white/80 mb-6">
-                        Transforming healthcare delivery through innovation and community engagement.
-                    </p>
-                    <div class="flex space-x-4">
-                        <!-- <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
-                            <i class="fab fa-facebook-f"></i>
-                        </a> -->
-                        <!-- <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
-                            <i class="fab fa-twitter"></i>
-                        </a> -->
-                        <a href="https://www.instagram.com/primetel_health/" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors" target="_blank">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/company/primetel-health/" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-6">Quick Links</h3>
-                    <ul class="space-y-3">
-                        <li><a href="{% url 'home' %}" class="text-white/80 hover:text-white transition-colors">Home</a></li>
-                        <li><a href="{% url 'about' %}" class="text-white/80 hover:text-white transition-colors">About Us</a></li>
-                        <li><a href="{% url 'services' %}" class="text-white/80 hover:text-white transition-colors">Services</a></li>
-                        <li><a href="{% url 'impact' %}" class="text-white/80 hover:text-white transition-colors">Impact</a></li>
-                        <li><a href="{% url 'get_involved' %}" class="text-white/80 hover:text-white transition-colors">Get Involved</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-6">Services</h3>
-                    <ul class="space-y-3">
-                        <li><a href="{% url 'services' %}#mental-health" class="text-white/80 hover:text-white transition-colors">Mental Health</a></li>
-                        <li><a href="{% url 'services' %}#primary-care" class="text-white/80 hover:text-white transition-colors">Primary Care</a></li>
-                        <li><a href="{% url 'services' %}#mobile-clinics" class="text-white/80 hover:text-white transition-colors">Mobile Clinics</a></li>
-                        <li><a href="{% url 'services' %}#school-programs" class="text-white/80 hover:text-white transition-colors">School Programs</a></li>
-                        <li><a href="{% url 'services' %}#community-outreach" class="text-white/80 hover:text-white transition-colors">Community Outreach</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-6">Contact Us</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt text-primary mr-3 mt-1"></i>
-                            <span class="text-white/80">Monduli, Arusha, Tanzania</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-phone-alt text-primary mr-3 mt-1"></i>
-                            <span class="text-white/80">+255762629046</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-envelope text-primary mr-3 mt-1"></i>
-                            <span class="text-white/80">primetelhealth@gmail.com</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-globe text-primary mr-3 mt-1"></i>
-                            <span class="text-white/80">health.primetel.tech</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-white/60 text-sm mb-4 md:mb-0">
-                    &copy; 2025-2026 Primetel. All rights reserved.
-                </p>
-                <div class="flex space-x-6">
-                    <a href="" class="text-white/60 hover:text-white text-sm transition-colors">Privacy Policy</a>
-                    <a href="" class="text-white/60 hover:text-white text-sm transition-colors">Terms of Service</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // Consultation form toggle
-        // const consultationButtons = [
-        //     document.getElementById('consultation-btn'),
-        //     document.getElementById('mobile-consultation-btn'),
-        //     document.getElementById('hero-consultation-btn'),
-        //     document.getElementById('cta-consultation-btn')
-        // ];
-        
-        // const consultationForm = document.getElementById('consultation-form');
-        // const closeFormButton = document.getElementById('close-form');
-        
-        // consultationButtons.forEach(button => {
-        //     if (button) {
-        //         button.addEventListener('click', () => {
-        //             consultationForm.classList.add('active');
-        //             document.body.style.overflow = 'hidden';
-        //         });
-        //     }
-        // });
-        
-        // closeFormButton.addEventListener('click', () => {
-        //     consultationForm.classList.remove('active');
-        //     document.body.style.overflow = '';
-        // });
-
-        // Animate stats on scroll
-function animateStats() {
-    const stats = [
-        { id: 'stat-1', target: 2500, duration: 2000 },
-        { id: 'stat-2', target: 35000, duration: 2000 },
-        { id: 'stat-3', target: 500, duration: 2000 },
-        { id: 'stat-4', target: 10000, duration: 2000 }
-    ];
-
-    stats.forEach(stat => {
-        const element = document.getElementById(stat.id);
-        if (!element) return; // Skip if element not found
-        let start = 0;
-        const increment = stat.target / (stat.duration / 16); // Approx 60fps
-        let current = start;
-
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= stat.target) {
-                clearInterval(timer);
-                current = stat.target;
-                element.textContent = formatNumber(stat.id, current);
-            } else {
-                element.textContent = formatNumber(stat.id, current);
-            }
-        }, 16);
-    });
-}
-
-// Helper function to format numbers based on stat ID
-function formatNumber(id, value) {
-    if (id === 'stat-2') {
-        return Math.floor(value).toLocaleString() + '+';
-    } else if (id === 'stat-3' || id === 'stat-4') {
-        return Math.floor(value).toLocaleString() + '+';
-    } else {
-        return Math.floor(value).toLocaleString() + '+';
+{% block extra_css %}
+<style>
+    .service-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-}
+    .service-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    }
 
-// Initialize counters when stats section is in view
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            animateStats();
-            statsObserver.unobserve(entry.target); // Stop observing after animation
-        }
-    });
-}, { threshold: 0.5 });
+    .stat-counter {
+        font-variant-numeric: tabular-nums;
+    }
 
-const statsSection = document.querySelector('.parallax-bg');
-if (statsSection) {
-    statsObserver.observe(statsSection);
-}
-        
-        
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                    }
+    .news-card img {
+        transition: transform 0.5s ease;
+    }
+    .news-card:hover img {
+        transform: scale(1.05);
+    }
+
+    .testimonial-card {
+        transition: box-shadow 0.3s ease;
+    }
+    .testimonial-card:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="relative bg-gradient-to-br from-dark via-slate-900 to-brand-900 text-white overflow-hidden">
+    <!-- Subtle decorative elements -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-brand-500/5 blur-3xl"></div>
+        <div class="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full bg-brand-600/5 blur-3xl"></div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 pt-24 pb-20 lg:pt-32 lg:pb-28">
+        <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+            <!-- Text Content -->
+            <div class="lg:w-1/2 fade-up">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-brand-300 text-sm font-medium mb-6">
+                    <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
+                    Healthcare Innovation in Tanzania
+                </div>
+
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] tracking-tight mb-6">
+                    Innovating <span class="gradient-text">Healthcare Delivery</span> in Tanzania
+                </h1>
+
+                <p class="text-lg text-white/70 leading-relaxed max-w-xl mb-8">
+                    Bridging the gap between communities and quality healthcare through technology and compassionate service.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="{% url 'get_involved' %}" class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-brand-500 text-white font-semibold text-sm hover:bg-brand-600 transition-colors">
+                        <i class="fas fa-handshake"></i>
+                        Partner With Us
+                    </a>
+                    <a href="https://www.youtube.com/watch?v=-WbS28O_JLY&t=23s" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg border border-white/20 text-white font-semibold text-sm hover:bg-white/10 transition-colors">
+                        <i class="fas fa-play-circle"></i>
+                        Watch Our Story
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Image -->
+            <div class="lg:w-1/2 flex justify-center fade-up">
+                <div class="relative">
+                    <div class="w-full max-w-md rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="{% static 'images/primetel_doctor_homepage.jpg' %}"
+                             alt="Primetel Healthcare Worker"
+                             class="w-full h-96 object-cover">
+                    </div>
+
+                    <!-- Stats Badge -->
+                    <div class="absolute -bottom-5 -left-5 bg-white text-dark px-5 py-3 rounded-xl shadow-lg">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-brand-500 animate-pulse"></span>
+                            <span class="font-bold text-sm">35,000+ Lives Reached</span>
+                        </div>
+                    </div>
+
+                    <!-- Location Badge -->
+                    <div class="absolute -top-5 -right-5 bg-brand-600 text-white px-5 py-3 rounded-xl shadow-lg">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-map-marker-alt text-sm"></i>
+                            <span class="font-bold text-sm">Monduli, Arusha</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-6 left-0 right-0 flex justify-center animate-bounce">
+        <i class="fas fa-chevron-down text-white/40 text-sm"></i>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+            <span class="inline-block px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-semibold uppercase tracking-wider mb-4">Our Services</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">
+                Comprehensive <span class="gradient-text">Healthcare Solutions</span>
+            </h2>
+            <p class="text-muted text-lg leading-relaxed">
+                Delivering quality care through innovative approaches tailored to community needs
+            </p>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Service 1: Mental Health -->
+            <a href="{% url 'services' %}#mental-health" class="service-card block bg-white p-7 rounded-xl border border-slate-100 shadow-sm fade-up">
+                <div class="w-12 h-12 rounded-lg bg-brand-50 flex items-center justify-center text-brand-600 text-xl mb-5">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="text-lg font-bold text-dark mb-2">Mental Health Services</h3>
+                <p class="text-muted text-sm leading-relaxed mb-4">
+                    Counseling, crisis support, and wellness programs for individuals of all ages.
+                </p>
+                <span class="inline-flex items-center gap-1.5 text-brand-600 text-sm font-semibold">
+                    Learn More <i class="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
+                </span>
+            </a>
+
+            <!-- Service 2: Primary Healthcare -->
+            <a href="{% url 'services' %}#primary-care" class="service-card block bg-white p-7 rounded-xl border border-slate-100 shadow-sm fade-up">
+                <div class="w-12 h-12 rounded-lg bg-brand-50 flex items-center justify-center text-brand-600 text-xl mb-5">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h3 class="text-lg font-bold text-dark mb-2">Primary Healthcare</h3>
+                <p class="text-muted text-sm leading-relaxed mb-4">
+                    Comprehensive medical consultations, screenings, and treatment services.
+                </p>
+                <span class="inline-flex items-center gap-1.5 text-brand-600 text-sm font-semibold">
+                    Learn More <i class="fas fa-arrow-right text-xs"></i>
+                </span>
+            </a>
+
+            <!-- Service 3: Mobile Health Access -->
+            <a href="{% url 'services' %}#community-outreach" class="service-card block bg-white p-7 rounded-xl border border-slate-100 shadow-sm fade-up">
+                <div class="w-12 h-12 rounded-lg bg-brand-50 flex items-center justify-center text-brand-600 text-xl mb-5">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3 class="text-lg font-bold text-dark mb-2">Mobile Health Access</h3>
+                <p class="text-muted text-sm leading-relaxed mb-4">
+                    Healthcare services delivered directly to your community via mobile units.
+                </p>
+                <span class="inline-flex items-center gap-1.5 text-brand-600 text-sm font-semibold">
+                    Learn More <i class="fas fa-arrow-right text-xs"></i>
+                </span>
+            </a>
+
+            <!-- Service 4: School Health Programs -->
+            <a href="{% url 'services' %}#school-health" class="service-card block bg-white p-7 rounded-xl border border-slate-100 shadow-sm fade-up">
+                <div class="w-12 h-12 rounded-lg bg-brand-50 flex items-center justify-center text-brand-600 text-xl mb-5">
+                    <i class="fas fa-school"></i>
+                </div>
+                <h3 class="text-lg font-bold text-dark mb-2">School Health Programs</h3>
+                <p class="text-muted text-sm leading-relaxed mb-4">
+                    Education and screenings for students to promote lifelong wellness.
+                </p>
+                <span class="inline-flex items-center gap-1.5 text-brand-600 text-sm font-semibold">
+                    Learn More <i class="fas fa-arrow-right text-xs"></i>
+                </span>
+            </a>
+
+            <!-- Service 5: Community Outreach -->
+            <a href="{% url 'services' %}#community-outreach" class="service-card block bg-white p-7 rounded-xl border border-slate-100 shadow-sm fade-up">
+                <div class="w-12 h-12 rounded-lg bg-brand-50 flex items-center justify-center text-brand-600 text-xl mb-5">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="text-lg font-bold text-dark mb-2">Community Outreach</h3>
+                <p class="text-muted text-sm leading-relaxed mb-4">
+                    Bringing healthcare education and services directly to underserved areas.
+                </p>
+                <span class="inline-flex items-center gap-1.5 text-brand-600 text-sm font-semibold">
+                    Learn More <i class="fas fa-arrow-right text-xs"></i>
+                </span>
+            </a>
+
+            <!-- Service 6: Telemedicine -->
+            <a href="{% url 'services' %}#telehealth-service" class="service-card block bg-white p-7 rounded-xl border border-slate-100 shadow-sm fade-up">
+                <div class="w-12 h-12 rounded-lg bg-brand-50 flex items-center justify-center text-brand-600 text-xl mb-5">
+                    <i class="fas fa-laptop-medical"></i>
+                </div>
+                <h3 class="text-lg font-bold text-dark mb-2">Telemedicine</h3>
+                <p class="text-muted text-sm leading-relaxed mb-4">
+                    Remote consultations with healthcare professionals via digital platforms.
+                </p>
+                <span class="inline-flex items-center gap-1.5 text-brand-600 text-sm font-semibold">
+                    Learn More <i class="fas fa-arrow-right text-xs"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section id="stats-section" class="relative py-20 lg:py-24 bg-dark text-white overflow-hidden">
+    <!-- Accent bar -->
+    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-500 via-brand-600 to-brand-700"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
+            <div class="glass rounded-xl p-6 lg:p-8 text-center fade-up">
+                <div class="stat-counter text-3xl lg:text-4xl font-extrabold text-white mb-1" id="stat-1">0+</div>
+                <div class="text-sm text-white/60 font-medium">Active USSD Users</div>
+            </div>
+            <div class="glass rounded-xl p-6 lg:p-8 text-center fade-up">
+                <div class="stat-counter text-3xl lg:text-4xl font-extrabold text-white mb-1" id="stat-2">0+</div>
+                <div class="text-sm text-white/60 font-medium">People Reached</div>
+            </div>
+            <div class="glass rounded-xl p-6 lg:p-8 text-center fade-up">
+                <div class="stat-counter text-3xl lg:text-4xl font-extrabold text-white mb-1" id="stat-3">0+</div>
+                <div class="text-sm text-white/60 font-medium">Counseling Sessions</div>
+            </div>
+            <div class="glass rounded-xl p-6 lg:p-8 text-center fade-up">
+                <div class="stat-counter text-3xl lg:text-4xl font-extrabold text-white mb-1" id="stat-4">0+</div>
+                <div class="text-sm text-white/60 font-medium">Students Reached</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-20 lg:py-28 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+            <span class="inline-block px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-semibold uppercase tracking-wider mb-4">Testimonials</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">
+                Stories of <span class="gradient-text">Impact</span>
+            </h2>
+            <p class="text-muted text-lg leading-relaxed">
+                Hear from those whose lives we've touched through our healthcare services
+            </p>
+        </div>
+
+        <!-- Testimonials Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Testimonial 1: Rabia -->
+            <div class="testimonial-card bg-white rounded-xl p-7 border-l-4 border-brand-500 shadow-sm fade-up">
+                <div class="flex items-center gap-4 mb-5">
+                    <div class="w-14 h-14 rounded-full overflow-hidden shrink-0">
+                        <img src="{% static 'images/rabia_testimonial.jpg' %}"
+                             alt="Rabia"
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-dark">Rabia</h4>
+                        <p class="text-muted text-sm">Community Member, Monduli</p>
+                    </div>
+                </div>
+                <p class="text-slate-600 text-sm leading-relaxed italic mb-5">
+                    "When I look at people such as Eliasi in my community who found
+                    purpose through Primetel, I get motivated to keep supporting
+                    Primetel's works. Every time I help someone take that first step
+                    towards healing, I know I am part of something bigger."
+                </p>
+                <div class="flex gap-0.5 text-amber-400 text-sm">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <!-- Testimonial 2: Pastor Laizer -->
+            <div class="testimonial-card bg-white rounded-xl p-7 border-l-4 border-brand-600 shadow-sm fade-up">
+                <div class="flex items-center gap-4 mb-5">
+                    <div class="w-14 h-14 rounded-full overflow-hidden shrink-0">
+                        <img src="{% static 'images/lazier_testimonial.jpg' %}"
+                             alt="Pastor Laizer"
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-dark">Pastor Laizer</h4>
+                        <p class="text-muted text-sm">Pastor at Community Church</p>
+                    </div>
+                </div>
+                <p class="text-slate-600 text-sm leading-relaxed italic mb-5">
+                    "When I met Einoth from Primetel, her message on mental health moved me to invite Primetel to train my church, and the life-changing impact on our members showed me how deeply such support is needed."
+                </p>
+                <div class="flex gap-0.5 text-amber-400 text-sm">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+
+            <!-- Testimonial 3: Anonymous -->
+            <div class="testimonial-card bg-white rounded-xl p-7 border-l-4 border-brand-700 shadow-sm fade-up">
+                <div class="flex items-center gap-4 mb-5">
+                    <div class="w-14 h-14 rounded-full overflow-hidden shrink-0">
+                        <img src="{% static 'images/anonymous.png' %}"
+                             alt="Anonymous"
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-dark">Anonymous</h4>
+                        <p class="text-muted text-sm">Community Member</p>
+                    </div>
+                </div>
+                <p class="text-slate-600 text-sm leading-relaxed italic mb-5">
+                    "I witnessed my niece come back to life, and it felt like a weight had
+                    been lifted off my heart. I could not keep this to myself. I needed to
+                    share this gift with others. If this can heal my niece, it can help anyone."
+                </p>
+                <div class="flex gap-0.5 text-amber-400 text-sm">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-20 lg:py-24 bg-slate-100">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="relative bg-brand-600 rounded-2xl p-10 md:p-14 overflow-hidden fade-up">
+            <!-- Decorative circles -->
+            <div class="absolute -top-16 -left-16 w-48 h-48 rounded-full bg-white/10"></div>
+            <div class="absolute -bottom-10 -right-10 w-36 h-36 rounded-full bg-brand-700/40"></div>
+
+            <div class="relative z-10 flex flex-col lg:flex-row items-center gap-8">
+                <div class="lg:w-2/3">
+                    <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white tracking-tight mb-3">
+                        Ready to Transform Healthcare in Your Community?
+                    </h2>
+                    <p class="text-white/80 text-lg">
+                        Join us in making quality healthcare accessible to all Tanzanians.
+                    </p>
+                </div>
+                <div class="lg:w-1/3 flex justify-center lg:justify-end">
+                    <a href="{% url 'get_involved' %}" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-lg bg-white text-brand-700 font-bold text-sm hover:bg-brand-50 transition-colors whitespace-nowrap shadow-lg">
+                        <i class="fas fa-handshake"></i>
+                        Partner With Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- News Section -->
+<section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+            <span class="inline-block px-3 py-1 rounded-full bg-brand-50 text-brand-700 text-xs font-semibold uppercase tracking-wider mb-4">Latest Updates</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">
+                News & <span class="gradient-text">Updates</span>
+            </h2>
+            <p class="text-muted text-lg leading-relaxed">
+                Stay informed about our latest initiatives and healthcare advancements
+            </p>
+        </div>
+
+        <!-- News Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {% for news in latest_news %}
+            <div class="news-card bg-white rounded-xl border border-slate-100 shadow-sm overflow-hidden fade-up">
+                <div class="h-48 overflow-hidden">
+                    {% if news.image %}
+                    <img src="{{ news.image.url }}"
+                         alt="{{ news.title }}"
+                         class="w-full h-full object-cover">
+                    {% else %}
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                         alt="{{ news.title }}"
+                         class="w-full h-full object-cover">
+                    {% endif %}
+                </div>
+                <div class="p-6">
+                    <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold mb-3 {% if news.category == 'partnerships' %}bg-amber-50 text-amber-700{% else %}bg-brand-50 text-brand-700{% endif %}">
+                        {{ news.get_category_display }}
+                    </span>
+                    <h3 class="text-lg font-bold text-dark mb-2 leading-snug">{{ news.title }}</h3>
+                    <p class="text-muted text-sm leading-relaxed mb-4">
+                        {{ news.content|truncatewords:20 }}
+                    </p>
+                    <a href="{% url 'news_detail' news.slug %}" class="inline-flex items-center gap-1.5 text-brand-600 text-sm font-semibold hover:text-brand-700 transition-colors">
+                        Read More
+                        <i class="fas fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- View All Link -->
+        <div class="text-center mt-12 fade-up">
+            <a href="{% url 'news_list' %}" class="inline-flex items-center gap-2 text-brand-600 font-semibold text-sm hover:text-brand-700 transition-colors">
+                View All News
+                <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Animated stat counters
+    function animateStats() {
+        const stats = [
+            { id: 'stat-1', target: 2500, duration: 2000 },
+            { id: 'stat-2', target: 35000, duration: 2000 },
+            { id: 'stat-3', target: 500, duration: 2000 },
+            { id: 'stat-4', target: 10000, duration: 2000 }
+        ];
+
+        stats.forEach(stat => {
+            const element = document.getElementById(stat.id);
+            if (!element) return;
+            let current = 0;
+            const increment = stat.target / (stat.duration / 16);
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= stat.target) {
+                    clearInterval(timer);
+                    current = stat.target;
                 }
-            });
+                element.textContent = Math.floor(current).toLocaleString() + '+';
+            }, 16);
         });
-        
-        // Form submission handling
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Here you would typically add your form submission logic
-                console.log('Form submitted:', this);
-                
-                // Show a success message
-                alert('Thank you for your submission! We will contact you soon.');
-                this.reset();
-                
-                // Close the form
-                consultationForm.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-        
-        // 3D Background Animation
-        const threeContainer = document.getElementById('threejs-bg');
-        if (threeContainer) {
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            threeContainer.appendChild(renderer.domElement);
-            
-            // Create a torus knot geometry
-            const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
-            const material = new THREE.MeshBasicMaterial({ 
-                color: 0xE63946, 
-                wireframe: true,
-                transparent: true,
-                opacity: 0.5
-            });
-            const knot = new THREE.Mesh(geometry, material);
-            scene.add(knot);
-            
-            camera.position.z = 30;
-            
-            // Animation loop
-            function animate() {
-                requestAnimationFrame(animate);
-                knot.rotation.x += 0.005;
-                knot.rotation.y += 0.005;
-                renderer.render(scene, camera);
-            }
-            animate();
-            
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        }
-        
-        // GSAP animations for elements
-        gsap.from(".animate-fade-in", {
-            opacity: 0,
-            y: 20,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power2.out"
-        });
-        
-        gsap.from(".animate-fade-in-up", {
-            opacity: 0,
-            y: 40,
-            duration: 1,
-            stagger: 0.1,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: ".animate-fade-in-up",
-                start: "top 80%",
-                toggleActions: "play none none none"
+    }
+
+    // Trigger animation when stats section scrolls into view
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateStats();
+                statsObserver.unobserve(entry.target);
             }
         });
-    </script>
-</body>
-</html>
+    }, { threshold: 0.3 });
+
+    const statsSection = document.getElementById('stats-section');
+    if (statsSection) {
+        statsObserver.observe(statsSection);
+    }
+</script>
+{% endblock %}

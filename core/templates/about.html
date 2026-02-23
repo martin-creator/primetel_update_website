@@ -1,1480 +1,763 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | Primetel Healthcare</title>
-    <meta name="description" content="Discover Primetel's journey, mission, and innovative approach to healthcare in Tanzania">
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#0056B3',
-                        secondary: '#E63946',
-                        accent: '#FFD700',
-                        darkblue: '#0A1F44',
-                        lightblue: '#E6F0FF'
-                    },
-                    fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'fade-in': 'fadeIn 1s ease-out forwards',
-                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-15px)' }
-                        },
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' }
-                        },
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(30px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <style>
-        body {
-            overflow-x: hidden;
-        }
-        
-        .hero-gradient {
-            background: linear-gradient(135deg, rgba(10, 31, 68, 0.95) 0%, rgba(0, 86, 179, 0.9) 100%);
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-        }
-        
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: #E63946;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover:after {
-            width: 100%;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #0056B3 0%, #003366 100%);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 86, 179, 0.3);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 86, 179, 0.4);
-        }
-        
-        .btn-secondary {
-            background: linear-gradient(135deg, #E63946 0%, #C1121F 100%);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
-        }
-        
-        .btn-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
-        }
-        
-        .hover-3d {
-            transition: transform 0.5s ease;
-        }
-        
-        .hover-3d:hover {
-            transform: rotateY(10deg) rotateX(5deg) scale(1.05);
-        }
-        
-        .text-stroke {
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
-            color: transparent;
-        }
-        
-        .floating-shape {
-            animation: float 8s ease-in-out infinite;
-        }
-        
-        .floating-shape-2 {
-            animation: float 6s ease-in-out infinite reverse;
-            animation-delay: 1s;
-        }
-        
-        .floating-shape-3 {
-            animation: float 7s ease-in-out infinite;
-            animation-delay: 2s;
-        }
-        
-        /* Updated Timeline Styles */
-        .timeline-container {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .timeline-line {
-            position: relative;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(to right, #0056B3, #E63946);
-            margin: 60px 0;
-        }
-        
-        .timeline-dot {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: white;
-            border: 3px solid #0056B3;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 2;
-        }
-        
-        .timeline-dot:hover {
-            transform: translateY(-50%) scale(1.2);
-            box-shadow: 0 0 10px rgba(0, 86, 179, 0.5);
-        }
-        
-        .timeline-dot.active {
-            background: #0056B3;
-            border-color: white;
-        }
-        
-        .timeline-year {
-            position: absolute;
-            top: 30px;
+
+{% block title %}About Us | Primetel Health{% endblock %}
+{% block meta_description %}Discover Primetel's journey, mission, and innovative approach to healthcare in Tanzania{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Team Modal */
+    .team-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.7);
+        backdrop-filter: blur(4px);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+    }
+    .team-modal-overlay.active {
+        display: flex;
+    }
+    .team-modal-box {
+        background: white;
+        width: 100%;
+        max-width: 800px;
+        max-height: 90vh;
+        border-radius: 1rem;
+        overflow: hidden;
+        position: relative;
+        animation: modalIn 0.3s ease-out;
+    }
+    .team-modal-box .modal-body {
+        overflow-y: auto;
+        max-height: 90vh;
+    }
+    @keyframes modalIn {
+        from { opacity: 0; transform: translateY(16px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Timeline stepper */
+    .timeline-stepper::before {
+        content: '';
+        position: absolute;
+        left: 1.25rem;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, #dbeafe, #0056B3);
+    }
+    @media (min-width: 768px) {
+        .timeline-stepper::before {
             left: 50%;
             transform: translateX(-50%);
-            font-weight: bold;
-            color: #0056B3;
         }
-        
-        .timeline-content {
-            display: none;
-            position: absolute;
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 300px;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            z-index: 3;
+    }
+
+    /* Counter section */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    @media (min-width: 768px) {
+        .stats-grid {
+            grid-template-columns: repeat(4, 1fr);
         }
-        
-        .timeline-content.active {
-            display: block;
-            animation: fadeInUp 0.5s ease-out;
-        }
-        
-        /* Team Popup Styles */
-        .team-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .team-popup.active {
-            display: flex;
-        }
-        
-        .popup-content {
-            background: white;
-            width: 90%;
-            max-width: 800px;
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-            animation: fadeInUp 0.4s ease-out;
-        }
-        
-        .popup-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            width: 30px;
-            height: 30px;
-            background: #E63946;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 2;
-        }
-        
-        .parallax-bg {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        
-        @media (max-width: 1023px) {
-            .parallax-bg {
-                background-attachment: scroll;
-            }
-            
-            .timeline-content {
-                width: 250px;
-            }
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
-</head>
-<body class="font-sans bg-white text-gray-900">
-    <!-- Navigation -->
-    <header class="fixed w-full z-50 bg-darkblue/95 backdrop-blur-md shadow-sm text-white">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center">
-                    <div class="w-36 h-12 rounded-md bg-white flex items-center justify-center p-1">
-                        <a href="{% url 'home' %}">
-                        <img src="https://i.ibb.co/6cw7cwGP/primetel-logos.png" alt="primetel-logo" class="w-full h-full object-contain">
-                        </a>
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="relative bg-dark overflow-hidden">
+    <div class="absolute inset-0">
+        <img src="{% static 'images/primetel_about_header_men.jpg' %}" alt="Primetel Healthcare" class="w-full h-full object-cover opacity-20">
+    </div>
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="fade-up">
+                <span class="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 text-brand-400 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
+                    <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
+                    35,000+ Lives Touched
+                </span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+                    About <span class="gradient-text">Primetel Health</span>
+                </h1>
+                <p class="text-lg text-white/70 leading-relaxed mb-8 max-w-lg">
+                    Our journey to bridge the gap between communities and quality healthcare through innovation and compassion.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#our-story" class="inline-flex items-center gap-2 px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-lg transition-colors">
+                        <i class="fas fa-book-open"></i> Our Story
+                    </a>
+                    <a href="#timeline" class="inline-flex items-center gap-2 px-6 py-3 border border-white/20 hover:border-white/40 text-white text-sm font-semibold rounded-lg transition-colors">
+                        <i class="fas fa-history"></i> Our Timeline
+                    </a>
+                </div>
+            </div>
+            <div class="fade-up hidden lg:block">
+                <div class="relative">
+                    <div class="rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="{% static 'images/primetel_about_header_men.jpg' %}"
+                             alt="Primetel Healthcare Team"
+                             class="w-full h-[420px] object-cover">
+                    </div>
+                    <div class="absolute -bottom-4 -left-4 bg-white text-dark px-5 py-3 rounded-xl shadow-lg">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-brand-500 animate-pulse"></span>
+                            <span class="font-bold text-sm">35,000+ Lives Touched</span>
+                        </div>
                     </div>
                 </div>
-    
-                <nav class="hidden lg:flex items-center space-x-8">
-                    <a href="{% url 'home' %}" class="nav-link text-white/90 hover:text-white font-medium">Home</a>
-                    <a href="{% url 'about' %}" class="nav-link text-white/90 hover:text-white border-b-2 border-secondary">About</a>
-                    <a href="{% url 'services' %}" class="nav-link text-white/90 hover:text-white font-medium">Services</a>
-                    <a href="{% url 'impact' %}" class="nav-link text-white/90 hover:text-white font-medium">Impact</a>
-                    <a href="{% url 'news_list' %}" class="nav-link text-white font-semibold font-medium">News</a>
-                    <a href="{% url 'get_involved' %}" class="nav-link text-white font-semibold font-medium">Get Involved</a>
-                    <a href="{% url 'contact_us' %}" class="nav-link text-white font-semibold font-medium">Contact</a>
-                </nav>
-                
-                <button id="mobile-menu-button" class="lg:hidden text-white focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
-                </button>
             </div>
         </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-darkblue shadow-lg">
-            <div class="container mx-auto px-6 py-4 space-y-4 text-white">
-                <a href="{% url 'home' %}" class="block hover:text-secondary">Home</a>
-                <a href="{% url 'about' %}" class="block hover:text-secondary">About</a>
-                <a href="{% url 'services' %}" class="block hover:text-secondary">Services</a>
-                <a href="{% url 'impact' %}" class="block hover:text-secondary">Impact</a>
-                <a href="{% url 'news_list' %}" class="block text-secondary border-l-4 border-secondary pl-4">News</a>
-                <a href="{% url 'get_involved' %}" class="block text-secondary border-l-4 border-secondary">Get Involved</a>
-                <a href="{% url 'contact_us' %}" class="block text-white font-semibold font-medium">Contact</a>
-            </div>
-        </div>
-    </header>
+    </div>
+</section>
 
-    <!-- Hero Section -->
-    <section class="hero-gradient text-white min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
-        <!-- 3D Background Animation -->
-        <div id="threejs-bg" class="absolute inset-0 z-0 opacity-20"></div>
-        
-        <!-- Floating Shapes -->
-        <div class="absolute top-20 left-10 w-16 h-16 rounded-full bg-secondary/20 floating-shape"></div>
-        <div class="absolute bottom-1/4 right-20 w-24 h-24 rounded-lg bg-accent/20 floating-shape-2"></div>
-        <div class="absolute top-1/3 right-1/4 w-20 h-20 rounded-full bg-white/10 floating-shape-3"></div>
-        
-        <div class="container mx-auto px-6 py-20 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center">
-                <div class="lg:w-1/2 mb-12 lg:mb-0 animate-fade-in">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight mb-6">
-                        <span class="text-stroke">Redefining</span> Healthcare <span class="text-accent">in Tanzania</span>
-                    </h1>
-                    <p class="text-xl text-white/80 mb-8">
-                        Our journey to bridge the gap between communities and quality healthcare through innovation and compassion.
+<!-- Our Story Section -->
+<section id="our-story" class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16 fade-up">
+            <span class="inline-block bg-brand-50 text-brand-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">Our Roots</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">
+                The <span class="gradient-text">Primetel Story</span>
+            </h2>
+            <p class="text-lg text-muted max-w-2xl mx-auto">
+                From humble beginnings to a movement transforming Tanzanian healthcare
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="fade-up">
+                <div class="space-y-5">
+                    <p class="text-base text-slate-600 leading-relaxed">
+                        Founded in the heart of Tanzania, Primetel was born from a simple but powerful realization: healthcare shouldn't be a privilege reserved for those who can access it, but a fundamental right for all.
                     </p>
-                    <div class="flex gap-4">
-                        <a href="#our-story" class="btn-secondary text-white px-8 py-4 rounded-full font-medium flex items-center justify-center">
-                            <i class="fas fa-book-open mr-2"></i> Our Story
-                        </a>
-                        <a href="#timeline" class="border border-white/20 hover:border-white/40 text-white px-8 py-4 rounded-full font-medium transition-all duration-300 flex items-center justify-center">
-                            <i class="fas fa-history mr-2"></i> Our Timeline
-                        </a>
-                    </div>
+                    <p class="text-base text-slate-600 leading-relaxed">
+                        Our journey began with a small team of healthcare professionals and community advocates who saw firsthand how traditional systems were failing the most vulnerable. From rural villages to urban neighborhoods, we witnessed the gaps in access, the cultural barriers, and the urgent need for solutions that truly meet people where they are.
+                    </p>
+                    <p class="text-base text-slate-600 leading-relaxed">
+                        What started as grassroots mental health outreach has grown into a comprehensive healthcare initiative serving thousands across Tanzania through clinics, mobile units, schools, and digital platforms.
+                    </p>
                 </div>
-                
-                <div class="lg:w-1/2 flex justify-center animate-fade-in" style="animation-delay: 0.2s">
-                    <div class="relative">
-                        <div class="w-full max-w-md h-96 bg-white/10 rounded-3xl overflow-hidden glass-card hover-3d">
-                            <img src="{% static 'images/primetel_about_header_men.jpg' %}"
-                                 alt="Primetel Healthcare"
-                                 class="w-full h-full object-cover">
-                        </div>
-                        <div class="absolute -bottom-6 -left-6 bg-white text-darkblue p-4 rounded-xl shadow-xl">
-                            <div class="flex items-center">
-                                <div class="w-3 h-3 rounded-full bg-secondary mr-2 animate-pulse"></div>
-                                <span class="font-bold">35,000+ Lives Touched</span>
-                            </div>
-                        </div>
-                        <!-- <div class="absolute -top-6 -right-6 bg-accent text-darkblue p-4 rounded-xl shadow-xl rotate-6">
-                            <div class="flex items-center">
-                                <i class="fas fa-map-marker-alt mr-2"></i>
-                                <span class="font-bold">3 Regions Served</span>
-                            </div>
-                        </div> -->
+            </div>
+            <div class="fade-up">
+                <div class="relative">
+                    <img src="{% static 'images/primetel_story.jpg' %}"
+                         alt="Primetel Story"
+                         class="w-full rounded-2xl shadow-lg">
+                    <div class="absolute -bottom-4 -right-4 bg-brand-600 text-white px-5 py-3 rounded-xl shadow-lg">
+                        <div class="text-2xl font-bold">2020</div>
+                        <div class="text-sm text-brand-100">Founded in Monduli</div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <div class="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
-            <i class="fas fa-chevron-down text-white text-xl"></i>
-        </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Our Story Section -->
-    <section id="our-story" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 animate-fade-in">
-                <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Our Roots</span>
-                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">
-                    The <span class="text-primary">Primetel Story</span>
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    From humble beginnings to a movement transforming Tanzanian healthcare
+<!-- Mission & Vision Section -->
+<section class="py-20 lg:py-28 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white p-8 lg:p-10 rounded-2xl border border-slate-200 fade-up">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 text-xl">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-dark">Our Mission</h2>
+                </div>
+                <p class="text-base text-slate-600 leading-relaxed">
+                    To make quality, affordable, and culturally sensitive healthcare accessible to every Tanzanian — no matter where they live, who they are, or what they face. We bridge the gap between communities and the care they deserve through innovation, compassion, and relentless commitment.
                 </p>
             </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="animate-fade-in-up" style="animation-delay: 0.1s">
-                    <div class="bg-white p-8 rounded-2xl shadow-xl hover-3d">
-                        <p class="text-lg text-gray-600 mb-6">
-                            Founded in the heart of Tanzania, Primetel was born from a simple but powerful realization: healthcare shouldn't be a privilege reserved for those who can access it, but a fundamental right for all.
-                        </p>
-                        <p class="text-lg text-gray-600 mb-6">
-                            Our journey began with a small team of healthcare professionals and community advocates who saw firsthand how traditional systems were failing the most vulnerable. From rural villages to urban neighborhoods, we witnessed the gaps in access, the cultural barriers, and the urgent need for solutions that truly meet people where they are.
-                        </p>
-                        <p class="text-lg text-gray-600">
-                            What started as grassroots mental health outreach has grown into a comprehensive healthcare initiative serving thousands across Tanzania through clinics, mobile units, schools, and digital platforms.
-                        </p>
+
+            <div class="bg-white p-8 lg:p-10 rounded-2xl border border-slate-200 fade-up">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 text-xl">
+                        <i class="fas fa-eye"></i>
                     </div>
+                    <h2 class="text-2xl font-bold text-dark">Our Vision</h2>
                 </div>
-                
-                <div class="animate-fade-in-up" style="animation-delay: 0.3s">
-                    <div class="relative">
-                        <img src="{% static 'images/primetel_story.jpg' %}" 
-                             alt="Primetel Story" 
-                             class="w-full rounded-2xl shadow-xl hover-3d">
-                        <div class="absolute -bottom-6 -right-6 bg-secondary text-white p-6 rounded-xl shadow-lg">
-                            <div class="text-3xl font-bold">2020</div>
-                            <div class="text-sm">Founded in Monduli</div>
-                        </div>
-                    </div>
-                </div>
+                <p class="text-base text-slate-600 leading-relaxed">
+                    A Tanzania where healthcare barriers are eliminated, where every individual can access care that is timely, respectful, and rooted in their reality. From remote bomas to bustling cities, from mobile phones to clinics, we envision a future where health equity is not an aspiration but a lived experience.
+                </p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Mission & Vision Section -->
-    <section class="py-20 bg-lightblue">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-xl hover-3d animate-fade-in-up" style="animation-delay: 0.1s">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center text-primary text-2xl mr-6">
-                            <i class="fas fa-bullseye"></i>
-                        </div>
-                        <h2 class="text-3xl font-serif font-bold text-primary">Our Mission</h2>
-                    </div>
-                    <p class="text-lg text-gray-600">
-                        To make quality, affordable, and culturally sensitive healthcare accessible to every Tanzanian — no matter where they live, who they are, or what they face. We bridge the gap between communities and the care they deserve through innovation, compassion, and relentless commitment.
+<!-- Timeline Section -->
+<section id="timeline" class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16 fade-up">
+            <span class="inline-block bg-brand-50 text-brand-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">Our Journey</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">
+                Milestone <span class="gradient-text">Timeline</span>
+            </h2>
+            <p class="text-lg text-muted max-w-2xl mx-auto">
+                Key moments in our evolution as a healthcare innovator
+            </p>
+        </div>
+
+        <div class="relative timeline-stepper max-w-3xl mx-auto">
+            <!-- 2020 -->
+            <div class="relative pl-12 md:pl-0 mb-12 fade-up md:flex md:items-start">
+                <div class="md:w-1/2 md:pr-12 md:text-right">
+                    <span class="inline-block bg-brand-50 text-brand-700 px-3 py-1 rounded-full text-sm font-bold mb-2">2020</span>
+                    <h3 class="text-lg font-bold text-dark mb-2">Foundation</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        The idea for Primetel was born when founder Emmanuel Samwel recognized the urgent need to bridge healthcare gaps in underserved communities.
                     </p>
                 </div>
-                
-                <div class="bg-white p-8 rounded-2xl shadow-xl hover-3d animate-fade-in-up" style="animation-delay: 0.3s">
-                    <div class="flex items-center mb-6">
-                        <div class="w-16 h-16 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary text-2xl mr-6">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <h2 class="text-3xl font-serif font-bold text-secondary">Our Vision</h2>
-                    </div>
-                    <p class="text-lg text-gray-600">
-                        A Tanzania where healthcare barriers are eliminated, where every individual can access care that is timely, respectful, and rooted in their reality. From remote bomas to bustling cities, from mobile phones to clinics, we envision a future where health equity is not an aspiration but a lived experience.
+                <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-1 w-10 h-10 rounded-full bg-brand-500 border-4 border-white shadow-md flex items-center justify-center">
+                    <i class="fas fa-seedling text-white text-xs"></i>
+                </div>
+                <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
+            </div>
+
+            <!-- 2023 -->
+            <div class="relative pl-12 md:pl-0 mb-12 fade-up md:flex md:items-start">
+                <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
+                <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-1 w-10 h-10 rounded-full bg-brand-500 border-4 border-white shadow-md flex items-center justify-center">
+                    <i class="fas fa-file-signature text-white text-xs"></i>
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                    <span class="inline-block bg-brand-50 text-brand-700 px-3 py-1 rounded-full text-sm font-bold mb-2">2023</span>
+                    <h3 class="text-lg font-bold text-dark mb-2">Official Registration</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Primetel was officially registered as a health enterprise and piloted the first version of its USSD application, pioneering a digital-first approach to healthcare delivery in Tanzania.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 2024 -->
+            <div class="relative pl-12 md:pl-0 mb-12 fade-up md:flex md:items-start">
+                <div class="md:w-1/2 md:pr-12 md:text-right">
+                    <span class="inline-block bg-brand-50 text-brand-700 px-3 py-1 rounded-full text-sm font-bold mb-2">2024</span>
+                    <h3 class="text-lg font-bold text-dark mb-2">Structured Intervention</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Primetel launched its first structured outreach programs, reaching thousands with primary care and mental health sensitization campaigns. In the same year, the organization recruited and trained a team of Community Health Workers (CHWs) to extend its reach into villages and households. Clearance from the regional health office further strengthened institutional credibility.
+                    </p>
+                </div>
+                <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-1 w-10 h-10 rounded-full bg-brand-500 border-4 border-white shadow-md flex items-center justify-center">
+                    <i class="fas fa-hands-helping text-white text-xs"></i>
+                </div>
+                <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
+            </div>
+
+            <!-- 2025 -->
+            <div class="relative pl-12 md:pl-0 fade-up md:flex md:items-start">
+                <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
+                <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-1 w-10 h-10 rounded-full bg-brand-600 border-4 border-brand-100 shadow-md flex items-center justify-center">
+                    <i class="fas fa-award text-white text-xs"></i>
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                    <span class="inline-block bg-brand-100 text-brand-800 px-3 py-1 rounded-full text-sm font-bold mb-2">2025</span>
+                    <h3 class="text-lg font-bold text-dark mb-2">Medical Clinic License</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Primetel achieved a major milestone with the issuance of its official medical clinic license, cementing its role as a fully integrated provider of primary care, mental health services, and telehealth access nationwide.
                     </p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Updated Timeline Section -->
-    <section id="timeline" class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 animate-fade-in">
-                <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Our Journey</span>
-                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">
-                    Milestone <span class="text-primary">Timeline</span>
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Key moments in our evolution as a healthcare innovator
-                </p>
-            </div>
-            
-            <div class="timeline-container">
-                <div class="timeline-line">
-                    <!-- Timeline Dots -->
-                    <div class="timeline-dot" style="left: 0%;" data-year="2020">
-                        <span class="timeline-year">2020</span>
-                    </div>
-                    <div class="timeline-dot" style="left: 20%;" data-year="2023">
-                        <span class="timeline-year">2023</span>
-                    </div>
-                    <div class="timeline-dot" style="left: 40%;" data-year="2024">
-                        <span class="timeline-year">2024</span>
-                    </div>
-                    <div class="timeline-dot" style="left: 60%;" data-year="2025">
-                        <span class="timeline-year">2025</span>
-                    </div>
-                    <!-- <div class="timeline-dot" style="left: 80%;" data-year="2022">
-                        <span class="timeline-year">2022</span>
-                    </div>
-                    <div class="timeline-dot" style="left: 100%;" data-year="2023">
-                        <span class="timeline-year">2023</span>
-                    </div>
-                     -->
-                    <!-- Timeline Content -->
-                    <div class="timeline-content" data-year="2020">
-                        <h3 class="text-xl font-bold mb-2">Foundation</h3>
-                        <p class="text-gray-600">
-                            The idea for Primetel was born when founder Emmanuel Samwel recognized the urgent need to bridge healthcare gaps in underserved communities.
-                        </p>
-                    </div>
-                    
-                    <div class="timeline-content" data-year="2023">
-                        <h3 class="text-xl font-bold mb-2">Official registration</h3>
-                        <p class="text-gray-600">
-                            Primetel was officially registered as a health enterprise and piloted the first version of its USSD application, pioneering a digital-first approach to healthcare delivery in Tanzania.
-                        </p>
-                    </div>
-                    
-                    <div class="timeline-content" data-year="2024">
-                        <h3 class="text-xl font-bold mb-2">Structured Intervention</h3>
-                        <p class="text-gray-600">
-                            Primetel launched its first structured outreach programs, reaching thousands with primary care and mental health sensitization campaigns. In the same year, the organization recruited and trained a team of Community Health Workers (CHWs) to extend its reach into villages and households. Clearance from the regional health office further strengthened institutional credibility.
-                        </p>
-                    </div>
-                    
-                    <div class="timeline-content" data-year="2025">
-                        <h3 class="text-xl font-bold mb-2">Medical Clinic License </h3>
-                        <p class="text-gray-600">
-                            Primetel achieved a major milestone with the issuance of its official medical clinic license, cementing its role as a fully integrated provider of primary care, mental health services, and telehealth access nationwide.
-                        </p>
-                    </div>
-                    
-                    <!-- <div class="timeline-content" data-year="2022">
-                        <h3 class="text-xl font-bold mb-2">10,000 Students Reached</h3>
-                        <p class="text-gray-600">
-                            Milestone achievement of sensitizing over 10,000 students about mental health and wellness through school programs.
-                        </p>
-                    </div>
-                    
-                    <div class="timeline-content" data-year="2023">
-                        <h3 class="text-xl font-bold mb-2">Government Partnership</h3>
-                        <p class="text-gray-600">
-                            Signed collaboration agreement with Ministry of Health to integrate our model into national community health strategy.
-                        </p>
-                    </div> -->
-                </div>
-            </div>
+<!-- Team Section -->
+<section class="py-20 lg:py-28 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16 fade-up">
+            <span class="inline-block bg-brand-50 text-brand-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">Our People</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">
+                Meet the <span class="gradient-text">Leadership Team</span>
+            </h2>
+            <p class="text-lg text-muted max-w-2xl mx-auto">
+                The passionate professionals driving our healthcare revolution
+            </p>
         </div>
-    </section>
 
-    <!-- Updated Our Team Section with 9 Members and Popups -->
-    <section class="py-20 bg-lightblue">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 animate-fade-in">
-                <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">Our People</span>
-                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">
-                    Meet the <span class="text-primary">Leadership Team</span>
-                </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    The passionate professionals driving our healthcare revolution
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Team Member 1 -->
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="1" style="animation-delay: 0.1s">
-                    <div class="h-64 overflow-hidden">
-                        <img src="{% static 'images/Emmanuel_bio.jpg' %}"
-                             alt="Emmanuel Christopher Samwel" 
-                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-1">Emmanuel Christopher Samwel</h3>
-                        <p class="text-secondary font-medium mb-4">Founder & CEO</p>
-                        <!-- <p class="text-gray-600 text-sm">
-                            Public health specialist with 10+ years experience in community healthcare and social innovation.
-                        </p> -->
-                        <!-- <div class="mt-4 flex space-x-3">
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </div> -->
-                    </div>
-                </div>
-                
-                <!-- Team Member 2 -->
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="2" style="animation-delay: 0.2s">
-                    <div class="h-64 overflow-hidden">
-                        <img src="{% static 'images/moshi_bio.jpg' %}" 
-                             alt="Dr Epiphania Simon Moshi"
-                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-1">Dr Epiphania Simon Moshi</h3>
-                        <p class="text-secondary font-medium mb-4">Medical in Charge </p>
-                        <!-- <p class="text-gray-600 text-sm">
-                            Physician with expertise in rural healthcare delivery. Leads our clinical services and quality assurance.
-                        </p> -->
-                        <!-- <div class="mt-4 flex space-x-3">
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </div> -->
-                    </div>
-                </div>
-                
-                <!-- Team Member 3 -->
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="3" style="animation-delay: 0.3s">
-                    <div class="h-64 overflow-hidden">
-                        <img src="{% static 'images/ellymartin_bio.jpg' %}"
-                             alt="Dr.Gy Elly Martin" 
-                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-1">Dr.Gy Elly Martin</h3>
-                        <p class="text-secondary font-medium mb-4">Medical Doctor</p>
-                        <!-- <p class="text-gray-600 text-sm">
-                            Digital health innovator overseeing our USSD platform and telehealth initiatives.
-                        </p> -->
-                        <!-- <div class="mt-4 flex space-x-3">
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </div> -->
-                    </div>
-                </div>
-                
-                <!-- Team Member 4 -->
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="4" style="animation-delay: 0.4s">
-                    <div class="h-64 overflow-hidden">
-                        <img src="{% static 'images/kenneth_bio.jpg' %}" 
-                             alt="Dr. Keneth H. Masao"
-                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-1">Dr. Keneth H. Masao</h3>
-                        <p class="text-secondary font-medium mb-4">Medical Doctor</p>
-                        <!-- <p class="text-gray-600 text-sm">
-                            Healthcare administrator with 8 years experience in managing clinical operations.
-                        </p>
-                        <div class="mt-4 flex space-x-3">
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </div> -->
-                    </div>
-                </div>
-                
-                <!-- Team Member 5 -->
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="5" style="animation-delay: 0.5s">
-                    <div class="h-64 overflow-hidden">
-                        <img src="{% static 'images/gigwa_bio.jpg' %}" 
-                             alt="Gigwa Godfrey Mbaga" 
-                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-1">Gigwa Godfrey Mbaga</h3>
-                        <p class="text-secondary font-medium mb-4">Counseling Psychologist</p>
-                        <!-- <p class="text-gray-600 text-sm">
-                            Psychiatrist specializing in community mental health interventions.
-                        </p>
-                        <div class="mt-4 flex space-x-3">
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </div> -->
-                    </div>
-                </div>
-                
-                <!-- Team Member 6 -->
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="6" style="animation-delay: 0.6s">
-                    <div class="h-64 overflow-hidden">
-                        <img src="{% static 'images/rumas_bio.jpg' %}" 
-                             alt="Rumas" 
-                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-1">Rumas</h3>
-                        <p class="text-secondary font-medium mb-4">Outreach Coordinator</p>
-                        <!-- <p class="text-gray-600 text-sm">
-                            Social worker connecting communities with healthcare resources.
-                        </p>
-                        <div class="mt-4 flex space-x-3">
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </div> -->
-                    </div>
-                </div>
-                
-                <!-- Team Member 7 -->
-                <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="7" style="animation-delay: 0.7s">
-                    <div class="h-64 overflow-hidden">
-                        <img src="{% static 'images/einoth_bio.jpg' %}" 
-                             alt="Einoth Saitoti" 
-                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-1">Einoth Saitoti</h3>
-                        <p class="text-secondary font-medium mb-4">Customer Support Lead</p>
-                        <!-- <p class="text-gray-600 text-sm">
-                            Financial strategist ensuring sustainable healthcare delivery.
-                        </p> -->
-                        <!-- <div class="mt-4 flex space-x-3">
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </div> -->
-                    </div>
-                </div>
-                
-                <!-- Team Member 8 -->
-                <!-- <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="8" style="animation-delay: 0.8s">
-                    <div class="h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                             alt="Dr. Amina Juma" 
-                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-1">Dr. Amina Juma</h3>
-                        <p class="text-secondary font-medium mb-4">Pediatrics Specialist</p>
-                        <p class="text-gray-600 text-sm">
-                            Pediatrician leading our child health initiatives.
-                        </p>
-                        <div class="mt-4 flex space-x-3">
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                 -->
-                <!-- Team Member 9 -->
-                <!-- <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover-3d animate-fade-in-up cursor-pointer team-card" data-member="9" style="animation-delay: 0.9s">
-                    <div class="h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                             alt="Fatuma Hassan" 
-                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-1">Fatuma Hassan</h3>
-                        <p class="text-secondary font-medium mb-4">Partnerships Manager</p>
-                        <p class="text-gray-600 text-sm">
-                            Building strategic alliances for greater impact.
-                        </p>
-                        <div class="mt-4 flex space-x-3">
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="text-primary hover:text-secondary">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Team Popups -->
-    <div id="team-popup-1" class="team-popup">
-        <div class="popup-content">
-            <div class="popup-close"><i class="fas fa-times"></i></div>
-            <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="h-full">
-                    <img src="{% static 'images/emmanuel_bio.jpg' %}"
-                         alt="Emmanuel Christopher Samwel" 
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Team Member 1 -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="1">
+                <div class="aspect-[4/5] overflow-hidden">
+                    <img src="{% static 'images/Emmanuel_bio.jpg' %}"
+                         alt="Emmanuel Christopher Samwel"
                          class="w-full h-full object-cover">
                 </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-2">Emmanuel Christopher Samwel</h3>
-                    <p class="text-secondary font-medium mb-4">Founder & CEO</p>
-                    <p class="text-gray-600 mb-6">
+                <div class="p-5">
+                    <h3 class="text-base font-bold text-dark mb-1">Emmanuel Christopher Samwel</h3>
+                    <p class="text-sm text-brand-600 font-medium">Founder & CEO</p>
+                </div>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="2">
+                <div class="aspect-[4/5] overflow-hidden">
+                    <img src="{% static 'images/moshi_bio.jpg' %}"
+                         alt="Dr Epiphania Simon Moshi"
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-5">
+                    <h3 class="text-base font-bold text-dark mb-1">Dr Epiphania Simon Moshi</h3>
+                    <p class="text-sm text-brand-600 font-medium">Medical in Charge</p>
+                </div>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="3">
+                <div class="aspect-[4/5] overflow-hidden">
+                    <img src="{% static 'images/ellymartin_bio.jpg' %}"
+                         alt="Dr.Gy Elly Martin"
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-5">
+                    <h3 class="text-base font-bold text-dark mb-1">Dr.Gy Elly Martin</h3>
+                    <p class="text-sm text-brand-600 font-medium">Medical Doctor</p>
+                </div>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="4">
+                <div class="aspect-[4/5] overflow-hidden">
+                    <img src="{% static 'images/kenneth_bio.jpg' %}"
+                         alt="Dr. Keneth H. Masao"
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-5">
+                    <h3 class="text-base font-bold text-dark mb-1">Dr. Keneth H. Masao</h3>
+                    <p class="text-sm text-brand-600 font-medium">Medical Doctor</p>
+                </div>
+            </div>
+
+            <!-- Team Member 5 -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="5">
+                <div class="aspect-[4/5] overflow-hidden">
+                    <img src="{% static 'images/gigwa_bio.jpg' %}"
+                         alt="Gigwa Godfrey Mbaga"
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-5">
+                    <h3 class="text-base font-bold text-dark mb-1">Gigwa Godfrey Mbaga</h3>
+                    <p class="text-sm text-brand-600 font-medium">Counseling Psychologist</p>
+                </div>
+            </div>
+
+            <!-- Team Member 6 -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="6">
+                <div class="aspect-[4/5] overflow-hidden">
+                    <img src="{% static 'images/rumas_bio.jpg' %}"
+                         alt="Rumas"
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-5">
+                    <h3 class="text-base font-bold text-dark mb-1">Rumas</h3>
+                    <p class="text-sm text-brand-600 font-medium">Outreach Coordinator</p>
+                </div>
+            </div>
+
+            <!-- Team Member 7 -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="7">
+                <div class="aspect-[4/5] overflow-hidden">
+                    <img src="{% static 'images/einoth_bio.jpg' %}"
+                         alt="Einoth Saitoti"
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-5">
+                    <h3 class="text-base font-bold text-dark mb-1">Einoth Saitoti</h3>
+                    <p class="text-sm text-brand-600 font-medium">Customer Support Lead</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Modals -->
+<div id="team-modal-1" class="team-modal-overlay">
+    <div class="team-modal-box">
+        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 z-10 transition-colors">
+            <i class="fas fa-times text-sm"></i>
+        </button>
+        <div class="modal-body">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+                <div class="h-64 lg:h-auto">
+                    <img src="{% static 'images/emmanuel_bio.jpg' %}"
+                         alt="Emmanuel Christopher Samwel"
+                         class="w-full h-full object-cover">
+                </div>
+                <div class="p-6 lg:p-8">
+                    <h3 class="text-xl font-bold text-dark mb-1">Emmanuel Christopher Samwel</h3>
+                    <p class="text-brand-600 font-medium text-sm mb-5">Founder & CEO</p>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
                         Emmanuel Samwel is a health advocate, digital innovator, and youth development champion dedicated to redefining healthcare access in Tanzania. As the Founder and CEO of Primetel Health, his work blends the art of community health systems, the science of technology delivery, and the discipline of impact entrepreneurship. He has contributed to digital health initiatives with Doctors Without Borders and advised early-stage ventures such as Mkaa Safi and Banana Fibre Seedbag, helping them grow catalytic grant funding and build sustainable models.
                     </p>
-                    <p class="text-gray-600 mb-6">
+                    <p class="text-sm text-slate-600 leading-relaxed">
                         An African Leadership University graduate and African Leadership Academy alumnus, Emmanuel has earned recognition as a Millennium Fellow, an Innovate for Good Winner, and a Regional Finalist in the Hult Prize. Certified in mHealth, HRH systems, and mobile tech for health, he is well positioned to lead scalable, low-tech health innovations in resource-limited settings. Beyond health, Emmanuel is also a certified music producer, intentionally bridging creativity, rhythm, and purpose-driven leadership.
                     </p>
-                    <!-- <div class="flex space-x-4">
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-linkedin-in text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-twitter text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fas fa-envelope text-xl"></i>
-                        </a>
-                    </div> -->
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div id="team-popup-2" class="team-popup">
-        <div class="popup-content">
-            <div class="popup-close"><i class="fas fa-times"></i></div>
+<div id="team-modal-2" class="team-modal-overlay">
+    <div class="team-modal-box">
+        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 z-10 transition-colors">
+            <i class="fas fa-times text-sm"></i>
+        </button>
+        <div class="modal-body">
             <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="h-full">
+                <div class="h-64 lg:h-auto">
                     <img src="{% static 'images/moshi_bio.jpg' %}"
-                         alt="Dr Epiphania Simon Moshi" 
+                         alt="Dr Epiphania Simon Moshi"
                          class="w-full h-full object-cover">
                 </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-2"> Dr Epiphania Simon Moshi</h3>
-                    <p class="text-secondary font-medium mb-4">Medical in Charge</p>
-                    <p class="text-gray-600 mb-6">
+                <div class="p-6 lg:p-8">
+                    <h3 class="text-xl font-bold text-dark mb-1">Dr Epiphania Simon Moshi</h3>
+                    <p class="text-brand-600 font-medium text-sm mb-5">Medical in Charge</p>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
                         Dr. Epiphania Simon Moshi is a dedicated Medical Doctor with comprehensive training and hands-on experience in both hospital and clinical settings. She earned her Doctor of Medicine (MD) degree from Kilimanjaro Christian Medical University College in 2020 and has since built a strong clinical background through service at leading health institutions in Tanzania.
                     </p>
-                    <p class="text-gray-600 mb-6">
-                        Dr. Moshi completed her medical internship at Mt. Meru Regional Referral Hospital, where she gained experience managing both inpatient and outpatient cases, conducting thorough clinical assessments, and performing a wide range of medical and surgical procedures. These included obstetric care—ranging from normal deliveries to cesarean sections—as well as procedures such as lumbar punctures, chest tube insertions, ascitic and pleural tapping, herniorrhaphy, and trauma management.
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Dr. Moshi completed her medical internship at Mt. Meru Regional Referral Hospital, where she gained experience managing both inpatient and outpatient cases, conducting thorough clinical assessments, and performing a wide range of medical and surgical procedures. These included obstetric care—ranging from normal deliveries to cesarean sections—as well as procedures such as lumbar punctures, chest tube insertions, ascitic and pleural tapping, herniorrhaphy, and trauma management.
                     </p>
-                    <!-- <div class="flex space-x-4">
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-linkedin-in text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-twitter text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fas fa-envelope text-xl"></i>
-                        </a>
-                    </div> -->
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div id="team-popup-3" class="team-popup">
-        <div class="popup-content">
-            <div class="popup-close"><i class="fas fa-times"></i></div>
+<div id="team-modal-3" class="team-modal-overlay">
+    <div class="team-modal-box">
+        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 z-10 transition-colors">
+            <i class="fas fa-times text-sm"></i>
+        </button>
+        <div class="modal-body">
             <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="h-full">
-                    <img src="{% static 'images/ellymartin_bio.jpg' %}" 
-                         alt="Dr. Gy Elly Martin" 
+                <div class="h-64 lg:h-auto">
+                    <img src="{% static 'images/ellymartin_bio.jpg' %}"
+                         alt="Dr. Gy Elly Martin"
                          class="w-full h-full object-cover">
                 </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-2">Dr. Gy Elly Martin</h3>
-                    <p class="text-secondary font-medium mb-4">Medical Doctor</p>
-                    <p class="text-gray-600 mb-6">
+                <div class="p-6 lg:p-8">
+                    <h3 class="text-xl font-bold text-dark mb-1">Dr. Gy Elly Martin</h3>
+                    <p class="text-brand-600 font-medium text-sm mb-5">Medical Doctor</p>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
                         Gy Elly Martin is an experienced Clinical Officer with over five years of service in primary and specialized healthcare. A graduate of Machame Health Training Institution, he has built a strong clinical foundation that combines both technical expertise and a deep commitment to patient-centered care.
                     </p>
-                    <p class="text-gray-600 mb-6">
-                        Throughout his career, Gy Elly has demonstrated proficiency in diagnosing, treating, and managing a wide range of medical conditions across outpatient and inpatient settings. His hands-on experience includes conducting comprehensive patient assessments, administering appropriate treatment plans, and supporting preventive health initiatives within the community. He is also skilled in performing essential clinical procedures, providing emergency care, and ensuring timely referrals for advanced management when needed.
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Throughout his career, Gy Elly has demonstrated proficiency in diagnosing, treating, and managing a wide range of medical conditions across outpatient and inpatient settings. His hands-on experience includes conducting comprehensive patient assessments, administering appropriate treatment plans, and supporting preventive health initiatives within the community. He is also skilled in performing essential clinical procedures, providing emergency care, and ensuring timely referrals for advanced management when needed.
                     </p>
-                    <!-- <div class="flex space-x-4">
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-linkedin-in text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-twitter text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fas fa-envelope text-xl"></i>
-                        </a>
-                    </div> -->
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div id="team-popup-4" class="team-popup">
-        <div class="popup-content">
-            <div class="popup-close"><i class="fas fa-times"></i></div>
+<div id="team-modal-4" class="team-modal-overlay">
+    <div class="team-modal-box">
+        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 z-10 transition-colors">
+            <i class="fas fa-times text-sm"></i>
+        </button>
+        <div class="modal-body">
             <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="h-full">
-                    <img src="{% static 'images/kenneth_bio.jpg' %}" 
-                         alt="Dr. Keneth H. Masao" 
+                <div class="h-64 lg:h-auto">
+                    <img src="{% static 'images/kenneth_bio.jpg' %}"
+                         alt="Dr. Keneth H. Masao"
                          class="w-full h-full object-cover">
                 </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-2">Dr. Keneth H. Masao</h3>
-                    <p class="text-secondary font-medium mb-4">Medical Doctor</p>
-                    <p class="text-gray-600 mb-6">
+                <div class="p-6 lg:p-8">
+                    <h3 class="text-xl font-bold text-dark mb-1">Dr. Keneth H. Masao</h3>
+                    <p class="text-brand-600 font-medium text-sm mb-5">Medical Doctor</p>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
                         Keneth H. Masao is a committed Enrolled Nurse with over five years of frontline healthcare experience, serving patients across both facility and community settings. With formal nursing training and a strong track record of practice, he has honed his expertise in delivering compassionate, high-quality care to diverse patient populations.
-
                     </p>
-                    <p class="text-gray-600 mb-6">
-                        Keneth’s professional background spans a wide range of responsibilities, including patient assessment, basic clinical procedures, medication administration, wound care, and support for maternal, child, and adult health services. His experience also extends to health education and counseling, where he has played an important role in sensitizing patients and communities on preventive healthcare, treatment adherence, and healthy lifestyle practices.
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Keneth's professional background spans a wide range of responsibilities, including patient assessment, basic clinical procedures, medication administration, wound care, and support for maternal, child, and adult health services. His experience also extends to health education and counseling, where he has played an important role in sensitizing patients and communities on preventive healthcare, treatment adherence, and healthy lifestyle practices.
                     </p>
-                    <!-- <div class="flex space-x-4">
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-linkedin-in text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-twitter text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fas fa-envelope text-xl"></i>
-                        </a> -->
-                    <!-- </div> -->
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div id="team-popup-5" class="team-popup">
-        <div class="popup-content">
-            <div class="popup-close"><i class="fas fa-times"></i></div>
+<div id="team-modal-5" class="team-modal-overlay">
+    <div class="team-modal-box">
+        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 z-10 transition-colors">
+            <i class="fas fa-times text-sm"></i>
+        </button>
+        <div class="modal-body">
             <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="h-full">
-                    <img src="{% static 'images/gigwa_bio.jpg' %}" 
-                         alt="Gigwa Godfrey Mbaga" 
+                <div class="h-64 lg:h-auto">
+                    <img src="{% static 'images/gigwa_bio.jpg' %}"
+                         alt="Gigwa Godfrey Mbaga"
                          class="w-full h-full object-cover">
                 </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-2">Gigwa Godfrey Mbaga</h3>
-                    <p class="text-secondary font-medium mb-4">Counseling Psychologist</p>
-                    <p class="text-gray-600 mb-6">
-                        Gigwa Godfrey Mbaga is a compassionate and dedicated Counseling Psychologist with a strong foundation in mental health practice and community support. She holds a Bachelor’s degree in Counseling Psychology from the University of Iringa, complemented by a Diploma in Counseling Psychology and additional training in law.
+                <div class="p-6 lg:p-8">
+                    <h3 class="text-xl font-bold text-dark mb-1">Gigwa Godfrey Mbaga</h3>
+                    <p class="text-brand-600 font-medium text-sm mb-5">Counseling Psychologist</p>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        Gigwa Godfrey Mbaga is a compassionate and dedicated Counseling Psychologist with a strong foundation in mental health practice and community support. She holds a Bachelor's degree in Counseling Psychology from the University of Iringa, complemented by a Diploma in Counseling Psychology and additional training in law.
                     </p>
-                    <p class="text-gray-600 mb-6">
-                        Gigwa has gained extensive practical experience through clinical placements and professional roles at leading institutions, including Iringa Regional Referral Hospital, Lugalo General Military Hospital, and the Ubungo Municipal Council. In these roles, she provided psychological education, facilitated mental health awareness sessions, and offered counseling across diverse settings such as pediatric, psychiatric, reproductive health, and voluntary counseling and testing (VCT) wards. Her work also extended to marriage counseling, child support interventions, and psychological support for vulnerable populations, including street children and single parents.
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Gigwa has gained extensive practical experience through clinical placements and professional roles at leading institutions, including Iringa Regional Referral Hospital, Lugalo General Military Hospital, and the Ubungo Municipal Council. In these roles, she provided psychological education, facilitated mental health awareness sessions, and offered counseling across diverse settings such as pediatric, psychiatric, reproductive health, and voluntary counseling and testing (VCT) wards. Her work also extended to marriage counseling, child support interventions, and psychological support for vulnerable populations, including street children and single parents.
                     </p>
-                    <!-- <div class="flex space-x-4">
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-linkedin-in text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-twitter text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fas fa-envelope text-xl"></i>
-                        </a>
-                    </div> -->
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div id="team-popup-6" class="team-popup">
-        <div class="popup-content">
-            <div class="popup-close"><i class="fas fa-times"></i></div>
+<div id="team-modal-6" class="team-modal-overlay">
+    <div class="team-modal-box">
+        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 z-10 transition-colors">
+            <i class="fas fa-times text-sm"></i>
+        </button>
+        <div class="modal-body">
             <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="h-full">
-                    <img src="{% static 'images/rumas_bio.jpg' %}" 
-                         alt="Rumas" 
+                <div class="h-64 lg:h-auto">
+                    <img src="{% static 'images/rumas_bio.jpg' %}"
+                         alt="Rumas"
                          class="w-full h-full object-cover">
                 </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-2">Rumas</h3>
-                    <p class="text-secondary font-medium mb-4">Outreach Coordinator</p>
-                    <p class="text-gray-600 mb-6">
-                        Rumas is the Outreach Coordinator at Primetel, bringing more than 15 years of experience as a Community Health Worker with specialized training in mental health. He provides strategic leadership to Primetel’s outreach team, spearheading the design and execution of high-impact sensitization campaigns that promote health awareness and improve access to care in underserved communities.
-
+                <div class="p-6 lg:p-8">
+                    <h3 class="text-xl font-bold text-dark mb-1">Rumas</h3>
+                    <p class="text-brand-600 font-medium text-sm mb-5">Outreach Coordinator</p>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        Rumas is the Outreach Coordinator at Primetel, bringing more than 15 years of experience as a Community Health Worker with specialized training in mental health. He provides strategic leadership to Primetel's outreach team, spearheading the design and execution of high-impact sensitization campaigns that promote health awareness and improve access to care in underserved communities.
                     </p>
-                    <p class="text-gray-600 mb-6">
-                        In addition to coordinating outreach activities, Rumas plays a central role in forging and strengthening partnerships with community groups, institutions, and development partners. His ability to bridge grassroots realities with organizational goals has made him instrumental in expanding Primetel’s footprint and ensuring alignment with community needs.
-
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        In addition to coordinating outreach activities, Rumas plays a central role in forging and strengthening partnerships with community groups, institutions, and development partners. His ability to bridge grassroots realities with organizational goals has made him instrumental in expanding Primetel's footprint and ensuring alignment with community needs.
                     </p>
-                    <!-- <div class="flex space-x-4">
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-linkedin-in text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-twitter text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fas fa-envelope text-xl"></i>
-                        </a>
-                    </div> -->
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div id="team-popup-7" class="team-popup">
-        <div class="popup-content">
-            <div class="popup-close"><i class="fas fa-times"></i></div>
+<div id="team-modal-7" class="team-modal-overlay">
+    <div class="team-modal-box">
+        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 z-10 transition-colors">
+            <i class="fas fa-times text-sm"></i>
+        </button>
+        <div class="modal-body">
             <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="h-full">
-                    <img src="{% static 'images/einoth_bio.jpg' %}" 
-                         alt="Einoth Saitoti" 
+                <div class="h-64 lg:h-auto">
+                    <img src="{% static 'images/einoth_bio.jpg' %}"
+                         alt="Einoth Saitoti"
                          class="w-full h-full object-cover">
                 </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-2">Einoth Saitoti</h3>
-                    <p class="text-secondary font-medium mb-4">Customer Support Lead</p>
-                    <p class="text-gray-600 mb-6">
-                        Einoth Saitoti serves as the Customer Support Lead at Primetel, where she oversees client engagement and support for users across the country who access Primetel’s services through its USSD application. In this role, she is responsible for receiving and managing customer requests, resolving inquiries, and ensuring that clients receive timely and effective assistance.
-
+                <div class="p-6 lg:p-8">
+                    <h3 class="text-xl font-bold text-dark mb-1">Einoth Saitoti</h3>
+                    <p class="text-brand-600 font-medium text-sm mb-5">Customer Support Lead</p>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                        Einoth Saitoti serves as the Customer Support Lead at Primetel, where she oversees client engagement and support for users across the country who access Primetel's services through its USSD application. In this role, she is responsible for receiving and managing customer requests, resolving inquiries, and ensuring that clients receive timely and effective assistance.
                     </p>
-                    <p class="text-gray-600 mb-6">
-                        Einoth plays a vital role in maintaining a seamless link between the community and Primetel’s health services, helping users navigate the platform and access the care and information they need. Her dedication to responsiveness, empathy, and problem-solving ensures that every customer interaction reinforces trust in Primetel’s mission to deliver accessible and inclusive healthcare solutions.
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Einoth plays a vital role in maintaining a seamless link between the community and Primetel's health services, helping users navigate the platform and access the care and information they need. Her dedication to responsiveness, empathy, and problem-solving ensures that every customer interaction reinforces trust in Primetel's mission to deliver accessible and inclusive healthcare solutions.
                     </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-linkedin-in text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-twitter text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fas fa-envelope text-xl"></i>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <div id="team-popup-8" class="team-popup">
-        <div class="popup-content">
-            <div class="popup-close"><i class="fas fa-times"></i></div>
-            <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="h-full">
-                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                         alt="Dr. Amina Juma" 
-                         class="w-full h-full object-cover">
+<!-- Approach Section -->
+<section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16 fade-up">
+            <span class="inline-block bg-brand-50 text-brand-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">How We Work</span>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">
+                Our <span class="gradient-text">Approach</span>
+            </h2>
+            <p class="text-lg text-muted max-w-2xl mx-auto">
+                The principles that guide everything we do
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white p-8 rounded-2xl border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up">
+                <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 text-xl mb-5">
+                    <i class="fas fa-hands-helping"></i>
                 </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-2">Dr. Amina Juma</h3>
-                    <p class="text-secondary font-medium mb-4">Pediatrics Specialist</p>
-                    <p class="text-gray-600 mb-6">
-                        Dr. Juma is a pediatrician who leads Primetel's child health initiatives, including vaccination programs, nutrition education, and school health services. Her compassionate approach has made her beloved by children and families across our service areas.
-                    </p>
-                    <p class="text-gray-600 mb-6">
-                        Before joining Primetel, Dr. Juma worked at Muhimbili National Hospital's pediatric ward. She holds an MD from Muhimbili University and specialized in Pediatrics at the same institution. Her research on childhood malnutrition in rural Tanzania has been published in several medical journals.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-linkedin-in text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-twitter text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fas fa-envelope text-xl"></i>
-                        </a>
-                    </div>
+                <h3 class="text-lg font-bold text-dark mb-3">Community-Centered</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    We listen first, then design solutions with — not for — the communities we serve. Every program is built on local insights and leadership.
+                </p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up">
+                <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 text-xl mb-5">
+                    <i class="fas fa-mobile-alt"></i>
                 </div>
+                <h3 class="text-lg font-bold text-dark mb-3">Hybrid Model</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    Combining high-touch in-person care with scalable digital solutions to maximize both impact and reach.
+                </p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up">
+                <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 text-xl mb-5">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="text-lg font-bold text-dark mb-3">Data-Driven</h3>
+                <p class="text-sm text-slate-600 leading-relaxed">
+                    Measuring what matters to continuously improve our services and demonstrate real impact.
+                </p>
             </div>
         </div>
     </div>
+</section>
 
-    <div id="team-popup-9" class="team-popup">
-        <div class="popup-content">
-            <div class="popup-close"><i class="fas fa-times"></i></div>
-            <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="h-full">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                         alt="Fatuma Hassan" 
-                         class="w-full h-full object-cover">
-                </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-2">Fatuma Hassan</h3>
-                    <p class="text-secondary font-medium mb-4">Partnerships Manager</p>
-                    <p class="text-gray-600 mb-6">
-                        Fatuma builds strategic alliances that amplify Primetel's impact. She manages relationships with government agencies, international NGOs, corporate partners, and community organizations to expand our reach and resources.
-                    </p>
-                    <p class="text-gray-600 mb-6">
-                        With a background in international development and public relations, Fatuma has successfully secured partnerships that have enabled Primetel to scale its programs. She holds a degree in International Relations from the University of Dar es Salaam and has trained in partnership development at several global institutions.
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-linkedin-in text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fab fa-twitter text-xl"></i>
-                        </a>
-                        <a href="#" class="text-primary hover:text-secondary">
-                            <i class="fas fa-envelope text-xl"></i>
-                        </a>
-                    </div>
-                </div>
+<!-- Stats Section -->
+<section id="stats-section" class="py-20 lg:py-28 bg-dark">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-14 fade-up">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">
+                By the <span class="gradient-text">Numbers</span>
+            </h2>
+            <p class="text-lg text-white/60 max-w-2xl mx-auto">
+                The measurable impact of our work across Tanzania
+            </p>
+        </div>
+
+        <div class="stats-grid fade-up">
+            <div class="glass rounded-xl p-8 text-center">
+                <div class="text-3xl md:text-4xl font-extrabold text-white mb-2" data-counter="2500">0</div>
+                <div class="text-sm text-white/60 font-medium">Active USSD Users</div>
+            </div>
+            <div class="glass rounded-xl p-8 text-center">
+                <div class="text-3xl md:text-4xl font-extrabold text-white mb-2" data-counter="35000">0</div>
+                <div class="text-sm text-white/60 font-medium">People Reached</div>
+            </div>
+            <div class="glass rounded-xl p-8 text-center">
+                <div class="text-3xl md:text-4xl font-extrabold text-white mb-2" data-counter="500">0</div>
+                <div class="text-sm text-white/60 font-medium">Counseling Sessions</div>
+            </div>
+            <div class="glass rounded-xl p-8 text-center">
+                <div class="text-3xl md:text-4xl font-extrabold text-white mb-2" data-counter="10000">0</div>
+                <div class="text-sm text-white/60 font-medium">Students Reached</div>
             </div>
         </div>
     </div>
+</section>
 
-    <!-- Our Approach Section -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 animate-fade-in">
-                <span class="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-4">How We Work</span>
-                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">
-                    Our <span class="text-primary">Approach</span>
+<!-- CTA Section -->
+<section class="py-20 lg:py-28 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="bg-dark rounded-2xl p-8 md:p-12 lg:p-16 text-center relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-brand-500/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-48 h-48 bg-brand-500/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+            <div class="relative z-10 fade-up">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">
+                    Ready to Join Our Healthcare Movement?
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    The principles that guide everything we do
+                <p class="text-lg text-white/70 max-w-2xl mx-auto mb-8">
+                    Whether you're seeking care, partnership opportunities, or want to join our team — we'd love to connect.
                 </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Approach 1 -->
-                <div class="bg-white p-8 rounded-2xl shadow-xl border-t-4 border-primary hover-3d animate-fade-in-up" style="animation-delay: 0.1s">
-                    <div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center text-primary text-2xl mb-6">
-                        <i class="fas fa-hands-helping"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">Community-Centered</h3>
-                    <p class="text-gray-600">
-                        We listen first, then design solutions with — not for — the communities we serve. Every program is built on local insights and leadership.
-                    </p>
-                </div>
-                
-                <!-- Approach 2 -->
-                <div class="bg-white p-8 rounded-2xl shadow-xl border-t-4 border-secondary hover-3d animate-fade-in-up" style="animation-delay: 0.3s">
-                    <div class="w-16 h-16 bg-secondary/10 rounded-xl flex items-center justify-center text-secondary text-2xl mb-6">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">Hybrid Model</h3>
-                    <p class="text-gray-600">
-                        Combining high-touch in-person care with scalable digital solutions to maximize both impact and reach.
-                    </p>
-                </div>
-                
-                <!-- Approach 3 -->
-                <div class="bg-white p-8 rounded-2xl shadow-xl border-t-4 border-accent hover-3d animate-fade-in-up" style="animation-delay: 0.5s">
-                    <div class="w-16 h-16 bg-accent/10 rounded-xl flex items-center justify-center text-accent text-2xl mb-6">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-4">Data-Driven</h3>
-                    <p class="text-gray-600">
-                        Measuring what matters to continuously improve our services and demonstrate real impact.
-                    </p>
-                </div>
+                <a href="{% url 'contact_us' %}" class="inline-flex items-center gap-2 px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-lg transition-colors">
+                    <i class="fas fa-paper-plane"></i> Get In Touch
+                </a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Stats Section -->
-    <section class="py-20 bg-darkblue bg-opacity-75 text-white parallax-bg" style="background-image: url('{% static 'images/about_bg.jpg' %}')">
-        <div class="absolute inset-0 bg-darkblue/80"></div>
-        <div class="container mx-auto px-6 relative">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">
-                    By the <span class="text-accent">Numbers</span>
-                </h2>
-                <p class="text-xl text-white/80 max-w-3xl mx-auto">
-                    The measurable impact of our work across Tanzania
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.1s">
-                    <div class="text-4xl font-bold mb-2" id="stat-1">2500+</div>
-                    <div class="text-white/80">Active USSD Users</div>
-                </div>
-                <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.2s">
-                    <div class="text-4xl font-bold mb-2" id="stat-2">35,000+</div>
-                    <div class="text-white/80">People Reached</div>
-                </div>
-                <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.3s">
-                    <div class="text-4xl font-bold mb-2" id="stat-3">500+</div>
-                    <div class="text-white/80">Counseling Sessions</div>
-                </div>
-                <div class="glass-card p-8 rounded-xl text-center animate-fade-in-up" style="animation-delay: 0.4s">
-                    <div class="text-4xl font-bold mb-2" id="stat-4">10,000+</div>
-                    <div class="text-white/80">Students Reached</div>
-                </div>
-            </div>
-        </div>
-    </section>
+{% endblock %}
 
-    <!-- CTA Section -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="bg-primary text-white rounded-2xl p-8 md:p-12 shadow-xl relative overflow-hidden">
-                <!-- Floating 3D Elements -->
-                <div class="absolute -top-20 -left-20 w-40 h-40 rounded-full bg-white/10"></div>
-                <div class="absolute -bottom-10 -right-10 w-32 h-32 rounded-full bg-secondary/20"></div>
-                <div class="absolute top-1/4 right-1/4 w-16 h-16 rounded-lg bg-accent/30 rotate-45"></div>
-                
-                <div class="relative z-10">
-                    <div class="flex flex-col lg:flex-row items-center">
-                        <div class="lg:w-2/3 mb-8 lg:mb-0">
-                            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4">
-                                Ready to Join Our Healthcare Movement?
-                            </h2>
-                            <p class="text-xl text-white/90">
-                                Whether you're seeking care, partnership opportunities, or want to join our team — we'd love to connect.
-                            </p>
-                        </div>
-                        <div class="lg:w-1/3 flex justify-center lg:justify-end">
-                            <a href="{% url 'contact_us' %}" class="btn-secondary text-white px-8 py-4 rounded-full font-medium whitespace-nowrap">
-                                <i class="fas fa-paper-plane mr-2"></i> Get In Touch
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+{% block extra_js %}
+<script>
+(function() {
+    // ----- Team Modal Logic -----
+    const teamCards = document.querySelectorAll('.team-card');
+    const modalOverlays = document.querySelectorAll('.team-modal-overlay');
+    const modalCloseBtns = document.querySelectorAll('.modal-close-btn');
 
-    <!-- Footer -->
-    <footer class="bg-darkblue text-white pt-20 pb-12">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                <div>
-                    <div class="flex items-center mb-6">
-                        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center mr-3">
-                            <i class="fas fa-heartbeat text-white text-xl"></i>
-                        </div>
-                        <span class="text-2xl font-serif font-bold">Primetel</span>
-                    </div>
-                    <p class="text-white/80 mb-6">
-                        Transforming healthcare delivery through innovation and community engagement.
-                    </p>
-                    <div class="flex space-x-4">
-                        <!-- <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
-                            <i class="fab fa-facebook-f"></i>
-                        </a> -->
-                        <!-- <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
-                            <i class="fab fa-twitter"></i>
-                        </a> -->
-                        <a href="https://www.instagram.com/primetel_health/" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors" target="_blank">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/company/primetel-health/" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-6">Quick Links</h3>
-                    <ul class="space-y-3">
-                        <li><a href="{% url 'home' %}" class="text-white/80 hover:text-white transition-colors">Home</a></li>
-                        <li><a href="{% url 'about' %}" class="text-white/80 hover:text-white transition-colors">About Us</a></li>
-                        <li><a href="{% url 'services' %}" class="text-white/80 hover:text-white transition-colors">Services</a></li>
-                        <li><a href="{% url 'impact' %}" class="text-white/80 hover:text-white transition-colors">Impact</a></li>
-                        <li><a href="{% url 'get_involved' %}" class="text-white/80 hover:text-white transition-colors">Get Involved</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-6">Services</h3>
-                    <ul class="space-y-3">
-                        <li><a href="{% url 'services' %}#mental-health" class="text-white/80 hover:text-white transition-colors">Mental Health</a></li>
-                        <li><a href="{% url 'services' %}#primary-care" class="text-white/80 hover:text-white transition-colors">Primary Care</a></li>
-                        <li><a href="{% url 'services' %}#mobile-clinics" class="text-white/80 hover:text-white transition-colors">Mobile Clinics</a></li>
-                        <li><a href="{% url 'services' %}#school-programs" class="text-white/80 hover:text-white transition-colors">School Programs</a></li>
-                        <li><a href="{% url 'services' %}#community-outreach" class="text-white/80 hover:text-white transition-colors">Community Outreach</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-bold mb-6">Contact Us</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt text-primary mr-3 mt-1"></i>
-                            <span class="text-white/80">Monduli, Arusha, Tanzania</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-phone-alt text-primary mr-3 mt-1"></i>
-                            <span class="text-white/80">+255762629046</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-envelope text-primary mr-3 mt-1"></i>
-                            <span class="text-white/80">primetelhealth@gmail.com</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-globe text-primary mr-3 mt-1"></i>
-                            <span class="text-white/80">health.primetel.tech</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-white/60 text-sm mb-4 md:mb-0">
-                    &copy; 2025-2026 Primetel. All rights reserved.
-                </p>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Privacy Policy</a>
-                    <a href="#" class="text-white/60 hover:text-white text-sm transition-colors">Terms of Service</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    function openModal(id) {
+        const modal = document.getElementById('team-modal-' + id);
+        if (!modal) return;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
 
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+    function closeAllModals() {
+        modalOverlays.forEach(function(m) { m.classList.remove('active'); });
+        document.body.style.overflow = '';
+    }
+
+    teamCards.forEach(function(card) {
+        card.addEventListener('click', function() {
+            openModal(this.getAttribute('data-member'));
         });
-        
-        // 3D Background Animation
-        const threeContainer = document.getElementById('threejs-bg');
-        if (threeContainer) {
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            threeContainer.appendChild(renderer.domElement);
-            
-            // Create a torus knot geometry
-            const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
-            const material = new THREE.MeshBasicMaterial({ 
-                color: 0xE63946, 
-                wireframe: true,
-                transparent: true,
-                opacity: 0.5
-            });
-            const knot = new THREE.Mesh(geometry, material);
-            scene.add(knot);
-            
-            camera.position.z = 30;
-            
-            // Animation loop
-            function animate() {
-                requestAnimationFrame(animate);
-                knot.rotation.x += 0.005;
-                knot.rotation.y += 0.005;
-                renderer.render(scene, camera);
+    });
+
+    modalCloseBtns.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeAllModals();
+        });
+    });
+
+    modalOverlays.forEach(function(overlay) {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                closeAllModals();
             }
-            animate();
-            
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
+        });
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeAllModals();
         }
-        
-        // GSAP animations for elements
-        gsap.from(".animate-fade-in", {
-            opacity: 0,
-            y: 20,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power2.out"
-        });
-        
-        gsap.from(".animate-fade-in-up", {
-            opacity: 0,
-            y: 40,
-            duration: 1,
-            stagger: 0.1,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: ".animate-fade-in-up",
-                start: "top 80%",
-                toggleActions: "play none none none"
+    });
+
+    // ----- Animated Counters -----
+    var countersAnimated = false;
+
+    function animateCounters() {
+        if (countersAnimated) return;
+        countersAnimated = true;
+
+        document.querySelectorAll('[data-counter]').forEach(function(el) {
+            var target = parseInt(el.getAttribute('data-counter'), 10);
+            var duration = 2000;
+            var startTime = null;
+
+            function step(timestamp) {
+                if (!startTime) startTime = timestamp;
+                var progress = Math.min((timestamp - startTime) / duration, 1);
+                var eased = 1 - Math.pow(1 - progress, 3);
+                var current = Math.floor(eased * target);
+                el.textContent = current.toLocaleString() + '+';
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    el.textContent = target.toLocaleString() + '+';
+                }
             }
+
+            requestAnimationFrame(step);
         });
-        
-        // Timeline functionality
-        const timelineDots = document.querySelectorAll('.timeline-dot');
-        const timelineContents = document.querySelectorAll('.timeline-content');
-        
-        timelineDots.forEach(dot => {
-            dot.addEventListener('click', (e) => {
-                const year = dot.getAttribute('data-year');
-                
-                // Remove active class from all dots and contents
-                timelineDots.forEach(d => d.classList.remove('active'));
-                timelineContents.forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked dot and corresponding content
-                dot.classList.add('active');
-                document.querySelector(`.timeline-content[data-year="${year}"]`).classList.add('active');
-                
-                // Prevent event bubbling
-                e.stopPropagation();
-            });
-        });
-        
-        // Close timeline content when clicking outside
-        document.addEventListener('click', () => {
-            timelineDots.forEach(d => d.classList.remove('active'));
-            timelineContents.forEach(c => c.classList.remove('active'));
-        });
-        
-        // Team popup functionality
-        const teamCards = document.querySelectorAll('.team-card');
-        const teamPopups = document.querySelectorAll('.team-popup');
-        const popupCloses = document.querySelectorAll('.popup-close');
-        
-        teamCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const memberId = card.getAttribute('data-member');
-                document.getElementById(`team-popup-${memberId}`).classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-        });
-        
-        popupCloses.forEach(close => {
-            close.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const popup = close.closest('.team-popup');
-                popup.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-        });
-        
-        // Close popup when clicking outside content
-        teamPopups.forEach(popup => {
-            popup.addEventListener('click', (e) => {
-                if (e.target === popup) {
-                    popup.classList.remove('active');
-                    document.body.style.overflow = 'auto';
+    }
+
+    var statsSection = document.getElementById('stats-section');
+    if (statsSection) {
+        var statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
                 }
             });
-        });
-
-        // Animate stats on scroll
-function animateStats() {
-    const stats = [
-        { id: 'stat-1', target: 2500, duration: 2000 },
-        { id: 'stat-2', target: 35000, duration: 2000 },
-        { id: 'stat-3', target: 500, duration: 2000 },
-        { id: 'stat-4', target: 10000, duration: 2000 }
-    ];
-
-    stats.forEach(stat => {
-        const element = document.getElementById(stat.id);
-        if (!element) return; // Skip if element not found
-        let start = 0;
-        const increment = stat.target / (stat.duration / 16); // Approx 60fps
-        let current = start;
-
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= stat.target) {
-                clearInterval(timer);
-                current = stat.target;
-                element.textContent = formatNumber(stat.id, current);
-            } else {
-                element.textContent = formatNumber(stat.id, current);
-            }
-        }, 16);
-    });
-}
-
-// Helper function to format numbers based on stat ID
-function formatNumber(id, value) {
-    if (id === 'stat-2') {
-        return Math.floor(value).toLocaleString() + '+';
-    } else if (id === 'stat-3' || id === 'stat-4') {
-        return Math.floor(value).toLocaleString() + '+';
-    } else {
-        return Math.floor(value).toLocaleString() + '+';
+        }, { threshold: 0.3 });
+        statsObserver.observe(statsSection);
     }
-}
-
-// Initialize counters when stats section is in view
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            animateStats();
-            statsObserver.unobserve(entry.target); // Stop observing after animation
-        }
-    });
-}, { threshold: 0.5 });
-
-const statsSection = document.querySelector('.parallax-bg');
-if (statsSection) {
-    statsObserver.observe(statsSection);
-}
-    </script>
-</body>
-</html>
+})();
+</script>
+{% endblock %}

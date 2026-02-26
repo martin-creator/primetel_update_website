@@ -1,2 +1,7 @@
+__pycache__/
+*.py[cod]
+*.sqlite3
+.venv/
 primenv/
-primenv
+staticfiles/
+*.log

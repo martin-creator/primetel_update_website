@@ -15,28 +15,66 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+AZURE_SITE_ROOT = Path('/home/site')
+DATA_ROOT = Path(
+    os.environ.get(
+        'DATA_ROOT',
+        str(AZURE_SITE_ROOT if AZURE_SITE_ROOT.exists() else BASE_DIR),
+    )
+)
+
+
+def env_bool(name, default=False):
+    value = os.environ.get(name)
+    if value is None:
+        return default
+    return value.strip().lower() in {"1", "true", "yes", "on"}
+
+
+def env_list(name, default=None):
+    value = os.environ.get(name)
+    if value is None:
+        return default[:] if default else []
+    return [item.strip() for item in value.split(",") if item.strip()]
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
+IS_RENDER = bool(os.environ.get("RENDER"))
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b_&wnw6!n&00cl0p0y=(mgoc0^%_##s77j^q+04j=tm8&ytxb_'
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY",
+    "dev-only-change-me-0f9c2a7e8b1346c5d412ef7a90b3c6d1a4e5f7b8c9d2e3a1",
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env_bool("DEBUG", default=not IS_RENDER)
 
-ALLOWED_HOSTS = ['*']  # Change this to your domain in production
+ALLOWED_HOSTS = env_list(
+    "ALLOWED_HOSTS",
+    default=[
+        "127.0.0.1",
+        "localhost",
+        "primetel.onrender.com",
+        "primetel-update-website.onrender.com",
+        "health.primetel.tech",
+    ],
+)
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:8000',  # Local development
-    'https://primetel.onrender.com',  # Production domain
-    'https://primetel-app-gch8e3gahfdhggfc.canadacentral-01.azurewebsites.net',  # Azure production domain
-    'https://primetel.tech',  # Custom domain
-    'https://health.primetel.tech',  # Health subdomain
-    'https://primetel-update-website.onrender.com',
-
-]
+CSRF_TRUSTED_ORIGINS = env_list(
+    "CSRF_TRUSTED_ORIGINS",
+    default=[
+        "http://127.0.0.1:8000",
+        "http://localhost:8000",
+        "https://primetel.onrender.com",
+        "https://primetel-update-website.onrender.com",
+        "https://primetel-app-gch8e3gahfdhggfc.canadacentral-01.azurewebsites.net",
+        "https://primetel.tech",
+        "https://health.primetel.tech",
+    ],
+)
 
 
 # Application definition
@@ -54,6 +92,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -74,6 +113,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.analytics_context',
             ],
         },
     },
@@ -88,8 +128,7 @@ WSGI_APPLICATION = 'primetel_website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join('/home', 'site', 'db.sqlite3'),
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.environ.get('SQLITE_PATH', str(DATA_ROOT / 'db.sqlite3')),
     }
 }
 
@@ -116,40 +155,36 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-# LANGUAGE_CODE = 'en-us'
-
-# TIME_ZONE = 'UTC'
-
-# USE_I18N = True
-
-# USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.2/howto/static-files/
-
-# STATIC_URL = 'static/'
-
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Africa/Nairobi'
 USE_I18N = True
 USE_TZ = True
 
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.2/howto/static-files/
+
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'core/static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-#MEDIA_ROOT = os.path.join('/home', 'site', 'media')
+MEDIA_ROOT = Path(os.environ.get('MEDIA_ROOT', str(DATA_ROOT / 'media')))
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+GA_MEASUREMENT_ID = os.environ.get("GA_MEASUREMENT_ID", "")
 
-SECURE_SSL_REDIRECT = False  # Enable HTTPS in production
-SECURE_HSTS_SECONDS = 3600
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = env_bool("SECURE_SSL_REDIRECT", default=not DEBUG)
+SESSION_COOKIE_SECURE = env_bool("SESSION_COOKIE_SECURE", default=not DEBUG)
+CSRF_COOKIE_SECURE = env_bool("CSRF_COOKIE_SECURE", default=not DEBUG)
+SECURE_HSTS_SECONDS = int(os.environ.get("SECURE_HSTS_SECONDS", "31536000" if not DEBUG else "0"))
+SECURE_HSTS_INCLUDE_SUBDOMAINS = env_bool("SECURE_HSTS_INCLUDE_SUBDOMAINS", default=not DEBUG)
+SECURE_HSTS_PRELOAD = env_bool("SECURE_HSTS_PRELOAD", default=not DEBUG)
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = "DENY"
+REFERRER_POLICY = "strict-origin-when-cross-origin"

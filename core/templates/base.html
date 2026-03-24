@@ -139,6 +139,8 @@
                         class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {% if url_name == 'impact' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Impact</a>
                     <a href="{% url 'news_list' %}"
                         class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {% if url_name == 'news_list' or url_name == 'news_detail' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">News</a>
+                    <a href="{% url 'annual_reports' %}"
+                        class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {% if url_name == 'annual_reports' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Annual Reports</a>
                     <a href="{% url 'get_involved' %}"
                         class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {% if url_name == 'get_involved' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Get
                         Involved</a>
@@ -178,6 +180,8 @@
                     class="block px-4 py-3 text-sm font-medium rounded-lg {% if url_name == 'impact' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Impact</a>
                 <a href="{% url 'news_list' %}"
                     class="block px-4 py-3 text-sm font-medium rounded-lg {% if url_name == 'news_list' or url_name == 'news_detail' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">News</a>
+                <a href="{% url 'annual_reports' %}"
+                    class="block px-4 py-3 text-sm font-medium rounded-lg {% if url_name == 'annual_reports' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Annual Reports</a>
                 <a href="{% url 'get_involved' %}"
                     class="block px-4 py-3 text-sm font-medium rounded-lg {% if url_name == 'get_involved' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Get
                     Involved</a>
@@ -235,6 +239,8 @@
                                 class="text-sm text-white/60 hover:text-white transition-colors">Impact</a></li>
                         <li><a href="{% url 'news_list' %}"
                                 class="text-sm text-white/60 hover:text-white transition-colors">News</a></li>
+                        <li><a href="{% url 'annual_reports' %}"
+                                class="text-sm text-white/60 hover:text-white transition-colors">Annual Reports</a></li>
                         <li><a href="{% url 'get_involved' %}"
                                 class="text-sm text-white/60 hover:text-white transition-colors">Get Involved</a></li>
                     </ul>

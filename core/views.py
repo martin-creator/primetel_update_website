@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
-from .models import News, ContactInquiry, GetInvolvedInquiry, ConsultationBooking, NewsletterSubscription
+from .models import News, ContactInquiry, GetInvolvedInquiry, ConsultationBooking, NewsletterSubscription, AnnualReport
 from .forms import ContactForm, GetInvolvedForm, ConsultationForm, NewsletterForm
 
 def home(request):
@@ -53,6 +53,11 @@ def get_involved(request):
     else:
         form = GetInvolvedForm()
     return render(request, 'get_involved.html', {'get_involved_form': form})
+
+def annual_reports(request):
+    reports = AnnualReport.objects.all()
+    return render(request, 'annual_reports.html', {'reports': reports})
+
 
 class NewsListView(ListView):
     model = News

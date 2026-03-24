@@ -79,6 +79,23 @@ class ConsultationBooking(models.Model):  # For book consultation forms on multi
     def __str__(self):
         return f"{self.name} - {self.service}"
 
+class AnnualReport(models.Model):
+    title = models.CharField(max_length=200)
+    year = models.PositiveIntegerField()
+    description = models.TextField()
+    cover_image = models.ImageField(upload_to='annual_reports/', blank=True, null=True)
+    report_file = models.FileField(upload_to='annual_reports/files/')
+    highlights = models.TextField(blank=True, help_text="Key highlights, one per line")
+    published_date = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-year']
+
+    def __str__(self):
+        return f"{self.title} ({self.year})"
+
+
 class NewsletterSubscription(models.Model):  # For subscribe forms
     email = models.EmailField(unique=True)
     created_at = models.DateTimeField(auto_now_add=True)

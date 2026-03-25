@@ -75,29 +75,31 @@
             </div>
 
             <!-- Hero Image -->
-            <div class="lg:w-1/2 flex justify-center fade-up">
-                <div class="relative">
-                    <div class="w-full max-w-md rounded-2xl overflow-hidden shadow-2xl">
-                        <img src="{% static 'images/primetel_doctor_homepage.jpg' %}"
-                             alt="Primetel Healthcare Worker"
-                             class="w-full h-96 object-cover">
+            <div class="lg:w-1/2 fade-up">
+                <!-- Quick Stats -->
+                <div class="grid grid-cols-2 gap-3 mb-4">
+                    <div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2.5">
+                        <i class="fas fa-mobile-alt text-brand-400 text-sm"></i>
+                        <span class="text-white font-semibold text-sm">3,600+ USSD Users</span>
                     </div>
-
-                    <!-- Stats Badge -->
-                    <div class="absolute -bottom-5 -left-5 bg-white text-dark px-5 py-3 rounded-xl shadow-lg">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-brand-500 animate-pulse"></span>
-                            <span class="font-bold text-sm">35,000+ Lives Reached</span>
-                        </div>
+                    <div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2.5">
+                        <i class="fas fa-users text-brand-400 text-sm"></i>
+                        <span class="text-white font-semibold text-sm">45,000+ Reached</span>
                     </div>
-
-                    <!-- Location Badge -->
-                    <div class="absolute -top-5 -right-5 bg-brand-600 text-white px-5 py-3 rounded-xl shadow-lg">
-                        <div class="flex items-center gap-2">
-                            <i class="fas fa-map-marker-alt text-sm"></i>
-                            <span class="font-bold text-sm">Monduli, Arusha</span>
-                        </div>
+                    <div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2.5">
+                        <i class="fas fa-heartbeat text-brand-400 text-sm"></i>
+                        <span class="text-white font-semibold text-sm">1,000+ Patients Treated</span>
                     </div>
+                    <div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2.5">
+                        <i class="fas fa-graduation-cap text-brand-400 text-sm"></i>
+                        <span class="text-white font-semibold text-sm">15,000+ Students</span>
+                    </div>
+                </div>
+                <!-- Image -->
+                <div class="w-full rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="{% static 'images/primetel_doctor_homepage.jpg' %}"
+                         alt="Primetel Healthcare Worker"
+                         class="w-full h-[500px] object-cover">
                 </div>
             </div>
         </div>
@@ -221,7 +223,7 @@
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
             <div class="glass rounded-xl p-6 lg:p-8 text-center fade-up">
                 <div class="stat-counter text-3xl lg:text-4xl font-extrabold text-white mb-1" id="stat-1">0+</div>
-                <div class="text-sm text-white/60 font-medium">Active USSD Users</div>
+                <div class="text-sm text-white/60 font-medium">USSD Users</div>
             </div>
             <div class="glass rounded-xl p-6 lg:p-8 text-center fade-up">
                 <div class="stat-counter text-3xl lg:text-4xl font-extrabold text-white mb-1" id="stat-2">0+</div>
@@ -229,7 +231,7 @@
             </div>
             <div class="glass rounded-xl p-6 lg:p-8 text-center fade-up">
                 <div class="stat-counter text-3xl lg:text-4xl font-extrabold text-white mb-1" id="stat-3">0+</div>
-                <div class="text-sm text-white/60 font-medium">Counseling Sessions</div>
+                <div class="text-sm text-white/60 font-medium">Patients Treated</div>
             </div>
             <div class="glass rounded-xl p-6 lg:p-8 text-center fade-up">
                 <div class="stat-counter text-3xl lg:text-4xl font-extrabold text-white mb-1" id="stat-4">0+</div>
@@ -429,10 +431,10 @@
     // Animated stat counters
     function animateStats() {
         const stats = [
-            { id: 'stat-1', target: 2500, duration: 2000 },
-            { id: 'stat-2', target: 35000, duration: 2000 },
-            { id: 'stat-3', target: 500, duration: 2000 },
-            { id: 'stat-4', target: 10000, duration: 2000 }
+            { id: 'stat-1', target: 3600, duration: 2000 },
+            { id: 'stat-2', target: 45000, duration: 2000 },
+            { id: 'stat-3', target: 1000, duration: 2000 },
+            { id: 'stat-4', target: 15000, duration: 2000 }
         ];
 
         stats.forEach(stat => {

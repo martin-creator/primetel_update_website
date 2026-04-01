@@ -39,7 +39,6 @@
 
 <!-- Hero Section -->
 <section class="relative bg-gradient-to-br from-dark via-slate-900 to-brand-900 text-white overflow-hidden">
-    <!-- Subtle decorative elements -->
     <div class="absolute inset-0 overflow-hidden pointer-events-none">
         <div class="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-brand-500/5 blur-3xl"></div>
         <div class="absolute -bottom-40 -left-40 w-[400px] h-[400px] rounded-full bg-brand-600/5 blur-3xl"></div>
@@ -48,7 +47,7 @@
     <div class="relative max-w-7xl mx-auto px-6 lg:px-8 pt-24 pb-20 lg:pt-32 lg:pb-28">
         <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
             <!-- Text Content -->
-            <div class="lg:w-1/2 fade-up">
+            <div class="lg:w-2/5 fade-up">
                 <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-brand-300 text-sm font-medium mb-6">
                     <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
                     Healthcare Innovation in Tanzania
@@ -75,37 +74,31 @@
             </div>
 
             <!-- Hero Image -->
-            <div class="lg:w-1/2 fade-up">
-                <!-- Quick Stats -->
-                <div class="grid grid-cols-2 gap-3 mb-4">
-                    <div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2.5">
-                        <i class="fas fa-mobile-alt text-brand-400 text-sm"></i>
-                        <span class="text-white font-semibold text-sm">3,600+ USSD Users</span>
-                    </div>
-                    <div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2.5">
-                        <i class="fas fa-users text-brand-400 text-sm"></i>
-                        <span class="text-white font-semibold text-sm">45,000+ Reached</span>
-                    </div>
-                    <div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2.5">
-                        <i class="fas fa-heartbeat text-brand-400 text-sm"></i>
-                        <span class="text-white font-semibold text-sm">1,000+ Patients Treated</span>
-                    </div>
-                    <div class="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2.5">
-                        <i class="fas fa-graduation-cap text-brand-400 text-sm"></i>
-                        <span class="text-white font-semibold text-sm">15,000+ Students</span>
-                    </div>
-                </div>
-                <!-- Image -->
-                <div class="w-full rounded-2xl overflow-hidden shadow-2xl">
+            <div class="lg:w-3/5 fade-up relative">
+                <div class="relative w-full rounded-2xl overflow-hidden shadow-2xl">
                     <img src="{% static 'images/primetel_doctor_homepage.jpg' %}"
                          alt="Primetel Healthcare Worker"
-                         class="w-full h-[500px] object-cover">
+                         class="w-full h-[720px] object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-5 left-5 right-5 flex justify-between gap-3">
+                        <div class="flex-1 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3 text-center">
+                            <p class="text-white font-extrabold text-xl leading-none">45,000+</p>
+                            <p class="text-white/70 text-xs mt-1">People Reached</p>
+                        </div>
+                        <div class="flex-1 bg-brand-500/80 backdrop-blur-md border border-brand-400/30 rounded-xl px-4 py-3 text-center">
+                            <p class="text-white font-extrabold text-xl leading-none">1,000+</p>
+                            <p class="text-white/80 text-xs mt-1">Patients Treated</p>
+                        </div>
+                        <div class="flex-1 bg-white/15 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3 text-center">
+                            <p class="text-white font-extrabold text-xl leading-none">15,000+</p>
+                            <p class="text-white/70 text-xs mt-1">Students</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Scroll indicator -->
     <div class="absolute bottom-6 left-0 right-0 flex justify-center animate-bounce">
         <i class="fas fa-chevron-down text-white/40 text-sm"></i>
     </div>

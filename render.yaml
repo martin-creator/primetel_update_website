@@ -16,5 +16,7 @@ services:
         value: primetel.onrender.com,health.primetel.tech
       - key: CSRF_TRUSTED_ORIGINS
         value: https://primetel.onrender.com,https://health.primetel.tech
+      - key: DATABASE_URL
+        sync: false
       - key: GA_MEASUREMENT_ID
         sync: false

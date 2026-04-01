@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
-from .models import News, ContactInquiry, GetInvolvedInquiry, ConsultationBooking, NewsletterSubscription, AnnualReport
+from .models import News, ContactInquiry, GetInvolvedInquiry, ConsultationBooking, NewsletterSubscription, AnnualReport, GalleryItem, SiteSettings
 from .forms import ContactForm, GetInvolvedForm, ConsultationForm, NewsletterForm
 
 def home(request):
@@ -15,7 +15,7 @@ def home(request):
     latest_news = News.objects.all().order_by('-date')[:3]
     return render(request, 'index.html', {
         'consultation_form': form,
-        'latest_news': latest_news
+        'latest_news': latest_news,
     })
 
 def about(request):
@@ -57,6 +57,17 @@ def get_involved(request):
 def annual_reports(request):
     reports = AnnualReport.objects.all()
     return render(request, 'annual_reports.html', {'reports': reports})
+
+def gallery(request):
+    category = request.GET.get('category', '')
+    items = GalleryItem.objects.all()
+    if category:
+        items = items.filter(category=category)
+    return render(request, 'gallery.html', {
+        'items': items,
+        'categories': GalleryItem.CATEGORY_CHOICES,
+        'active_category': category,
+    })
 
 
 class NewsListView(ListView):

@@ -88,7 +88,7 @@
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, #0056B3, #004a9a);
+            background: linear-gradient(135deg, #60a5fa, #0056B3);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -108,11 +108,14 @@
 <body class="font-sans text-slate-800 bg-white antialiased">
 
     <!-- Announcement Bar -->
+    {% if site_settings.announcement_visible %}
     <div class="bg-accent-500 text-white text-center py-2 px-4 text-sm font-medium">
-        <span class="hidden sm:inline">Primetel Health is now licensed as a medical clinic.</span>
-        <span class="sm:hidden">Now a licensed medical clinic.</span>
-        <a href="{% url 'about' %}" class="underline ml-1 hover:text-accent-100">Learn more &rarr;</a>
+        <span>{{ site_settings.announcement_text }}</span>
+        {% if site_settings.announcement_link %}
+        <a href="{{ site_settings.announcement_link }}" class="underline ml-1 hover:text-accent-100">Learn more &rarr;</a>
+        {% endif %}
     </div>
+    {% endif %}
 
     <!-- Navigation -->
     <header id="main-nav" class="sticky top-0 w-full z-50 transition-all duration-300 bg-dark/95 backdrop-blur-md">
@@ -141,6 +144,8 @@
                         class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {% if url_name == 'news_list' or url_name == 'news_detail' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">News</a>
                     <a href="{% url 'annual_reports' %}"
                         class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {% if url_name == 'annual_reports' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Annual Reports</a>
+                    <a href="{% url 'gallery' %}"
+                        class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {% if url_name == 'gallery' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Gallery</a>
                     <a href="{% url 'get_involved' %}"
                         class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {% if url_name == 'get_involved' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Get
                         Involved</a>
@@ -182,6 +187,8 @@
                     class="block px-4 py-3 text-sm font-medium rounded-lg {% if url_name == 'news_list' or url_name == 'news_detail' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">News</a>
                 <a href="{% url 'annual_reports' %}"
                     class="block px-4 py-3 text-sm font-medium rounded-lg {% if url_name == 'annual_reports' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Annual Reports</a>
+                <a href="{% url 'gallery' %}"
+                    class="block px-4 py-3 text-sm font-medium rounded-lg {% if url_name == 'gallery' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Gallery</a>
                 <a href="{% url 'get_involved' %}"
                     class="block px-4 py-3 text-sm font-medium rounded-lg {% if url_name == 'get_involved' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Get
                     Involved</a>
@@ -204,24 +211,27 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
                 <!-- Brand -->
                 <div>
-                    <div class="flex items-center gap-2 mb-4">
-                        <div class="w-8 h-8 rounded-full bg-brand-500 flex items-center justify-center">
-                            <i class="fas fa-heartbeat text-white text-sm"></i>
+                    <div class="mb-4">
+                        <div class="w-32 h-10 bg-white rounded-md flex items-center justify-center p-1">
+                            <img src="https://i.ibb.co/6cw7cwGP/primetel-logos.png" alt="Primetel" class="w-full h-full object-contain">
                         </div>
-                        <span class="text-lg font-bold">Primetel Health</span>
                     </div>
                     <p class="text-white/60 text-sm leading-relaxed mb-5">
                         Transforming healthcare access in Tanzania through technology, community care, and innovation.
                     </p>
                     <div class="flex gap-3">
-                        <a href="https://www.instagram.com/primetel_health/" target="_blank"
+                        {% if site_settings.instagram_url %}
+                        <a href="{{ site_settings.instagram_url }}" target="_blank"
                             class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-brand-500 hover:text-white transition-colors text-sm">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="https://www.linkedin.com/company/primetel-health/" target="_blank"
+                        {% endif %}
+                        {% if site_settings.linkedin_url %}
+                        <a href="{{ site_settings.linkedin_url }}" target="_blank"
                             class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-brand-500 hover:text-white transition-colors text-sm">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
+                        {% endif %}
                     </div>
                 </div>
 
@@ -270,19 +280,19 @@
                     <ul class="space-y-3">
                         <li class="flex items-start gap-3">
                             <i class="fas fa-map-marker-alt text-brand-400 mt-0.5 text-sm"></i>
-                            <span class="text-sm text-white/60">Monduli, Arusha, Tanzania</span>
+                            <span class="text-sm text-white/60">{{ site_settings.address }}</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <i class="fas fa-phone-alt text-brand-400 mt-0.5 text-sm"></i>
-                            <span class="text-sm text-white/60">+255 762 629 046</span>
+                            <span class="text-sm text-white/60">{{ site_settings.phone }}</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <i class="fas fa-envelope text-brand-400 mt-0.5 text-sm"></i>
-                            <span class="text-sm text-white/60">primetelhealth@gmail.com</span>
+                            <span class="text-sm text-white/60">{{ site_settings.email }}</span>
                         </li>
                         <li class="flex items-start gap-3">
                             <i class="fas fa-globe text-brand-400 mt-0.5 text-sm"></i>
-                            <span class="text-sm text-white/60">health.primetel.tech</span>
+                            <span class="text-sm text-white/60">{{ site_settings.website }}</span>
                         </li>
                     </ul>
                 </div>

@@ -76,14 +76,18 @@
 <!-- Hero Section -->
 <section class="relative bg-dark overflow-hidden">
     <div class="absolute inset-0">
+        {% if site_settings.about_hero_image %}
+        <img src="{{ site_settings.about_hero_image.url }}" alt="Primetel Healthcare" class="w-full h-full object-cover opacity-20">
+        {% else %}
         <img src="{% static 'images/primetel_about_header_men.jpg' %}" alt="Primetel Healthcare" class="w-full h-full object-cover opacity-20">
+        {% endif %}
     </div>
     <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-            <div class="fade-up">
+        <div class="flex flex-col lg:flex-row gap-12 items-center">
+            <div class="lg:w-1/3 fade-up">
                 <span class="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 text-brand-400 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
                     <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
-                    45,000+ Lives Touched
+                    {{ site_settings.stat_people_reached }}+ Lives Touched
                 </span>
                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
                     About <span class="gradient-text">Primetel Health</span>
@@ -100,12 +104,18 @@
                     </a>
                 </div>
             </div>
-            <div class="fade-up hidden lg:block">
+            <div class="lg:w-2/3 fade-up hidden lg:block">
                 <div class="relative">
                     <div class="rounded-2xl overflow-hidden shadow-2xl">
+                        {% if site_settings.about_hero_image %}
+                        <img src="{{ site_settings.about_hero_image.url }}"
+                             alt="Primetel Healthcare Team"
+                             class="w-full h-[600px] object-cover">
+                        {% else %}
                         <img src="{% static 'images/primetel_about_header_men.jpg' %}"
                              alt="Primetel Healthcare Team"
-                             class="w-full h-[420px] object-cover">
+                             class="w-full h-[600px] object-cover">
+                        {% endif %}
                     </div>
                     <div class="absolute -bottom-4 -left-4 bg-white text-dark px-5 py-3 rounded-xl shadow-lg">
                         <div class="flex items-center gap-2">

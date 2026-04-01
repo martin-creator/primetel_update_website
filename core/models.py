@@ -96,6 +96,80 @@ class AnnualReport(models.Model):
         return f"{self.title} ({self.year})"
 
 
+class SiteSettings(models.Model):
+    """Singleton model — all admin-editable content across the site."""
+
+    # --- Hero Images ---
+    home_hero_image = models.ImageField(upload_to='site/', blank=True, null=True, help_text="Home page hero image")
+    about_hero_image = models.ImageField(upload_to='site/', blank=True, null=True, help_text="About page hero image")
+
+    # --- Announcement Bar ---
+    announcement_text = models.CharField(max_length=300, default="Primetel Health is now licensed as a medical clinic.")
+    announcement_link = models.CharField(max_length=200, blank=True, default="/about/", help_text="URL for 'Learn more' link")
+    announcement_visible = models.BooleanField(default=True)
+
+    # --- Stats ---
+    stat_ussd_users = models.PositiveIntegerField(default=3600, help_text="e.g. 3600")
+    stat_people_reached = models.PositiveIntegerField(default=45000)
+    stat_patients_treated = models.PositiveIntegerField(default=1000)
+    stat_students_reached = models.PositiveIntegerField(default=15000)
+
+    # --- Contact Info ---
+    phone = models.CharField(max_length=50, default="+255 762 629 046")
+    email = models.EmailField(default="primetelhealth@gmail.com")
+    address = models.CharField(max_length=200, default="Monduli, Arusha, Tanzania")
+    website = models.CharField(max_length=200, default="health.primetel.tech")
+
+    # --- Social Links ---
+    instagram_url = models.URLField(blank=True, default="https://www.instagram.com/primetel_health/")
+    linkedin_url = models.URLField(blank=True, default="https://www.linkedin.com/company/primetel-health/")
+
+    class Meta:
+        verbose_name = "Site Settings"
+        verbose_name_plural = "Site Settings"
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    @classmethod
+    def get(cls):
+        obj, _ = cls.objects.get_or_create(pk=1)
+        return obj
+
+    def __str__(self):
+        return "Site Settings"
+
+
+class GalleryItem(models.Model):
+    MEDIA_TYPE_CHOICES = [
+        ('image', 'Image'),
+        ('video', 'Video'),
+    ]
+    CATEGORY_CHOICES = [
+        ('community', 'Community'),
+        ('clinic', 'Clinic'),
+        ('events', 'Events'),
+        ('team', 'Team'),
+        ('outreach', 'Outreach'),
+    ]
+
+    title = models.CharField(max_length=200)
+    media_type = models.CharField(max_length=10, choices=MEDIA_TYPE_CHOICES, default='image')
+    image = models.ImageField(upload_to='gallery/', blank=True, null=True)
+    video_url = models.URLField(blank=True, help_text="YouTube or Vimeo embed URL")
+    caption = models.TextField(blank=True)
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, blank=True)
+    order = models.PositiveIntegerField(default=0, help_text="Lower numbers appear first")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['order', '-created_at']
+
+    def __str__(self):
+        return self.title
+
+
 class NewsletterSubscription(models.Model):  # For subscribe forms
     email = models.EmailField(unique=True)
     created_at = models.DateTimeField(auto_now_add=True)

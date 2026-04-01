@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Gallery | Primetel Health{% endblock %}
+{% block meta_description %}Photos and videos from Primetel Health's community work, clinics, and outreach programs across Tanzania.{% endblock %}
+
+{% block extra_css %}
+<style>
+    .gallery-item {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gallery-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.15);
+    }
+    .gallery-item:hover .overlay {
+        opacity: 1;
+    }
+    .overlay {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .category-chip { transition: all 0.2s ease; }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<section class="relative bg-dark overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-20 left-10 w-72 h-72 bg-brand-500 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-10 right-10 w-96 h-96 bg-brand-700 rounded-full blur-3xl"></div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32 text-center">
+        <div class="fade-up">
+            <span class="inline-block bg-brand-500/10 text-brand-400 px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-brand-500/20">
+                Our Work in Pictures
+            </span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+                Photo & Video <span class="gradient-text">Gallery</span>
+            </h1>
+            <p class="text-lg md:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
+                A glimpse into our clinics, community outreach, and the lives we touch every day across Tanzania.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Category Filter -->
+<section class="py-6 bg-white border-b border-slate-100 sticky top-[72px] z-40">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex flex-wrap justify-center gap-3">
+            <a href="{% url 'gallery' %}"
+               class="category-chip inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium border transition-colors
+                      {% if not active_category %}bg-brand-600 text-white border-brand-600{% else %}bg-white text-slate-600 border-slate-200 hover:border-brand-300 hover:text-brand-700{% endif %}">
+                All
+            </a>
+            {% for cat_value, cat_name in categories %}
+            <a href="{% url 'gallery' %}?category={{ cat_value }}"
+               class="category-chip inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium border transition-colors
+                      {% if active_category == cat_value %}bg-brand-600 text-white border-brand-600{% else %}bg-white text-slate-600 border-slate-200 hover:border-brand-300 hover:text-brand-700{% endif %}">
+                {{ cat_name }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Gallery Grid -->
+<section class="py-16 lg:py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        {% if items %}
+        <div class="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5">
+            {% for item in items %}
+            <div class="gallery-item break-inside-avoid rounded-xl overflow-hidden shadow-sm bg-white fade-up relative">
+                {% if item.media_type == 'image' and item.image %}
+                    <img src="{{ item.image.url }}"
+                         alt="{{ item.title }}"
+                         class="w-full object-cover">
+                    <div class="overlay absolute inset-0 bg-dark/50 flex items-end">
+                        <div class="p-4">
+                            <p class="text-white font-semibold text-sm">{{ item.title }}</p>
+                            {% if item.caption %}<p class="text-white/70 text-xs mt-1">{{ item.caption }}</p>{% endif %}
+                        </div>
+                    </div>
+                {% elif item.media_type == 'video' and item.video_url %}
+                    <div class="relative w-full" style="padding-top: 56.25%">
+                        <iframe
+                            src="{{ item.video_url }}"
+                            class="absolute inset-0 w-full h-full"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="p-4">
+                        <p class="text-dark font-semibold text-sm">{{ item.title }}</p>
+                        {% if item.caption %}<p class="text-muted text-xs mt-1">{{ item.caption }}</p>{% endif %}
+                    </div>
+                {% endif %}
+                {% if item.category %}
+                <div class="absolute top-3 left-3">
+                    <span class="bg-white/90 backdrop-blur-sm text-brand-700 px-2.5 py-1 rounded-full text-xs font-medium">
+                        {{ item.get_category_display }}
+                    </span>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-24 fade-up">
+            <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fas fa-images text-slate-400 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-dark mb-2">No Media Yet</h3>
+            <p class="text-muted">Gallery items will appear here once added via the admin panel.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+{% endblock %}

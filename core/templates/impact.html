@@ -14,17 +14,32 @@
         transform: translateY(-4px);
         box-shadow: 0 12px 24px rgba(16, 185, 129, 0.12);
     }
-    .timeline-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .timeline-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-    }
     .chart-container {
         position: relative;
         width: 100%;
-        height: 320px;
+        height: 360px;
+    }
+.chart-card {
+        position: relative;
+        overflow: hidden;
+    }
+    .chart-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top left, rgba(0, 86, 179, 0.12), transparent 55%);
+        pointer-events: none;
+    }
+    .chart-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.35rem 0.6rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        background: rgba(2, 132, 199, 0.08);
+        color: #0f172a;
     }
 .partner-logo {
         transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -128,105 +143,6 @@
     </div>
 </section>
 
-<!-- Impact Timeline -->
-<section class="py-20 lg:py-28 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16 fade-up">
-            <span class="inline-block bg-brand-50 text-brand-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
-                Our Journey
-            </span>
-            <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">
-                Impact <span class="text-brand-600">Timeline</span>
-            </h2>
-            <p class="text-muted text-lg max-w-2xl mx-auto">
-                How our reach and effectiveness have grown over time
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <!-- Q1&2 2024 -->
-            <div class="timeline-card fade-up bg-white rounded-xl border border-slate-200 p-6">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 bg-brand-500 rounded-lg flex items-center justify-center text-white text-sm font-bold shrink-0">
-                        Q1
-                    </div>
-                    <div>
-                        <span class="text-sm font-semibold text-dark">Q1 & Q2 (2024)</span>
-                    </div>
-                </div>
-                <div class="h-px bg-slate-100 mb-4"></div>
-                <p class="text-muted text-sm leading-relaxed">
-                    Reached <span class="font-semibold text-dark">9,088 people</span> with mental health education including <span class="font-semibold text-dark">21 institutions</span>.
-                </p>
-            </div>
-
-            <!-- Q3 2024 -->
-            <div class="timeline-card fade-up bg-white rounded-xl border border-slate-200 p-6">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 bg-brand-500 rounded-lg flex items-center justify-center text-white text-sm font-bold shrink-0">
-                        Q3
-                    </div>
-                    <div>
-                        <span class="text-sm font-semibold text-dark">Q3 (2024)</span>
-                    </div>
-                </div>
-                <div class="h-px bg-slate-100 mb-4"></div>
-                <p class="text-muted text-sm leading-relaxed">
-                    <span class="font-semibold text-dark">6,789 people</span> reached through outreach efforts, <span class="font-semibold text-dark">498 USSD users</span>, and welcomed two new team members.
-                </p>
-            </div>
-
-            <!-- Q4 2024 -->
-            <div class="timeline-card fade-up bg-white rounded-xl border border-slate-200 p-6">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 bg-brand-500 rounded-lg flex items-center justify-center text-white text-sm font-bold shrink-0">
-                        Q4
-                    </div>
-                    <div>
-                        <span class="text-sm font-semibold text-dark">Q4 (2024)</span>
-                    </div>
-                </div>
-                <div class="h-px bg-slate-100 mb-4"></div>
-                <p class="text-muted text-sm leading-relaxed">
-                    <span class="font-semibold text-dark">6,826 people</span> reached through mental health outreach campaigns, <span class="font-semibold text-dark">3,924 students</span> sensitized.
-                </p>
-            </div>
-
-            <!-- Q1 2025 -->
-            <div class="timeline-card fade-up bg-white rounded-xl border border-slate-200 p-6">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 bg-brand-600 rounded-lg flex items-center justify-center text-white text-sm font-bold shrink-0">
-                        Q1
-                    </div>
-                    <div>
-                        <span class="text-sm font-semibold text-dark">Q1 (2025)</span>
-                    </div>
-                </div>
-                <div class="h-px bg-slate-100 mb-4"></div>
-                <p class="text-muted text-sm leading-relaxed">
-                    <span class="font-semibold text-dark">7,415 people</span> reached through mental health campaign, <span class="font-semibold text-dark">472 active USSD users</span>.
-                </p>
-            </div>
-
-            <!-- Q2 2025 -->
-            <div class="timeline-card fade-up bg-white rounded-xl border border-slate-200 p-6">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 bg-brand-600 rounded-lg flex items-center justify-center text-white text-sm font-bold shrink-0">
-                        Q2
-                    </div>
-                    <div>
-                        <span class="text-sm font-semibold text-dark">Q2 (2025)</span>
-                    </div>
-                </div>
-                <div class="h-px bg-slate-100 mb-4"></div>
-                <p class="text-muted text-sm leading-relaxed">
-                    <span class="font-semibold text-dark">5,529 people</span> reached through mental health campaign, <span class="font-semibold text-dark">532 active USSD users</span>.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- Data Visualization -->
 <section class="py-20 lg:py-28 bg-slate-50">
     <div class="max-w-7xl mx-auto px-6 lg:px-8">
@@ -244,8 +160,17 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Bar Chart -->
-            <div class="fade-up bg-white border border-slate-200 rounded-xl p-8">
-                <h3 class="text-lg font-semibold text-dark mb-6">People Reached by Year</h3>
+            <div class="fade-up chart-card bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-dark">People Reached by Quarter</h3>
+                        <p class="text-sm text-slate-500 mt-1">Q1 2024 through Q2 2025</p>
+                    </div>
+                    <span class="chart-chip">
+                        <i class="fas fa-arrow-trend-up text-brand-600 text-xs"></i>
+                        Growth trend
+                    </span>
+                </div>
                 <div class="chart-container">
                     <canvas id="peopleReachedChart"></canvas>
                 </div>
@@ -255,8 +180,17 @@
             </div>
 
             <!-- Doughnut Chart -->
-            <div class="fade-up bg-white border border-slate-200 rounded-xl p-8">
-                <h3 class="text-lg font-semibold text-dark mb-6">Service Breakdown</h3>
+            <div class="fade-up chart-card bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+                    <div>
+                        <h3 class="text-lg font-semibold text-dark">Service Breakdown</h3>
+                        <p class="text-sm text-slate-500 mt-1">Relative share of service focus</p>
+                    </div>
+                    <span class="chart-chip">
+                        <i class="fas fa-circle-nodes text-brand-600 text-xs"></i>
+                        Balanced portfolio
+                    </span>
+                </div>
                 <div class="chart-container">
                     <canvas id="serviceBreakdownChart"></canvas>
                 </div>
@@ -334,6 +268,13 @@
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
+    const formatNumber = (value) => {
+        if (typeof value !== 'number') {
+            return value;
+        }
+        return value.toLocaleString();
+    };
+
     // People Reached by Year (Bar Chart)
     const peopleReachedCtx = document.getElementById('peopleReachedChart').getContext('2d');
     new Chart(peopleReachedCtx, {
@@ -343,18 +284,23 @@
             datasets: [{
                 label: 'People Reached',
                 data: [9088, 6789, 6826, 7415, 5529],
-                backgroundColor: '#0056B3',
-                borderColor: '#004a9a',
-                borderWidth: 1,
-                borderRadius: 6
+                backgroundColor: 'rgba(0, 86, 179, 0.85)',
+                borderColor: '#0f4c8f',
+                borderWidth: 1.5,
+                borderRadius: 10,
+                hoverBackgroundColor: 'rgba(2, 132, 199, 0.9)'
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            layout: {
+                padding: { top: 6 }
+            },
             scales: {
                 y: {
                     beginAtZero: true,
+                    suggestedMax: 10000,
                     title: {
                         display: true,
                         text: 'Number of People',
@@ -366,7 +312,8 @@
                     },
                     ticks: {
                         color: '#64748b',
-                        font: { family: 'Inter', size: 11 }
+                        font: { family: 'Inter', size: 11 },
+                        callback: (value) => formatNumber(value)
                     }
                 },
                 x: {
@@ -381,13 +328,24 @@
                     },
                     ticks: {
                         color: '#64748b',
-                        font: { family: 'Inter', size: 11 }
+                        font: { family: 'Inter', size: 11 },
+                        maxRotation: 0
                     }
+                }
+            },
+            elements: {
+                bar: {
+                    borderSkipped: false
                 }
             },
             plugins: {
                 legend: {
                     display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: (context) => `${context.dataset.label}: ${formatNumber(context.parsed.y)}`
+                    }
                 }
             }
         }
@@ -401,15 +359,17 @@
             labels: ['Mental Health', 'Primary Care', 'Outreach/Education'],
             datasets: [{
                 data: [50, 30, 20],
-                backgroundColor: ['#0056B3', '#E63946', '#fbbf24'],
+                backgroundColor: ['#0056B3', '#E63946', '#f59e0b'],
                 borderColor: '#ffffff',
-                borderWidth: 3
+                borderWidth: 4,
+                hoverOffset: 10,
+                borderRadius: 6
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            cutout: '60%',
+            cutout: '62%',
             plugins: {
                 legend: {
                     position: 'bottom',
@@ -419,6 +379,11 @@
                         font: { family: 'Inter', size: 12 },
                         usePointStyle: true,
                         pointStyleWidth: 10
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: (context) => `${context.label}: ${context.parsed}%`
                     }
                 }
             }

@@ -3,6 +3,15 @@
 This is the public-facing Primetel site, built with Django and template based frontend pages.
 It includes core pages (home, about, services, impact, news, contact, get involved), form handling, and Render-ready deployment settings.
 
+## Admin-managed site images
+
+After running migrations, you can update key site images from Django admin:
+
+- `Admin > Core > Site Images` for the About, Services, and Impact page image slots
+- `Admin > Core > Site Settings` for the home and about hero images
+
+If a slot has no uploaded image yet, the site automatically falls back to the current bundled static image.
+
 ## Stack
 
 - Python + Django

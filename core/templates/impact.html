@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load site_images %}
 
 {% block title %}Our Impact | Primetel Health{% endblock %}
 {% block meta_description %}See how Primetel is transforming healthcare access in Tanzania through measurable impact and real stories{% endblock %}
@@ -36,6 +37,10 @@
 {% endblock %}
 
 {% block content %}
+
+{% site_image_url 'impact_partner_moh' 'images/moh_logo.jpg' as impact_partner_moh_url %}
+{% site_image_url 'impact_partner_orkeeswa' 'images/orkeeswa_logo.jpg' as impact_partner_orkeeswa_url %}
+{% site_image_url 'impact_partner_pfq' 'images/pfq_logo.png' as impact_partner_pfq_url %}
 
 <!-- Page Header -->
 <section class="relative bg-dark overflow-hidden">
@@ -280,13 +285,13 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto fade-up">
             <div class="partner-logo bg-white border border-slate-200 rounded-xl p-8 flex items-center justify-center">
-                <img src="{% static 'images/moh_logo.jpg' %}" alt="Ministry of Health" class="h-24 object-contain">
+                <img src="{{ impact_partner_moh_url }}" alt="Ministry of Health" class="h-24 object-contain">
             </div>
             <div class="partner-logo bg-white border border-slate-200 rounded-xl p-8 flex items-center justify-center">
-                <img src="{% static 'images/orkeeswa_logo.jpg' %}" alt="Orkeeswa" class="h-24 object-contain">
+                <img src="{{ impact_partner_orkeeswa_url }}" alt="Orkeeswa" class="h-24 object-contain">
             </div>
             <div class="partner-logo bg-white border border-slate-200 rounded-xl p-8 flex items-center justify-center">
-                <img src="{% static 'images/pfq_logo.png' %}" alt="Partners for Equity" class="h-16 object-contain">
+                <img src="{{ impact_partner_pfq_url }}" alt="Partners for Equity" class="h-16 object-contain">
             </div>
         </div>
 

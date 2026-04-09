@@ -1,6 +1,27 @@
 from django.db import models
 from django.utils.text import slugify
 
+
+SITE_IMAGE_CHOICES = [
+    ("about_story_image", "About: Story image"),
+    ("about_team_emmanuel", "About: Emmanuel team image"),
+    ("about_team_moshi", "About: Dr Epiphania Moshi team image"),
+    ("about_team_elly", "About: Dr Gy Elly Martin team image"),
+    ("about_team_kenneth", "About: Dr Keneth Masao team image"),
+    ("about_team_albano", "About: Albano Sabino team image"),
+    ("about_team_rumas", "About: Rumas team image"),
+    ("about_team_einoth", "About: Einoth Saitoti team image"),
+    ("services_primary_care", "Services: Primary healthcare image"),
+    ("services_mental_health", "Services: Mental health image"),
+    ("services_outreach", "Services: Community outreach image"),
+    ("services_youth", "Services: Youth and school health image"),
+    ("services_telehealth", "Services: Telehealth image"),
+    ("impact_partner_moh", "Impact: Ministry of Health logo"),
+    ("impact_partner_orkeeswa", "Impact: Orkeeswa logo"),
+    ("impact_partner_pfq", "Impact: Partners for Equity logo"),
+]
+
+
 class News(models.Model):
     CATEGORY_CHOICES = [
         ('health_updates', 'Health Updates'),
@@ -139,6 +160,25 @@ class SiteSettings(models.Model):
 
     def __str__(self):
         return "Site Settings"
+
+
+class SiteImage(models.Model):
+    key = models.CharField(max_length=100, unique=True, choices=SITE_IMAGE_CHOICES)
+    image = models.ImageField(
+        upload_to="site_images/",
+        blank=True,
+        null=True,
+        help_text="Upload a replacement image for this part of the site.",
+    )
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ["key"]
+        verbose_name = "Site Image"
+        verbose_name_plural = "Site Images"
+
+    def __str__(self):
+        return self.get_key_display()
 
 
 class GalleryItem(models.Model):

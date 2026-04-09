@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load site_images %}
 
 {% block title %}About Us | Primetel Health{% endblock %}
 {% block meta_description %}Discover Primetel's journey, mission, and innovative approach to healthcare in Tanzania{% endblock %}
@@ -72,6 +73,15 @@
 {% endblock %}
 
 {% block content %}
+
+{% site_image_url 'about_story_image' 'images/primetel_story.jpg' as about_story_image_url %}
+{% site_image_url 'about_team_emmanuel' 'images/Emmanuel_bio.jpg' as about_team_emmanuel_url %}
+{% site_image_url 'about_team_moshi' 'images/moshi_bio.jpg' as about_team_moshi_url %}
+{% site_image_url 'about_team_elly' 'images/ellymartin_bio.jpg' as about_team_elly_url %}
+{% site_image_url 'about_team_kenneth' 'images/kenneth_bio.jpg' as about_team_kenneth_url %}
+{% site_image_url 'about_team_albano' 'images/albano_bio.jpeg' as about_team_albano_url %}
+{% site_image_url 'about_team_rumas' 'images/rumas_bio.jpg' as about_team_rumas_url %}
+{% site_image_url 'about_team_einoth' 'images/einoth_bio.jpg' as about_team_einoth_url %}
 
 <!-- Hero Section -->
 <section class="relative bg-dark overflow-hidden">
@@ -158,7 +168,7 @@
             </div>
             <div class="fade-up">
                 <div class="relative">
-                    <img src="{% static 'images/primetel_story.jpg' %}"
+                    <img src="{{ about_story_image_url }}"
                          alt="Primetel Story"
                          class="w-full rounded-2xl shadow-lg">
                     <div class="absolute -bottom-4 -right-4 bg-brand-600 text-white px-5 py-3 rounded-xl shadow-lg">
@@ -296,7 +306,7 @@
             <!-- Team Member 1 -->
             <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="1">
                 <div class="aspect-[4/5] overflow-hidden">
-                    <img src="{% static 'images/Emmanuel_bio.jpg' %}"
+                    <img src="{{ about_team_emmanuel_url }}"
                          alt="Emmanuel Christopher Samwel"
                          class="w-full h-full object-cover">
                 </div>
@@ -309,7 +319,7 @@
             <!-- Team Member 2 -->
             <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="2">
                 <div class="aspect-[4/5] overflow-hidden">
-                    <img src="{% static 'images/moshi_bio.jpg' %}"
+                    <img src="{{ about_team_moshi_url }}"
                          alt="Dr Epiphania Simon Moshi"
                          class="w-full h-full object-cover">
                 </div>
@@ -322,7 +332,7 @@
             <!-- Team Member 3 -->
             <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="3">
                 <div class="aspect-[4/5] overflow-hidden">
-                    <img src="{% static 'images/ellymartin_bio.jpg' %}"
+                    <img src="{{ about_team_elly_url }}"
                          alt="Dr.Gy Elly Martin"
                          class="w-full h-full object-cover">
                 </div>
@@ -335,7 +345,7 @@
             <!-- Team Member 4 -->
             <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="4">
                 <div class="aspect-[4/5] overflow-hidden">
-                    <img src="{% static 'images/kenneth_bio.jpg' %}"
+                    <img src="{{ about_team_kenneth_url }}"
                          alt="Dr. Keneth H. Masao"
                          class="w-full h-full object-cover">
                 </div>
@@ -348,7 +358,7 @@
             <!-- Team Member 5 -->
             <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="5">
                 <div class="aspect-[4/5] overflow-hidden">
-                    <img src="{% static 'images/albano_bio.jpeg' %}"
+                    <img src="{{ about_team_albano_url }}"
                          alt="Albano Sabino"
                          class="w-full h-full object-cover">
                 </div>
@@ -361,7 +371,7 @@
             <!-- Team Member 6 -->
             <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="6">
                 <div class="aspect-[4/5] overflow-hidden">
-                    <img src="{% static 'images/rumas_bio.jpg' %}"
+                    <img src="{{ about_team_rumas_url }}"
                          alt="Rumas"
                          class="w-full h-full object-cover">
                 </div>
@@ -374,7 +384,7 @@
             <!-- Team Member 7 -->
             <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="7">
                 <div class="aspect-[4/5] overflow-hidden">
-                    <img src="{% static 'images/einoth_bio.jpg' %}"
+                    <img src="{{ about_team_einoth_url }}"
                          alt="Einoth Saitoti"
                          class="w-full h-full object-cover">
                 </div>
@@ -396,7 +406,7 @@
         <div class="modal-body">
             <div class="grid grid-cols-1 lg:grid-cols-2">
                 <div class="h-64 lg:h-auto">
-                    <img src="{% static 'images/Emmanuel_bio.jpg' %}"
+                    <img src="{{ about_team_emmanuel_url }}"
                          alt="Emmanuel Christopher Samwel"
                          class="w-full h-full object-cover">
                 </div>
@@ -423,7 +433,7 @@
         <div class="modal-body">
             <div class="grid grid-cols-1 lg:grid-cols-2">
                 <div class="h-64 lg:h-auto">
-                    <img src="{% static 'images/moshi_bio.jpg' %}"
+                    <img src="{{ about_team_moshi_url }}"
                          alt="Dr Epiphania Simon Moshi"
                          class="w-full h-full object-cover">
                 </div>
@@ -450,7 +460,7 @@
         <div class="modal-body">
             <div class="grid grid-cols-1 lg:grid-cols-2">
                 <div class="h-64 lg:h-auto">
-                    <img src="{% static 'images/ellymartin_bio.jpg' %}"
+                    <img src="{{ about_team_elly_url }}"
                          alt="Dr. Gy Elly Martin"
                          class="w-full h-full object-cover">
                 </div>
@@ -477,7 +487,7 @@
         <div class="modal-body">
             <div class="grid grid-cols-1 lg:grid-cols-2">
                 <div class="h-64 lg:h-auto">
-                    <img src="{% static 'images/kenneth_bio.jpg' %}"
+                    <img src="{{ about_team_kenneth_url }}"
                          alt="Dr. Keneth H. Masao"
                          class="w-full h-full object-cover">
                 </div>
@@ -504,7 +514,7 @@
         <div class="modal-body">
             <div class="grid grid-cols-1 lg:grid-cols-2">
                 <div class="h-64 lg:h-auto">
-                    <img src="{% static 'images/albano_bio.jpg' %}"
+                    <img src="{{ about_team_albano_url }}"
                          alt="Albano Sabino"
                          class="w-full h-full object-cover">
                 </div>
@@ -528,7 +538,7 @@
         <div class="modal-body">
             <div class="grid grid-cols-1 lg:grid-cols-2">
                 <div class="h-64 lg:h-auto">
-                    <img src="{% static 'images/rumas_bio.jpg' %}"
+                    <img src="{{ about_team_rumas_url }}"
                          alt="Rumas"
                          class="w-full h-full object-cover">
                 </div>
@@ -555,7 +565,7 @@
         <div class="modal-body">
             <div class="grid grid-cols-1 lg:grid-cols-2">
                 <div class="h-64 lg:h-auto">
-                    <img src="{% static 'images/einoth_bio.jpg' %}"
+                    <img src="{{ about_team_einoth_url }}"
                          alt="Einoth Saitoti"
                          class="w-full h-full object-cover">
                 </div>

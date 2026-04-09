@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load site_images %}
 
 {% block title %}Our Services | Primetel Health{% endblock %}
 
@@ -23,6 +24,12 @@
 {% endblock %}
 
 {% block content %}
+
+{% site_image_url 'services_primary_care' 'images/primaryhealth_care_service.jpg' as services_primary_care_url %}
+{% site_image_url 'services_mental_health' 'images/mental_health_service.jpg' as services_mental_health_url %}
+{% site_image_url 'services_outreach' 'images/outreach_services.jpg' as services_outreach_url %}
+{% site_image_url 'services_youth' 'images/youth_mental_service.jpg' as services_youth_url %}
+{% site_image_url 'services_telehealth' 'images/telemedicine_service.jpg' as services_telehealth_url %}
 
 <!-- Page Header -->
 <section class="relative bg-dark overflow-hidden">
@@ -129,7 +136,7 @@
             <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
                     <div class="relative overflow-hidden">
-                        <img src="{% static 'images/primaryhealth_care_service.jpg' %}"
+                        <img src="{{ services_primary_care_url }}"
                              alt="Primary Healthcare Services"
                              class="w-full h-64 lg:h-full object-cover service-img">
                         <div class="absolute top-4 left-4 bg-brand-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wide flex items-center gap-1.5">
@@ -218,7 +225,7 @@
                         </a>
                     </div>
                     <div class="relative overflow-hidden order-1 lg:order-2">
-                        <img src="{% static 'images/mental_health_service.jpg' %}"
+                        <img src="{{ services_mental_health_url }}"
                              alt="Mental Health & Psychosocial Support"
                              class="w-full h-64 lg:h-full object-cover service-img">
                         <div class="absolute top-4 right-4 bg-brand-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wide flex items-center gap-1.5">
@@ -235,7 +242,7 @@
             <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
                     <div class="relative overflow-hidden">
-                        <img src="{% static 'images/outreach_services.jpg' %}"
+                        <img src="{{ services_outreach_url }}"
                              alt="Community Health Outreach"
                              class="w-full h-64 lg:h-full object-cover service-img">
                         <div class="absolute top-4 left-4 bg-brand-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wide flex items-center gap-1.5">
@@ -324,7 +331,7 @@
                         </a>
                     </div>
                     <div class="relative overflow-hidden order-1 lg:order-2">
-                        <img src="{% static 'images/youth_mental_service.jpg' %}"
+                        <img src="{{ services_youth_url }}"
                              alt="Youth & School Health Programs"
                              class="w-full h-64 lg:h-full object-cover service-img">
                         <div class="absolute top-4 right-4 bg-brand-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wide flex items-center gap-1.5">
@@ -341,7 +348,7 @@
             <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
                     <div class="relative overflow-hidden">
-                        <img src="{% static 'images/telemedicine_service.jpg' %}"
+                        <img src="{{ services_telehealth_url }}"
                              alt="Telehealth & USSD Services"
                              class="w-full h-64 lg:h-full object-cover service-img">
                         <div class="absolute top-4 left-4 bg-brand-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wide flex items-center gap-1.5">

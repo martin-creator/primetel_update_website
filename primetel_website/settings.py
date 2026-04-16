@@ -12,19 +12,33 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import tempfile
 import dj_database_url
 from dotenv import load_dotenv
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+IS_RENDER = bool(os.environ.get("RENDER"))
 AZURE_SITE_ROOT = Path('/home/site')
-DATA_ROOT = Path(
-    os.environ.get(
-        'DATA_ROOT',
-        str(AZURE_SITE_ROOT if AZURE_SITE_ROOT.exists() else BASE_DIR),
-    )
-)
+RENDER_DISK_ROOT = Path('/var/data')
+RENDER_TMP_ROOT = Path(tempfile.gettempdir()) / 'primetel_data'
+
+
+def default_data_root():
+    configured = os.environ.get('DATA_ROOT')
+    if configured:
+        return Path(configured)
+    if AZURE_SITE_ROOT.exists():
+        return AZURE_SITE_ROOT
+    if IS_RENDER and RENDER_DISK_ROOT.exists():
+        return RENDER_DISK_ROOT
+    if IS_RENDER:
+        return RENDER_TMP_ROOT
+    return BASE_DIR
+
+
+DATA_ROOT = default_data_root()
 
 
 def env_bool(name, default=False):
@@ -43,8 +57,6 @@ def env_list(name, default=None):
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
-IS_RENDER = bool(os.environ.get("RENDER"))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get(
@@ -185,6 +197,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(os.environ.get('MEDIA_ROOT', str(DATA_ROOT / 'media')))
 SERVE_MEDIA = env_bool("SERVE_MEDIA", default=True)
+MEDIA_ROOT.mkdir(parents=True, exist_ok=True)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

@@ -199,12 +199,60 @@ MEDIA_ROOT = Path(os.environ.get('MEDIA_ROOT', str(DATA_ROOT / 'media')))
 SERVE_MEDIA = env_bool("SERVE_MEDIA", default=True)
 MEDIA_ROOT.mkdir(parents=True, exist_ok=True)
 
+# --- Supabase Storage (S3-compatible) ---
+# Set SUPABASE_URL, SUPABASE_S3_ACCESS_KEY, SUPABASE_S3_SECRET_KEY, and
+# SUPABASE_BUCKET in the Render environment to activate cloud media storage.
+_supabase_url = os.environ.get("SUPABASE_URL", "").rstrip("/")
+_supabase_access_key = os.environ.get("SUPABASE_S3_ACCESS_KEY", "")
+_supabase_secret_key = os.environ.get("SUPABASE_S3_SECRET_KEY", "")
+_supabase_bucket = os.environ.get("SUPABASE_BUCKET", "media")
+
+if _supabase_url and _supabase_access_key and _supabase_secret_key:
+    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    AWS_ACCESS_KEY_ID = _supabase_access_key
+    AWS_SECRET_ACCESS_KEY = _supabase_secret_key
+    AWS_STORAGE_BUCKET_NAME = _supabase_bucket
+    AWS_S3_ENDPOINT_URL = f"{_supabase_url}/storage/v1/s3"
+    AWS_S3_REGION_NAME = os.environ.get("SUPABASE_REGION", "auto")
+    AWS_S3_ADDRESSING_STYLE = "path"
+    AWS_DEFAULT_ACL = "public-read"
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_QUERYSTRING_AUTH = False
+    _supabase_host = _supabase_url.replace("https://", "")
+    MEDIA_URL = f"https://{_supabase_host}/storage/v1/object/public/{_supabase_bucket}/"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 GA_MEASUREMENT_ID = os.environ.get("GA_MEASUREMENT_ID", "")
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+        "django.request": {
+            "handlers": ["console"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+    },
+}
 
 SECURE_SSL_REDIRECT = env_bool("SECURE_SSL_REDIRECT", default=not DEBUG)
 SESSION_COOKIE_SECURE = env_bool("SESSION_COOKIE_SECURE", default=not DEBUG)

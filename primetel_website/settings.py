@@ -219,7 +219,10 @@ if _supabase_url and _supabase_access_key and _supabase_secret_key:
     AWS_S3_FILE_OVERWRITE = False
     AWS_QUERYSTRING_AUTH = False
     _supabase_host = _supabase_url.replace("https://", "")
-    MEDIA_URL = f"https://{_supabase_host}/storage/v1/object/public/{_supabase_bucket}/"
+    # django-storages uses AWS_S3_CUSTOM_DOMAIN to build file URLs, not MEDIA_URL.
+    # Supabase public URL format: /storage/v1/object/public/<bucket>/<key>
+    AWS_S3_CUSTOM_DOMAIN = f"{_supabase_host}/storage/v1/object/public/{_supabase_bucket}"
+    MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

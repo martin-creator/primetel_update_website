@@ -19,6 +19,10 @@ SITE_IMAGE_CHOICES = [
     ("impact_partner_moh", "Impact: Ministry of Health logo"),
     ("impact_partner_orkeeswa", "Impact: Orkeeswa logo"),
     ("impact_partner_pfq", "Impact: Partners for Equity logo"),
+    ("get_involved_funders", "Get Involved: Funders / How You Can Help image"),
+    ("get_involved_volunteers", "Get Involved: Volunteers image"),
+    ("get_involved_partners", "Get Involved: Partners image"),
+    ("get_involved_brand_ally", "Get Involved: Brand Ally image"),
 ]
 
 

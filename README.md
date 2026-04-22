@@ -95,3 +95,14 @@ If your deployment still cannot connect after updating `DATABASE_URL`, confirm t
 - the connection string includes SSL requirements
 - any Supabase network restrictions or IP allowlists include Render's outbound addresses
 
+### Supabase media storage
+
+If you upload images through Django admin and want them to render on the site, the Supabase storage bucket must be public. The app builds public object URLs in the form `/storage/v1/object/public/<bucket>/<key>`, so private buckets can accept uploads but the browser will not be able to display them.
+
+Required media env vars for production:
+
+- `SUPABASE_URL=https://<project-ref>.supabase.co`
+- `SUPABASE_S3_ACCESS_KEY=<storage access key>`
+- `SUPABASE_S3_SECRET_KEY=<storage secret key>`
+- `SUPABASE_BUCKET=<public bucket name>`
+

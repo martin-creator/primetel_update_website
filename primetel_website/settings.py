@@ -193,7 +193,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(os.environ.get('MEDIA_ROOT', str(DATA_ROOT / 'media')))
 SERVE_MEDIA = env_bool("SERVE_MEDIA", default=True)
@@ -206,12 +205,12 @@ _supabase_url = os.environ.get("SUPABASE_URL", "").rstrip("/")
 _supabase_access_key = os.environ.get("SUPABASE_S3_ACCESS_KEY", "")
 _supabase_secret_key = os.environ.get("SUPABASE_S3_SECRET_KEY", "")
 _supabase_bucket = os.environ.get("SUPABASE_BUCKET", "media")
+_supabase_storage_active = bool(_supabase_url and _supabase_access_key and _supabase_secret_key)
 
 import logging as _logging
 _storage_log = _logging.getLogger(__name__)
-if _supabase_url and _supabase_access_key and _supabase_secret_key:
+if _supabase_storage_active:
     _storage_log.warning("STORAGE: Supabase active — bucket=%s endpoint=%s/storage/v1/s3", _supabase_bucket, _supabase_url)
-    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
     AWS_ACCESS_KEY_ID = _supabase_access_key
     AWS_SECRET_ACCESS_KEY = _supabase_secret_key
     AWS_STORAGE_BUCKET_NAME = _supabase_bucket
@@ -226,6 +225,14 @@ if _supabase_url and _supabase_access_key and _supabase_secret_key:
     # Supabase public URL format: /storage/v1/object/public/<bucket>/<key>
     AWS_S3_CUSTOM_DOMAIN = f"{_supabase_host}/storage/v1/object/public/{_supabase_bucket}"
     MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
 else:
     _storage_log.warning(
         "STORAGE: Supabase INACTIVE — missing vars: %s",
@@ -235,6 +242,22 @@ else:
             ("SUPABASE_S3_SECRET_KEY", _supabase_secret_key),
         ] if not v)
     )
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+            "OPTIONS": {
+                "location": MEDIA_ROOT,
+                "base_url": MEDIA_URL,
+            },
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
+
+# Keep the legacy setting for any code paths that still read it directly.
+DEFAULT_FILE_STORAGE = STORAGES["default"]["BACKEND"]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

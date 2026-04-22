@@ -207,7 +207,10 @@ _supabase_access_key = os.environ.get("SUPABASE_S3_ACCESS_KEY", "")
 _supabase_secret_key = os.environ.get("SUPABASE_S3_SECRET_KEY", "")
 _supabase_bucket = os.environ.get("SUPABASE_BUCKET", "media")
 
+import logging as _logging
+_storage_log = _logging.getLogger(__name__)
 if _supabase_url and _supabase_access_key and _supabase_secret_key:
+    _storage_log.warning("STORAGE: Supabase active — bucket=%s endpoint=%s/storage/v1/s3", _supabase_bucket, _supabase_url)
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
     AWS_ACCESS_KEY_ID = _supabase_access_key
     AWS_SECRET_ACCESS_KEY = _supabase_secret_key
@@ -223,6 +226,15 @@ if _supabase_url and _supabase_access_key and _supabase_secret_key:
     # Supabase public URL format: /storage/v1/object/public/<bucket>/<key>
     AWS_S3_CUSTOM_DOMAIN = f"{_supabase_host}/storage/v1/object/public/{_supabase_bucket}"
     MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
+else:
+    _storage_log.warning(
+        "STORAGE: Supabase INACTIVE — missing vars: %s",
+        ", ".join(k for k, v in [
+            ("SUPABASE_URL", _supabase_url),
+            ("SUPABASE_S3_ACCESS_KEY", _supabase_access_key),
+            ("SUPABASE_S3_SECRET_KEY", _supabase_secret_key),
+        ] if not v)
+    )
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

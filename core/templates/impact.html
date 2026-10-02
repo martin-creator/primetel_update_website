@@ -10,7 +10,12 @@
     .chart-container {
         position: relative;
         width: 100%;
-        height: 340px;
+        height: 280px;
+    }
+    @media (min-width: 640px) {
+        .chart-container {
+            height: 340px;
+        }
     }
 </style>
 {% endblock %}
@@ -56,12 +61,12 @@
             <h2 class="editorial-title text-3xl sm:text-4xl text-navy-950 font-normal">Our Reach Across Tanzania</h2>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
 
             <!-- Card 1 -->
-            <div class="p-8 rounded-2xl bg-sand-50 border border-sand-200 fade-up">
+            <div class="p-6 sm:p-8 rounded-2xl bg-sand-50 border border-sand-200 fade-up">
                 <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 block mb-1">Direct Reach</span>
-                <p class="text-4xl sm:text-5xl font-bold font-mono text-navy-950 mb-2">45,000+</p>
+                <p class="text-3xl sm:text-4xl lg:text-5xl font-bold font-mono text-navy-950 mb-2 truncate">45,000+</p>
                 <h3 class="text-sm font-bold text-navy-900 mb-2">People Reached</h3>
                 <p class="text-xs text-ink-muted leading-relaxed">
                     Individuals engaged through mobile clinic outreach, school workshops, and public community health camps.
@@ -69,9 +74,9 @@
             </div>
 
             <!-- Card 2 -->
-            <div class="p-8 rounded-2xl bg-sand-50 border border-sand-200 fade-up">
+            <div class="p-6 sm:p-8 rounded-2xl bg-sand-50 border border-sand-200 fade-up">
                 <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 block mb-1">Clinical Treatment</span>
-                <p class="text-4xl sm:text-5xl font-bold font-mono text-navy-950 mb-2">1,200+</p>
+                <p class="text-3xl sm:text-4xl lg:text-5xl font-bold font-mono text-navy-950 mb-2 truncate">1,200+</p>
                 <h3 class="text-sm font-bold text-navy-900 mb-2">Patients Treated</h3>
                 <p class="text-xs text-ink-muted leading-relaxed">
                     Comprehensive outpatient consultations, laboratory testing, and minor procedures at our Monduli clinic.
@@ -79,9 +84,9 @@
             </div>
 
             <!-- Card 3 -->
-            <div class="p-8 rounded-2xl bg-sand-50 border border-sand-200 fade-up">
+            <div class="p-6 sm:p-8 rounded-2xl bg-sand-50 border border-sand-200 fade-up">
                 <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 block mb-1">Adolescent Health</span>
-                <p class="text-4xl sm:text-5xl font-bold font-mono text-navy-950 mb-2">15,000+</p>
+                <p class="text-3xl sm:text-4xl lg:text-5xl font-bold font-mono text-navy-950 mb-2 truncate">15,000+</p>
                 <h3 class="text-sm font-bold text-navy-900 mb-2">Students Sensitized</h3>
                 <p class="text-xs text-ink-muted leading-relaxed">
                     Secondary school youth guided in mental wellness, suicide prevention, and peer support across Arusha.
@@ -89,9 +94,9 @@
             </div>
 
             <!-- Card 4 -->
-            <div class="p-8 rounded-2xl bg-sand-50 border border-sand-200 fade-up">
+            <div class="p-6 sm:p-8 rounded-2xl bg-sand-50 border border-sand-200 fade-up">
                 <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 block mb-1">Low-Tech Telehealth</span>
-                <p class="text-4xl sm:text-5xl font-bold font-mono text-navy-950 mb-2">3,600+</p>
+                <p class="text-3xl sm:text-4xl lg:text-5xl font-bold font-mono text-navy-950 mb-2 truncate">3,600+</p>
                 <h3 class="text-sm font-bold text-navy-900 mb-2">USSD Users</h3>
                 <p class="text-xs text-ink-muted leading-relaxed">
                     Rural patients accessing clinical triage, advice, and refill coordination via basic feature phone (*149*46#).

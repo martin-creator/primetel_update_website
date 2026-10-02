@@ -157,38 +157,68 @@
             </div>
         </article>
 
-        <!-- 3. Community Outreach & Mobile Units -->
-        <article id="community-outreach" class="service-chapter grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-            <div class="lg:col-span-6 space-y-4 fade-up">
-                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-terracotta-600">
-                    <span class="w-2 h-2 rounded-full bg-terracotta-600"></span>
-                    <span>Rural Mobile Health</span>
-                </div>
-                <h2 class="editorial-title text-3xl sm:text-4xl text-navy-950 font-normal leading-tight">
-                    Mobile Outreach & Remote Boma Camps
-                </h2>
-                <p class="text-sm sm:text-base text-ink-light leading-relaxed">
-                    Our mobile clinic program delivers care directly to rural communities that lack transport infrastructure. Led by Outreach Coordinator Rumas and our medical officers, we set up temporary health posts at village centers, providing free preventive screenings, immunizations, and doctor consultations.
-                </p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-navy-950 font-medium">
-                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Remote boma visits in Monduli</div>
-                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Rapid malaria & HIV screenings</div>
-                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Maternal & child wellness checks</div>
-                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Free community health education</div>
-                </div>
-                <div class="pt-4 flex items-center gap-4">
-                    <a href="{% url 'donate' %}?allocation=mobile_clinic" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-terracotta-600 text-white text-xs font-bold uppercase tracking-wider hover:bg-terracotta-700 transition-colors shadow">
-                        <i class="fas fa-heart text-terracotta-200"></i>
-                        <span>Sponsor an Outreach Mission</span>
-                    </a>
-                </div>
-            </div>
-            <div class="lg:col-span-6 fade-up">
-                <div class="bg-white p-3 rounded-2xl border border-sand-300 shadow-sm">
-                    <div class="aspect-[16/11] rounded-xl overflow-hidden bg-sand-200">
-                        <img src="{{ services_outreach_url }}" alt="Mobile clinic field camp" class="w-full h-full object-cover">
+        <!-- 3. Community Outreach & Mobile Units (Enlarged Stature & Scope) -->
+        <article id="community-outreach" class="service-chapter bg-white p-6 sm:p-10 lg:p-12 rounded-3xl border-2 border-sand-300 shadow-sm">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+                <div class="lg:col-span-6 space-y-4 fade-up">
+                    <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-terracotta-600">
+                        <span class="w-2.5 h-2.5 rounded-full bg-terracotta-600 animate-pulse"></span>
+                        <span class="font-bold">Flagship Rural Mobile Healthcare</span>
                     </div>
-                    <p class="text-[11px] text-ink-muted mt-2.5 px-2">Rural mobile health outreach camp delivering care to underserved families.</p>
+                    <h2 class="editorial-title text-3xl sm:text-4xl lg:text-5xl text-navy-950 font-normal leading-tight">
+                        Mobile Outreach & Remote Boma Camps
+                    </h2>
+                    <p class="text-sm sm:text-base text-ink-light leading-relaxed">
+                        Our all-terrain mobile clinic program delivers comprehensive medical care directly to pastoralist communities and remote villages that lack roads, public transit, and clinical infrastructure. Led by Outreach Coordinator Rumas and our licensed physicians, we transform village centers and schools into fully operational field clinics.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-navy-950 font-medium">
+                        <div class="flex items-center gap-2"><i class="fas fa-check-circle text-emerald-600 shrink-0"></i> Remote boma visits across Monduli</div>
+                        <div class="flex items-center gap-2"><i class="fas fa-check-circle text-emerald-600 shrink-0"></i> Rapid malaria, typhoid & HIV screenings</div>
+                        <div class="flex items-center gap-2"><i class="fas fa-check-circle text-emerald-600 shrink-0"></i> Antenatal care & maternal wellness checks</div>
+                        <div class="flex items-center gap-2"><i class="fas fa-check-circle text-emerald-600 shrink-0"></i> Free prescription medicine dispensary</div>
+                        <div class="flex items-center gap-2"><i class="fas fa-check-circle text-emerald-600 shrink-0"></i> Emergency referral coordination</div>
+                        <div class="flex items-center gap-2"><i class="fas fa-check-circle text-emerald-600 shrink-0"></i> Community-wide health sensitization</div>
+                    </div>
+
+                    <!-- Mini Outreach Impact Badges -->
+                    <div class="pt-3 pb-1 border-t border-sand-200 grid grid-cols-3 gap-2 text-center">
+                        <div class="bg-sand-50 p-2 sm:p-2.5 rounded-lg border border-sand-200">
+                            <p class="text-base sm:text-lg font-bold font-mono text-navy-950">20+</p>
+                            <p class="text-[10px] text-ink-muted leading-tight">Bomas Reached</p>
+                        </div>
+                        <div class="bg-sand-50 p-2 sm:p-2.5 rounded-lg border border-sand-200">
+                            <p class="text-base sm:text-lg font-bold font-mono text-navy-950">100%</p>
+                            <p class="text-[10px] text-ink-muted leading-tight">Free Community Care</p>
+                        </div>
+                        <div class="bg-sand-50 p-2 sm:p-2.5 rounded-lg border border-sand-200">
+                            <p class="text-base sm:text-lg font-bold font-mono text-terracotta-600">Same-Day</p>
+                            <p class="text-[10px] text-ink-muted leading-tight">Lab Diagnostics</p>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 flex flex-wrap items-center gap-3">
+                        <a href="{% url 'donate' %}?allocation=mobile_clinic" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-terracotta-600 text-white text-xs font-bold uppercase tracking-wider hover:bg-terracotta-700 transition-colors shadow">
+                            <i class="fas fa-heart text-terracotta-200"></i>
+                            <span>Sponsor an Outreach Mission</span>
+                        </a>
+                        <a href="{% url 'get_involved' %}" class="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-sand-300 text-navy-950 hover:bg-sand-100 text-xs font-bold uppercase tracking-wider transition-colors">
+                            <i class="fas fa-user-doctor text-terracotta-600"></i>
+                            <span>Volunteer on Field Team</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:col-span-6 fade-up">
+                    <div class="bg-sand-50 p-3 sm:p-4 rounded-2xl border border-sand-300 shadow-sm">
+                        <div class="aspect-[16/10] sm:aspect-[16/10] rounded-xl overflow-hidden bg-sand-200 group relative">
+                            <img src="{{ services_outreach_url }}" alt="Mobile clinic field camp in rural Tanzania" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute top-3 left-3">
+                                <span class="bg-navy-950/85 text-white text-[10px] font-mono font-bold px-2.5 py-1 rounded backdrop-blur-sm border border-white/20">
+                                    <i class="fas fa-map-pin text-terracotta-400 mr-1"></i> Field Mission • Monduli, Arusha
+                                </span>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-ink-muted mt-2.5 px-2">Rural mobile health outreach camp delivering care, diagnostics, and patient counseling to underserved pastoralist families.</p>
+                    </div>
                 </div>
             </div>
         </article>
@@ -283,8 +313,8 @@
             <p class="text-sm text-ink-muted mt-2">Primetel subsidizes care to ensure no patient is turned away due to lack of funds.</p>
         </div>
 
-        <div class="overflow-x-auto rounded-xl border border-sand-300">
-            <table class="w-full text-left text-xs font-sans">
+        <div class="overflow-x-auto rounded-xl border border-sand-300 -mx-1 sm:mx-0">
+            <table class="w-full text-left text-xs font-sans min-w-[580px]">
                 <thead class="bg-navy-950 text-white uppercase text-[11px] tracking-wider">
                     <tr>
                         <th class="p-4">Program</th>
@@ -327,21 +357,22 @@
                 </tbody>
             </table>
         </div>
+        <p class="text-[11px] text-ink-subtle mt-2 sm:hidden text-center"><i class="fas fa-arrows-left-right text-[10px] mr-1"></i> Swipe table horizontally to view full matrix</p>
     </div>
 </section>
 
 <!-- Callout -->
-<section class="py-16 bg-navy-950 text-white text-center">
+<section class="py-14 sm:py-16 bg-navy-950 text-white text-center">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 fade-up">
-        <h2 class="editorial-title text-3xl sm:text-4xl font-normal mb-4">Need healthcare or looking to partner?</h2>
+        <h2 class="editorial-title text-2xl sm:text-4xl font-normal mb-3 sm:mb-4">Need healthcare or looking to partner?</h2>
         <p class="text-sm sm:text-base text-white/70 max-w-xl mx-auto mb-8 font-sans">
             Our clinic is open for outpatient appointments, and our team is ready to coordinate outreach sessions for your school or community.
         </p>
-        <div class="flex flex-wrap justify-center gap-4">
-            <a href="{% url 'contact_us' %}" class="px-8 py-3.5 rounded-lg bg-white text-navy-950 font-bold text-xs uppercase tracking-wider hover:bg-sand-100 transition-colors">
+        <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+            <a href="{% url 'contact_us' %}" class="px-7 py-3.5 rounded-lg bg-white text-navy-950 font-bold text-xs uppercase tracking-wider hover:bg-sand-100 transition-colors">
                 Contact Our Clinical Team
             </a>
-            <a href="{% url 'donate' %}" class="px-8 py-3.5 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold text-xs uppercase tracking-wider transition-colors shadow">
+            <a href="{% url 'donate' %}" class="px-7 py-3.5 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold text-xs uppercase tracking-wider transition-colors shadow">
                 <i class="fas fa-heart text-terracotta-200 mr-1.5"></i>
                 Support Patient Care
             </a>

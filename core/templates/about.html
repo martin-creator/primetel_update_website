@@ -17,16 +17,18 @@
         z-index: 1000;
         justify-content: center;
         align-items: center;
-        padding: 1.5rem;
+        padding: 0.75rem;
     }
-    .team-modal-overlay.active {
-        display: flex;
+    @media (min-width: 640px) {
+        .team-modal-overlay {
+            padding: 1.5rem;
+        }
     }
     .team-modal-box {
         background: white;
         width: 100%;
         max-width: 780px;
-        max-height: 90vh;
+        max-height: 92vh;
         border-radius: 1rem;
         overflow: hidden;
         position: relative;
@@ -35,7 +37,7 @@
     }
     .team-modal-box .modal-body {
         overflow-y: auto;
-        max-height: 90vh;
+        max-height: 92vh;
     }
     @keyframes modalIn {
         from { opacity: 0; transform: translateY(12px); }
@@ -46,7 +48,7 @@
     .timeline-rule::before {
         content: '';
         position: absolute;
-        left: 1.25rem;
+        left: 1rem;
         top: 0;
         bottom: 0;
         width: 2px;

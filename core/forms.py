@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContactInquiry, GetInvolvedInquiry, ConsultationBooking, NewsletterSubscription
+from .models import ContactInquiry, GetInvolvedInquiry, ConsultationBooking, NewsletterSubscription, DonationPledge
 
 class ContactForm(forms.ModelForm):
     class Meta:
@@ -20,3 +20,8 @@ class NewsletterForm(forms.ModelForm):
     class Meta:
         model = NewsletterSubscription
         fields = ['email']
+
+class DonationPledgeForm(forms.ModelForm):
+    class Meta:
+        model = DonationPledge
+        fields = ['name', 'email', 'phone', 'amount', 'currency', 'frequency', 'allocation', 'payment_preference', 'notes']

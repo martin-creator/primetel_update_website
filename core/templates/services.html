@@ -2,23 +2,13 @@
 {% load static %}
 {% load site_images %}
 
-{% block title %}Our Services | Primetel Health{% endblock %}
-
-{% block meta_description %}Discover Primetel's comprehensive healthcare services including primary care, mental health support, community outreach, and telehealth solutions in Tanzania.{% endblock %}
+{% block title %}Our Healthcare Services | Primetel Health Tanzania{% endblock %}
+{% block meta_description %}Comprehensive healthcare services in Monduli, Arusha: licensed outpatient clinical care, rural mobile outreach, school mental wellness, and low-tech USSD telemedicine.{% endblock %}
 
 {% block extra_css %}
 <style>
-    .service-img {
-        transition: transform 0.5s ease;
-    }
-    .service-img:hover {
-        transform: scale(1.03);
-    }
-    .comparison-row:nth-child(even) {
-        background-color: rgba(16, 185, 129, 0.04);
-    }
-    .comparison-row:hover {
-        background-color: rgba(16, 185, 129, 0.08);
+    .service-chapter {
+        scroll-margin-top: 6rem;
     }
 </style>
 {% endblock %}
@@ -31,454 +21,308 @@
 {% site_image_url 'services_youth' 'images/youth_mental_service.jpg' as services_youth_url %}
 {% site_image_url 'services_telehealth' 'images/telemedicine_service.jpg' as services_telehealth_url %}
 
-<!-- Page Header -->
-<section class="relative bg-dark overflow-hidden">
-    <!-- Subtle background pattern -->
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-brand-500 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-        <div class="absolute bottom-0 left-0 w-72 h-72 bg-brand-400 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
-    </div>
-    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
-        <div class="max-w-3xl mx-auto text-center fade-up">
-            <span class="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 text-brand-400 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
-                <i class="fas fa-stethoscope text-xs"></i>
-                What We Offer
+<!-- Editorial Header -->
+<section class="bg-sand-50 border-b border-sand-200 pt-16 pb-20 lg:pt-24 lg:pb-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl fade-up">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sand-200/80 text-navy-950 text-xs font-semibold tracking-wide uppercase mb-6">
+                <i class="fas fa-stethoscope text-terracotta-600 text-[10px]"></i>
+                Clinical & Community Delivery
             </span>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-                Our <span class="gradient-text">Services</span>
+            <h1 class="editorial-title text-4xl sm:text-5xl lg:text-6xl text-navy-950 font-normal leading-[1.1] mb-6">
+                Healthcare that meets communities <span class="italic font-normal text-terracotta-600">where they live</span>.
             </h1>
-            <p class="text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl mx-auto">
-                Comprehensive healthcare solutions designed to meet the diverse needs of Tanzanian communities, delivered with compassion and innovation.
+            <p class="text-lg sm:text-xl text-ink-muted leading-relaxed font-sans font-normal mb-8">
+                Primetel blends in-person clinical practice with active mobile units, secondary school counseling, and low-tech USSD code access. Our programs remove the geographic, financial, and stigma barriers that keep Tanzanians from getting care.
             </p>
-            <div class="flex flex-wrap justify-center gap-4 mt-10">
-                <a href="#services-list" class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-6 py-3 rounded-lg font-semibold text-sm transition-colors">
-                    <i class="fas fa-list-ul"></i>
-                    Explore Services
-                </a>
-                <a href="{% url 'contact_us' %}" class="inline-flex items-center gap-2 border border-white/20 hover:border-white/40 text-white px-6 py-3 rounded-lg font-semibold text-sm transition-colors">
-                    <i class="fas fa-paper-plane"></i>
-                    Get in Touch
-                </a>
+            <div class="flex flex-wrap gap-3 text-xs font-semibold">
+                <a href="#primary-care" class="px-3.5 py-2 rounded-lg bg-white border border-sand-300 text-navy-950 hover:border-terracotta-600 transition-colors">Licensed Clinic</a>
+                <a href="#mental-health" class="px-3.5 py-2 rounded-lg bg-white border border-sand-300 text-navy-950 hover:border-terracotta-600 transition-colors">Mental Health</a>
+                <a href="#community-outreach" class="px-3.5 py-2 rounded-lg bg-white border border-sand-300 text-navy-950 hover:border-terracotta-600 transition-colors">Mobile Outreach</a>
+                <a href="#school-health" class="px-3.5 py-2 rounded-lg bg-white border border-sand-300 text-navy-950 hover:border-terracotta-600 transition-colors">School Programs</a>
+                <a href="#telehealth-service" class="px-3.5 py-2 rounded-lg bg-white border border-sand-300 text-navy-950 hover:border-terracotta-600 transition-colors">USSD Telehealth</a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Approach Overview -->
-<section class="py-20 lg:py-28 bg-white">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16 fade-up">
-            <span class="inline-flex items-center gap-2 bg-brand-50 text-brand-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
-                Our Approach
-            </span>
-            <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">
-                Healthcare That Meets You Where You Are
-            </h2>
-            <p class="text-lg text-muted max-w-2xl mx-auto">
-                We blend traditional care with innovative solutions to overcome barriers in Tanzania's healthcare landscape.
-            </p>
-        </div>
-
+<!-- The Three Delivery Pillars -->
+<section class="py-16 sm:py-20 bg-white border-b border-sand-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Community-Centered -->
-            <div class="fade-up bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-lg hover:border-brand-200 transition-all duration-300">
-                <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 text-xl mb-6">
-                    <i class="fas fa-users"></i>
-                </div>
-                <h3 class="text-xl font-bold text-dark mb-3">Community-Centered</h3>
-                <p class="text-muted leading-relaxed">
-                    Designed with and for the communities we serve, ensuring cultural relevance and accessibility in every interaction.
+            <div class="p-6 rounded-2xl bg-sand-50 border border-sand-200 fade-up">
+                <span class="w-8 h-8 rounded-full bg-sand-200 text-navy-950 flex items-center justify-center text-xs font-bold font-mono mb-4">01</span>
+                <h3 class="text-base font-bold text-navy-950 mb-2">Community-Centered</h3>
+                <p class="text-xs sm:text-sm text-ink-muted leading-relaxed font-sans">
+                    Programs co-designed alongside Maasai village elders, local leaders, and teachers to reflect language, pastoralist migration patterns, and local cultural norms.
                 </p>
             </div>
-
-            <!-- Hybrid Delivery -->
-            <div class="fade-up bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-lg hover:border-brand-200 transition-all duration-300">
-                <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 text-xl mb-6">
-                    <i class="fas fa-mobile-alt"></i>
-                </div>
-                <h3 class="text-xl font-bold text-dark mb-3">Hybrid Delivery</h3>
-                <p class="text-muted leading-relaxed">
-                    Combining in-person care with digital solutions to maximize reach and impact across urban and rural areas.
+            <div class="p-6 rounded-2xl bg-sand-50 border border-sand-200 fade-up">
+                <span class="w-8 h-8 rounded-full bg-sand-200 text-navy-950 flex items-center justify-center text-xs font-bold font-mono mb-4">02</span>
+                <h3 class="text-base font-bold text-navy-950 mb-2">Hybrid Clinical Delivery</h3>
+                <p class="text-xs sm:text-sm text-ink-muted leading-relaxed font-sans">
+                    Connecting our physical medical clinic in Monduli with mobile all-terrain units and simple feature phone USSD access (<code class="text-navy-950 font-mono">*149*46#</code>).
                 </p>
             </div>
-
-            <!-- Holistic Care -->
-            <div class="fade-up bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-lg hover:border-brand-200 transition-all duration-300">
-                <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 text-xl mb-6">
-                    <i class="fas fa-heartbeat"></i>
-                </div>
-                <h3 class="text-xl font-bold text-dark mb-3">Holistic Care</h3>
-                <p class="text-muted leading-relaxed">
-                    Addressing physical, mental, and social aspects of health for comprehensive wellbeing at every stage of life.
+            <div class="p-6 rounded-2xl bg-sand-50 border border-sand-200 fade-up">
+                <span class="w-8 h-8 rounded-full bg-sand-200 text-navy-950 flex items-center justify-center text-xs font-bold font-mono mb-4">03</span>
+                <h3 class="text-base font-bold text-navy-950 mb-2">Holistic & Longitudinal</h3>
+                <p class="text-xs sm:text-sm text-ink-muted leading-relaxed font-sans">
+                    Treating the full person: physical diagnostics, prescription medicine, maternal care, and destigmatized psychological therapy under one coordinated framework.
                 </p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Detailed Services -->
-<section id="services-list" class="py-20 lg:py-28 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-20 fade-up">
-            <span class="inline-flex items-center gap-2 bg-brand-50 text-brand-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
-                Our Services
-            </span>
-            <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">
-                Comprehensive Healthcare Solutions
-            </h2>
-            <p class="text-lg text-muted max-w-2xl mx-auto">
-                Tailored services designed to meet the diverse needs of Tanzanian communities.
-            </p>
-        </div>
+<!-- Detailed Healthcare Chapters -->
+<section class="py-20 lg:py-28 bg-sand-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20 lg:space-y-28">
 
-        <!-- 1. Primary Healthcare (image left) -->
-        <div id="primary-care" class="scroll-mt-28 mb-20 fade-up">
-            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                    <div class="relative overflow-hidden">
-                        <img src="{{ services_primary_care_url }}"
-                             alt="Primary Healthcare Services"
-                             class="w-full h-64 lg:h-full object-cover service-img">
-                        <div class="absolute top-4 left-4 bg-brand-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wide flex items-center gap-1.5">
-                            <i class="fas fa-user-md"></i>
-                            Primary Care
-                        </div>
+        <!-- 1. Primary Healthcare & Licensed Outpatient Clinic -->
+        <article id="primary-care" class="service-chapter grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div class="lg:col-span-6 space-y-4 fade-up">
+                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-terracotta-600">
+                    <span class="w-2 h-2 rounded-full bg-terracotta-600"></span>
+                    <span>Licensed Clinical Practice</span>
+                </div>
+                <h2 class="editorial-title text-3xl sm:text-4xl text-navy-950 font-normal leading-tight">
+                    Primary Healthcare & Clinical Services
+                </h2>
+                <p class="text-sm sm:text-base text-ink-light leading-relaxed">
+                    Our licensed outpatient medical clinic in Monduli provides essential clinical consultations, laboratory diagnostic testing (malaria, typhoid, blood sugar, hemoglobin), and chronic disease management for hypertension and diabetes.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-navy-950 font-medium">
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> General medical consultations</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Antenatal & maternal care</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Minor surgical procedures & wound care</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> In-house pharmacy & diagnostic lab</div>
+                </div>
+                <div class="pt-4 flex items-center gap-4">
+                    <a href="{% url 'contact_us' %}" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-navy-900 text-white text-xs font-bold uppercase tracking-wider hover:bg-navy-800 transition-colors">
+                        <span>Book Clinic Visit</span>
+                        <i class="fas fa-arrow-right text-[10px]"></i>
+                    </a>
+                    <a href="{% url 'donate' %}?allocation=general" class="text-xs font-bold uppercase tracking-wider text-terracotta-600 hover:text-terracotta-700 underline">
+                        Subsidize Patient Fund
+                    </a>
+                </div>
+            </div>
+            <div class="lg:col-span-6 fade-up">
+                <div class="bg-white p-3 rounded-2xl border border-sand-300 shadow-sm">
+                    <div class="aspect-[16/11] rounded-xl overflow-hidden bg-sand-200">
+                        <img src="{{ services_primary_care_url }}" alt="Primary healthcare doctor consultation" class="w-full h-full object-cover">
                     </div>
-                    <div class="p-8 lg:p-10 flex flex-col justify-center">
-                        <h3 class="text-2xl font-bold text-dark mb-3">Primary Healthcare Services</h3>
-                        <p class="text-muted leading-relaxed mb-6">
-                            Comprehensive medical care delivered with compassion and cultural sensitivity. Our services include diagnosis and treatment of common illnesses, preventive health screenings, and referrals.
-                        </p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">General consultations</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Basic diagnostic tests</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Chronic disease management</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Referrals to specialists</span>
-                            </div>
+                    <p class="text-[11px] text-ink-muted mt-2.5 px-2">Clinical diagnosis and patient examination at Primetel's licensed clinic in Monduli.</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- 2. Mental Health & Counseling -->
+        <article id="mental-health" class="service-chapter grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div class="lg:col-span-6 order-2 lg:order-1 fade-up">
+                <div class="bg-white p-3 rounded-2xl border border-sand-300 shadow-sm">
+                    <div class="aspect-[16/11] rounded-xl overflow-hidden bg-sand-200">
+                        <img src="{{ services_mental_health_url }}" alt="Mental health counseling session" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-[11px] text-ink-muted mt-2.5 px-2">One-on-one psychological counseling and trauma recovery guided by psychologist Albano Sabino.</p>
+                </div>
+            </div>
+            <div class="lg:col-span-6 order-1 lg:order-2 space-y-4 fade-up">
+                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-terracotta-600">
+                    <span class="w-2 h-2 rounded-full bg-terracotta-600"></span>
+                    <span>Psychosocial Wellness</span>
+                </div>
+                <h2 class="editorial-title text-3xl sm:text-4xl text-navy-950 font-normal leading-tight">
+                    Mental Health & Psychosocial Counseling
+                </h2>
+                <p class="text-sm sm:text-base text-ink-light leading-relaxed">
+                    Mental wellness has long been stigmatized or ignored in rural East Africa. Primetel integrates certified psychological counseling directly into primary health services. We provide confidential individual therapy, trauma counseling, and workplace wellness for institutions including CRDB Bank and police staff.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-navy-950 font-medium">
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Individual therapy & crisis support</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Depression & anxiety intervention</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Workplace wellness sessions</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Family & grief counseling</div>
+                </div>
+                <div class="pt-4 flex items-center gap-4">
+                    <a href="{% url 'contact_us' %}" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-navy-900 text-white text-xs font-bold uppercase tracking-wider hover:bg-navy-800 transition-colors">
+                        <span>Request Counseling</span>
+                        <i class="fas fa-arrow-right text-[10px]"></i>
+                    </a>
+                    <a href="{% url 'donate' %}?allocation=mental_health" class="text-xs font-bold uppercase tracking-wider text-terracotta-600 hover:text-terracotta-700 underline">
+                        Support Mental Health Care
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- 3. Community Outreach & Mobile Units -->
+        <article id="community-outreach" class="service-chapter grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div class="lg:col-span-6 space-y-4 fade-up">
+                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-terracotta-600">
+                    <span class="w-2 h-2 rounded-full bg-terracotta-600"></span>
+                    <span>Rural Mobile Health</span>
+                </div>
+                <h2 class="editorial-title text-3xl sm:text-4xl text-navy-950 font-normal leading-tight">
+                    Mobile Outreach & Remote Boma Camps
+                </h2>
+                <p class="text-sm sm:text-base text-ink-light leading-relaxed">
+                    Our mobile clinic program delivers care directly to rural communities that lack transport infrastructure. Led by Outreach Coordinator Rumas and our medical officers, we set up temporary health posts at village centers, providing free preventive screenings, immunizations, and doctor consultations.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-navy-950 font-medium">
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Remote boma visits in Monduli</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Rapid malaria & HIV screenings</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Maternal & child wellness checks</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Free community health education</div>
+                </div>
+                <div class="pt-4 flex items-center gap-4">
+                    <a href="{% url 'donate' %}?allocation=mobile_clinic" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-terracotta-600 text-white text-xs font-bold uppercase tracking-wider hover:bg-terracotta-700 transition-colors shadow">
+                        <i class="fas fa-heart text-terracotta-200"></i>
+                        <span>Sponsor an Outreach Mission</span>
+                    </a>
+                </div>
+            </div>
+            <div class="lg:col-span-6 fade-up">
+                <div class="bg-white p-3 rounded-2xl border border-sand-300 shadow-sm">
+                    <div class="aspect-[16/11] rounded-xl overflow-hidden bg-sand-200">
+                        <img src="{{ services_outreach_url }}" alt="Mobile clinic field camp" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-[11px] text-ink-muted mt-2.5 px-2">Rural mobile health outreach camp delivering care to underserved families.</p>
+                </div>
+            </div>
+        </article>
+
+        <!-- 4. Youth & School Health Programs -->
+        <article id="school-health" class="service-chapter grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div class="lg:col-span-6 order-2 lg:order-1 fade-up">
+                <div class="bg-white p-3 rounded-2xl border border-sand-300 shadow-sm">
+                    <div class="aspect-[16/11] rounded-xl overflow-hidden bg-sand-200">
+                        <img src="{{ services_youth_url }}" alt="School mental health session" class="w-full h-full object-cover">
+                    </div>
+                    <p class="text-[11px] text-ink-muted mt-2.5 px-2">Adolescent mental wellness and resilience workshops reaching 15,000+ secondary students.</p>
+                </div>
+            </div>
+            <div class="lg:col-span-6 order-1 lg:order-2 space-y-4 fade-up">
+                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-terracotta-600">
+                    <span class="w-2 h-2 rounded-full bg-terracotta-600"></span>
+                    <span>Youth Development</span>
+                </div>
+                <h2 class="editorial-title text-3xl sm:text-4xl text-navy-950 font-normal leading-tight">
+                    Youth & School Health Programs
+                </h2>
+                <p class="text-sm sm:text-base text-ink-light leading-relaxed">
+                    Empowering Tanzanian youth with health literacy, reproductive education, and emotional resilience. To date, Primetel has reached over 15,000 students across secondary schools in Arusha, training peer mentors to identify depression and prevent youth crises.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-navy-950 font-medium">
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> School-based mental health workshops</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Peer counselor training programs</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Reproductive health sensitization</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Substance abuse prevention</div>
+                </div>
+                <div class="pt-4">
+                    <a href="{% url 'contact_us' %}" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-navy-900 hover:text-terracotta-600 underline">
+                        <span>Partner with Our Schools Team</span>
+                        <i class="fas fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+
+        <!-- 5. Low-Tech Telemedicine & USSD -->
+        <article id="telehealth-service" class="service-chapter grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div class="lg:col-span-6 space-y-4 fade-up">
+                <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-terracotta-600">
+                    <span class="w-2 h-2 rounded-full bg-terracotta-600"></span>
+                    <span>Low-Tech Digital Innovation</span>
+                </div>
+                <h2 class="editorial-title text-3xl sm:text-4xl text-navy-950 font-normal leading-tight">
+                    USSD Telehealth Access (*149*46#)
+                </h2>
+                <p class="text-sm sm:text-base text-ink-light leading-relaxed">
+                    We designed digital health for the real conditions of rural Tanzania. Patients dial <code class="font-mono bg-sand-200 text-navy-950 px-1.5 py-0.5 rounded font-bold">*149*46#</code> from any mobile phone — including basic feature phones without touchscreens or internet connectivity.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-navy-950 font-medium">
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Zero mobile internet data needed</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Clinician triage & callback dispatch</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> Automated medication adherence reminders</div>
+                    <div class="flex items-center gap-2"><i class="fas fa-check text-emerald-600"></i> 3,600+ registered active users</div>
+                </div>
+                <div class="pt-4">
+                    <a href="{% url 'donate' %}?allocation=telehealth" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-navy-900 text-white text-xs font-bold uppercase tracking-wider hover:bg-navy-800 transition-colors">
+                        <span>Fund Telehealth Line Bandwidth</span>
+                        <i class="fas fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="lg:col-span-6 fade-up">
+                <div class="bg-white p-3 rounded-2xl border border-sand-300 shadow-sm">
+                    <div class="aspect-[16/11] rounded-xl overflow-hidden bg-sand-200">
+                        <img src="{{ services_telehealth_url }}" alt="USSD low-tech mobile health application" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-3 bg-navy-950 text-white rounded-lg mt-3 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-sand-300">Tanzania National USSD Line</p>
+                            <p class="text-base font-bold font-mono">*149*46#</p>
                         </div>
-                        <a href="{% url 'contact_us' %}" class="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-semibold text-sm transition-colors">
-                            Book a Consultation
-                            <i class="fas fa-arrow-right text-xs"></i>
-                        </a>
+                        <span class="text-[11px] font-semibold text-emerald-400">Over 3,600 Dialed Users</span>
                     </div>
                 </div>
             </div>
-        </div>
+        </article>
 
-        <!-- 2. Mental Health & Psychosocial Support (image right) -->
-        <div id="mental-health" class="scroll-mt-28 mb-20 fade-up">
-            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                    <div class="p-8 lg:p-10 flex flex-col justify-center order-2 lg:order-1">
-                        <h3 class="text-2xl font-bold text-dark mb-3">Mental Health & Psychosocial Support</h3>
-                        <p class="text-muted leading-relaxed mb-6">
-                            Breaking the stigma around mental health with compassionate, confidential services. We provide counseling, crisis intervention, and community education to promote mental wellbeing across all ages.
-                        </p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Individual counseling</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Group therapy sessions</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">School mental health programs</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Trauma recovery support</span>
-                            </div>
-                        </div>
-                        <a href="{% url 'contact_us' %}" class="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-semibold text-sm transition-colors">
-                            Get Support
-                            <i class="fas fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                    <div class="relative overflow-hidden order-1 lg:order-2">
-                        <img src="{{ services_mental_health_url }}"
-                             alt="Mental Health & Psychosocial Support"
-                             class="w-full h-64 lg:h-full object-cover service-img">
-                        <div class="absolute top-4 right-4 bg-brand-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wide flex items-center gap-1.5">
-                            <i class="fas fa-brain"></i>
-                            Mental Health
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. Community Health Outreach (image left) -->
-        <div id="community-outreach" class="scroll-mt-28 mb-20 fade-up">
-            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                    <div class="relative overflow-hidden">
-                        <img src="{{ services_outreach_url }}"
-                             alt="Community Health Outreach"
-                             class="w-full h-64 lg:h-full object-cover service-img">
-                        <div class="absolute top-4 left-4 bg-brand-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wide flex items-center gap-1.5">
-                            <i class="fas fa-hands-helping"></i>
-                            Community Outreach
-                        </div>
-                    </div>
-                    <div class="p-8 lg:p-10 flex flex-col justify-center">
-                        <h3 class="text-2xl font-bold text-dark mb-3">Community Health Outreach</h3>
-                        <p class="text-muted leading-relaxed mb-6">
-                            Bringing healthcare directly to underserved communities through mobile clinics, health education, and preventive screenings. Our outreach programs have reached over 45,000 Tanzanians across multiple regions.
-                        </p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Mobile health clinics</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Health education workshops</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Preventive screenings</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Vaccination campaigns</span>
-                            </div>
-                        </div>
-                        <a href="{% url 'contact_us' %}" class="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-semibold text-sm transition-colors">
-                            Learn More
-                            <i class="fas fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 4. Youth & School Health Programs (image right) -->
-        <div id="school-health" class="scroll-mt-28 mb-20 fade-up">
-            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                    <div class="p-8 lg:p-10 flex flex-col justify-center order-2 lg:order-1">
-                        <h3 class="text-2xl font-bold text-dark mb-3">Youth & School Health Programs</h3>
-                        <p class="text-muted leading-relaxed mb-6">
-                            Empowering the next generation with knowledge and resources for lifelong health. Our school programs have sensitized over 15,000 students on mental health, sexual health, and healthy lifestyle choices.
-                        </p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Mental health education</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Sexual & reproductive health</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Substance abuse prevention</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Life skills development</span>
-                            </div>
-                        </div>
-                        <a href="{% url 'contact_us' %}" class="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-semibold text-sm transition-colors">
-                            Contact Schools Team
-                            <i class="fas fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                    <div class="relative overflow-hidden order-1 lg:order-2">
-                        <img src="{{ services_youth_url }}"
-                             alt="Youth & School Health Programs"
-                             class="w-full h-64 lg:h-full object-cover service-img">
-                        <div class="absolute top-4 right-4 bg-brand-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wide flex items-center gap-1.5">
-                            <i class="fas fa-graduation-cap"></i>
-                            Youth Programs
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 5. Telehealth & USSD Services (image left) -->
-        <div id="telehealth-service" class="scroll-mt-28 mb-8 fade-up">
-            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                    <div class="relative overflow-hidden">
-                        <img src="{{ services_telehealth_url }}"
-                             alt="Telehealth & USSD Services"
-                             class="w-full h-64 lg:h-full object-cover service-img">
-                        <div class="absolute top-4 left-4 bg-brand-600 text-white px-3 py-1.5 rounded-lg text-xs font-semibold uppercase tracking-wide flex items-center gap-1.5">
-                            <i class="fas fa-mobile-alt"></i>
-                            Telehealth
-                        </div>
-                    </div>
-                    <div class="p-8 lg:p-10 flex flex-col justify-center">
-                        <h3 class="text-2xl font-bold text-dark mb-3">Telehealth & USSD Services</h3>
-                        <p class="text-muted leading-relaxed mb-6">
-                            Access healthcare information and consultations through your mobile phone. Our USSD platform (<span class="font-semibold text-brand-700">*149*46*22#</span>) provides health information, symptom checkers, and direct access to healthcare providers for over 2,000 active users.
-                        </p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">USSD health information</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Teleconsultations</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Medication reminders</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-brand-50 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-check text-brand-600 text-xs"></i>
-                                </div>
-                                <span class="text-slate-700 text-sm">Follow-up care</span>
-                            </div>
-                        </div>
-                        <a href="{% url 'contact_us' %}" class="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-semibold text-sm transition-colors">
-                            Access USSD Service
-                            <i class="fas fa-arrow-right text-xs"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 
-<!-- Service Comparison Table -->
-<section class="py-20 lg:py-28 bg-white">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16 fade-up">
-            <span class="inline-flex items-center gap-2 bg-brand-50 text-brand-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
-                Service Options
-            </span>
-            <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">
-                Finding the Right Service for You
-            </h2>
-            <p class="text-lg text-muted max-w-2xl mx-auto">
-                Compare our service options to find the best fit for your healthcare needs.
-            </p>
+<!-- Service Transparency & Access Matrix -->
+<section class="py-20 lg:py-24 bg-white border-t border-sand-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14 fade-up">
+            <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-2 block font-sans">Access & Affordability</span>
+            <h2 class="editorial-title text-3xl sm:text-4xl text-navy-950 font-normal">Service Access & Fee Transparency</h2>
+            <p class="text-sm text-ink-muted mt-2">Primetel subsidizes care to ensure no patient is turned away due to lack of funds.</p>
         </div>
 
-        <div class="fade-up overflow-x-auto rounded-2xl border border-slate-200 shadow-sm">
-            <table class="w-full min-w-[640px]">
-                <thead>
-                    <tr class="bg-dark text-white">
-                        <th class="px-6 py-4 text-left text-sm font-semibold">Service</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold">Best For</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold">Availability</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold">Cost</th>
-                        <th class="px-6 py-4 text-left text-sm font-semibold">Access</th>
+        <div class="overflow-x-auto rounded-xl border border-sand-300">
+            <table class="w-full text-left text-xs font-sans">
+                <thead class="bg-navy-950 text-white uppercase text-[11px] tracking-wider">
+                    <tr>
+                        <th class="p-4">Program</th>
+                        <th class="p-4">Target Community</th>
+                        <th class="p-4">Delivery Mode</th>
+                        <th class="p-4">Patient Cost</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-100">
-                    <tr class="comparison-row transition-colors">
-                        <td class="px-6 py-4">
-                            <span class="font-semibold text-dark text-sm">Primary Care</span>
-                        </td>
-                        <td class="px-6 py-4 text-sm text-muted">General health concerns, check-ups</td>
-                        <td class="px-6 py-4 text-sm text-muted">Clinics & mobile units</td>
-                        <td class="px-6 py-4">
-                            <span class="inline-flex items-center bg-brand-50 text-brand-700 px-2.5 py-0.5 rounded-full text-xs font-medium">Low-cost</span>
-                        </td>
-                        <td class="px-6 py-4 text-sm text-muted">Walk-in or appointment</td>
+                <tbody class="divide-y divide-sand-200 bg-sand-50/50">
+                    <tr>
+                        <td class="p-4 font-bold text-navy-950">Primary Care Clinic</td>
+                        <td class="p-4 text-ink-light">General public, families in Monduli</td>
+                        <td class="p-4 text-ink-muted">In-person outpatient clinic</td>
+                        <td class="p-4 text-forest-700 font-bold">Subsidized / Low-cost</td>
                     </tr>
-                    <tr class="comparison-row transition-colors">
-                        <td class="px-6 py-4">
-                            <span class="font-semibold text-dark text-sm">Mental Health</span>
-                        </td>
-                        <td class="px-6 py-4 text-sm text-muted">Counseling, emotional support</td>
-                        <td class="px-6 py-4 text-sm text-muted">Clinics, schools, outreach</td>
-                        <td class="px-6 py-4">
-                            <span class="inline-flex items-center bg-brand-50 text-brand-700 px-2.5 py-0.5 rounded-full text-xs font-medium">Free - low cost</span>
-                        </td>
-                        <td class="px-6 py-4 text-sm text-muted">Appointment recommended</td>
+                    <tr>
+                        <td class="p-4 font-bold text-navy-950">Mental Health Therapy</td>
+                        <td class="p-4 text-ink-light">Youth, trauma survivors, families</td>
+                        <td class="p-4 text-ink-muted">Clinic & field sessions</td>
+                        <td class="p-4 text-forest-700 font-bold">Free to heavily subsidized</td>
                     </tr>
-                    <tr class="comparison-row transition-colors">
-                        <td class="px-6 py-4">
-                            <span class="font-semibold text-dark text-sm">Community Outreach</span>
-                        </td>
-                        <td class="px-6 py-4 text-sm text-muted">Preventive care, education</td>
-                        <td class="px-6 py-4 text-sm text-muted">Scheduled community visits</td>
-                        <td class="px-6 py-4">
-                            <span class="inline-flex items-center bg-brand-50 text-brand-700 px-2.5 py-0.5 rounded-full text-xs font-medium">Mostly free</span>
-                        </td>
-                        <td class="px-6 py-4 text-sm text-muted">Check schedule</td>
+                    <tr>
+                        <td class="p-4 font-bold text-navy-950">Mobile Outreach Camps</td>
+                        <td class="p-4 text-ink-light">Remote Maasai bomas, rural villages</td>
+                        <td class="p-4 text-ink-muted">Field mobile units</td>
+                        <td class="p-4 text-forest-700 font-bold">100% Free to community</td>
                     </tr>
-                    <tr class="comparison-row transition-colors">
-                        <td class="px-6 py-4">
-                            <span class="font-semibold text-dark text-sm">Youth Programs</span>
-                        </td>
-                        <td class="px-6 py-4 text-sm text-muted">Students ages 10-24</td>
-                        <td class="px-6 py-4 text-sm text-muted">Partner schools</td>
-                        <td class="px-6 py-4">
-                            <span class="inline-flex items-center bg-brand-50 text-brand-700 px-2.5 py-0.5 rounded-full text-xs font-medium">Free</span>
-                        </td>
-                        <td class="px-6 py-4 text-sm text-muted">Through schools</td>
+                    <tr>
+                        <td class="p-4 font-bold text-navy-950">School Health Sessions</td>
+                        <td class="p-4 text-ink-light">Secondary students (ages 12–22)</td>
+                        <td class="p-4 text-ink-muted">School partner workshops</td>
+                        <td class="p-4 text-forest-700 font-bold">100% Free to schools</td>
                     </tr>
-                    <tr class="comparison-row transition-colors">
-                        <td class="px-6 py-4">
-                            <span class="font-semibold text-dark text-sm">Telehealth</span>
-                        </td>
-                        <td class="px-6 py-4 text-sm text-muted">Basic consultations, info</td>
-                        <td class="px-6 py-4 text-sm text-muted">24/7 via USSD</td>
-                        <td class="px-6 py-4">
-                            <span class="inline-flex items-center bg-brand-50 text-brand-700 px-2.5 py-0.5 rounded-full text-xs font-medium">Free - low cost</span>
-                        </td>
-                        <td class="px-6 py-4 text-sm text-muted">Dial *149*46*22#</td>
+                    <tr>
+                        <td class="p-4 font-bold text-navy-950">USSD Telemedicine</td>
+                        <td class="p-4 text-ink-light">Any mobile phone user in Tanzania</td>
+                        <td class="p-4 text-ink-muted">Feature phone *149*46#</td>
+                        <td class="p-4 text-forest-700 font-bold">Free to dial</td>
                     </tr>
                 </tbody>
             </table>
@@ -486,32 +330,21 @@
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="py-20 lg:py-28 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="fade-up relative bg-dark rounded-2xl overflow-hidden">
-            <!-- Background accents -->
-            <div class="absolute top-0 right-0 w-72 h-72 bg-brand-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-            <div class="absolute bottom-0 left-0 w-56 h-56 bg-brand-400/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
-
-            <div class="relative px-8 md:px-12 lg:px-16 py-16 lg:py-20">
-                <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-                    <div class="flex-1 text-center lg:text-left">
-                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                            Ready to Access Our Services?
-                        </h2>
-                        <p class="text-lg text-white/70 max-w-xl">
-                            Whether you need immediate care or want to learn more about our programs, our team is here to help you every step of the way.
-                        </p>
-                    </div>
-                    <div class="flex-shrink-0">
-                        <a href="{% url 'contact_us' %}" class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-8 py-4 rounded-lg font-semibold transition-colors">
-                            <i class="fas fa-paper-plane"></i>
-                            Contact Us
-                        </a>
-                    </div>
-                </div>
-            </div>
+<!-- Callout -->
+<section class="py-16 bg-navy-950 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 fade-up">
+        <h2 class="editorial-title text-3xl sm:text-4xl font-normal mb-4">Need healthcare or looking to partner?</h2>
+        <p class="text-sm sm:text-base text-white/70 max-w-xl mx-auto mb-8 font-sans">
+            Our clinic is open for outpatient appointments, and our team is ready to coordinate outreach sessions for your school or community.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="{% url 'contact_us' %}" class="px-8 py-3.5 rounded-lg bg-white text-navy-950 font-bold text-xs uppercase tracking-wider hover:bg-sand-100 transition-colors">
+                Contact Our Clinical Team
+            </a>
+            <a href="{% url 'donate' %}" class="px-8 py-3.5 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold text-xs uppercase tracking-wider transition-colors shadow">
+                <i class="fas fa-heart text-terracotta-200 mr-1.5"></i>
+                Support Patient Care
+            </a>
         </div>
     </div>
 </section>

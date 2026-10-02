@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.db.models import Q
-from .models import News, ContactInquiry, GetInvolvedInquiry, ConsultationBooking, NewsletterSubscription, AnnualReport, GalleryItem, SiteSettings
-from .forms import ContactForm, GetInvolvedForm, ConsultationForm, NewsletterForm
+from django.contrib import messages
+from .models import News, ContactInquiry, GetInvolvedInquiry, ConsultationBooking, NewsletterSubscription, AnnualReport, GalleryItem, SiteSettings, DonationPledge
+from .forms import ContactForm, GetInvolvedForm, ConsultationForm, NewsletterForm, DonationPledgeForm
 
 def home(request):
     if request.method == 'POST' and 'consultation_submit' in request.POST:
@@ -34,6 +35,36 @@ def services(request):
 def impact(request):
     return render(request, 'impact.html')
 
+def donate(request):
+    donation_success = False
+    pledge_instance = None
+    if request.method == 'POST':
+        form = DonationPledgeForm(request.POST)
+        if form.is_valid():
+            pledge_instance = form.save()
+            donation_success = True
+            messages.success(
+                request,
+                f"Thank you, {pledge_instance.name}. Your pledge of {pledge_instance.currency} {pledge_instance.amount:,.2f} has been received. Our team will follow up directly with instructions."
+            )
+            form = DonationPledgeForm()
+    else:
+        initial_amount = request.GET.get('amount', 50)
+        initial_currency = request.GET.get('currency', 'USD')
+        initial_frequency = request.GET.get('frequency', 'one_time')
+        initial_allocation = request.GET.get('allocation', 'general')
+        form = DonationPledgeForm(initial={
+            'amount': initial_amount,
+            'currency': initial_currency,
+            'frequency': initial_frequency,
+            'allocation': initial_allocation,
+        })
+    return render(request, 'donate.html', {
+        'form': form,
+        'donation_success': donation_success,
+        'pledge': pledge_instance,
+    })
+
 def contact_us(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -57,6 +88,7 @@ def get_involved(request):
 def annual_reports(request):
     reports = AnnualReport.objects.all()
     return render(request, 'annual_reports.html', {'reports': reports})
+
 
 def gallery(request):
     category = request.GET.get('category', '')

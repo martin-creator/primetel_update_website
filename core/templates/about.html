@@ -2,8 +2,8 @@
 {% load static %}
 {% load site_images %}
 
-{% block title %}About Us | Primetel Health{% endblock %}
-{% block meta_description %}Discover Primetel's journey, mission, and innovative approach to healthcare in Tanzania{% endblock %}
+{% block title %}About Primetel Health | Our Story, Mission & Clinical Team{% endblock %}
+{% block meta_description %}Learn about Primetel Health's journey from grassroots rural healthcare outreach in Monduli to a licensed medical clinic delivering primary care, mental health support, and telehealth across Tanzania.{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -12,12 +12,12 @@
         display: none;
         position: fixed;
         inset: 0;
-        background: rgba(15, 23, 42, 0.7);
+        background: rgba(7, 26, 41, 0.75);
         backdrop-filter: blur(4px);
         z-index: 1000;
         justify-content: center;
         align-items: center;
-        padding: 1rem;
+        padding: 1.5rem;
     }
     .team-modal-overlay.active {
         display: flex;
@@ -25,48 +25,37 @@
     .team-modal-box {
         background: white;
         width: 100%;
-        max-width: 800px;
+        max-width: 780px;
         max-height: 90vh;
         border-radius: 1rem;
         overflow: hidden;
         position: relative;
-        animation: modalIn 0.3s ease-out;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        animation: modalIn 0.25s ease-out;
     }
     .team-modal-box .modal-body {
         overflow-y: auto;
         max-height: 90vh;
     }
     @keyframes modalIn {
-        from { opacity: 0; transform: translateY(16px); }
+        from { opacity: 0; transform: translateY(12px); }
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Timeline stepper */
-    .timeline-stepper::before {
+    /* Timeline Stepper */
+    .timeline-rule::before {
         content: '';
         position: absolute;
         left: 1.25rem;
         top: 0;
         bottom: 0;
         width: 2px;
-        background: linear-gradient(to bottom, #dbeafe, #0056B3);
+        background-color: #ECE4D6;
     }
     @media (min-width: 768px) {
-        .timeline-stepper::before {
+        .timeline-rule::before {
             left: 50%;
             transform: translateX(-50%);
-        }
-    }
-
-    /* Counter section */
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-    @media (min-width: 768px) {
-        .stats-grid {
-            grid-template-columns: repeat(4, 1fr);
         }
     }
 </style>
@@ -83,55 +72,45 @@
 {% site_image_url 'about_team_rumas' 'images/rumas_bio.jpg' as about_team_rumas_url %}
 {% site_image_url 'about_team_einoth' 'images/einoth_bio.jpg' as about_team_einoth_url %}
 
-<!-- Hero Section -->
-<section class="relative bg-dark overflow-hidden">
-    <div class="absolute inset-0">
-        {% if site_settings.about_hero_image %}
-        <img src="{{ site_settings.about_hero_image.url }}" alt="Primetel Healthcare" class="w-full h-full object-cover opacity-20">
-        {% else %}
-        <img src="{% static 'images/primetel_about_header_men.jpg' %}" alt="Primetel Healthcare" class="w-full h-full object-cover opacity-20">
-        {% endif %}
-    </div>
-    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
-        <div class="flex flex-col lg:flex-row gap-12 items-center">
-            <div class="lg:w-1/3 fade-up">
-                <span class="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 text-brand-400 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
-                    <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse"></span>
-                    {{ site_settings.stat_people_reached }}+ Lives Touched
-                </span>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
-                    About <span class="gradient-text">Primetel Health</span>
+<!-- Editorial Hero Section -->
+<section class="bg-sand-50 border-b border-sand-200 pt-16 pb-20 lg:pt-24 lg:pb-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div class="lg:col-span-7 fade-up">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sand-200/80 text-navy-950 text-xs font-semibold tracking-wide uppercase mb-6">
+                    <span class="w-2 h-2 rounded-full bg-terracotta-600"></span>
+                    <span>The Primetel Foundation</span>
+                </div>
+                <h1 class="editorial-title text-4xl sm:text-5xl lg:text-6xl text-navy-950 font-normal leading-[1.1] mb-6">
+                    Rooted in the community. <span class="italic font-normal text-terracotta-600">Built for the last mile</span>.
                 </h1>
-                <p class="text-lg text-white/70 leading-relaxed mb-8 max-w-lg">
-                    Our journey to bridge the gap between communities and quality healthcare through innovation and compassion.
+                <p class="text-lg sm:text-xl text-ink-muted leading-relaxed font-sans font-normal mb-8 max-w-2xl">
+                    Primetel Health began with a simple moral truth: geographic distance should never dictate whether a person lives or dies. From rural pastoralist bomas in Monduli to a licensed outpatient clinic and national USSD platform, our journey is guided by compassion, clinical excellence, and humility.
                 </p>
-                <div class="flex flex-wrap gap-4">
-                    <a href="#our-story" class="inline-flex items-center gap-2 px-6 py-3 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-lg transition-colors">
-                        <i class="fas fa-book-open"></i> Our Story
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="#our-story" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-navy-900 hover:bg-navy-800 text-white text-xs font-bold uppercase tracking-wider transition-all">
+                        <span>Our Founding Story</span>
+                        <i class="fas fa-arrow-down text-[10px]"></i>
                     </a>
-                    <a href="#timeline" class="inline-flex items-center gap-2 px-6 py-3 border border-white/20 hover:border-white/40 text-white text-sm font-semibold rounded-lg transition-colors">
-                        <i class="fas fa-history"></i> Our Timeline
+                    <a href="#team-section" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-sand-300 hover:bg-sand-100 text-navy-950 text-xs font-bold uppercase tracking-wider transition-all">
+                        <span>Clinical Leadership</span>
+                        <i class="fas fa-users text-xs"></i>
                     </a>
                 </div>
             </div>
-            <div class="lg:w-2/3 fade-up hidden lg:block">
-                <div class="relative">
-                    <div class="rounded-2xl overflow-hidden shadow-2xl">
+
+            <div class="lg:col-span-5 fade-up">
+                <div class="bg-white p-3 rounded-2xl border border-sand-300 shadow-md">
+                    <div class="aspect-[4/3] rounded-xl overflow-hidden bg-sand-200">
                         {% if site_settings.about_hero_image %}
-                        <img src="{{ site_settings.about_hero_image.url }}"
-                             alt="Primetel Healthcare Team"
-                             class="w-full h-[600px] object-cover">
+                        <img src="{{ site_settings.about_hero_image.url }}" alt="Primetel Community Work" class="w-full h-full object-cover">
                         {% else %}
-                        <img src="{% static 'images/primetel_about_header_men.jpg' %}"
-                             alt="Primetel Healthcare Team"
-                             class="w-full h-[600px] object-cover">
+                        <img src="{% static 'images/primetel_about_header_men.jpg' %}" alt="Primetel Community Work" class="w-full h-full object-cover">
                         {% endif %}
                     </div>
-                    <div class="absolute -bottom-4 -left-4 bg-white text-dark px-5 py-3 rounded-xl shadow-lg">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-brand-500 animate-pulse"></span>
-                            <span class="font-bold text-sm">45,000+ Lives Touched</span>
-                        </div>
+                    <div class="mt-3 px-1 caption-line">
+                        <p class="text-xs text-navy-950 font-semibold">Monduli District, Arusha, Tanzania</p>
+                        <p class="text-[11px] text-ink-muted">Where our clinicians and outreach teams work alongside local leaders and families every day.</p>
                     </div>
                 </div>
             </div>
@@ -139,149 +118,169 @@
     </div>
 </section>
 
-<!-- Our Story Section -->
-<section id="our-story" class="py-20 lg:py-28 bg-white">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16 fade-up">
-            <span class="inline-block bg-brand-50 text-brand-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">Our Roots</span>
-            <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">
-                The <span class="gradient-text">Primetel Story</span>
-            </h2>
-            <p class="text-lg text-muted max-w-2xl mx-auto">
-                From humble beginnings to a movement transforming Tanzanian healthcare
-            </p>
-        </div>
+<!-- The Primetel Story (Long-Form Editorial) -->
+<section id="our-story" class="py-20 lg:py-28 bg-white border-b border-sand-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-            <div class="fade-up">
-                <div class="space-y-5">
-                    <p class="text-base text-slate-600 leading-relaxed">
-                        Founded in the heart of Tanzania, Primetel was born from a simple but powerful realization: healthcare shouldn't be a privilege reserved for those who can access it, but a fundamental right for all.
+            <!-- Narrative Text (7 cols) -->
+            <div class="lg:col-span-7 space-y-6 fade-up">
+                <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 block">Our Roots</span>
+                <h2 class="editorial-title text-3xl sm:text-4xl text-navy-950 font-normal leading-tight">
+                    How an idea in Monduli became a movement for healthcare equity.
+                </h2>
+                <div class="space-y-5 text-ink-light text-base leading-relaxed font-sans">
+                    <p>
+                        Primetel was founded in Monduli, Arusha, by Emmanuel Christopher Samwel, an African Leadership Academy alumnus and health advocate who witnessed the systemic failures facing rural Tanzanians. In remote bomas and villages, routine infections became life-threatening simply because the nearest health center was hours away over impassable roads.
                     </p>
-                    <p class="text-base text-slate-600 leading-relaxed">
-                        Our journey began with a small team of healthcare professionals and community advocates who saw firsthand how traditional systems were failing the most vulnerable. From rural villages to urban neighborhoods, we witnessed the gaps in access, the cultural barriers, and the urgent need for solutions that truly meet people where they are.
+                    <p>
+                        At the same time, mental healthcare was virtually absent from public conversations. Stigma kept individuals suffering in silence, and community health workers lacked the diagnostic tools and clinical backing to provide meaningful, long-term support.
                     </p>
-                    <p class="text-base text-slate-600 leading-relaxed">
-                        What started as grassroots mental health outreach has grown into a comprehensive healthcare initiative serving thousands across Tanzania through clinics, mobile units, schools, and digital platforms.
+                    <p>
+                        What began as grassroots mental health and health literacy camps quickly evolved. Emmanuel brought together committed Tanzanian clinicians — led by Dr. Epiphania Simon Moshi and Dr. Gy Elly Martin — and counselling psychologist Albano Sabino to build a permanent continuum of care.
+                    </p>
+                    <p>
+                        Today, Primetel is officially licensed as a medical clinic by the Ministry of Health. We combine brick-and-mortar primary care in Monduli with mobile field units, secondary school youth workshops, and a low-tech USSD telemedicine system that operates on simple feature phones without internet access.
                     </p>
                 </div>
+
+                <div class="pt-4 border-t border-sand-200">
+                    <blockquote class="editorial-title text-xl text-navy-950 italic">
+                        "We didn't set out to build an abstract technology startup. We set out to treat patients who were being left behind by traditional infrastructure."
+                    </blockquote>
+                    <p class="text-xs font-bold text-ink-muted mt-2 uppercase tracking-wider font-sans">— Emmanuel C. Samwel, Founder & CEO</p>
+                </div>
             </div>
-            <div class="fade-up">
-                <div class="relative">
-                    <img src="{{ about_story_image_url }}"
-                         alt="Primetel Story"
-                         class="w-full rounded-2xl shadow-lg">
-                    <div class="absolute -bottom-4 -right-4 bg-brand-600 text-white px-5 py-3 rounded-xl shadow-lg">
-                        <div class="text-2xl font-bold">2020</div>
-                        <div class="text-sm text-brand-100">Founded in Monduli</div>
+
+            <!-- Supporting Imagery (5 cols) -->
+            <div class="lg:col-span-5 space-y-6 fade-up">
+                <div class="bg-sand-50 p-3 rounded-2xl border border-sand-300">
+                    <div class="aspect-[4/3] rounded-xl overflow-hidden bg-sand-200">
+                        <img src="{{ about_story_image_url }}" alt="Primetel field outreach" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 bg-white rounded-xl mt-3 border border-sand-200">
+                        <span class="text-xs font-bold font-mono text-terracotta-600">ESTABLISHED 2020</span>
+                        <h4 class="text-sm font-bold text-navy-950 mt-1">From Field Camps to Licensed Clinic</h4>
+                        <p class="text-xs text-ink-muted mt-1 leading-relaxed">Headquartered in Monduli, serving pastoralist and agrarian communities across the Arusha region.</p>
                     </div>
                 </div>
+
+                <div class="p-6 rounded-2xl bg-navy-950 text-white space-y-3">
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-sand-300">Core Accreditation</span>
+                    <h4 class="editorial-title text-xl text-white">Licensed Healthcare Clinic</h4>
+                    <p class="text-xs text-white/70 leading-relaxed font-sans">
+                        Operating under the standards and oversight of the Ministry of Health, United Republic of Tanzania. All clinical consultations and treatments are conducted by registered medical practitioners.
+                    </p>
+                </div>
             </div>
+
         </div>
     </div>
 </section>
 
-<!-- Mission & Vision Section -->
-<section class="py-20 lg:py-28 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="grid md:grid-cols-2 gap-8">
-            <div class="bg-white p-8 lg:p-10 rounded-2xl border border-slate-200 fade-up">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 text-xl">
-                        <i class="fas fa-bullseye"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold text-dark">Our Mission</h2>
+<!-- Mission & Vision -->
+<section class="py-16 sm:py-24 bg-sand-50 border-b border-sand-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+
+            <!-- Mission -->
+            <div class="bg-white p-8 sm:p-10 rounded-2xl border border-sand-300 fade-up">
+                <div class="w-10 h-10 rounded-xl bg-sand-100 text-terracotta-600 flex items-center justify-center text-lg mb-6">
+                    <i class="fas fa-bullseye"></i>
                 </div>
-                <p class="text-base text-slate-600 leading-relaxed">
-                    To make quality, affordable, and culturally sensitive healthcare accessible to every Tanzanian — no matter where they live, who they are, or what they face. We bridge the gap between communities and the care they deserve through innovation, compassion, and relentless commitment.
+                <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-2 block font-sans">Our Mission</span>
+                <h3 class="editorial-title text-2xl sm:text-3xl text-navy-950 font-normal mb-4">
+                    Universal access without geographic penalty.
+                </h3>
+                <p class="text-sm sm:text-base text-ink-light leading-relaxed font-sans">
+                    To make quality, affordable, and culturally respectful healthcare accessible to every Tanzanian — regardless of geographic isolation, socioeconomic standing, or technological barrier. We bridge the last mile through integrated clinical practice, mobile outreach, and low-barrier digital tools.
                 </p>
             </div>
 
-            <div class="bg-white p-8 lg:p-10 rounded-2xl border border-slate-200 fade-up">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 text-xl">
-                        <i class="fas fa-eye"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold text-dark">Our Vision</h2>
+            <!-- Vision -->
+            <div class="bg-white p-8 sm:p-10 rounded-2xl border border-sand-300 fade-up">
+                <div class="w-10 h-10 rounded-xl bg-sand-100 text-navy-800 flex items-center justify-center text-lg mb-6">
+                    <i class="fas fa-eye"></i>
                 </div>
-                <p class="text-base text-slate-600 leading-relaxed">
-                    A Tanzania where healthcare barriers are eliminated, where every individual can access care that is timely, respectful, and rooted in their reality. From remote bomas to bustling cities, from mobile phones to clinics, we envision a future where health equity is not an aspiration but a lived experience.
+                <span class="text-xs font-bold uppercase tracking-wider text-navy-700 mb-2 block font-sans">Our Vision</span>
+                <h3 class="editorial-title text-2xl sm:text-3xl text-navy-950 font-normal mb-4">
+                    A nation where health equity is lived reality.
+                </h3>
+                <p class="text-sm sm:text-base text-ink-light leading-relaxed font-sans">
+                    A Tanzania where healthcare barriers are eliminated, where mental wellness is integrated seamlessly into primary care, and where no mother, child, or student suffers in silence due to lack of diagnostic screening or clinician support.
                 </p>
             </div>
+
         </div>
     </div>
 </section>
 
-<!-- Timeline Section -->
-<section id="timeline" class="py-20 lg:py-28 bg-white">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+<!-- Milestone Timeline -->
+<section id="timeline" class="py-20 lg:py-28 bg-white border-b border-sand-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16 fade-up">
-            <span class="inline-block bg-brand-50 text-brand-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">Our Journey</span>
-            <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">
-                Milestone <span class="gradient-text">Timeline</span>
-            </h2>
-            <p class="text-lg text-muted max-w-2xl mx-auto">
-                Key moments in our evolution as a healthcare innovator
-            </p>
+            <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-2 block font-sans">The Trajectory</span>
+            <h2 class="editorial-title text-3xl sm:text-4xl text-navy-950 font-normal">Milestones in Our Journey</h2>
+            <p class="text-sm text-ink-muted mt-2">How Primetel grew from grassroots camps to an institutional healthcare provider.</p>
         </div>
 
-        <div class="relative timeline-stepper max-w-3xl mx-auto">
+        <div class="relative timeline-rule space-y-12">
             <!-- 2020 -->
-            <div class="relative pl-12 md:pl-0 mb-12 fade-up md:flex md:items-start">
+            <div class="relative pl-12 md:pl-0 md:flex md:items-start fade-up">
                 <div class="md:w-1/2 md:pr-12 md:text-right">
-                    <span class="inline-block bg-brand-50 text-brand-700 px-3 py-1 rounded-full text-sm font-bold mb-2">2020</span>
-                    <h3 class="text-lg font-bold text-dark mb-2">Foundation</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">
-                        The idea for Primetel was born when founder Emmanuel Samwel recognized the urgent need to bridge healthcare gaps in underserved communities.
+                    <span class="inline-block px-2.5 py-0.5 rounded bg-sand-200 text-navy-950 text-xs font-bold font-mono mb-2">2020</span>
+                    <h3 class="editorial-title text-xl text-navy-950 font-bold mb-1.5">Foundation & Grassroots Health Camps</h3>
+                    <p class="text-xs sm:text-sm text-ink-light leading-relaxed">
+                        Emmanuel Samwel establishes Primetel in Monduli, identifying critical gaps in maternal healthcare and mental wellness across rural Arusha communities.
                     </p>
                 </div>
-                <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-1 w-10 h-10 rounded-full bg-brand-500 border-4 border-white shadow-md flex items-center justify-center">
-                    <i class="fas fa-seedling text-white text-xs"></i>
+                <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-1 w-8 h-8 rounded-full bg-navy-900 border-4 border-white shadow flex items-center justify-center text-white text-xs">
+                    <i class="fas fa-seedling"></i>
                 </div>
                 <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
             </div>
 
-            <!-- 2023 -->
-            <div class="relative pl-12 md:pl-0 mb-12 fade-up md:flex md:items-start">
+            <!-- 2022 -->
+            <div class="relative pl-12 md:pl-0 md:flex md:items-start fade-up">
                 <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
-                <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-1 w-10 h-10 rounded-full bg-brand-500 border-4 border-white shadow-md flex items-center justify-center">
-                    <i class="fas fa-file-signature text-white text-xs"></i>
+                <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-1 w-8 h-8 rounded-full bg-navy-900 border-4 border-white shadow flex items-center justify-center text-white text-xs">
+                    <i class="fas fa-mobile-screen"></i>
                 </div>
                 <div class="md:w-1/2 md:pl-12">
-                    <span class="inline-block bg-brand-50 text-brand-700 px-3 py-1 rounded-full text-sm font-bold mb-2">2023</span>
-                    <h3 class="text-lg font-bold text-dark mb-2">Official Registration</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">
-                        Primetel was officially registered as a health enterprise and piloted the first version of its USSD application, pioneering a digital-first approach to healthcare delivery in Tanzania.
+                    <span class="inline-block px-2.5 py-0.5 rounded bg-sand-200 text-navy-950 text-xs font-bold font-mono mb-2">2022</span>
+                    <h3 class="editorial-title text-xl text-navy-950 font-bold mb-1.5">USSD Telemedicine Launch</h3>
+                    <p class="text-xs sm:text-sm text-ink-light leading-relaxed">
+                        Primetel launches <code class="font-mono bg-sand-100 px-1 py-0.5 rounded text-navy-900">*149*46#</code>, enabling any phone in Tanzania to connect patients with clinical triage and medical follow-up without internet access.
                     </p>
                 </div>
             </div>
 
             <!-- 2024 -->
-            <div class="relative pl-12 md:pl-0 mb-12 fade-up md:flex md:items-start">
+            <div class="relative pl-12 md:pl-0 md:flex md:items-start fade-up">
                 <div class="md:w-1/2 md:pr-12 md:text-right">
-                    <span class="inline-block bg-brand-50 text-brand-700 px-3 py-1 rounded-full text-sm font-bold mb-2">2024</span>
-                    <h3 class="text-lg font-bold text-dark mb-2">Structured Intervention</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">
-                        Primetel launched its first structured outreach programs, reaching thousands with primary care and mental health sensitization campaigns. In the same year, the organization recruited and trained a team of Community Health Workers (CHWs) to extend its reach into villages and households. Clearance from the regional health office further strengthened institutional credibility.
+                    <span class="inline-block px-2.5 py-0.5 rounded bg-sand-200 text-navy-950 text-xs font-bold font-mono mb-2">2024</span>
+                    <h3 class="editorial-title text-xl text-navy-950 font-bold mb-1.5">Licensed Medical Clinic Status</h3>
+                    <p class="text-xs sm:text-sm text-ink-light leading-relaxed">
+                        Primetel receives formal clinical licensing from the Ministry of Health, establishing a permanent outpatient medical facility in Monduli.
                     </p>
                 </div>
-                <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-1 w-10 h-10 rounded-full bg-brand-500 border-4 border-white shadow-md flex items-center justify-center">
-                    <i class="fas fa-hands-helping text-white text-xs"></i>
+                <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-1 w-8 h-8 rounded-full bg-terracotta-600 border-4 border-white shadow flex items-center justify-center text-white text-xs">
+                    <i class="fas fa-stethoscope"></i>
                 </div>
                 <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
             </div>
 
-            <!-- 2025 -->
-            <div class="relative pl-12 md:pl-0 fade-up md:flex md:items-start">
+            <!-- 2025-2026 -->
+            <div class="relative pl-12 md:pl-0 md:flex md:items-start fade-up">
                 <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
-                <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-1 w-10 h-10 rounded-full bg-brand-600 border-4 border-brand-100 shadow-md flex items-center justify-center">
-                    <i class="fas fa-award text-white text-xs"></i>
+                <div class="absolute left-0 md:left-1/2 md:-translate-x-1/2 top-1 w-8 h-8 rounded-full bg-emerald-600 border-4 border-white shadow flex items-center justify-center text-white text-xs">
+                    <i class="fas fa-hospital"></i>
                 </div>
                 <div class="md:w-1/2 md:pl-12">
-                    <span class="inline-block bg-brand-100 text-brand-800 px-3 py-1 rounded-full text-sm font-bold mb-2">2025</span>
-                    <h3 class="text-lg font-bold text-dark mb-2">Medical Clinic License</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">
-                        Primetel achieved a major milestone with the issuance of its official medical clinic license, cementing its role as a fully integrated provider of primary care, mental health services, and telehealth access nationwide.
+                    <span class="inline-block px-2.5 py-0.5 rounded bg-sand-200 text-navy-950 text-xs font-bold font-mono mb-2">2025–2026</span>
+                    <h3 class="editorial-title text-xl text-navy-950 font-bold mb-1.5">Expansion: 45,000+ Reached</h3>
+                    <p class="text-xs sm:text-sm text-ink-light leading-relaxed">
+                        Mobile clinics scale across Arusha region; school mental health reaches 15,000+ students; strategic engagements with Ministry of Health leadership expand national advocacy.
                     </p>
                 </div>
             </div>
@@ -289,136 +288,145 @@
     </div>
 </section>
 
-<!-- Team Section -->
-<section class="py-20 lg:py-28 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16 fade-up">
-            <span class="inline-block bg-brand-50 text-brand-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">Our People</span>
-            <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">
-                Meet the <span class="gradient-text">Leadership Team</span>
+<!-- Clinical & Leadership Team -->
+<section id="team-section" class="py-20 lg:py-28 bg-sand-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mb-14 fade-up">
+            <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-2 block font-sans">The Team</span>
+            <h2 class="editorial-title text-3xl sm:text-4xl text-navy-950 font-normal">
+                Clinical & Community Leadership.
             </h2>
-            <p class="text-lg text-muted max-w-2xl mx-auto">
-                The passionate professionals driving our healthcare revolution
+            <p class="text-sm sm:text-base text-ink-muted mt-2 font-sans">
+                Our staff brings together medical doctors trained at premier Tanzanian teaching hospitals, certified psychologists, and experienced community coordinators. Click any card to read their complete biography.
             </p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <!-- Team Member 1 -->
-            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="1">
-                <div class="aspect-[4/5] overflow-hidden">
-                    <img src="{{ about_team_emmanuel_url }}"
-                         alt="Emmanuel Christopher Samwel"
-                         class="w-full h-full object-cover">
+
+            <!-- Member 1: Emmanuel -->
+            <div class="bg-white rounded-xl border border-sand-300 p-4 cursor-pointer hover:shadow-md hover:border-terracotta-500 transition-all team-card fade-up" data-member="1">
+                <div class="aspect-[4/5] rounded-lg overflow-hidden bg-sand-200 mb-4">
+                    <img src="{{ about_team_emmanuel_url }}" alt="Emmanuel Christopher Samwel" class="w-full h-full object-cover">
                 </div>
-                <div class="p-5">
-                    <h3 class="text-base font-bold text-dark mb-1">Emmanuel Christopher Samwel</h3>
-                    <p class="text-sm text-brand-600 font-medium">Founder & CEO</p>
-                </div>
+                <h3 class="text-base font-bold text-navy-950">Emmanuel C. Samwel</h3>
+                <p class="text-xs font-semibold text-terracotta-600">Founder & CEO</p>
+                <p class="text-[11px] text-ink-muted mt-2 leading-relaxed">Health advocate, digital innovator, African Leadership Academy alumnus.</p>
+                <span class="inline-flex items-center gap-1 text-[11px] font-bold text-navy-900 mt-3 pt-3 border-t border-sand-200">
+                    <span>Read Full Bio</span>
+                    <i class="fas fa-arrow-right text-[9px]"></i>
+                </span>
             </div>
 
-            <!-- Team Member 2 -->
-            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="2">
-                <div class="aspect-[4/5] overflow-hidden">
-                    <img src="{{ about_team_moshi_url }}"
-                         alt="Dr Epiphania Simon Moshi"
-                         class="w-full h-full object-cover">
+            <!-- Member 2: Dr. Moshi -->
+            <div class="bg-white rounded-xl border border-sand-300 p-4 cursor-pointer hover:shadow-md hover:border-terracotta-500 transition-all team-card fade-up" data-member="2">
+                <div class="aspect-[4/5] rounded-lg overflow-hidden bg-sand-200 mb-4">
+                    <img src="{{ about_team_moshi_url }}" alt="Dr Epiphania Simon Moshi" class="w-full h-full object-cover">
                 </div>
-                <div class="p-5">
-                    <h3 class="text-base font-bold text-dark mb-1">Dr Epiphania Simon Moshi</h3>
-                    <p class="text-sm text-brand-600 font-medium">Medical in Charge</p>
-                </div>
+                <h3 class="text-base font-bold text-navy-950">Dr. Epiphania S. Moshi</h3>
+                <p class="text-xs font-semibold text-terracotta-600">Medical in Charge (MD)</p>
+                <p class="text-[11px] text-ink-muted mt-2 leading-relaxed">Doctor of Medicine (KCMUCo, 2020), clinical director at Monduli clinic.</p>
+                <span class="inline-flex items-center gap-1 text-[11px] font-bold text-navy-900 mt-3 pt-3 border-t border-sand-200">
+                    <span>Read Full Bio</span>
+                    <i class="fas fa-arrow-right text-[9px]"></i>
+                </span>
             </div>
 
-            <!-- Team Member 3 -->
-            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="3">
-                <div class="aspect-[4/5] overflow-hidden">
-                    <img src="{{ about_team_elly_url }}"
-                         alt="Dr.Gy Elly Martin"
-                         class="w-full h-full object-cover">
+            <!-- Member 3: Dr. Gy Elly -->
+            <div class="bg-white rounded-xl border border-sand-300 p-4 cursor-pointer hover:shadow-md hover:border-terracotta-500 transition-all team-card fade-up" data-member="3">
+                <div class="aspect-[4/5] rounded-lg overflow-hidden bg-sand-200 mb-4">
+                    <img src="{{ about_team_elly_url }}" alt="Dr. Gy Elly Martin" class="w-full h-full object-cover">
                 </div>
-                <div class="p-5">
-                    <h3 class="text-base font-bold text-dark mb-1">Dr.Gy Elly Martin</h3>
-                    <p class="text-sm text-brand-600 font-medium">Medical Doctor</p>
-                </div>
+                <h3 class="text-base font-bold text-navy-950">Dr. Gy Elly Martin</h3>
+                <p class="text-xs font-semibold text-terracotta-600">Medical Doctor</p>
+                <p class="text-[11px] text-ink-muted mt-2 leading-relaxed">Machame Health graduate, 5+ years primary & specialized care.</p>
+                <span class="inline-flex items-center gap-1 text-[11px] font-bold text-navy-900 mt-3 pt-3 border-t border-sand-200">
+                    <span>Read Full Bio</span>
+                    <i class="fas fa-arrow-right text-[9px]"></i>
+                </span>
             </div>
 
-            <!-- Team Member 4 -->
-            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="4">
-                <div class="aspect-[4/5] overflow-hidden">
-                    <img src="{{ about_team_kenneth_url }}"
-                         alt="Dr. Keneth H. Masao"
-                         class="w-full h-full object-cover">
+            <!-- Member 4: Dr. Kenneth -->
+            <div class="bg-white rounded-xl border border-sand-300 p-4 cursor-pointer hover:shadow-md hover:border-terracotta-500 transition-all team-card fade-up" data-member="4">
+                <div class="aspect-[4/5] rounded-lg overflow-hidden bg-sand-200 mb-4">
+                    <img src="{{ about_team_kenneth_url }}" alt="Dr. Keneth H. Masao" class="w-full h-full object-cover">
                 </div>
-                <div class="p-5">
-                    <h3 class="text-base font-bold text-dark mb-1">Dr. Keneth H. Masao</h3>
-                    <p class="text-sm text-brand-600 font-medium">Medical Doctor</p>
-                </div>
+                <h3 class="text-base font-bold text-navy-950">Dr. Keneth H. Masao</h3>
+                <p class="text-xs font-semibold text-terracotta-600">Medical Clinician</p>
+                <p class="text-[11px] text-ink-muted mt-2 leading-relaxed">5+ years clinical nursing & community health education.</p>
+                <span class="inline-flex items-center gap-1 text-[11px] font-bold text-navy-900 mt-3 pt-3 border-t border-sand-200">
+                    <span>Read Full Bio</span>
+                    <i class="fas fa-arrow-right text-[9px]"></i>
+                </span>
             </div>
 
-            <!-- Team Member 5 -->
-            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="5">
-                <div class="aspect-[4/5] overflow-hidden">
-                    <img src="{{ about_team_albano_url }}"
-                         alt="Albano Sabino"
-                         class="w-full h-full object-cover">
+            <!-- Member 5: Albano -->
+            <div class="bg-white rounded-xl border border-sand-300 p-4 cursor-pointer hover:shadow-md hover:border-terracotta-500 transition-all team-card fade-up" data-member="5">
+                <div class="aspect-[4/5] rounded-lg overflow-hidden bg-sand-200 mb-4">
+                    <img src="{{ about_team_albano_url }}" alt="Albano Sabino" class="w-full h-full object-cover">
                 </div>
-                <div class="p-5">
-                    <h3 class="text-base font-bold text-dark mb-1">Albano Sabino</h3>
-                    <p class="text-sm text-brand-600 font-medium">Counselling Psychologist</p>
-                </div>
+                <h3 class="text-base font-bold text-navy-950">Albano Sabino</h3>
+                <p class="text-xs font-semibold text-terracotta-600">Counselling Psychologist</p>
+                <p class="text-[11px] text-ink-muted mt-2 leading-relaxed">Mental health lead, youth workshop facilitator across Arusha.</p>
+                <span class="inline-flex items-center gap-1 text-[11px] font-bold text-navy-900 mt-3 pt-3 border-t border-sand-200">
+                    <span>Read Full Bio</span>
+                    <i class="fas fa-arrow-right text-[9px]"></i>
+                </span>
             </div>
 
-            <!-- Team Member 6 -->
-            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="6">
-                <div class="aspect-[4/5] overflow-hidden">
-                    <img src="{{ about_team_rumas_url }}"
-                         alt="Rumas"
-                         class="w-full h-full object-cover">
+            <!-- Member 6: Rumas -->
+            <div class="bg-white rounded-xl border border-sand-300 p-4 cursor-pointer hover:shadow-md hover:border-terracotta-500 transition-all team-card fade-up" data-member="6">
+                <div class="aspect-[4/5] rounded-lg overflow-hidden bg-sand-200 mb-4">
+                    <img src="{{ about_team_rumas_url }}" alt="Rumas" class="w-full h-full object-cover">
                 </div>
-                <div class="p-5">
-                    <h3 class="text-base font-bold text-dark mb-1">Rumas</h3>
-                    <p class="text-sm text-brand-600 font-medium">Outreach Coordinator</p>
-                </div>
+                <h3 class="text-base font-bold text-navy-950">Rumas</h3>
+                <p class="text-xs font-semibold text-terracotta-600">Outreach Coordinator</p>
+                <p class="text-[11px] text-ink-muted mt-2 leading-relaxed">15+ years community health worker, grassroots campaign leader.</p>
+                <span class="inline-flex items-center gap-1 text-[11px] font-bold text-navy-900 mt-3 pt-3 border-t border-sand-200">
+                    <span>Read Full Bio</span>
+                    <i class="fas fa-arrow-right text-[9px]"></i>
+                </span>
             </div>
 
-            <!-- Team Member 7 -->
-            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up team-card" data-member="7">
-                <div class="aspect-[4/5] overflow-hidden">
-                    <img src="{{ about_team_einoth_url }}"
-                         alt="Einoth Saitoti"
-                         class="w-full h-full object-cover">
+            <!-- Member 7: Einoth -->
+            <div class="bg-white rounded-xl border border-sand-300 p-4 cursor-pointer hover:shadow-md hover:border-terracotta-500 transition-all team-card fade-up" data-member="7">
+                <div class="aspect-[4/5] rounded-lg overflow-hidden bg-sand-200 mb-4">
+                    <img src="{{ about_team_einoth_url }}" alt="Einoth Saitoti" class="w-full h-full object-cover">
                 </div>
-                <div class="p-5">
-                    <h3 class="text-base font-bold text-dark mb-1">Einoth Saitoti</h3>
-                    <p class="text-sm text-brand-600 font-medium">Customer Support Lead</p>
-                </div>
+                <h3 class="text-base font-bold text-navy-950">Einoth Saitoti</h3>
+                <p class="text-xs font-semibold text-terracotta-600">Customer Support Lead</p>
+                <p class="text-[11px] text-ink-muted mt-2 leading-relaxed">Direct coordinator for USSD *149*46# client inquiries.</p>
+                <span class="inline-flex items-center gap-1 text-[11px] font-bold text-navy-900 mt-3 pt-3 border-t border-sand-200">
+                    <span>Read Full Bio</span>
+                    <i class="fas fa-arrow-right text-[9px]"></i>
+                </span>
             </div>
+
         </div>
     </div>
 </section>
 
-<!-- Team Modals -->
+<!-- Modals for Full Biographies -->
 <div id="team-modal-1" class="team-modal-overlay">
     <div class="team-modal-box">
-        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 z-10 transition-colors">
-            <i class="fas fa-times text-sm"></i>
+        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-sand-100 hover:bg-sand-200 rounded-full flex items-center justify-center text-ink z-10 transition-colors">
+            <i class="fas fa-times text-xs"></i>
         </button>
-        <div class="modal-body">
-            <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="h-64 lg:h-auto">
-                    <img src="{{ about_team_emmanuel_url }}"
-                         alt="Emmanuel Christopher Samwel"
-                         class="w-full h-full object-cover">
+        <div class="modal-body p-6 sm:p-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                <div class="md:col-span-5 aspect-[4/5] rounded-xl overflow-hidden bg-sand-200">
+                    <img src="{{ about_team_emmanuel_url }}" alt="Emmanuel Christopher Samwel" class="w-full h-full object-cover">
                 </div>
-                <div class="p-6 lg:p-8">
-                    <h3 class="text-xl font-bold text-dark mb-1">Emmanuel Christopher Samwel</h3>
-                    <p class="text-brand-600 font-medium text-sm mb-5">Founder & CEO</p>
-                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
-                        Emmanuel Samwel is a health advocate, digital innovator, and youth development champion dedicated to redefining healthcare access in Tanzania. As the Founder and CEO of Primetel Health, his work blends the art of community health systems, the science of technology delivery, and the discipline of impact entrepreneurship. He has contributed to digital health initiatives with Doctors Without Borders and advised early-stage ventures such as Mkaa Safi and Banana Fibre Seedbag, helping them grow catalytic grant funding and build sustainable models.
-                    </p>
-                    <p class="text-sm text-slate-600 leading-relaxed">
-                        An African Leadership University graduate and African Leadership Academy alumnus, Emmanuel has earned recognition as a Millennium Fellow, an Innovate for Good Winner, and a Regional Finalist in the Hult Prize. Certified in mHealth, HRH systems, and mobile tech for health, he is well positioned to lead scalable, low-tech health innovations in resource-limited settings. Beyond health, Emmanuel is also a certified music producer, intentionally bridging creativity, rhythm, and purpose-driven leadership.
-                    </p>
+                <div class="md:col-span-7 space-y-3">
+                    <h3 class="editorial-title text-2xl font-bold text-navy-950">Emmanuel Christopher Samwel</h3>
+                    <p class="text-xs font-bold uppercase tracking-wider text-terracotta-600">Founder & CEO</p>
+                    <div class="text-xs sm:text-sm text-ink-light leading-relaxed space-y-3 font-sans">
+                        <p>
+                            Emmanuel Samwel is a health advocate, digital innovator, and youth development champion dedicated to redefining healthcare access in Tanzania. As the Founder and CEO of Primetel Health, his work blends community health systems, technological delivery, and impact entrepreneurship. He has contributed to digital health initiatives with Doctors Without Borders and advised early-stage health ventures.
+                        </p>
+                        <p>
+                            An African Leadership University graduate and African Leadership Academy alumnus, Emmanuel has earned recognition as a Millennium Fellow, an Innovate for Good Winner, and a Regional Finalist in the Hult Prize. Certified in mHealth, HRH systems, and mobile tech for health, he leads Primetel's mission to bridge rural healthcare divides.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -427,25 +435,25 @@
 
 <div id="team-modal-2" class="team-modal-overlay">
     <div class="team-modal-box">
-        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 z-10 transition-colors">
-            <i class="fas fa-times text-sm"></i>
+        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-sand-100 hover:bg-sand-200 rounded-full flex items-center justify-center text-ink z-10 transition-colors">
+            <i class="fas fa-times text-xs"></i>
         </button>
-        <div class="modal-body">
-            <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="h-64 lg:h-auto">
-                    <img src="{{ about_team_moshi_url }}"
-                         alt="Dr Epiphania Simon Moshi"
-                         class="w-full h-full object-cover">
+        <div class="modal-body p-6 sm:p-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                <div class="md:col-span-5 aspect-[4/5] rounded-xl overflow-hidden bg-sand-200">
+                    <img src="{{ about_team_moshi_url }}" alt="Dr Epiphania Simon Moshi" class="w-full h-full object-cover">
                 </div>
-                <div class="p-6 lg:p-8">
-                    <h3 class="text-xl font-bold text-dark mb-1">Dr Epiphania Simon Moshi</h3>
-                    <p class="text-brand-600 font-medium text-sm mb-5">Medical in Charge</p>
-                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
-                        Dr. Epiphania Simon Moshi is a dedicated Medical Doctor with comprehensive training and hands-on experience in both hospital and clinical settings. She earned her Doctor of Medicine (MD) degree from Kilimanjaro Christian Medical University College in 2020 and has since built a strong clinical background through service at leading health institutions in Tanzania.
-                    </p>
-                    <p class="text-sm text-slate-600 leading-relaxed">
-                        Dr. Moshi completed her medical internship at Mt. Meru Regional Referral Hospital, where she gained experience managing both inpatient and outpatient cases, conducting thorough clinical assessments, and performing a wide range of medical and surgical procedures. These included obstetric care—ranging from normal deliveries to cesarean sections—as well as procedures such as lumbar punctures, chest tube insertions, ascitic and pleural tapping, herniorrhaphy, and trauma management.
-                    </p>
+                <div class="md:col-span-7 space-y-3">
+                    <h3 class="editorial-title text-2xl font-bold text-navy-950">Dr. Epiphania Simon Moshi</h3>
+                    <p class="text-xs font-bold uppercase tracking-wider text-terracotta-600">Medical in Charge (Doctor of Medicine)</p>
+                    <div class="text-xs sm:text-sm text-ink-light leading-relaxed space-y-3 font-sans">
+                        <p>
+                            Dr. Epiphania Simon Moshi is a dedicated Medical Doctor with comprehensive training and hands-on experience across hospital and clinical settings in Tanzania. She earned her Doctor of Medicine (MD) degree from Kilimanjaro Christian Medical University College (KCMUCo) in 2020.
+                        </p>
+                        <p>
+                            Dr. Moshi completed her medical internship at Mt. Meru Regional Referral Hospital, managing complex inpatient and outpatient cases, conducting clinical assessments, and performing surgical and obstetric care — ranging from deliveries and cesarean sections to trauma stabilization and minor surgery. At Primetel, she leads the clinical staff and ensures all care adheres to national medical guidelines.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -454,25 +462,25 @@
 
 <div id="team-modal-3" class="team-modal-overlay">
     <div class="team-modal-box">
-        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 z-10 transition-colors">
-            <i class="fas fa-times text-sm"></i>
+        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-sand-100 hover:bg-sand-200 rounded-full flex items-center justify-center text-ink z-10 transition-colors">
+            <i class="fas fa-times text-xs"></i>
         </button>
-        <div class="modal-body">
-            <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="h-64 lg:h-auto">
-                    <img src="{{ about_team_elly_url }}"
-                         alt="Dr. Gy Elly Martin"
-                         class="w-full h-full object-cover">
+        <div class="modal-body p-6 sm:p-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                <div class="md:col-span-5 aspect-[4/5] rounded-xl overflow-hidden bg-sand-200">
+                    <img src="{{ about_team_elly_url }}" alt="Dr. Gy Elly Martin" class="w-full h-full object-cover">
                 </div>
-                <div class="p-6 lg:p-8">
-                    <h3 class="text-xl font-bold text-dark mb-1">Dr. Gy Elly Martin</h3>
-                    <p class="text-brand-600 font-medium text-sm mb-5">Medical Doctor</p>
-                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
-                        Gy Elly Martin is an experienced Clinical Officer with over five years of service in primary and specialized healthcare. A graduate of Machame Health Training Institution, he has built a strong clinical foundation that combines both technical expertise and a deep commitment to patient-centered care.
-                    </p>
-                    <p class="text-sm text-slate-600 leading-relaxed">
-                        Throughout his career, Gy Elly has demonstrated proficiency in diagnosing, treating, and managing a wide range of medical conditions across outpatient and inpatient settings. His hands-on experience includes conducting comprehensive patient assessments, administering appropriate treatment plans, and supporting preventive health initiatives within the community. He is also skilled in performing essential clinical procedures, providing emergency care, and ensuring timely referrals for advanced management when needed.
-                    </p>
+                <div class="md:col-span-7 space-y-3">
+                    <h3 class="editorial-title text-2xl font-bold text-navy-950">Dr. Gy Elly Martin</h3>
+                    <p class="text-xs font-bold uppercase tracking-wider text-terracotta-600">Medical Doctor</p>
+                    <div class="text-xs sm:text-sm text-ink-light leading-relaxed space-y-3 font-sans">
+                        <p>
+                            Gy Elly Martin is an experienced Clinical Officer with over five years of dedicated service in primary and specialized healthcare. A graduate of Machame Health Training Institution, he has built a strong clinical foundation combining technical expertise with patient-centered bedside care.
+                        </p>
+                        <p>
+                            He has demonstrated deep proficiency in managing outpatient consultations, conducting diagnostic assessments, delivering emergency intervention, and supporting rural outreach programs in Monduli and Arusha.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -481,25 +489,22 @@
 
 <div id="team-modal-4" class="team-modal-overlay">
     <div class="team-modal-box">
-        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 z-10 transition-colors">
-            <i class="fas fa-times text-sm"></i>
+        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-sand-100 hover:bg-sand-200 rounded-full flex items-center justify-center text-ink z-10 transition-colors">
+            <i class="fas fa-times text-xs"></i>
         </button>
-        <div class="modal-body">
-            <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="h-64 lg:h-auto">
-                    <img src="{{ about_team_kenneth_url }}"
-                         alt="Dr. Keneth H. Masao"
-                         class="w-full h-full object-cover">
+        <div class="modal-body p-6 sm:p-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                <div class="md:col-span-5 aspect-[4/5] rounded-xl overflow-hidden bg-sand-200">
+                    <img src="{{ about_team_kenneth_url }}" alt="Dr. Keneth H. Masao" class="w-full h-full object-cover">
                 </div>
-                <div class="p-6 lg:p-8">
-                    <h3 class="text-xl font-bold text-dark mb-1">Dr. Keneth H. Masao</h3>
-                    <p class="text-brand-600 font-medium text-sm mb-5">Medical Doctor</p>
-                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
-                        Keneth H. Masao is a committed Enrolled Nurse with over five years of frontline healthcare experience, serving patients across both facility and community settings. With formal nursing training and a strong track record of practice, he has honed his expertise in delivering compassionate, high-quality care to diverse patient populations.
-                    </p>
-                    <p class="text-sm text-slate-600 leading-relaxed">
-                        Keneth's professional background spans a wide range of responsibilities, including patient assessment, basic clinical procedures, medication administration, wound care, and support for maternal, child, and adult health services. His experience also extends to health education and counseling, where he has played an important role in sensitizing patients and communities on preventive healthcare, treatment adherence, and healthy lifestyle practices.
-                    </p>
+                <div class="md:col-span-7 space-y-3">
+                    <h3 class="editorial-title text-2xl font-bold text-navy-950">Dr. Keneth H. Masao</h3>
+                    <p class="text-xs font-bold uppercase tracking-wider text-terracotta-600">Medical Clinician</p>
+                    <div class="text-xs sm:text-sm text-ink-light leading-relaxed space-y-3 font-sans">
+                        <p>
+                            Keneth H. Masao is a committed Enrolled Nurse with over five years of frontline healthcare experience across clinic and community settings. He specializes in clinical patient assessment, wound care, medication administration, and maternal health education.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -508,22 +513,22 @@
 
 <div id="team-modal-5" class="team-modal-overlay">
     <div class="team-modal-box">
-        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 z-10 transition-colors">
-            <i class="fas fa-times text-sm"></i>
+        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-sand-100 hover:bg-sand-200 rounded-full flex items-center justify-center text-ink z-10 transition-colors">
+            <i class="fas fa-times text-xs"></i>
         </button>
-        <div class="modal-body">
-            <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="h-64 lg:h-auto">
-                    <img src="{{ about_team_albano_url }}"
-                         alt="Albano Sabino"
-                         class="w-full h-full object-cover">
+        <div class="modal-body p-6 sm:p-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                <div class="md:col-span-5 aspect-[4/5] rounded-xl overflow-hidden bg-sand-200">
+                    <img src="{{ about_team_albano_url }}" alt="Albano Sabino" class="w-full h-full object-cover">
                 </div>
-                <div class="p-6 lg:p-8">
-                    <h3 class="text-xl font-bold text-dark mb-1">Albano Sabino</h3>
-                    <p class="text-brand-600 font-medium text-sm mb-5">Counselling Psychologist</p>
-                    <p class="text-sm text-slate-600 leading-relaxed">
-                        Albano Sabino is a dedicated Counselling Psychologist at Primetel, committed to providing mental health support and guidance to communities in need. He plays a key role in delivering counselling services, facilitating mental health awareness sessions, and supporting community outreach programs.
-                    </p>
+                <div class="md:col-span-7 space-y-3">
+                    <h3 class="editorial-title text-2xl font-bold text-navy-950">Albano Sabino</h3>
+                    <p class="text-xs font-bold uppercase tracking-wider text-terracotta-600">Counselling Psychologist</p>
+                    <div class="text-xs sm:text-sm text-ink-light leading-relaxed space-y-3 font-sans">
+                        <p>
+                            Albano Sabino is a dedicated Counselling Psychologist at Primetel, committed to providing mental health support, crisis counseling, and youth resilience training in schools and workplace settings across Tanzania.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -532,25 +537,22 @@
 
 <div id="team-modal-6" class="team-modal-overlay">
     <div class="team-modal-box">
-        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 z-10 transition-colors">
-            <i class="fas fa-times text-sm"></i>
+        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-sand-100 hover:bg-sand-200 rounded-full flex items-center justify-center text-ink z-10 transition-colors">
+            <i class="fas fa-times text-xs"></i>
         </button>
-        <div class="modal-body">
-            <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="h-64 lg:h-auto">
-                    <img src="{{ about_team_rumas_url }}"
-                         alt="Rumas"
-                         class="w-full h-full object-cover">
+        <div class="modal-body p-6 sm:p-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                <div class="md:col-span-5 aspect-[4/5] rounded-xl overflow-hidden bg-sand-200">
+                    <img src="{{ about_team_rumas_url }}" alt="Rumas" class="w-full h-full object-cover">
                 </div>
-                <div class="p-6 lg:p-8">
-                    <h3 class="text-xl font-bold text-dark mb-1">Rumas</h3>
-                    <p class="text-brand-600 font-medium text-sm mb-5">Outreach Coordinator</p>
-                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
-                        Rumas is the Outreach Coordinator at Primetel, bringing more than 15 years of experience as a Community Health Worker with specialized training in mental health. He provides strategic leadership to Primetel's outreach team, spearheading the design and execution of high-impact sensitization campaigns that promote health awareness and improve access to care in underserved communities.
-                    </p>
-                    <p class="text-sm text-slate-600 leading-relaxed">
-                        In addition to coordinating outreach activities, Rumas plays a central role in forging and strengthening partnerships with community groups, institutions, and development partners. His ability to bridge grassroots realities with organizational goals has made him instrumental in expanding Primetel's footprint and ensuring alignment with community needs.
-                    </p>
+                <div class="md:col-span-7 space-y-3">
+                    <h3 class="editorial-title text-2xl font-bold text-navy-950">Rumas</h3>
+                    <p class="text-xs font-bold uppercase tracking-wider text-terracotta-600">Outreach Coordinator</p>
+                    <div class="text-xs sm:text-sm text-ink-light leading-relaxed space-y-3 font-sans">
+                        <p>
+                            Rumas is the Outreach Coordinator at Primetel, bringing over 15 years of experience as a Community Health Worker with specialized training in mental health. He coordinates village mobilization, local permissions, and field logistics across Monduli.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -559,128 +561,43 @@
 
 <div id="team-modal-7" class="team-modal-overlay">
     <div class="team-modal-box">
-        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 z-10 transition-colors">
-            <i class="fas fa-times text-sm"></i>
+        <button class="modal-close-btn absolute top-4 right-4 w-8 h-8 bg-sand-100 hover:bg-sand-200 rounded-full flex items-center justify-center text-ink z-10 transition-colors">
+            <i class="fas fa-times text-xs"></i>
         </button>
-        <div class="modal-body">
-            <div class="grid grid-cols-1 lg:grid-cols-2">
-                <div class="h-64 lg:h-auto">
-                    <img src="{{ about_team_einoth_url }}"
-                         alt="Einoth Saitoti"
-                         class="w-full h-full object-cover">
+        <div class="modal-body p-6 sm:p-8">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                <div class="md:col-span-5 aspect-[4/5] rounded-xl overflow-hidden bg-sand-200">
+                    <img src="{{ about_team_einoth_url }}" alt="Einoth Saitoti" class="w-full h-full object-cover">
                 </div>
-                <div class="p-6 lg:p-8">
-                    <h3 class="text-xl font-bold text-dark mb-1">Einoth Saitoti</h3>
-                    <p class="text-brand-600 font-medium text-sm mb-5">Customer Support Lead</p>
-                    <p class="text-sm text-slate-600 leading-relaxed mb-4">
-                        Einoth Saitoti serves as the Customer Support Lead at Primetel, where she oversees client engagement and support for users across the country who access Primetel's services through its USSD application. In this role, she is responsible for receiving and managing customer requests, resolving inquiries, and ensuring that clients receive timely and effective assistance.
-                    </p>
-                    <p class="text-sm text-slate-600 leading-relaxed">
-                        Einoth plays a vital role in maintaining a seamless link between the community and Primetel's health services, helping users navigate the platform and access the care and information they need. Her dedication to responsiveness, empathy, and problem-solving ensures that every customer interaction reinforces trust in Primetel's mission to deliver accessible and inclusive healthcare solutions.
-                    </p>
+                <div class="md:col-span-7 space-y-3">
+                    <h3 class="editorial-title text-2xl font-bold text-navy-950">Einoth Saitoti</h3>
+                    <p class="text-xs font-bold uppercase tracking-wider text-terracotta-600">Customer Support Lead</p>
+                    <div class="text-xs sm:text-sm text-ink-light leading-relaxed space-y-3 font-sans">
+                        <p>
+                            Einoth Saitoti manages user support and request dispatch for Primetel's low-tech USSD application. She ensures that every mobile inquiry from remote patients receives prompt clinical response and empathetic follow-up.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Approach Section -->
-<section class="py-20 lg:py-28 bg-white">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16 fade-up">
-            <span class="inline-block bg-brand-50 text-brand-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">How We Work</span>
-            <h2 class="text-3xl md:text-4xl font-extrabold text-dark mb-4">
-                Our <span class="gradient-text">Approach</span>
-            </h2>
-            <p class="text-lg text-muted max-w-2xl mx-auto">
-                The principles that guide everything we do
-            </p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="bg-white p-8 rounded-2xl border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up">
-                <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 text-xl mb-5">
-                    <i class="fas fa-hands-helping"></i>
-                </div>
-                <h3 class="text-lg font-bold text-dark mb-3">Community-Centered</h3>
-                <p class="text-sm text-slate-600 leading-relaxed">
-                    We listen first, then design solutions with — not for — the communities we serve. Every program is built on local insights and leadership.
-                </p>
-            </div>
-
-            <div class="bg-white p-8 rounded-2xl border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up">
-                <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 text-xl mb-5">
-                    <i class="fas fa-mobile-alt"></i>
-                </div>
-                <h3 class="text-lg font-bold text-dark mb-3">Hybrid Model</h3>
-                <p class="text-sm text-slate-600 leading-relaxed">
-                    Combining high-touch in-person care with scalable digital solutions to maximize both impact and reach.
-                </p>
-            </div>
-
-            <div class="bg-white p-8 rounded-2xl border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 fade-up">
-                <div class="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center text-brand-600 text-xl mb-5">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <h3 class="text-lg font-bold text-dark mb-3">Data-Driven</h3>
-                <p class="text-sm text-slate-600 leading-relaxed">
-                    Measuring what matters to continuously improve our services and demonstrate real impact.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Stats Section -->
-<section id="stats-section" class="py-20 lg:py-28 bg-dark">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-14 fade-up">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">
-                By the <span class="gradient-text">Numbers</span>
-            </h2>
-            <p class="text-lg text-white/60 max-w-2xl mx-auto">
-                The measurable impact of our work across Tanzania
-            </p>
-        </div>
-
-        <div class="stats-grid fade-up">
-            <div class="glass rounded-xl p-8 text-center">
-                <div class="text-3xl md:text-4xl font-extrabold text-white mb-2" data-counter="3600">0</div>
-                <div class="text-sm text-white/60 font-medium">USSD Users</div>
-            </div>
-            <div class="glass rounded-xl p-8 text-center">
-                <div class="text-3xl md:text-4xl font-extrabold text-white mb-2" data-counter="45000">0</div>
-                <div class="text-sm text-white/60 font-medium">People Reached</div>
-            </div>
-            <div class="glass rounded-xl p-8 text-center">
-                <div class="text-3xl md:text-4xl font-extrabold text-white mb-2" data-counter="1000">0</div>
-                <div class="text-sm text-white/60 font-medium">Patients Treated</div>
-            </div>
-            <div class="glass rounded-xl p-8 text-center">
-                <div class="text-3xl md:text-4xl font-extrabold text-white mb-2" data-counter="15000">0</div>
-                <div class="text-sm text-white/60 font-medium">Students Reached</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CTA Section -->
-<section class="py-20 lg:py-28 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="bg-dark rounded-2xl p-8 md:p-12 lg:p-16 text-center relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-brand-500/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-            <div class="absolute bottom-0 left-0 w-48 h-48 bg-brand-500/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
-            <div class="relative z-10 fade-up">
-                <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">
-                    Ready to Join Our Healthcare Movement?
-                </h2>
-                <p class="text-lg text-white/70 max-w-2xl mx-auto mb-8">
-                    Whether you're seeking care, partnership opportunities, or want to join our team — we'd love to connect.
-                </p>
-                <a href="{% url 'contact_us' %}" class="inline-flex items-center gap-2 px-8 py-4 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-lg transition-colors">
-                    <i class="fas fa-paper-plane"></i> Get In Touch
-                </a>
-            </div>
+<!-- Support CTA -->
+<section class="py-16 sm:py-20 bg-navy-950 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 fade-up">
+        <h2 class="editorial-title text-3xl sm:text-4xl font-normal mb-4">Support our clinical and outreach mission.</h2>
+        <p class="text-sm sm:text-base text-white/70 max-w-xl mx-auto mb-8 font-sans">
+            Every contribution directly funds diagnostic test kits, doctor visits, and mobile health outreach to underserved families in Monduli.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="{% url 'donate' %}" class="px-8 py-3.5 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md">
+                <i class="fas fa-heart text-terracotta-200 mr-2"></i>
+                <span>Make a Donation</span>
+            </a>
+            <a href="{% url 'contact_us' %}" class="px-8 py-3.5 rounded-lg border border-white/20 hover:border-white/40 text-white text-xs font-bold uppercase tracking-wider transition-all">
+                <span>Contact Headquarters</span>
+            </a>
         </div>
     </div>
 </section>
@@ -689,92 +606,46 @@
 
 {% block extra_js %}
 <script>
-(function() {
-    // ----- Team Modal Logic -----
     const teamCards = document.querySelectorAll('.team-card');
     const modalOverlays = document.querySelectorAll('.team-modal-overlay');
     const modalCloseBtns = document.querySelectorAll('.modal-close-btn');
 
     function openModal(id) {
         const modal = document.getElementById('team-modal-' + id);
-        if (!modal) return;
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
     }
 
     function closeAllModals() {
-        modalOverlays.forEach(function(m) { m.classList.remove('active'); });
+        modalOverlays.forEach(m => m.classList.remove('active'));
         document.body.style.overflow = '';
     }
 
-    teamCards.forEach(function(card) {
+    teamCards.forEach(card => {
         card.addEventListener('click', function() {
             openModal(this.getAttribute('data-member'));
         });
     });
 
-    modalCloseBtns.forEach(function(btn) {
-        btn.addEventListener('click', function(e) {
+    modalCloseBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
             e.stopPropagation();
             closeAllModals();
         });
     });
 
-    modalOverlays.forEach(function(overlay) {
-        overlay.addEventListener('click', function(e) {
+    modalOverlays.forEach(overlay => {
+        overlay.addEventListener('click', (e) => {
             if (e.target === overlay) {
                 closeAllModals();
             }
         });
     });
 
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeAllModals();
-        }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAllModals();
     });
-
-    // ----- Animated Counters -----
-    var countersAnimated = false;
-
-    function animateCounters() {
-        if (countersAnimated) return;
-        countersAnimated = true;
-
-        document.querySelectorAll('[data-counter]').forEach(function(el) {
-            var target = parseInt(el.getAttribute('data-counter'), 10);
-            var duration = 2000;
-            var startTime = null;
-
-            function step(timestamp) {
-                if (!startTime) startTime = timestamp;
-                var progress = Math.min((timestamp - startTime) / duration, 1);
-                var eased = 1 - Math.pow(1 - progress, 3);
-                var current = Math.floor(eased * target);
-                el.textContent = current.toLocaleString() + '+';
-                if (progress < 1) {
-                    requestAnimationFrame(step);
-                } else {
-                    el.textContent = target.toLocaleString() + '+';
-                }
-            }
-
-            requestAnimationFrame(step);
-        });
-    }
-
-    var statsSection = document.getElementById('stats-section');
-    if (statsSection) {
-        var statsObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    animateCounters();
-                    statsObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 });
-        statsObserver.observe(statsSection);
-    }
-})();
 </script>
 {% endblock %}

@@ -1,62 +1,39 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load widget_tweaks %}
-{% load math_filters %}
 
-{% block title %}News & Updates | Primetel Health{% endblock %}
-{% block meta_description %}Stay updated with Primetel's latest news, stories, and healthcare impact in Tanzania.{% endblock %}
-
-{% block extra_css %}
-<style>
-    .news-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .news-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.12);
-    }
-    .category-chip {
-        transition: all 0.2s ease;
-    }
-    .category-chip:hover {
-        transform: translateY(-1px);
-    }
-    .search-input:focus {
-        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
-    }
-</style>
-{% endblock %}
+{% block title %}Field Dispatches & News | Primetel Health Tanzania{% endblock %}
+{% block meta_description %}Read field dispatches, clinical updates, and community stories from Primetel Health in Monduli and across Tanzania.{% endblock %}
 
 {% block content %}
 
-<!-- Page Header -->
-<section class="pt-28 pb-14 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+<!-- Editorial Header -->
+<section class="bg-sand-50 border-b border-sand-200 pt-16 pb-16 lg:pt-24 lg:pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto text-center fade-up">
-            <span class="inline-flex items-center gap-2 text-brand-600 text-sm font-semibold tracking-wide uppercase mb-4">
-                <span class="w-8 h-px bg-brand-500"></span>
-                Our Stories
-                <span class="w-8 h-px bg-brand-500"></span>
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sand-200/80 text-navy-950 text-xs font-semibold tracking-wide uppercase mb-6">
+                <i class="fas fa-newspaper text-terracotta-600 text-[10px]"></i>
+                Dispatches From The Field
             </span>
-            <h1 class="text-4xl md:text-5xl font-bold text-dark tracking-tight mb-4">
-                News & Updates
+            <h1 class="editorial-title text-4xl sm:text-5xl lg:text-6xl text-navy-950 font-normal leading-[1.1] mb-6">
+                Stories of healthcare delivery, <span class="italic font-normal text-terracotta-600">action and impact</span>.
             </h1>
-            <p class="text-lg text-muted leading-relaxed mb-8">
-                Stories of impact, innovation, and healthcare transformation across Tanzania.
+            <p class="text-base sm:text-lg text-ink-muted leading-relaxed font-sans font-normal mb-8 max-w-2xl mx-auto">
+                Follow our frontline initiatives across Monduli, high-level policy advocacy with the Ministry of Health, and community mental wellness sessions.
             </p>
 
             <!-- Search Bar -->
-            <div class="max-w-xl mx-auto">
+            <div class="max-w-md mx-auto">
                 <form method="get" class="relative">
                     <input
                         type="text"
                         name="search"
                         value="{{ request.GET.search|default_if_none:'' }}"
-                        placeholder="Search news articles..."
-                        class="search-input w-full bg-white border border-slate-200 rounded-xl py-3.5 pl-12 pr-4 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-brand-400 transition-all"
+                        placeholder="Search field reports, topics, or authors..."
+                        class="w-full bg-white border border-sand-300 rounded-full py-3 pl-11 pr-4 text-xs sm:text-sm text-navy-950 placeholder-ink-subtle focus:outline-none focus:border-terracotta-600 focus:ring-1 focus:ring-terracotta-600 shadow-sm"
                     >
-                    <button type="submit" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-brand-600 transition-colors">
-                        <i class="fas fa-search"></i>
+                    <button type="submit" class="absolute left-4 top-1/2 -translate-y-1/2 text-ink-muted hover:text-terracotta-600">
+                        <i class="fas fa-search text-xs"></i>
                     </button>
                 </form>
             </div>
@@ -64,20 +41,17 @@
     </div>
 </section>
 
-<!-- Category Filter Chips -->
-<section class="py-6 bg-white border-b border-slate-100">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="flex flex-wrap justify-center gap-3 fade-up">
+<!-- Category Filter Strip -->
+<section class="py-5 bg-white border-b border-sand-200 sticky top-20 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap items-center justify-center gap-2 text-xs font-semibold">
             <a href="{% url 'news_list' %}"
-               class="category-chip inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium border transition-colors
-                      {% if not request.GET.category %}bg-brand-600 text-white border-brand-600{% else %}bg-white text-slate-600 border-slate-200 hover:border-brand-300 hover:text-brand-700 hover:bg-brand-50{% endif %}">
-                <i class="fas fa-newspaper text-xs"></i> All News
+               class="px-4 py-2 rounded-full transition-colors {% if not request.GET.category %}bg-navy-900 text-white font-bold{% else %}bg-sand-100 text-ink-muted hover:text-navy-950 hover:bg-sand-200{% endif %}">
+                All Dispatches
             </a>
             {% for category_value, category_name in categories %}
             <a href="{% url 'news_list' %}?category={{ category_value }}"
-               class="category-chip inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium border transition-colors
-                      {% if request.GET.category == category_value %}bg-brand-600 text-white border-brand-600{% else %}bg-white text-slate-600 border-slate-200 hover:border-brand-300 hover:text-brand-700 hover:bg-brand-50{% endif %}">
-                <i class="fas fa-{% if category_value == 'health_updates' %}heartbeat{% elif category_value == 'community_stories' %}users{% elif category_value == 'education' %}graduation-cap{% elif category_value == 'technology' %}mobile-alt{% else %}hand-holding-heart{% endif %} text-xs"></i>
+               class="px-4 py-2 rounded-full transition-colors {% if request.GET.category == category_value %}bg-navy-900 text-white font-bold{% else %}bg-sand-100 text-ink-muted hover:text-navy-950 hover:bg-sand-200{% endif %}">
                 {{ category_name }}
             </a>
             {% endfor %}
@@ -85,233 +59,131 @@
     </div>
 </section>
 
-<!-- Featured Article -->
-{% if news_list %}
-<section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="fade-up">
-            <a href="{% url 'news_detail' news_list.0.slug %}" class="group block">
-                <div class="bg-white rounded-2xl border border-slate-100 overflow-hidden news-card">
-                    <div class="grid grid-cols-1 lg:grid-cols-2">
-                        <div class="relative overflow-hidden">
-                            <img src="{% if news_list.0.image %}{{ news_list.0.image.url }}{% else %}https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80{% endif %}"
-                                 alt="{{ news_list.0.title }}"
-                                 class="w-full h-64 lg:h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                            <div class="absolute top-4 left-4">
-                                <span class="inline-flex items-center gap-1.5 bg-brand-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                                    <i class="fas fa-star text-[10px]"></i> Featured
-                                </span>
-                            </div>
+<!-- Articles Section -->
+<section class="py-16 lg:py-24 bg-sand-50/60 border-b border-sand-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {% if news_list %}
+        <!-- Featured Lead Dispatch -->
+        {% with news_list.0 as lead_article %}
+        <div class="mb-14 fade-up">
+            <article class="bg-white rounded-2xl border border-sand-300 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div class="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+                    <div class="lg:col-span-7 aspect-[16/10] lg:aspect-auto bg-sand-200 overflow-hidden relative">
+                        {% if lead_article.image %}
+                        <img src="{{ lead_article.image.url }}" alt="{{ lead_article.title }}" class="w-full h-full object-cover">
+                        {% else %}
+                        <img src="{% static 'images/primetel_story.jpg' %}" alt="{{ lead_article.title }}" class="w-full h-full object-cover">
+                        {% endif %}
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-navy-900 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                                Featured Dispatch
+                            </span>
                         </div>
-                        <div class="p-8 lg:p-10 flex flex-col justify-center">
-                            <div class="flex items-center gap-3 mb-4">
-                                <span class="bg-brand-50 text-brand-700 px-3 py-1 rounded-full text-xs font-medium">
-                                    {{ news_list.0.get_category_display }}
+                    </div>
+                    <div class="lg:col-span-5 p-8 lg:p-10 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-2 text-xs text-ink-subtle mb-3">
+                                <span class="px-2.5 py-0.5 rounded font-bold uppercase tracking-wider bg-sand-200 text-navy-900 text-[10px]">
+                                    {{ lead_article.get_category_display }}
                                 </span>
-                                <span class="text-muted text-sm">
-                                    <i class="far fa-calendar-alt mr-1"></i> {{ news_list.0.date|date:"F j, Y" }}
-                                </span>
+                                <span>•</span>
+                                <span>{{ lead_article.date|date:"F j, Y" }}</span>
                             </div>
-                            <h2 class="text-2xl lg:text-3xl font-bold text-dark mb-4 group-hover:text-brand-700 transition-colors">
-                                {{ news_list.0.title }}
+                            <h2 class="editorial-title text-2xl sm:text-3xl text-navy-950 font-normal leading-snug mb-4">
+                                <a href="{% url 'news_detail' lead_article.slug %}" class="hover:text-terracotta-600 transition-colors">
+                                    {{ lead_article.title }}
+                                </a>
                             </h2>
-                            <p class="text-muted leading-relaxed mb-6">
-                                {{ news_list.0.content|truncatewords:30 }}
+                            <p class="text-xs sm:text-sm text-ink-muted leading-relaxed mb-6 line-clamp-4">
+                                {{ lead_article.content }}
                             </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-3">
-                                    <img src="{% if news_list.0.image %}{{ news_list.0.image.url }}{% else %}https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80{% endif %}"
-                                         alt="{{ news_list.0.author }}"
-                                         class="w-10 h-10 rounded-full object-cover">
-                                    <div>
-                                        <p class="text-sm font-semibold text-dark">{{ news_list.0.author }}</p>
-                                        <p class="text-xs text-muted">{{ news_list.0.read_time }} min read</p>
-                                    </div>
-                                </div>
-                                <span class="inline-flex items-center gap-2 text-brand-600 font-semibold text-sm group-hover:gap-3 transition-all">
-                                    Read Story <i class="fas fa-arrow-right text-xs"></i>
-                                </span>
+                        </div>
+                        <div class="pt-4 border-t border-sand-200 flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-bold text-navy-950">{{ lead_article.author }}</p>
+                                <p class="text-[11px] text-ink-subtle">{{ lead_article.read_time }} min read</p>
                             </div>
+                            <a href="{% url 'news_detail' lead_article.slug %}" class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-terracotta-600 hover:text-terracotta-700">
+                                <span>Read Article</span>
+                                <i class="fas fa-arrow-right text-[10px]"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
-            </a>
+            </article>
         </div>
-    </div>
-</section>
-{% endif %}
+        {% endwith %}
 
-<!-- News Grid -->
-<section class="py-16 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="flex items-center justify-between mb-10">
-            <h2 class="text-2xl font-bold text-dark">Recent Updates</h2>
-            <div class="hidden sm:block h-px flex-1 bg-slate-200 ml-6"></div>
-        </div>
-
+        <!-- Secondary Articles Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for news in news_list|slice:"1:" %}
-            <div class="fade-up" style="transition-delay: {{ forloop.counter0|mul:0.08 }}s">
-                <a href="{% url 'news_detail' news.slug %}" class="group block">
-                    <div class="bg-white rounded-xl border border-slate-100 overflow-hidden news-card h-full flex flex-col">
-                        <div class="relative overflow-hidden">
-                            <img src="{% if news.image %}{{ news.image.url }}{% else %}https://images.unsplash.com/photo-1581056771107-24ca5f033842?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80{% endif %}"
-                                 alt="{{ news.title }}"
-                                 class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                            <div class="absolute top-3 left-3">
-                                <span class="bg-white/90 backdrop-blur-sm text-brand-700 px-2.5 py-1 rounded-full text-xs font-medium">
-                                    {{ news.get_category_display }}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="p-6 flex flex-col flex-1">
-                            <div class="flex items-center gap-2 text-muted text-sm mb-3">
-                                <i class="far fa-calendar-alt text-xs"></i>
-                                {{ news.date|date:"F j, Y" }}
-                            </div>
-                            <h3 class="text-lg font-bold text-dark mb-3 group-hover:text-brand-700 transition-colors leading-snug">
-                                {{ news.title }}
-                            </h3>
-                            <p class="text-muted text-sm leading-relaxed mb-4 flex-1">
-                                {{ news.content|truncatewords:20 }}
-                            </p>
-                            <span class="inline-flex items-center gap-2 text-brand-600 font-semibold text-sm group-hover:gap-3 transition-all">
-                                Read More <i class="fas fa-arrow-right text-xs"></i>
-                            </span>
-                        </div>
+            <article class="bg-white rounded-2xl border border-sand-300 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow fade-up">
+                <div>
+                    <div class="aspect-[16/10] bg-sand-200 overflow-hidden">
+                        {% if news.image %}
+                        <img src="{{ news.image.url }}" alt="{{ news.title }}" class="w-full h-full object-cover">
+                        {% else %}
+                        <img src="{% static 'images/primetel_story.jpg' %}" alt="{{ news.title }}" class="w-full h-full object-cover">
+                        {% endif %}
                     </div>
-                </a>
-            </div>
-            {% empty %}
-            <div class="col-span-full text-center py-12">
-                <div class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-newspaper text-slate-400 text-xl"></i>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 text-xs text-ink-subtle mb-2.5">
+                            <span class="px-2 py-0.5 rounded font-bold uppercase tracking-wider bg-sand-100 text-navy-900 text-[10px]">
+                                {{ news.get_category_display }}
+                            </span>
+                            <span>•</span>
+                            <span>{{ news.date|date:"M d, Y" }}</span>
+                        </div>
+                        <h3 class="editorial-title text-xl text-navy-950 font-normal leading-snug mb-3">
+                            <a href="{% url 'news_detail' news.slug %}" class="hover:text-terracotta-600 transition-colors">
+                                {{ news.title }}
+                            </a>
+                        </h3>
+                        <p class="text-xs text-ink-muted leading-relaxed line-clamp-3">
+                            {{ news.content }}
+                        </p>
+                    </div>
                 </div>
-                <p class="text-muted text-lg">No news articles available.</p>
-            </div>
+                <div class="p-6 pt-0 flex items-center justify-between border-t border-sand-100 mt-4">
+                    <span class="text-[11px] text-ink-subtle font-sans">{{ news.author }}</span>
+                    <a href="{% url 'news_detail' news.slug %}" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-terracotta-600 hover:text-terracotta-700">
+                        <span>Read</span>
+                        <i class="fas fa-arrow-right text-[9px]"></i>
+                    </a>
+                </div>
+            </article>
             {% endfor %}
         </div>
-
-        <!-- Pagination -->
-        {% if is_paginated %}
-        <div class="mt-12 flex justify-center">
-            <nav class="inline-flex items-center gap-2">
-                {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}"
-                   class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-slate-200 bg-white text-slate-600 text-sm font-medium hover:bg-brand-50 hover:border-brand-300 hover:text-brand-700 transition-colors">
-                    <i class="fas fa-chevron-left text-xs"></i> Previous
-                </a>
-                {% endif %}
-
-                {% for num in page_obj.paginator.page_range %}
-                <a href="?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}"
-                   class="inline-flex items-center justify-center w-10 h-10 rounded-lg text-sm font-medium transition-colors
-                          {% if page_obj.number == num %}bg-brand-600 text-white{% else %}bg-white border border-slate-200 text-slate-600 hover:bg-brand-50 hover:border-brand-300 hover:text-brand-700{% endif %}">
-                    {{ num }}
-                </a>
-                {% endfor %}
-
-                {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}"
-                   class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg border border-slate-200 bg-white text-slate-600 text-sm font-medium hover:bg-brand-50 hover:border-brand-300 hover:text-brand-700 transition-colors">
-                    Next <i class="fas fa-chevron-right text-xs"></i>
-                </a>
-                {% endif %}
-            </nav>
+        {% else %}
+        <div class="text-center py-16 bg-white rounded-2xl border border-sand-300 max-w-md mx-auto p-8">
+            <i class="fas fa-newspaper text-3xl text-sand-400 mb-3"></i>
+            <h3 class="editorial-title text-xl text-navy-950 font-bold mb-1">No dispatches found</h3>
+            <p class="text-xs text-ink-muted mb-4">Try clearing your search query or choosing another category filter.</p>
+            <a href="{% url 'news_list' %}" class="inline-block px-5 py-2 rounded-lg bg-navy-900 text-white text-xs font-bold uppercase tracking-wider">
+                Reset Filters
+            </a>
         </div>
         {% endif %}
+
     </div>
 </section>
 
-<!-- Related Blogs -->
-{% if related_blogs %}
+<!-- Newsletter / Field Dispatch Subscription -->
 <section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="flex items-center justify-between mb-10">
-            <h2 class="text-2xl font-bold text-dark">Related Blogs</h2>
-            <div class="hidden sm:block h-px flex-1 bg-slate-200 ml-6"></div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {% for news in related_blogs %}
-            <div class="fade-up" style="transition-delay: {{ forloop.counter0|mul:0.08 }}s">
-                <a href="{% url 'news_detail' news.slug %}" class="group block">
-                    <div class="bg-white rounded-xl border border-slate-100 overflow-hidden news-card h-full flex flex-col">
-                        <div class="relative overflow-hidden">
-                            <img src="{% if news.image %}{{ news.image.url }}{% else %}https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80{% endif %}"
-                                 alt="{{ news.title }}"
-                                 class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                            <div class="absolute top-3 left-3">
-                                <span class="bg-white/90 backdrop-blur-sm text-brand-700 px-2.5 py-1 rounded-full text-xs font-medium">
-                                    {{ news.get_category_display }}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="p-6 flex flex-col flex-1">
-                            <div class="flex items-center gap-2 text-muted text-sm mb-3">
-                                <i class="far fa-calendar-alt text-xs"></i>
-                                {{ news.date|date:"F j, Y" }}
-                            </div>
-                            <h3 class="text-lg font-bold text-dark mb-3 group-hover:text-brand-700 transition-colors leading-snug">
-                                {{ news.title }}
-                            </h3>
-                            <p class="text-muted text-sm leading-relaxed mb-4 flex-1">
-                                {{ news.content|truncatewords:20 }}
-                            </p>
-                            <span class="inline-flex items-center gap-2 text-brand-600 font-semibold text-sm group-hover:gap-3 transition-all">
-                                Read Blog <i class="fas fa-arrow-right text-xs"></i>
-                            </span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            {% empty %}
-            <p class="col-span-full text-center text-muted">No related blogs available.</p>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-{% endif %}
-
-<!-- Newsletter Section -->
-<section class="py-20 bg-dark relative overflow-hidden">
-    <!-- Subtle decorative elements -->
-    <div class="absolute top-0 left-0 w-72 h-72 bg-brand-500/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-500/5 rounded-full translate-x-1/3 translate-y-1/3"></div>
-
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
-        <div class="max-w-2xl mx-auto text-center fade-up">
-            <div class="w-12 h-12 bg-brand-500/10 rounded-xl flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-envelope text-brand-400 text-lg"></i>
-            </div>
-            <h2 class="text-3xl font-bold text-white mb-4">Stay Updated With Our Work</h2>
-            <p class="text-white/60 text-lg leading-relaxed mb-8">
-                Subscribe to our newsletter for the latest news, stories, and impact reports.
-            </p>
-
-            {% if messages %}
-            <div class="mb-6 bg-brand-500/10 border border-brand-500/20 text-brand-300 px-5 py-4 rounded-xl">
-                {% for message in messages %}
-                <p class="text-sm font-medium">{{ message }}</p>
-                {% endfor %}
-            </div>
-            {% endif %}
-
-            <form method="post" action="{% url 'news_list' %}">
-                {% csrf_token %}
-                <div class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
-                    {{ newsletter_form.email|add_class:"flex-1 bg-white/10 border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-400 focus:bg-white/15 transition-all" }}
-                    <button type="submit"
-                            class="bg-brand-500 hover:bg-brand-600 text-white px-7 py-3.5 rounded-xl font-semibold text-sm transition-colors whitespace-nowrap">
-                        Subscribe <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                    </button>
-                </div>
-            </form>
-
-            <p class="mt-5 text-white/40 text-sm">
-                We respect your privacy. Unsubscribe at any time.
-            </p>
-        </div>
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-up">
+        <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-2 block font-sans">Stay Informed</span>
+        <h2 class="editorial-title text-3xl font-bold text-navy-950 mb-3">Subscribe to Field Dispatches</h2>
+        <p class="text-xs sm:text-sm text-ink-muted mb-6 max-w-lg mx-auto">
+            Receive periodic updates on rural mobile clinic schedules, mental health campaigns, and health equity progress in Tanzania.
+        </p>
+        <form method="post" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            {% csrf_token %}
+            {{ newsletter_form.email|add_class:"flex-1 px-4 py-2.5 rounded-lg border border-sand-300 text-xs text-navy-950 placeholder-ink-subtle focus:border-terracotta-600 outline-none" }}
+            <button type="submit" class="px-6 py-2.5 rounded-lg bg-navy-900 hover:bg-navy-800 text-white text-xs font-bold uppercase tracking-wider shrink-0 transition-colors">
+                Subscribe
+            </button>
+        </form>
     </div>
 </section>
 

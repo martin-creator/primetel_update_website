@@ -1,107 +1,50 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load widget_tweaks %}
-{% load math_filters %}
 
-{% block title %}{{ object.title }} | Primetel Health{% endblock %}
+{% block title %}{{ object.title }} | Primetel Health Tanzania{% endblock %}
 {% block meta_description %}{{ object.content|truncatewords:30 }}{% endblock %}
 
 {% block extra_css %}
 <style>
-    .article-content p {
+    .article-body p {
         margin-bottom: 1.5rem;
-        line-height: 1.8;
-        color: #475569;
-        font-size: 1.075rem;
+        line-height: 1.85;
+        color: #283642;
+        font-size: 1.0625rem;
     }
 
-    .article-content h2 {
-        font-family: 'Inter', system-ui, sans-serif;
-        font-size: 1.75rem;
-        font-weight: 700;
-        color: #0f172a;
+    .article-body h2 {
+        font-family: 'Newsreader', Georgia, serif;
+        font-size: 1.875rem;
+        font-weight: 500;
+        color: #071A29;
         margin: 2.5rem 0 1rem;
-        letter-spacing: -0.02em;
-    }
-
-    .article-content h3 {
-        font-family: 'Inter', system-ui, sans-serif;
-        font-size: 1.375rem;
-        font-weight: 600;
-        color: #0f172a;
-        margin: 2rem 0 0.75rem;
         letter-spacing: -0.01em;
     }
 
-    .article-content blockquote {
-        border-left: 3px solid #0056B3;
+    .article-body h3 {
+        font-family: 'Newsreader', Georgia, serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #071A29;
+        margin: 2rem 0 0.75rem;
+    }
+
+    .article-body blockquote {
+        border-left: 3px solid #C84F35;
         padding: 1rem 0 1rem 1.5rem;
         margin: 2rem 0;
-        background: #eff6ff;
-        border-radius: 0 8px 8px 0;
+        background: #FAF8F5;
+        font-family: 'Newsreader', Georgia, serif;
+        font-size: 1.25rem;
         font-style: italic;
-        color: #003d80;
+        color: #071A29;
     }
 
-    .article-content blockquote p {
-        color: #003d80;
+    .article-body blockquote p {
+        color: #071A29;
         margin-bottom: 0;
-    }
-
-    .article-content ul {
-        list-style-type: disc;
-        padding-left: 1.75rem;
-        margin-bottom: 1.5rem;
-        color: #475569;
-    }
-
-    .article-content ul li {
-        margin-bottom: 0.5rem;
-        line-height: 1.7;
-    }
-
-    .article-content ol {
-        list-style-type: decimal;
-        padding-left: 1.75rem;
-        margin-bottom: 1.5rem;
-        color: #475569;
-    }
-
-    .article-content ol li {
-        margin-bottom: 0.5rem;
-        line-height: 1.7;
-    }
-
-    .article-content img {
-        border-radius: 12px;
-        margin: 2rem auto;
-        max-width: 100%;
-        height: auto;
-    }
-
-    .article-content a {
-        color: #0056B3;
-        text-decoration: underline;
-        text-underline-offset: 2px;
-    }
-
-    .article-content a:hover {
-        color: #004a9a;
-    }
-
-    .share-btn {
-        transition: all 0.2s ease;
-    }
-    .share-btn:hover {
-        transform: translateY(-2px);
-    }
-
-    .related-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .related-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.12);
     }
 </style>
 {% endblock %}
@@ -109,180 +52,116 @@
 {% block content %}
 
 <!-- Article Header -->
-<section class="pt-32 pb-12 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="max-w-4xl mx-auto">
-            <!-- Back Link -->
-            <div class="mb-8 fade-up">
-                <a href="{% url 'news_list' %}" class="inline-flex items-center gap-2 text-muted hover:text-brand-600 text-sm font-medium transition-colors">
-                    <i class="fas fa-arrow-left text-xs"></i> Back to News
-                </a>
-            </div>
+<article class="py-14 lg:py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <!-- Tags -->
-            <div class="flex flex-wrap gap-2 mb-5 fade-up">
-                {% for tag in object.tags|split:"," %}
-                {% if tag|slugify %}
-                <span class="bg-brand-50 text-brand-700 border border-brand-100 px-3 py-1 rounded-full text-xs font-medium">
-                    {{ tag|title }}
+        <!-- Back to Dispatches -->
+        <div class="mb-8">
+            <a href="{% url 'news_list' %}" class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-ink-muted hover:text-navy-950 transition-colors">
+                <i class="fas fa-arrow-left text-[10px]"></i>
+                <span>Back to Field Dispatches</span>
+            </a>
+        </div>
+
+        <!-- Meta Header -->
+        <div class="space-y-4 mb-8">
+            <div class="flex items-center gap-2 text-xs font-semibold">
+                <span class="px-2.5 py-0.5 rounded font-bold uppercase tracking-wider bg-sand-200 text-navy-900 text-[10px]">
+                    {{ object.get_category_display }}
                 </span>
-                {% endif %}
-                {% endfor %}
+                <span class="text-ink-subtle">•</span>
+                <span class="text-ink-muted">{{ object.date|date:"F j, Y" }}</span>
+                <span class="text-ink-subtle">•</span>
+                <span class="text-ink-muted">{{ object.read_time }} min read</span>
             </div>
 
-            <!-- Title -->
-            <h1 class="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-dark leading-tight tracking-tight mb-6 fade-up">
+            <h1 class="editorial-title text-3xl sm:text-4xl lg:text-5xl text-navy-950 font-normal leading-[1.15]">
                 {{ object.title }}
             </h1>
 
-            <!-- Author Info & Meta -->
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5 mb-8 fade-up">
-                <div class="flex items-center gap-4">
-                    <img src="{% if object.image %}{{ object.image.url }}{% else %}https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80{% endif %}"
-                         alt="{{ object.author }}"
-                         class="w-11 h-11 rounded-full object-cover ring-2 ring-brand-100">
-                    <div>
-                        <p class="text-sm font-semibold text-dark">{{ object.author }}</p>
-                        <p class="text-xs text-muted">
-                            {{ object.date|date:"F j, Y" }}
-                            <span class="mx-1.5 text-slate-300">&middot;</span>
-                            {{ object.read_time }} min read
-                        </p>
-                    </div>
+            <div class="flex items-center gap-3 pt-2">
+                <div class="w-10 h-10 rounded-full bg-sand-200 text-navy-950 flex items-center justify-center font-bold text-xs font-mono">
+                    {{ object.author|slice:":2"|upper }}
                 </div>
-
-                <!-- Share Buttons -->
-                <div class="flex items-center gap-2">
-                    <span class="text-xs text-muted font-medium mr-1">Share</span>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}"
-                       target="_blank" rel="noopener noreferrer"
-                       class="share-btn w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:text-blue-600 hover:border-blue-200 hover:bg-blue-50">
-                        <i class="fab fa-facebook-f text-sm"></i>
-                    </a>
-                    <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ object.title }}"
-                       target="_blank" rel="noopener noreferrer"
-                       class="share-btn w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:text-sky-500 hover:border-sky-200 hover:bg-sky-50">
-                        <i class="fab fa-twitter text-sm"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ object.title }}"
-                       target="_blank" rel="noopener noreferrer"
-                       class="share-btn w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:text-blue-700 hover:border-blue-200 hover:bg-blue-50">
-                        <i class="fab fa-linkedin-in text-sm"></i>
-                    </a>
-                    <button onclick="navigator.clipboard.writeText(window.location.href); this.innerHTML='<i class=\'fas fa-check text-sm\'></i>'; setTimeout(() => this.innerHTML='<i class=\'fas fa-link text-sm\'></i>', 2000)"
-                            class="share-btn w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:text-brand-600 hover:border-brand-200 hover:bg-brand-50">
-                        <i class="fas fa-link text-sm"></i>
-                    </button>
+                <div>
+                    <p class="text-xs font-bold text-navy-950">{{ object.author }}</p>
+                    <p class="text-[11px] text-ink-subtle">Primetel Health Field Dispatch</p>
                 </div>
             </div>
+        </div>
 
-            <!-- Hero Image -->
-            <div class="rounded-2xl overflow-hidden fade-up">
-                <img src="{% if object.image %}{{ object.image.url }}{% else %}https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80{% endif %}"
-                     alt="{{ object.title }}"
-                     class="w-full h-auto max-h-[480px] object-cover">
+        <!-- Lead Documentary Image -->
+        {% if object.image %}
+        <div class="mb-12 rounded-2xl overflow-hidden bg-sand-200 border border-sand-300 shadow-sm">
+            <img src="{{ object.image.url }}" alt="{{ object.title }}" class="w-full max-h-[520px] object-cover">
+        </div>
+        {% endif %}
+
+        <!-- Body Content -->
+        <div class="article-body font-sans max-w-none">
+            {{ object.content|linebreaks }}
+        </div>
+
+        <!-- Tags -->
+        {% if object.tags %}
+        <div class="pt-8 mt-8 border-t border-sand-200 flex flex-wrap gap-2 text-xs">
+            {% for tag in object.tags.split %}
+            <span class="px-3 py-1 rounded-full bg-sand-100 text-ink-muted font-medium">#{{ tag|cut:"," }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Support Callout inside Article -->
+        <div class="my-14 p-8 rounded-2xl bg-sand-50 border border-sand-300 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-terracotta-600 block mb-1">Support Frontline Care</span>
+                <h3 class="editorial-title text-xl font-bold text-navy-950">Help fund the next field medical mission.</h3>
+                <p class="text-xs text-ink-muted mt-1 max-w-md">100% of your gift directly supports patient consultations, medicines, and mobile clinic fuel.</p>
             </div>
+            <a href="{% url 'donate' %}" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold text-xs uppercase tracking-wider transition-colors shadow shrink-0">
+                <i class="fas fa-heart text-terracotta-200 text-xs"></i>
+                <span>Support Our Work</span>
+            </a>
         </div>
-    </div>
-</section>
 
-<!-- Article Content -->
-<section class="py-16 bg-white">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto article-content fade-up">
-            {{ object.content|safe }}
-        </div>
     </div>
-</section>
+</article>
 
-<!-- Related Articles -->
+<!-- Related Dispatches -->
 {% if related_news %}
-<section class="py-16 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="flex items-center justify-between mb-10">
-            <h2 class="text-2xl font-bold text-dark">Related Articles</h2>
-            <div class="hidden sm:block h-px flex-1 bg-slate-200 ml-6"></div>
-        </div>
-
+<section class="py-16 bg-sand-50 border-t border-sand-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="editorial-title text-2xl sm:text-3xl text-navy-950 mb-8 font-normal">Related Field Dispatches</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {% for related in related_news %}
-            <div class="fade-up" style="transition-delay: {{ forloop.counter0|mul:0.08 }}s">
-                <a href="{% url 'news_detail' related.slug %}" class="group block">
-                    <div class="bg-white rounded-xl border border-slate-100 overflow-hidden related-card h-full flex flex-col">
-                        <div class="relative overflow-hidden">
-                            <img src="{% if related.image %}{{ related.image.url }}{% else %}https://images.unsplash.com/photo-1521791055366-0d553872125f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80{% endif %}"
-                                 alt="{{ related.title }}"
-                                 class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
-                            <div class="absolute top-3 left-3">
-                                <span class="bg-white/90 backdrop-blur-sm text-brand-700 px-2.5 py-1 rounded-full text-xs font-medium">
-                                    {{ related.get_category_display }}
-                                </span>
-                            </div>
-                        </div>
-                        <div class="p-6 flex flex-col flex-1">
-                            <div class="flex items-center gap-2 text-muted text-sm mb-3">
-                                <i class="far fa-calendar-alt text-xs"></i>
-                                {{ related.date|date:"F j, Y" }}
-                            </div>
-                            <h3 class="text-lg font-bold text-dark mb-3 group-hover:text-brand-700 transition-colors leading-snug">
-                                {{ related.title }}
-                            </h3>
-                            <p class="text-muted text-sm leading-relaxed mb-4 flex-1">
-                                {{ related.content|truncatewords:20 }}
-                            </p>
-                            <span class="inline-flex items-center gap-2 text-brand-600 font-semibold text-sm group-hover:gap-3 transition-all">
-                                Read Article <i class="fas fa-arrow-right text-xs"></i>
-                            </span>
-                        </div>
+            {% for item in related_news %}
+            <article class="bg-white rounded-2xl border border-sand-300 overflow-hidden flex flex-col justify-between shadow-sm">
+                <div>
+                    <div class="aspect-[16/10] bg-sand-200 overflow-hidden">
+                        {% if item.image %}
+                        <img src="{{ item.image.url }}" alt="{{ item.title }}" class="w-full h-full object-cover">
+                        {% endif %}
                     </div>
-                </a>
-            </div>
+                    <div class="p-6">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-terracotta-600 block mb-2">{{ item.get_category_display }}</span>
+                        <h3 class="editorial-title text-lg text-navy-950 font-normal leading-snug mb-2">
+                            <a href="{% url 'news_detail' item.slug %}" class="hover:text-terracotta-600 transition-colors">
+                                {{ item.title }}
+                            </a>
+                        </h3>
+                        <p class="text-xs text-ink-muted line-clamp-2">{{ item.content }}</p>
+                    </div>
+                </div>
+                <div class="p-6 pt-0">
+                    <a href="{% url 'news_detail' item.slug %}" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-terracotta-600 hover:text-terracotta-700">
+                        <span>Read Dispatch</span>
+                        <i class="fas fa-arrow-right text-[9px]"></i>
+                    </a>
+                </div>
+            </article>
             {% endfor %}
         </div>
     </div>
 </section>
 {% endif %}
-
-<!-- Newsletter Section -->
-<section class="py-20 bg-dark relative overflow-hidden">
-    <!-- Subtle decorative elements -->
-    <div class="absolute top-0 left-0 w-72 h-72 bg-brand-500/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-500/5 rounded-full translate-x-1/3 translate-y-1/3"></div>
-
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative">
-        <div class="max-w-2xl mx-auto text-center fade-up">
-            <div class="w-12 h-12 bg-brand-500/10 rounded-xl flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-envelope text-brand-400 text-lg"></i>
-            </div>
-            <h2 class="text-3xl font-bold text-white mb-4">Stay Updated With Our Work</h2>
-            <p class="text-white/60 text-lg leading-relaxed mb-8">
-                Subscribe to our newsletter for the latest news, stories, and impact reports.
-            </p>
-
-            {% if messages %}
-            <div class="mb-6 bg-brand-500/10 border border-brand-500/20 text-brand-300 px-5 py-4 rounded-xl">
-                {% for message in messages %}
-                <p class="text-sm font-medium">{{ message }}</p>
-                {% endfor %}
-            </div>
-            {% endif %}
-
-            <form method="post" action="{% url 'news_list' %}">
-                {% csrf_token %}
-                <div class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
-                    {{ newsletter_form.email|add_class:"flex-1 bg-white/10 border border-white/10 rounded-xl px-5 py-3.5 text-white placeholder-white/40 focus:outline-none focus:border-brand-400 focus:bg-white/15 transition-all" }}
-                    <button type="submit"
-                            class="bg-brand-500 hover:bg-brand-600 text-white px-7 py-3.5 rounded-xl font-semibold text-sm transition-colors whitespace-nowrap">
-                        Subscribe <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                    </button>
-                </div>
-            </form>
-
-            <p class="mt-5 text-white/40 text-sm">
-                We respect your privacy. Unsubscribe at any time.
-            </p>
-        </div>
-    </div>
-</section>
 
 {% endblock %}

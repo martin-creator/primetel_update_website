@@ -1,154 +1,135 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Annual Reports | Primetel Health{% endblock %}
-{% block meta_description %}Access Primetel Health's annual reports — comprehensive overviews of our impact, growth, and healthcare transformation in Tanzania.{% endblock %}
-
-{% block extra_css %}
-<style>
-    .report-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .report-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.12);
-    }
-</style>
-{% endblock %}
+{% block title %}Annual Reports & Audits | Primetel Health Tanzania{% endblock %}
+{% block meta_description %}Review and download Primetel Health's official annual reports, audited accounts, and verified clinical outcomes in Tanzania.{% endblock %}
 
 {% block content %}
 
-<!-- Page Header -->
-<section class="relative bg-dark overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-20 left-10 w-72 h-72 bg-brand-500 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-10 right-10 w-96 h-96 bg-brand-700 rounded-full blur-3xl"></div>
-    </div>
-    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32 text-center">
-        <div class="fade-up">
-            <span class="inline-block bg-brand-500/10 text-brand-400 px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-brand-500/20">
-                Transparency & Accountability
+<!-- Editorial Header -->
+<section class="bg-sand-50 border-b border-sand-200 pt-16 pb-20 lg:pt-24 lg:pb-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl fade-up">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sand-200/80 text-navy-950 text-xs font-semibold tracking-wide uppercase mb-6">
+                <i class="fas fa-file-shield text-terracotta-600 text-[10px]"></i>
+                Transparency & Governance
             </span>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
-                Annual <span class="gradient-text">Reports</span>
+            <h1 class="editorial-title text-4xl sm:text-5xl lg:text-6xl text-navy-950 font-normal leading-[1.1] mb-6">
+                Institutional accountability <span class="italic font-normal text-terracotta-600">year by year</span>.
             </h1>
-            <p class="text-lg md:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
-                Explore our yearly progress, achievements, and the measurable difference we're making in healthcare access across Tanzania.
+            <p class="text-lg sm:text-xl text-ink-muted leading-relaxed font-sans font-normal">
+                Primetel operates under full transparency. We document our patient reach, clinic operations, financial expenditures, and clinical milestones in comprehensive annual reports accessible to the public, partners, and donors.
             </p>
         </div>
     </div>
 </section>
 
-<!-- Reports Grid -->
-<section class="py-20 lg:py-28 bg-white">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16 fade-up">
-            <span class="inline-block bg-brand-50 text-brand-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
-                Our Reports
-            </span>
-            <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">
-                Year by <span class="text-brand-600">Year</span>
-            </h2>
-            <p class="text-muted text-lg max-w-2xl mx-auto">
-                Download and review our comprehensive annual reports
-            </p>
+<!-- Reports Section -->
+<section class="py-20 lg:py-28 bg-white border-b border-sand-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mb-14 fade-up">
+            <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 block mb-2 font-sans">Official Publications</span>
+            <h2 class="editorial-title text-3xl sm:text-4xl text-navy-950 font-normal">Published Impact Reports</h2>
         </div>
 
+        {% if reports %}
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for report in reports %}
-            <div class="fade-up report-card bg-white rounded-xl border border-slate-200 overflow-hidden flex flex-col">
-                <!-- Cover Image -->
-                <div class="relative overflow-hidden">
-                    {% if report.cover_image %}
-                    <img src="{{ report.cover_image.url }}" alt="{{ report.title }}"
-                         class="w-full h-56 object-cover">
-                    {% else %}
-                    <div class="w-full h-56 bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center">
-                        <div class="text-center text-white">
-                            <i class="fas fa-file-alt text-5xl mb-3 opacity-80"></i>
-                            <p class="text-2xl font-bold">{{ report.year }}</p>
+            <article class="bg-sand-50 rounded-2xl border border-sand-300 overflow-hidden flex flex-col justify-between fade-up">
+                <div>
+                    <!-- Report Cover Image / Banner -->
+                    <div class="relative aspect-[16/10] bg-sand-200 overflow-hidden">
+                        {% if report.cover_image %}
+                        <img src="{{ report.cover_image.url }}" alt="{{ report.title }}" class="w-full h-full object-cover">
+                        {% else %}
+                        <div class="w-full h-full bg-navy-950 flex items-center justify-center p-6 text-center">
+                            <div>
+                                <i class="fas fa-file-lines text-4xl text-sand-300 mb-2 opacity-80"></i>
+                                <p class="text-xs font-bold font-mono uppercase tracking-widest text-sand-200">Primetel Health Annual Report</p>
+                                <p class="text-2xl font-bold font-mono text-white mt-1">{{ report.year }}</p>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="absolute top-3 left-3">
+                            <span class="bg-navy-900 text-white font-mono text-xs font-bold px-2.5 py-1 rounded">
+                                FY {{ report.year }}
+                            </span>
                         </div>
                     </div>
+
+                    <!-- Content -->
+                    <div class="p-6">
+                        <h3 class="editorial-title text-2xl text-navy-950 font-normal leading-snug mb-3">
+                            {{ report.title }}
+                        </h3>
+                        <p class="text-xs sm:text-sm text-ink-muted leading-relaxed mb-4">
+                            {{ report.description }}
+                        </p>
+
+                        {% if report.highlights %}
+                        <div class="pt-4 border-t border-sand-200 space-y-2">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-navy-900 block font-sans">Verified Highlights</span>
+                            <ul class="space-y-1.5 text-xs text-ink-light">
+                                {% for highlight in report.highlights.splitlines %}
+                                {% if highlight.strip %}
+                                <li class="flex items-start gap-2">
+                                    <i class="fas fa-check text-emerald-600 text-[10px] mt-0.5 shrink-0"></i>
+                                    <span>{{ highlight }}</span>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Download Footer -->
+                <div class="p-6 pt-0">
+                    {% if report.report_file %}
+                    <a href="{{ report.report_file.url }}" target="_blank"
+                        class="w-full py-2.5 px-4 rounded-lg bg-navy-900 hover:bg-navy-800 text-white text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 transition-colors">
+                        <i class="fas fa-download text-xs text-sand-300"></i>
+                        <span>Download Full Report (PDF)</span>
+                    </a>
+                    {% else %}
+                    <span class="text-xs text-ink-subtle italic">Document archiving in progress</span>
                     {% endif %}
-                    <div class="absolute top-4 left-4">
-                        <span class="inline-flex items-center gap-1.5 bg-brand-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                            <i class="fas fa-calendar-alt text-[10px]"></i> {{ report.year }}
-                        </span>
-                    </div>
                 </div>
-
-                <!-- Content -->
-                <div class="p-6 flex flex-col flex-1">
-                    <h3 class="text-xl font-bold text-dark mb-3">{{ report.title }}</h3>
-                    <p class="text-muted text-sm leading-relaxed mb-4 flex-1">
-                        {{ report.description|truncatewords:30 }}
-                    </p>
-
-                    <!-- Highlights -->
-                    {% if report.highlights %}
-                    <div class="mb-5">
-                        <h4 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Key Highlights</h4>
-                        <ul class="space-y-1.5">
-                            {% for highlight in report.highlights.splitlines %}
-                            {% if highlight.strip %}
-                            <li class="flex items-start gap-2 text-sm text-muted">
-                                <i class="fas fa-check-circle text-brand-500 mt-0.5 text-xs shrink-0"></i>
-                                {{ highlight }}
-                            </li>
-                            {% endif %}
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    {% endif %}
-
-                    <!-- Footer -->
-                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-                        <span class="text-xs text-muted">
-                            <i class="far fa-calendar-alt mr-1"></i> Published {{ report.published_date|date:"F j, Y" }}
-                        </span>
-                        <a href="{{ report.report_file.url }}" target="_blank"
-                           class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">
-                            <i class="fas fa-download text-xs"></i> Download
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {% empty %}
-            <div class="col-span-full text-center py-16">
-                <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <i class="fas fa-file-alt text-slate-400 text-2xl"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-dark mb-2">No Reports Available Yet</h3>
-                <p class="text-muted text-lg">Annual reports will be published here. Check back soon.</p>
-            </div>
+            </article>
             {% endfor %}
         </div>
+        {% else %}
+        <!-- Default Institutional Overview when no custom reports uploaded in admin -->
+        <div class="bg-sand-50 p-8 sm:p-12 rounded-2xl border border-sand-300 max-w-3xl fade-up space-y-6">
+            <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 block">Governance Archive</span>
+            <h3 class="editorial-title text-3xl text-navy-950 font-normal">Annual Clinical & Governance Audits</h3>
+            <p class="text-sm text-ink-light leading-relaxed">
+                Primetel compiles yearly audits covering clinical patient records, mobile outreach logs across Monduli district, and financial accounts. To request historical governance archives or verify registration details under the Ministry of Health, please reach out directly to our headquarters.
+            </p>
+            <div class="flex items-center gap-4 pt-2">
+                <a href="mailto:primetelhealth@gmail.com?subject=Annual%20Report%20Inquiry" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-navy-900 text-white text-xs font-bold uppercase tracking-wider hover:bg-navy-800 transition-colors">
+                    <i class="fas fa-envelope text-xs text-sand-300"></i>
+                    <span>Request Audited Accounts</span>
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="relative bg-dark overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-10 right-20 w-80 h-80 bg-brand-500 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-10 left-20 w-64 h-64 bg-brand-700 rounded-full blur-3xl"></div>
-    </div>
-    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
-        <div class="max-w-3xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 fade-up">
-                Want to Learn More About <span class="gradient-text">Our Work</span>?
-            </h2>
-            <p class="text-lg text-white/60 mb-10 fade-up leading-relaxed">
-                Get in touch to learn more about our programs, impact, and how you can support healthcare access in Tanzania.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4 fade-up">
-                <a href="{% url 'contact_us' %}" class="inline-flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-8 py-3.5 rounded-lg font-semibold text-sm transition-colors">
-                    <i class="fas fa-envelope"></i> Contact Us
-                </a>
-                <a href="{% url 'get_involved' %}" class="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-3.5 rounded-lg font-semibold text-sm transition-all">
-                    <i class="fas fa-handshake"></i> Get Involved
-                </a>
-            </div>
-        </div>
+<!-- Donation & Support strip -->
+<section class="py-16 bg-navy-950 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 fade-up">
+        <h2 class="editorial-title text-3xl sm:text-4xl font-normal mb-4">Invest in audited, verifiable healthcare.</h2>
+        <p class="text-sm sm:text-base text-white/70 max-w-xl mx-auto mb-8 font-sans">
+            Every contribution directly funds patient visits, essential medicines, and rural mobile clinics.
+        </p>
+        <a href="{% url 'donate' %}" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold text-xs uppercase tracking-wider transition-colors shadow">
+            <i class="fas fa-heart text-terracotta-200"></i>
+            <span>Support Our Work</span>
+        </a>
     </div>
 </section>
 

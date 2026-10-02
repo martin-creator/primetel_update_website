@@ -226,3 +226,43 @@ class NewsletterSubscription(models.Model):  # For subscribe forms
 
     def __str__(self):
         return self.email
+
+
+class DonationPledge(models.Model):
+    FREQUENCY_CHOICES = [
+        ('one_time', 'One-time gift'),
+        ('monthly', 'Monthly sustaining support'),
+    ]
+    PAYMENT_PREFERENCE_CHOICES = [
+        ('mobile_money', 'Tanzania Mobile Money (M-Pesa / Tigo Pesa / Airtel Money)'),
+        ('bank_transfer', 'Direct Bank Wire / Transfer'),
+        ('card_pledge', 'Credit / Debit Card Pledge'),
+        ('other', 'Other / Discuss with Primetel team'),
+    ]
+    ALLOCATION_CHOICES = [
+        ('general', 'Where it is needed most (Urgent Care & Clinic Operations)'),
+        ('mobile_clinic', 'Mobile Outreach Clinics & Rural Boma Visits'),
+        ('mental_health', 'School Mental Health & Youth Workshops'),
+        ('medication_fund', 'Patient Emergency Medication Fund'),
+        ('telehealth', 'USSD *149*46# Telehealth Access'),
+    ]
+
+    name = models.CharField(max_length=150)
+    email = models.EmailField()
+    phone = models.CharField(max_length=30, blank=True)
+    amount = models.DecimalField(max_digits=12, decimal_places=2, default=50.00)
+    currency = models.CharField(max_length=10, default='USD', choices=[('USD', 'USD ($)'), ('TZS', 'TZS (Tanzanian Shilling)')])
+    frequency = models.CharField(max_length=20, choices=FREQUENCY_CHOICES, default='one_time')
+    allocation = models.CharField(max_length=30, choices=ALLOCATION_CHOICES, default='general')
+    payment_preference = models.CharField(max_length=30, choices=PAYMENT_PREFERENCE_CHOICES, default='mobile_money')
+    notes = models.TextField(blank=True, help_text="Optional dedication or note")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Donation Pledge"
+        verbose_name_plural = "Donation Pledges"
+
+    def __str__(self):
+        return f"{self.name} - {self.currency} {self.amount} ({self.get_frequency_display()})"
+

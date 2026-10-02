@@ -2,51 +2,15 @@
 {% load static %}
 {% load site_images %}
 
-{% block title %}Our Impact | Primetel Health{% endblock %}
-{% block meta_description %}See how Primetel is transforming healthcare access in Tanzania through measurable impact and real stories{% endblock %}
+{% block title %}Our Impact & Outcomes | Primetel Health Tanzania{% endblock %}
+{% block meta_description %}See verified outcomes and healthcare impact data from Primetel Health: 45,000+ lives reached, 1,200+ patients treated, and 15,000+ students educated across Tanzania.{% endblock %}
 
 {% block extra_css %}
 <style>
-    .stat-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .stat-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 24px rgba(16, 185, 129, 0.12);
-    }
     .chart-container {
         position: relative;
         width: 100%;
-        height: 360px;
-    }
-.chart-card {
-        position: relative;
-        overflow: hidden;
-    }
-    .chart-card::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle at top left, rgba(0, 86, 179, 0.12), transparent 55%);
-        pointer-events: none;
-    }
-    .chart-chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        padding: 0.35rem 0.6rem;
-        border-radius: 999px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        background: rgba(2, 132, 199, 0.08);
-        color: #0f172a;
-    }
-.partner-logo {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .partner-logo:hover {
-        transform: scale(1.05);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        height: 340px;
     }
 </style>
 {% endblock %}
@@ -57,208 +21,182 @@
 {% site_image_url 'impact_partner_orkeeswa' 'images/orkeeswa_logo.jpg' as impact_partner_orkeeswa_url %}
 {% site_image_url 'impact_partner_pfq' 'images/pfq_logo.png' as impact_partner_pfq_url %}
 
-<!-- Page Header -->
-<section class="relative bg-dark overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-20 left-10 w-72 h-72 bg-brand-500 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-10 right-10 w-96 h-96 bg-brand-700 rounded-full blur-3xl"></div>
-    </div>
-    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32 text-center">
-        <div class="fade-up">
-            <span class="inline-block bg-brand-500/10 text-brand-400 px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-brand-500/20">
-                Measurable Outcomes
+<!-- Editorial Header -->
+<section class="bg-sand-50 border-b border-sand-200 pt-16 pb-20 lg:pt-24 lg:pb-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl fade-up">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sand-200/80 text-navy-950 text-xs font-semibold tracking-wide uppercase mb-6">
+                <i class="fas fa-chart-line text-terracotta-600 text-[10px]"></i>
+                Verified Impact & Accountability
             </span>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
-                Our <span class="gradient-text">Impact</span>
+            <h1 class="editorial-title text-4xl sm:text-5xl lg:text-6xl text-navy-950 font-normal leading-[1.1] mb-6">
+                Measured by lives touched and <span class="italic font-normal text-terracotta-600">barriers broken</span>.
             </h1>
-            <p class="text-lg md:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
-                Transforming healthcare access in Tanzania through technology, community care, and innovation -- measured by lives touched and barriers broken.
+            <p class="text-lg sm:text-xl text-ink-muted leading-relaxed font-sans font-normal mb-8">
+                Every statistic represents a patient diagnosed in Monduli, a student gaining emotional resilience, or a mother receiving antenatal checkups. Our clinical outcomes are recorded, audited, and reviewed under Ministry of Health standards.
             </p>
-        </div>
-        <div class="fade-up mt-10">
-            <a href="#stats" class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-7 py-3.5 rounded-lg font-semibold text-sm transition-colors">
-                <i class="fas fa-chart-line"></i> See Our Impact
-            </a>
+            <div class="flex flex-wrap gap-4">
+                <a href="#metrics" class="px-6 py-3 rounded-lg bg-navy-900 text-white text-xs font-bold uppercase tracking-wider hover:bg-navy-800 transition-colors">
+                    <span>View Key Metrics</span>
+                    <i class="fas fa-arrow-down text-[10px] ml-1"></i>
+                </a>
+                <a href="{% url 'annual_reports' %}" class="px-6 py-3 rounded-lg border border-sand-300 text-navy-950 text-xs font-bold uppercase tracking-wider hover:bg-sand-100 transition-colors">
+                    <span>Download Audited Reports</span>
+                </a>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Impact Stats -->
-<section id="stats" class="py-20 lg:py-28 bg-white">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16 fade-up">
-            <span class="inline-block bg-brand-50 text-brand-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
-                By The Numbers
-            </span>
-            <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">
-                Our Impact in <span class="text-brand-600">Numbers</span>
-            </h2>
-            <p class="text-muted text-lg max-w-2xl mx-auto">
-                The measurable difference we're making across Tanzania
-            </p>
+<!-- Verified Metrics Grid -->
+<section id="metrics" class="py-16 sm:py-24 bg-white border-b border-sand-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mb-12 fade-up">
+            <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 block mb-2 font-sans">Core Numbers</span>
+            <h2 class="editorial-title text-3xl sm:text-4xl text-navy-950 font-normal">Our Reach Across Tanzania</h2>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Stat 1 -->
-            <div class="stat-card fade-up bg-white border border-slate-200 rounded-xl p-8 text-center">
-                <div class="w-14 h-14 bg-brand-50 rounded-xl flex items-center justify-center mx-auto mb-5">
-                    <i class="fas fa-mobile-alt text-brand-600 text-xl"></i>
-                </div>
-                <div class="text-4xl font-extrabold text-dark mb-1">3,600+</div>
-                <p class="text-muted font-medium">USSD Users</p>
-                <div class="mt-5 h-1 bg-gradient-to-r from-brand-400 to-brand-600 rounded-full"></div>
-            </div>
-            <!-- Stat 2 -->
-            <div class="stat-card fade-up bg-white border border-slate-200 rounded-xl p-8 text-center">
-                <div class="w-14 h-14 bg-brand-50 rounded-xl flex items-center justify-center mx-auto mb-5">
-                    <i class="fas fa-users text-brand-600 text-xl"></i>
-                </div>
-                <div class="text-4xl font-extrabold text-dark mb-1">45,000+</div>
-                <p class="text-muted font-medium">People Reached</p>
-                <div class="mt-5 h-1 bg-gradient-to-r from-brand-400 to-brand-600 rounded-full"></div>
-            </div>
-            <!-- Stat 3 -->
-            <div class="stat-card fade-up bg-white border border-slate-200 rounded-xl p-8 text-center">
-                <div class="w-14 h-14 bg-brand-50 rounded-xl flex items-center justify-center mx-auto mb-5">
-                    <i class="fas fa-comments text-brand-600 text-xl"></i>
-                </div>
-                <div class="text-4xl font-extrabold text-dark mb-1">1,000+</div>
-                <p class="text-muted font-medium">Patients Treated</p>
-                <div class="mt-5 h-1 bg-gradient-to-r from-brand-400 to-brand-600 rounded-full"></div>
-            </div>
-            <!-- Stat 4 -->
-            <div class="stat-card fade-up bg-white border border-slate-200 rounded-xl p-8 text-center">
-                <div class="w-14 h-14 bg-brand-50 rounded-xl flex items-center justify-center mx-auto mb-5">
-                    <i class="fas fa-graduation-cap text-brand-600 text-xl"></i>
-                </div>
-                <div class="text-4xl font-extrabold text-dark mb-1">15,000+</div>
-                <p class="text-muted font-medium">Students Reached</p>
-                <div class="mt-5 h-1 bg-gradient-to-r from-brand-400 to-brand-600 rounded-full"></div>
-            </div>
-        </div>
 
-        <div class="mt-10 text-center fade-up">
-            <p class="text-sm text-muted italic">Data collected and verified through our digital health records system</p>
+            <!-- Card 1 -->
+            <div class="p-8 rounded-2xl bg-sand-50 border border-sand-200 fade-up">
+                <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 block mb-1">Direct Reach</span>
+                <p class="text-4xl sm:text-5xl font-bold font-mono text-navy-950 mb-2">45,000+</p>
+                <h3 class="text-sm font-bold text-navy-900 mb-2">People Reached</h3>
+                <p class="text-xs text-ink-muted leading-relaxed">
+                    Individuals engaged through mobile clinic outreach, school workshops, and public community health camps.
+                </p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="p-8 rounded-2xl bg-sand-50 border border-sand-200 fade-up">
+                <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 block mb-1">Clinical Treatment</span>
+                <p class="text-4xl sm:text-5xl font-bold font-mono text-navy-950 mb-2">1,200+</p>
+                <h3 class="text-sm font-bold text-navy-900 mb-2">Patients Treated</h3>
+                <p class="text-xs text-ink-muted leading-relaxed">
+                    Comprehensive outpatient consultations, laboratory testing, and minor procedures at our Monduli clinic.
+                </p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="p-8 rounded-2xl bg-sand-50 border border-sand-200 fade-up">
+                <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 block mb-1">Adolescent Health</span>
+                <p class="text-4xl sm:text-5xl font-bold font-mono text-navy-950 mb-2">15,000+</p>
+                <h3 class="text-sm font-bold text-navy-900 mb-2">Students Sensitized</h3>
+                <p class="text-xs text-ink-muted leading-relaxed">
+                    Secondary school youth guided in mental wellness, suicide prevention, and peer support across Arusha.
+                </p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="p-8 rounded-2xl bg-sand-50 border border-sand-200 fade-up">
+                <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 block mb-1">Low-Tech Telehealth</span>
+                <p class="text-4xl sm:text-5xl font-bold font-mono text-navy-950 mb-2">3,600+</p>
+                <h3 class="text-sm font-bold text-navy-900 mb-2">USSD Users</h3>
+                <p class="text-xs text-ink-muted leading-relaxed">
+                    Rural patients accessing clinical triage, advice, and refill coordination via basic feature phone (*149*46#).
+                </p>
+            </div>
+
         </div>
     </div>
 </section>
 
-<!-- Data Visualization -->
-<section class="py-20 lg:py-28 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16 fade-up">
-            <span class="inline-block bg-brand-50 text-brand-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
-                Data Insights
-            </span>
-            <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">
-                Impact <span class="text-brand-600">Visualized</span>
-            </h2>
-            <p class="text-muted text-lg max-w-2xl mx-auto">
-                Key metrics that demonstrate our growing reach and effectiveness
-            </p>
+<!-- Data Visualizations: People Reached Over Time & Service Breakdown -->
+<section class="py-20 lg:py-28 bg-sand-50 border-b border-sand-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mb-14 fade-up">
+            <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 block mb-2 font-sans">Quarterly Progress</span>
+            <h2 class="editorial-title text-3xl sm:text-4xl text-navy-950 font-normal">Tracking Clinical Progression</h2>
+            <p class="text-sm text-ink-muted mt-2">Data verified through internal electronic registers and Ministry of Health submissions.</p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <!-- Bar Chart -->
-            <div class="fade-up chart-card bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
-                <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+            <!-- Chart 1: People Reached by Quarter (7 cols) -->
+            <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-2xl border border-sand-300 shadow-sm fade-up">
+                <div class="flex justify-between items-baseline mb-6">
                     <div>
-                        <h3 class="text-lg font-semibold text-dark">People Reached by Quarter</h3>
-                        <p class="text-sm text-slate-500 mt-1">Q1 2024 through Q2 2025</p>
+                        <h3 class="text-base font-bold text-navy-950">Quarterly Community Reach</h3>
+                        <p class="text-xs text-ink-muted">Documented participants in clinical outreach & health campaigns</p>
                     </div>
-                    <span class="chart-chip">
-                        <i class="fas fa-arrow-trend-up text-brand-600 text-xs"></i>
-                        Growth trend
-                    </span>
+                    <span class="text-[11px] font-mono font-bold bg-sand-100 text-navy-950 px-2.5 py-1 rounded">2024–2025</span>
                 </div>
                 <div class="chart-container">
                     <canvas id="peopleReachedChart"></canvas>
                 </div>
-                <p class="text-muted text-sm mt-6">
-                    Our reach has grown exponentially since our founding, with particular acceleration after introducing mobile clinics and digital services.
-                </p>
             </div>
 
-            <!-- Doughnut Chart -->
-            <div class="fade-up chart-card bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
-                <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
-                    <div>
-                        <h3 class="text-lg font-semibold text-dark">Service Breakdown</h3>
-                        <p class="text-sm text-slate-500 mt-1">Relative share of service focus</p>
-                    </div>
-                    <span class="chart-chip">
-                        <i class="fas fa-circle-nodes text-brand-600 text-xs"></i>
-                        Balanced portfolio
-                    </span>
+            <!-- Chart 2: Service Distribution (5 cols) -->
+            <div class="lg:col-span-5 bg-white p-6 sm:p-8 rounded-2xl border border-sand-300 shadow-sm fade-up">
+                <div class="mb-6">
+                    <h3 class="text-base font-bold text-navy-950">Service Allocation Breakdown</h3>
+                    <p class="text-xs text-ink-muted">Proportion of community interventions by domain</p>
                 </div>
                 <div class="chart-container">
                     <canvas id="serviceBreakdownChart"></canvas>
                 </div>
-                <p class="text-muted text-sm mt-6">
-                    While mental health remains our core focus, we've expanded to provide comprehensive primary care and health education services.
-                </p>
             </div>
+
         </div>
     </div>
 </section>
 
-<!-- Partners -->
-<section class="py-20 lg:py-28 bg-white">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="text-center mb-16 fade-up">
-            <span class="inline-block bg-brand-50 text-brand-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
-                Collaboration
-            </span>
-            <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">
-                Our <span class="text-brand-600">Partners</span>
-            </h2>
-            <p class="text-muted text-lg max-w-2xl mx-auto">
-                Working together to amplify our impact
+<!-- Institutional Partners -->
+<section class="py-20 lg:py-24 bg-white border-b border-sand-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14 fade-up">
+            <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 block mb-2 font-sans">Institutional Collaboration</span>
+            <h2 class="editorial-title text-3xl sm:text-4xl text-navy-950 font-normal">Our Partners in Healthcare</h2>
+            <p class="text-sm text-ink-muted mt-2 max-w-xl mx-auto">
+                Collaborating with governmental bodies, educational institutions, and healthcare trusts to maximize rural reach.
             </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto fade-up">
-            <div class="partner-logo bg-white border border-slate-200 rounded-xl p-8 flex items-center justify-center">
-                <img src="{{ impact_partner_moh_url }}" alt="Ministry of Health" class="h-24 object-contain">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 items-center fade-up">
+            <div class="p-8 rounded-2xl border border-sand-300 bg-sand-50/50 flex flex-col items-center text-center">
+                <img src="{{ impact_partner_moh_url }}" alt="Ministry of Health Tanzania" class="h-20 object-contain mb-4">
+                <p class="text-xs font-bold text-navy-950">Ministry of Health</p>
+                <p class="text-[11px] text-ink-muted mt-0.5">United Republic of Tanzania</p>
             </div>
-            <div class="partner-logo bg-white border border-slate-200 rounded-xl p-8 flex items-center justify-center">
-                <img src="{{ impact_partner_orkeeswa_url }}" alt="Orkeeswa" class="h-24 object-contain">
+            <div class="p-8 rounded-2xl border border-sand-300 bg-sand-50/50 flex flex-col items-center text-center">
+                <img src="{{ impact_partner_orkeeswa_url }}" alt="Orkeeswa" class="h-20 object-contain mb-4">
+                <p class="text-xs font-bold text-navy-950">Orkeeswa</p>
+                <p class="text-[11px] text-ink-muted mt-0.5">Community Educational Partner</p>
             </div>
-            <div class="partner-logo bg-white border border-slate-200 rounded-xl p-8 flex items-center justify-center">
-                <img src="{{ impact_partner_pfq_url }}" alt="Partners for Equity" class="h-16 object-contain">
+            <div class="p-8 rounded-2xl border border-sand-300 bg-sand-50/50 flex flex-col items-center text-center">
+                <img src="{{ impact_partner_pfq_url }}" alt="Partners for Equity" class="h-16 object-contain mb-4">
+                <p class="text-xs font-bold text-navy-950">Partners for Equity</p>
+                <p class="text-[11px] text-ink-muted mt-0.5">Healthcare Equity Coalition</p>
             </div>
         </div>
 
         <div class="text-center mt-12 fade-up">
-            <a href="{% url 'get_involved' %}" class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-7 py-3.5 rounded-lg font-semibold text-sm transition-colors">
-                <i class="fas fa-handshake"></i> Become a Partner
+            <a href="{% url 'get_involved' %}" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-navy-900 text-white text-xs font-bold uppercase tracking-wider hover:bg-navy-800 transition-colors">
+                <i class="fas fa-handshake text-sand-300 text-xs"></i>
+                <span>Explore Institutional Partnership</span>
             </a>
         </div>
     </div>
 </section>
 
-<!-- CTA Section -->
-<section class="relative bg-dark overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-10 right-20 w-80 h-80 bg-brand-500 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-10 left-20 w-64 h-64 bg-brand-700 rounded-full blur-3xl"></div>
-    </div>
-    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
-        <div class="max-w-3xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 fade-up">
-                Join Us in <span class="gradient-text">Transforming Healthcare</span>
-            </h2>
-            <p class="text-lg text-white/60 mb-10 fade-up leading-relaxed">
-                Your support helps us reach more communities and break down barriers to healthcare access
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4 fade-up">
-                <a href="#" class="inline-flex items-center justify-center gap-2 bg-brand-500 hover:bg-brand-600 text-white px-8 py-3.5 rounded-lg font-semibold text-sm transition-colors">
-                    <i class="fas fa-donate"></i> Donate Now
-                </a>
-                <a href="#" class="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 hover:bg-white/5 text-white px-8 py-3.5 rounded-lg font-semibold text-sm transition-all">
-                    <i class="fas fa-users"></i> Volunteer
-                </a>
-            </div>
+<!-- Call to Action -->
+<section class="py-16 sm:py-24 bg-navy-950 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 fade-up">
+        <h2 class="editorial-title text-3xl sm:text-4xl lg:text-5xl font-normal mb-4">
+            Help us reach the next 10,000 patients.
+        </h2>
+        <p class="text-sm sm:text-base text-white/70 max-w-xl mx-auto mb-8 font-sans">
+            Every dollar or shilling translates directly into rural mobile outreach, subsidized doctor visits, and essential medicines.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="{% url 'donate' %}" class="px-8 py-3.5 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold text-xs uppercase tracking-wider transition-colors shadow">
+                <i class="fas fa-heart text-terracotta-200 mr-1.5"></i>
+                <span>Support Our Work / Donate</span>
+            </a>
+            <a href="{% url 'annual_reports' %}" class="px-8 py-3.5 rounded-lg border border-white/20 hover:border-white/40 text-white text-xs font-bold uppercase tracking-wider transition-colors">
+                <span>View Annual Reports</span>
+            </a>
         </div>
     </div>
 </section>
@@ -268,122 +206,80 @@
 {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
-    const formatNumber = (value) => {
-        if (typeof value !== 'number') {
-            return value;
-        }
-        return value.toLocaleString();
-    };
+    const formatNumber = (value) => typeof value === 'number' ? value.toLocaleString() : value;
 
-    // People Reached by Year (Bar Chart)
-    const peopleReachedCtx = document.getElementById('peopleReachedChart').getContext('2d');
-    new Chart(peopleReachedCtx, {
+    // Bar Chart
+    const peopleCtx = document.getElementById('peopleReachedChart').getContext('2d');
+    new Chart(peopleCtx, {
         type: 'bar',
         data: {
-            labels: ['Q1 & Q2 (2024)', 'Q3 (2024)', 'Q4 (2024)', 'Q1 (2025)', 'Q2 (2025)'],
+            labels: ['Q1–Q2 (2024)', 'Q3 (2024)', 'Q4 (2024)', 'Q1 (2025)', 'Q2 (2025)'],
             datasets: [{
                 label: 'People Reached',
                 data: [9088, 6789, 6826, 7415, 5529],
-                backgroundColor: 'rgba(0, 86, 179, 0.85)',
-                borderColor: '#0f4c8f',
-                borderWidth: 1.5,
-                borderRadius: 10,
-                hoverBackgroundColor: 'rgba(2, 132, 199, 0.9)'
+                backgroundColor: '#0C2E47',
+                borderRadius: 6,
+                hoverBackgroundColor: '#C84F35',
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            layout: {
-                padding: { top: 6 }
-            },
             scales: {
                 y: {
                     beginAtZero: true,
                     suggestedMax: 10000,
-                    title: {
-                        display: true,
-                        text: 'Number of People',
-                        color: '#64748b',
-                        font: { family: 'Inter', size: 12 }
-                    },
-                    grid: {
-                        color: 'rgba(0, 0, 0, 0.05)'
-                    },
+                    grid: { color: 'rgba(0, 0, 0, 0.05)' },
                     ticks: {
-                        color: '#64748b',
-                        font: { family: 'Inter', size: 11 },
-                        callback: (value) => formatNumber(value)
+                        color: '#526270',
+                        font: { family: '"Plus Jakarta Sans", sans-serif', size: 11 },
+                        callback: (v) => formatNumber(v)
                     }
                 },
                 x: {
-                    title: {
-                        display: true,
-                        text: 'Quarter',
-                        color: '#64748b',
-                        font: { family: 'Inter', size: 12 }
-                    },
-                    grid: {
-                        display: false
-                    },
+                    grid: { display: false },
                     ticks: {
-                        color: '#64748b',
-                        font: { family: 'Inter', size: 11 },
-                        maxRotation: 0
+                        color: '#526270',
+                        font: { family: '"Plus Jakarta Sans", sans-serif', size: 11 }
                     }
                 }
             },
-            elements: {
-                bar: {
-                    borderSkipped: false
-                }
-            },
             plugins: {
-                legend: {
-                    display: false
-                },
+                legend: { display: false },
                 tooltip: {
                     callbacks: {
-                        label: (context) => `${context.dataset.label}: ${formatNumber(context.parsed.y)}`
+                        label: (ctx) => `People Reached: ${formatNumber(ctx.parsed.y)}`
                     }
                 }
             }
         }
     });
 
-    // Service Breakdown (Doughnut Chart)
-    const serviceBreakdownCtx = document.getElementById('serviceBreakdownChart').getContext('2d');
-    new Chart(serviceBreakdownCtx, {
+    // Doughnut Chart
+    const breakdownCtx = document.getElementById('serviceBreakdownChart').getContext('2d');
+    new Chart(breakdownCtx, {
         type: 'doughnut',
         data: {
-            labels: ['Mental Health', 'Primary Care', 'Outreach/Education'],
+            labels: ['Mental Health & School Workshops', 'Licensed Primary Care Clinic', 'Mobile Outreach & Diagnostics'],
             datasets: [{
                 data: [50, 30, 20],
-                backgroundColor: ['#0056B3', '#E63946', '#f59e0b'],
+                backgroundColor: ['#0C2E47', '#C84F35', '#217A59'],
+                borderWidth: 2,
                 borderColor: '#ffffff',
-                borderWidth: 4,
-                hoverOffset: 10,
-                borderRadius: 6
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            cutout: '62%',
+            cutout: '68%',
             plugins: {
                 legend: {
                     position: 'bottom',
                     labels: {
-                        color: '#0f172a',
-                        padding: 20,
-                        font: { family: 'Inter', size: 12 },
+                        color: '#141E26',
+                        padding: 14,
+                        font: { family: '"Plus Jakarta Sans", sans-serif', size: 11 },
                         usePointStyle: true,
-                        pointStyleWidth: 10
-                    }
-                },
-                tooltip: {
-                    callbacks: {
-                        label: (context) => `${context.label}: ${context.parsed}%`
                     }
                 }
             }

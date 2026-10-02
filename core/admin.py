@@ -5,6 +5,7 @@ from .models import (
     AnnualReport,
     ConsultationBooking,
     ContactInquiry,
+    DonationPledge,
     GalleryItem,
     GetInvolvedInquiry,
     News,
@@ -54,6 +55,12 @@ admin.site.register(GetInvolvedInquiry)
 admin.site.register(ConsultationBooking)
 admin.site.register(NewsletterSubscription)
 admin.site.register(AnnualReport)
+
+@admin.register(DonationPledge)
+class DonationPledgeAdmin(admin.ModelAdmin):
+    list_display = ['name', 'amount', 'currency', 'frequency', 'allocation', 'payment_preference', 'email', 'created_at']
+    list_filter = ['currency', 'frequency', 'allocation', 'payment_preference', 'created_at']
+    search_fields = ['name', 'email', 'phone', 'notes']
 
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):

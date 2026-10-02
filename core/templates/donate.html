@@ -1,0 +1,425 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Support Our Work | Primetel Health Tanzania{% endblock %}
+{% block meta_description %}Support Primetel Health in expanding mobile clinics, licensed primary healthcare, and mental health outreach to underserved Tanzanian communities.{% endblock %}
+
+{% block extra_css %}
+<style>
+    .giving-pillar {
+        transition: all 0.25s ease;
+        border: 2px solid #ECE4D6;
+    }
+    .giving-pillar:hover, .giving-pillar.active {
+        border-color: #C84F35;
+        background-color: #FDF6F4;
+    }
+    .giving-pillar.active {
+        box-shadow: 0 4px 16px -2px rgba(200, 79, 53, 0.12);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<!-- Editorial Hero Section -->
+<section class="bg-sand-50 border-b border-sand-200 pt-16 pb-20 lg:pt-24 lg:pb-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sand-200/70 text-navy-900 text-xs font-semibold tracking-wide uppercase mb-6">
+                <i class="fas fa-heart text-terracotta-600 text-[10px]"></i>
+                Direct Community Health Impact
+            </div>
+            <h1 class="editorial-title text-4xl sm:text-5xl lg:text-6xl font-normal text-navy-950 leading-[1.1] mb-6">
+                Invest in healthcare where the last mile is <span class="italic font-normal text-terracotta-600">someone’s entire life</span>.
+            </h1>
+            <p class="text-lg sm:text-xl text-ink-muted leading-relaxed font-sans font-normal mb-8">
+                In the rural communities of Monduli and across Arusha, a single mobile clinic visit or a subsidized medicine fund stands between a family and preventable suffering. Your support fuels authentic, community-led clinical care in Tanzania.
+            </p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-sand-200 text-xs text-ink-muted">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-check-circle text-emerald-600"></i>
+                    <span>Licensed Medical Clinic</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-check-circle text-emerald-600"></i>
+                    <span>Audited Annual Reports</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-check-circle text-emerald-600"></i>
+                    <span>Direct-to-Field Allocation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Main Support & Donation Interface -->
+<section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {% if donation_success %}
+        <!-- Submission Confirmation Modal/Alert -->
+        <div class="mb-14 p-8 rounded-2xl bg-forest-50 border border-forest-100 shadow-sm fade-up">
+            <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-xl bg-forest-600 text-white flex items-center justify-center shrink-0 text-xl">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <div class="space-y-3">
+                    <span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold uppercase tracking-wider bg-forest-100 text-forest-700">Pledge Received</span>
+                    <h2 class="editorial-title text-2xl font-bold text-navy-950">Thank you for standing with Primetel Health.</h2>
+                    <p class="text-sm text-ink-light leading-relaxed max-w-2xl">
+                        Your support pledge has been safely recorded by our administration. A member of our team will contact you directly with official transfer confirmation and field updates.
+                    </p>
+                    <div class="bg-white p-5 rounded-xl border border-forest-200/80 max-w-xl text-xs space-y-2">
+                        <div class="flex justify-between border-b border-sand-100 pb-1.5">
+                            <span class="text-ink-muted">Supporter Name:</span>
+                            <span class="font-bold text-navy-950">{{ pledge.name }}</span>
+                        </div>
+                        <div class="flex justify-between border-b border-sand-100 pb-1.5">
+                            <span class="text-ink-muted">Pledged Amount:</span>
+                            <span class="font-bold text-navy-950 font-mono text-sm">{{ pledge.currency }} {{ pledge.amount|floatformat:2 }}</span>
+                        </div>
+                        <div class="flex justify-between border-b border-sand-100 pb-1.5">
+                            <span class="text-ink-muted">Giving Type:</span>
+                            <span class="font-semibold text-navy-900">{{ pledge.get_frequency_display }}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-ink-muted">Allocated Area:</span>
+                            <span class="font-semibold text-terracotta-600">{{ pledge.get_allocation_display }}</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-ink-subtle">
+                        For immediate assistance or wire details, contact Founder & CEO Emmanuel Samwel directly at <strong class="text-ink-light">primetelhealth@gmail.com</strong> or call <strong class="text-ink-light">+255 762 629 046</strong>.
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+
+            <!-- Left Editorial Column: Impact Pillars (7 cols) -->
+            <div class="lg:col-span-7 space-y-12">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-2 block">Transparency & Responsibility</span>
+                    <h2 class="editorial-title text-3xl sm:text-4xl text-navy-950 mb-4">
+                        Where your contribution goes.
+                    </h2>
+                    <p class="text-sm sm:text-base text-ink-muted leading-relaxed">
+                        Primetel operates on an ultra-lean, grassroots model. Every shilling or dollar contributed directly supports clinical consumables, mobile outreach fuel, medication subsidies, and mental health clinicians serving in rural Monduli and Arusha.
+                    </p>
+                </div>
+
+                <!-- Tangible Pillars Grid -->
+                <div class="space-y-4">
+                    <!-- Pillar 1 -->
+                    <div class="giving-pillar active p-6 rounded-xl cursor-pointer" onclick="selectPillar(25, 'general')">
+                        <div class="flex items-start justify-between gap-4 mb-2">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-sand-200 text-navy-900 flex items-center justify-center text-xs font-bold font-mono">01</span>
+                                <h3 class="text-base font-bold text-navy-950">Essential Medicine & Clinical Care</h3>
+                            </div>
+                            <span class="text-lg font-bold font-mono text-terracotta-600">$25 <span class="text-xs text-ink-subtle font-sans font-normal">/ ~65,000 TZS</span></span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-ink-light leading-relaxed pl-11">
+                            Covers comprehensive outpatient doctor consultation, malaria and blood sugar diagnostics, and essential prescriptions for a family unable to pay out-of-pocket fees at our Monduli clinic.
+                        </p>
+                    </div>
+
+                    <!-- Pillar 2 -->
+                    <div class="giving-pillar p-6 rounded-xl cursor-pointer" onclick="selectPillar(50, 'mental_health')">
+                        <div class="flex items-start justify-between gap-4 mb-2">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-sand-200 text-navy-900 flex items-center justify-center text-xs font-bold font-mono">02</span>
+                                <h3 class="text-base font-bold text-navy-950">Youth Mental Wellness Workshop</h3>
+                            </div>
+                            <span class="text-lg font-bold font-mono text-terracotta-600">$50 <span class="text-xs text-ink-subtle font-sans font-normal">/ ~130,000 TZS</span></span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-ink-light leading-relaxed pl-11">
+                            Funds specialized counseling sessions and psychosocial training led by psychologist Albano Sabino for 50 secondary school students in Arusha, breaking stigma around depression and trauma.
+                        </p>
+                    </div>
+
+                    <!-- Pillar 3 -->
+                    <div class="giving-pillar p-6 rounded-xl cursor-pointer" onclick="selectPillar(100, 'mobile_clinic')">
+                        <div class="flex items-start justify-between gap-4 mb-2">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-sand-200 text-navy-900 flex items-center justify-center text-xs font-bold font-mono">03</span>
+                                <h3 class="text-base font-bold text-navy-950">Mobile Clinic Outreach to Remote Bomas</h3>
+                            </div>
+                            <span class="text-lg font-bold font-mono text-terracotta-600">$100 <span class="text-xs text-ink-subtle font-sans font-normal">/ ~260,000 TZS</span></span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-ink-light leading-relaxed pl-11">
+                            Sponsors vehicle transport, field diagnostic kits, and medical supplies for a mobile outreach team to visit a remote village in Monduli district where roads are impassable for public transport.
+                        </p>
+                    </div>
+
+                    <!-- Pillar 4 -->
+                    <div class="giving-pillar p-6 rounded-xl cursor-pointer" onclick="selectPillar(250, 'telehealth')">
+                        <div class="flex items-start justify-between gap-4 mb-2">
+                            <div class="flex items-center gap-3">
+                                <span class="w-8 h-8 rounded-full bg-sand-200 text-navy-900 flex items-center justify-center text-xs font-bold font-mono">04</span>
+                                <h3 class="text-base font-bold text-navy-950">USSD Telehealth Bandwidth & Clinician Stipend</h3>
+                            </div>
+                            <span class="text-lg font-bold font-mono text-terracotta-600">$250 <span class="text-xs text-ink-subtle font-sans font-normal">/ ~650,000 TZS</span></span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-ink-light leading-relaxed pl-11">
+                            Maintains the low-tech mobile code line (<code class="bg-sand-100 text-navy-900 px-1.5 py-0.5 rounded font-mono text-xs">*149*46#</code>) accessible on non-smartphones, enabling 150+ rural patients to consult clinicians remotely.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Credibility Quote from Founder -->
+                <div class="p-6 rounded-2xl bg-sand-100/70 border border-sand-200">
+                    <p class="editorial-title text-lg text-navy-950 italic leading-relaxed mb-4">
+                        "We believe health equity is a moral necessity. When you support Primetel, you aren't giving to an abstract cause — you are paying for actual doctor visits, actual malaria tests, and real psychological counseling in places where no one else goes."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <img src="{% static 'images/Emmanuel_bio.jpg' %}" alt="Emmanuel Christopher Samwel" class="w-10 h-10 rounded-full object-cover border border-sand-300">
+                        <div>
+                            <p class="text-xs font-bold text-navy-950">Emmanuel Christopher Samwel</p>
+                            <p class="text-[11px] text-ink-muted">Founder & CEO, Primetel Health</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Transparency & Reports link -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 rounded-xl border border-sand-200 text-xs">
+                    <div>
+                        <p class="font-bold text-navy-950">Looking for our official audited figures?</p>
+                        <p class="text-ink-muted">Download Primetel's annual reports detailing reach, verified treatments, and operational budgets.</p>
+                    </div>
+                    <a href="{% url 'annual_reports' %}" class="inline-flex items-center gap-1.5 font-bold text-terracotta-600 hover:text-terracotta-700 underline shrink-0">
+                        <span>View Annual Reports</span>
+                        <i class="fas fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Column: Contribution Form & Boundary (5 cols) -->
+            <div class="lg:col-span-5 bg-sand-50/80 p-6 sm:p-8 rounded-2xl border border-sand-300 sticky top-28 shadow-sm">
+                <div class="mb-6 pb-6 border-b border-sand-200">
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-navy-800">Support Primetel</span>
+                    <h3 class="editorial-title text-2xl font-bold text-navy-950 mt-1">Make Your Contribution</h3>
+                    <p class="text-xs text-ink-muted mt-1 leading-relaxed">
+                        Complete your gift pledge below. Our administration will confirm your allocation and deliver receipt instructions.
+                    </p>
+                </div>
+
+                <form method="post" action="{% url 'donate' %}" class="space-y-5" id="donation-form">
+                    {% csrf_token %}
+
+                    <!-- Giving Frequency Selector -->
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-ink-muted mb-2">Giving Frequency</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button type="button" class="freq-btn active py-2.5 px-3 rounded-lg text-xs font-bold border border-sand-300 bg-white text-navy-950 transition-all text-center" data-val="one_time" onclick="setFrequency('one_time')">
+                                One-Time Gift
+                            </button>
+                            <button type="button" class="freq-btn py-2.5 px-3 rounded-lg text-xs font-bold border border-sand-300 bg-sand-100 text-ink-muted transition-all text-center" data-val="monthly" onclick="setFrequency('monthly')">
+                                Monthly Partner
+                            </button>
+                        </div>
+                        <input type="hidden" name="frequency" id="id_frequency" value="one_time">
+                    </div>
+
+                    <!-- Currency & Amount Picker -->
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="text-xs font-bold uppercase tracking-wider text-ink-muted">Contribution Amount</label>
+                            <div class="inline-flex text-[11px] font-bold border border-sand-300 rounded overflow-hidden">
+                                <button type="button" class="curr-btn active px-2 py-0.5 bg-navy-900 text-white" onclick="setCurrency('USD')">USD ($)</button>
+                                <button type="button" class="curr-btn px-2 py-0.5 bg-white text-ink-muted" onclick="setCurrency('TZS')">TZS</button>
+                            </div>
+                            <input type="hidden" name="currency" id="id_currency" value="USD">
+                        </div>
+
+                        <!-- Amount Quick Buttons -->
+                        <div class="grid grid-cols-4 gap-2 mb-3" id="amount-presets-usd">
+                            <button type="button" class="amt-btn py-2 rounded-lg text-xs font-bold border border-sand-300 bg-white hover:border-terracotta-500" onclick="setAmount(25)">$25</button>
+                            <button type="button" class="amt-btn active py-2 rounded-lg text-xs font-bold border-2 border-terracotta-600 bg-terracotta-50 text-terracotta-700" onclick="setAmount(50)">$50</button>
+                            <button type="button" class="amt-btn py-2 rounded-lg text-xs font-bold border border-sand-300 bg-white hover:border-terracotta-500" onclick="setAmount(100)">$100</button>
+                            <button type="button" class="amt-btn py-2 rounded-lg text-xs font-bold border border-sand-300 bg-white hover:border-terracotta-500" onclick="setAmount(250)">$250</button>
+                        </div>
+
+                        <!-- Custom Amount Input -->
+                        <div class="relative">
+                            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm font-bold text-ink-muted" id="curr-symbol">$</span>
+                            <input type="number" step="any" min="1" name="amount" id="id_amount" value="50" required
+                                class="w-full pl-8 pr-4 py-2.5 bg-white border border-sand-300 rounded-lg text-sm font-bold text-navy-950 focus:border-terracotta-600 focus:ring-1 focus:ring-terracotta-600 outline-none font-mono">
+                        </div>
+                    </div>
+
+                    <!-- Allocation Dropdown -->
+                    <div>
+                        <label for="{{ form.allocation.id_for_label }}" class="block text-xs font-bold uppercase tracking-wider text-ink-muted mb-1.5">Direct My Support To</label>
+                        {{ form.allocation|add_class:"w-full px-3.5 py-2.5 bg-white border border-sand-300 rounded-lg text-xs text-navy-950 font-medium focus:border-terracotta-600 focus:ring-1 focus:ring-terracotta-600 outline-none" }}
+                    </div>
+
+                    <!-- Supporter Details -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label for="{{ form.name.id_for_label }}" class="block text-xs font-semibold text-ink mb-1">Your Full Name *</label>
+                            {{ form.name|add_class:"w-full px-3.5 py-2.5 bg-white border border-sand-300 rounded-lg text-xs text-navy-950 placeholder-ink-subtle focus:border-terracotta-600 focus:ring-1 focus:ring-terracotta-600 outline-none" }}
+                            {% if form.name.errors %}
+                            <p class="text-terracotta-600 text-[11px] mt-1">{{ form.name.errors.as_text }}</p>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <label for="{{ form.email.id_for_label }}" class="block text-xs font-semibold text-ink mb-1">Email Address *</label>
+                            {{ form.email|add_class:"w-full px-3.5 py-2.5 bg-white border border-sand-300 rounded-lg text-xs text-navy-950 placeholder-ink-subtle focus:border-terracotta-600 focus:ring-1 focus:ring-terracotta-600 outline-none" }}
+                            {% if form.email.errors %}
+                            <p class="text-terracotta-600 text-[11px] mt-1">{{ form.email.errors.as_text }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="{{ form.phone.id_for_label }}" class="block text-xs font-semibold text-ink mb-1">Phone Number <span class="text-ink-subtle">(required for M-Pesa / Tigo Pesa)</span></label>
+                        {{ form.phone|add_class:"w-full px-3.5 py-2.5 bg-white border border-sand-300 rounded-lg text-xs text-navy-950 placeholder-ink-subtle focus:border-terracotta-600 focus:ring-1 focus:ring-terracotta-600 outline-none" }}
+                    </div>
+
+                    <!-- Preferred Transfer Channel -->
+                    <div>
+                        <label for="{{ form.payment_preference.id_for_label }}" class="block text-xs font-bold uppercase tracking-wider text-ink-muted mb-1.5">Intended Transfer Channel</label>
+                        {{ form.payment_preference|add_class:"w-full px-3.5 py-2.5 bg-white border border-sand-300 rounded-lg text-xs text-navy-950 font-medium focus:border-terracotta-600 focus:ring-1 focus:ring-terracotta-600 outline-none" }}
+                        <p class="text-[11px] text-ink-subtle mt-1.5">
+                            * Primetel provides verified Tanzania mobile money till numbers and official bank wire coordinates.
+                        </p>
+                    </div>
+
+                    <!-- Optional Dedication / Note -->
+                    <div>
+                        <label for="{{ form.notes.id_for_label }}" class="block text-xs font-semibold text-ink mb-1">Dedication or Note <span class="text-ink-subtle">(optional)</span></label>
+                        {{ form.notes|add_class:"w-full px-3.5 py-2 bg-white border border-sand-300 rounded-lg text-xs text-navy-950 placeholder-ink-subtle focus:border-terracotta-600 focus:ring-1 focus:ring-terracotta-600 outline-none h-16 resize-none" }}
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit"
+                        class="w-full py-3.5 px-6 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider text-white bg-terracotta-600 hover:bg-terracotta-700 transition-all shadow hover:shadow-md flex items-center justify-center gap-2">
+                        <i class="fas fa-heart text-terracotta-200"></i>
+                        <span>Confirm Support Pledge</span>
+                    </button>
+
+                    <div class="text-center pt-2">
+                        <p class="text-[11px] text-ink-subtle">
+                            <i class="fas fa-lock text-[10px] text-emerald-600 mr-1"></i>
+                            Direct institutional processing • No intermediary commissions taken
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Frequently Asked Questions on Support & Governance -->
+<section class="py-16 bg-sand-50 border-t border-sand-200">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <span class="text-xs font-bold uppercase tracking-wider text-terracotta-600 mb-2 block">Common Questions</span>
+            <h2 class="editorial-title text-3xl font-bold text-navy-950">Support & Accountability FAQ</h2>
+        </div>
+
+        <div class="space-y-4">
+            <div class="p-6 bg-white rounded-xl border border-sand-200">
+                <h3 class="font-bold text-navy-950 text-sm mb-2">Can I make a direct mobile money transfer from Tanzania?</h3>
+                <p class="text-xs sm:text-sm text-ink-muted leading-relaxed">
+                    Yes. Primetel accepts direct mobile money via Tanzania M-Pesa, Tigo Pesa, and Airtel Money to our registered healthcare organizational accounts in Arusha. When you submit your pledge, you receive our official till details and a direct confirmation.
+                </p>
+            </div>
+
+            <div class="p-6 bg-white rounded-xl border border-sand-200">
+                <h3 class="font-bold text-navy-950 text-sm mb-2">Can international donors wire funds directly?</h3>
+                <p class="text-xs sm:text-sm text-ink-muted leading-relaxed">
+                    Yes. We maintain institutional bank coordinates with SWIFT code access for direct wire transfers from partners and individual supporters in the US, Europe, and across Africa.
+                </p>
+            </div>
+
+            <div class="p-6 bg-white rounded-xl border border-sand-200">
+                <h3 class="font-bold text-navy-950 text-sm mb-2">Can I sponsor a specific mobile outreach clinic or school program?</h3>
+                <p class="text-xs sm:text-sm text-ink-muted leading-relaxed">
+                    Absolutely. If your organization, church, family, or foundation wishes to sponsor an entire outreach mission or secondary school program in Monduli, please specify this in your pledge note or contact Founder Emmanuel Samwel directly.
+                </p>
+            </div>
+
+            <div class="p-6 bg-white rounded-xl border border-sand-200">
+                <h3 class="font-bold text-navy-950 text-sm mb-2">How can I review past expenditures and clinical outcomes?</h3>
+                <p class="text-xs sm:text-sm text-ink-muted leading-relaxed">
+                    Primetel publishes comprehensive annual reports and clinical reviews on our <a href="{% url 'annual_reports' %}" class="text-terracotta-600 underline font-semibold">Annual Reports page</a>, documenting our patient numbers, school sessions, and financial accounts.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function setFrequency(freq) {
+        document.getElementById('id_frequency').value = freq;
+        document.querySelectorAll('.freq-btn').forEach(btn => {
+            if (btn.getAttribute('data-val') === freq) {
+                btn.classList.add('active', 'bg-white', 'text-navy-950');
+                btn.classList.remove('bg-sand-100', 'text-ink-muted');
+            } else {
+                btn.classList.remove('active', 'bg-white', 'text-navy-950');
+                btn.classList.add('bg-sand-100', 'text-ink-muted');
+            }
+        });
+    }
+
+    function setCurrency(curr) {
+        document.getElementById('id_currency').value = curr;
+        const symbol = curr === 'USD' ? '$' : 'TZS ';
+        document.getElementById('curr-symbol').textContent = symbol;
+
+        document.querySelectorAll('.curr-btn').forEach(btn => {
+            if (btn.textContent.includes(curr)) {
+                btn.classList.add('bg-navy-900', 'text-white');
+                btn.classList.remove('bg-white', 'text-ink-muted');
+            } else {
+                btn.classList.remove('bg-navy-900', 'text-white');
+                btn.classList.add('bg-white', 'text-ink-muted');
+            }
+        });
+
+        // Update default amount if switched
+        const amountInput = document.getElementById('id_amount');
+        if (curr === 'TZS' && amountInput.value < 1000) {
+            amountInput.value = 65000;
+        } else if (curr === 'USD' && amountInput.value >= 1000) {
+            amountInput.value = 50;
+        }
+    }
+
+    function setAmount(amt) {
+        const curr = document.getElementById('id_currency').value;
+        const finalAmt = curr === 'TZS' ? amt * 2600 : amt;
+        document.getElementById('id_amount').value = finalAmt;
+
+        document.querySelectorAll('.amt-btn').forEach(btn => {
+            if (btn.textContent.includes('$' + amt)) {
+                btn.classList.add('border-2', 'border-terracotta-600', 'bg-terracotta-50', 'text-terracotta-700');
+                btn.classList.remove('bg-white');
+            } else {
+                btn.classList.remove('border-2', 'border-terracotta-600', 'bg-terracotta-50', 'text-terracotta-700');
+                btn.classList.add('bg-white');
+            }
+        });
+    }
+
+    function selectPillar(amt, allocation) {
+        setAmount(amt);
+        const allocSelect = document.getElementById('id_allocation');
+        if (allocSelect) {
+            allocSelect.value = allocation;
+        }
+        document.getElementById('donation-form').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+</script>
+{% endblock %}

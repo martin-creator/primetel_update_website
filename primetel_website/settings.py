@@ -72,9 +72,11 @@ ALLOWED_HOSTS = env_list(
     default=[
         "127.0.0.1",
         "localhost",
+        "testserver",
         "primetel.onrender.com",
         "primetel-update-website.onrender.com",
         "health.primetel.tech",
+        "primetel.tech",
     ],
 )
 

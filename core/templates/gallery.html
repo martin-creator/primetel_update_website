@@ -1,65 +1,48 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Gallery | Primetel Health{% endblock %}
-{% block meta_description %}Photos and videos from Primetel Health's community work, clinics, and outreach programs across Tanzania.{% endblock %}
+{% block title %}Field Photo & Video Archive | Primetel Health Tanzania{% endblock %}
+{% block meta_description %}Documentary photographs and field dispatches from Primetel Health's licensed medical clinic in Monduli, rural mobile outreach, and youth programs across Tanzania.{% endblock %}
 
 {% block extra_css %}
 <style>
-    .gallery-item {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .gallery-item:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.15);
-    }
-    .gallery-item:hover .overlay {
+    .gallery-card:hover .gallery-overlay {
         opacity: 1;
     }
-    .overlay {
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    .category-chip { transition: all 0.2s ease; }
 </style>
 {% endblock %}
 
 {% block content %}
 
-<!-- Page Header -->
-<section class="relative bg-dark overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-20 left-10 w-72 h-72 bg-brand-500 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-10 right-10 w-96 h-96 bg-brand-700 rounded-full blur-3xl"></div>
-    </div>
-    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32 text-center">
-        <div class="fade-up">
-            <span class="inline-block bg-brand-500/10 text-brand-400 px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-brand-500/20">
-                Our Work in Pictures
+<!-- Editorial Header -->
+<section class="bg-sand-50 border-b border-sand-200 pt-16 pb-20 lg:pt-24 lg:pb-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl fade-up">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sand-200/80 text-navy-950 text-xs font-semibold tracking-wide uppercase mb-6">
+                <i class="fas fa-camera text-terracotta-600 text-[10px]"></i>
+                Documentary Archive
             </span>
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
-                Photo & Video <span class="gradient-text">Gallery</span>
+            <h1 class="editorial-title text-4xl sm:text-5xl lg:text-6xl text-navy-950 font-normal leading-[1.1] mb-6">
+                Our work in the field, <span class="italic font-normal text-terracotta-600">in real light</span>.
             </h1>
-            <p class="text-lg md:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
-                A glimpse into our clinics, community outreach, and the lives we touch every day across Tanzania.
+            <p class="text-lg sm:text-xl text-ink-muted leading-relaxed font-sans font-normal">
+                Authentic glimpses into our Monduli medical center, all-terrain outreach camps, school mental health seminars, and the Tanzanian families we serve every single day.
             </p>
         </div>
     </div>
 </section>
 
-<!-- Category Filter -->
-<section class="py-6 bg-white border-b border-slate-100 sticky top-[72px] z-40">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="flex flex-wrap justify-center gap-3">
+<!-- Category Filter Strip -->
+<section class="py-5 bg-white border-b border-sand-200 sticky top-20 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap items-center justify-center gap-2 text-xs font-semibold">
             <a href="{% url 'gallery' %}"
-               class="category-chip inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium border transition-colors
-                      {% if not active_category %}bg-brand-600 text-white border-brand-600{% else %}bg-white text-slate-600 border-slate-200 hover:border-brand-300 hover:text-brand-700{% endif %}">
-                All
+               class="px-4 py-2 rounded-full transition-colors {% if not active_category %}bg-navy-900 text-white font-bold{% else %}bg-sand-100 text-ink-muted hover:text-navy-950 hover:bg-sand-200{% endif %}">
+                All Archives
             </a>
             {% for cat_value, cat_name in categories %}
             <a href="{% url 'gallery' %}?category={{ cat_value }}"
-               class="category-chip inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium border transition-colors
-                      {% if active_category == cat_value %}bg-brand-600 text-white border-brand-600{% else %}bg-white text-slate-600 border-slate-200 hover:border-brand-300 hover:text-brand-700{% endif %}">
+               class="px-4 py-2 rounded-full transition-colors {% if active_category == cat_value %}bg-navy-900 text-white font-bold{% else %}bg-sand-100 text-ink-muted hover:text-navy-950 hover:bg-sand-200{% endif %}">
                 {{ cat_name }}
             </a>
             {% endfor %}
@@ -68,24 +51,29 @@
 </section>
 
 <!-- Gallery Grid -->
-<section class="py-16 lg:py-20 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+<section class="py-16 lg:py-24 bg-sand-50/60 border-b border-sand-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {% if items %}
-        <div class="columns-1 sm:columns-2 lg:columns-3 gap-5 space-y-5">
+        <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
             {% for item in items %}
-            <div class="gallery-item break-inside-avoid rounded-xl overflow-hidden shadow-sm bg-white fade-up relative">
+            <div class="gallery-card break-inside-avoid rounded-2xl overflow-hidden bg-white border border-sand-300 shadow-sm relative fade-up">
                 {% if item.media_type == 'image' and item.image %}
-                    <img src="{{ item.image.url }}"
-                         alt="{{ item.title }}"
-                         class="w-full object-cover">
-                    <div class="overlay absolute inset-0 bg-dark/50 flex items-end">
-                        <div class="p-4">
-                            <p class="text-white font-semibold text-sm">{{ item.title }}</p>
-                            {% if item.caption %}<p class="text-white/70 text-xs mt-1">{{ item.caption }}</p>{% endif %}
+                    <div class="relative overflow-hidden bg-sand-200">
+                        <img src="{{ item.image.url }}" alt="{{ item.title }}" class="w-full object-cover">
+                        <div class="gallery-overlay absolute inset-0 bg-navy-950/70 opacity-0 transition-opacity duration-200 flex items-end p-5">
+                            <div class="text-white">
+                                <p class="text-xs font-bold uppercase tracking-wider text-sand-300">{{ item.get_category_display }}</p>
+                                <p class="editorial-title text-lg font-normal text-white mt-1">{{ item.title }}</p>
+                                {% if item.caption %}<p class="text-xs text-white/80 mt-1 font-sans">{{ item.caption }}</p>{% endif %}
+                            </div>
                         </div>
                     </div>
+                    <div class="p-4 bg-white">
+                        <p class="text-xs font-bold text-navy-950">{{ item.title }}</p>
+                        {% if item.caption %}<p class="text-[11px] text-ink-muted mt-1 leading-relaxed">{{ item.caption }}</p>{% endif %}
+                    </div>
                 {% elif item.media_type == 'video' and item.video_url %}
-                    <div class="relative w-full" style="padding-top: 56.25%">
+                    <div class="relative w-full aspect-[16/9] bg-black">
                         <iframe
                             src="{{ item.video_url }}"
                             class="absolute inset-0 w-full h-full"
@@ -94,30 +82,94 @@
                             allowfullscreen>
                         </iframe>
                     </div>
-                    <div class="p-4">
-                        <p class="text-dark font-semibold text-sm">{{ item.title }}</p>
-                        {% if item.caption %}<p class="text-muted text-xs mt-1">{{ item.caption }}</p>{% endif %}
+                    <div class="p-4 bg-white">
+                        <p class="text-xs font-bold text-navy-950">{{ item.title }}</p>
+                        {% if item.caption %}<p class="text-[11px] text-ink-muted mt-1 leading-relaxed">{{ item.caption }}</p>{% endif %}
                     </div>
-                {% endif %}
-                {% if item.category %}
-                <div class="absolute top-3 left-3">
-                    <span class="bg-white/90 backdrop-blur-sm text-brand-700 px-2.5 py-1 rounded-full text-xs font-medium">
-                        {{ item.get_category_display }}
-                    </span>
-                </div>
                 {% endif %}
             </div>
             {% endfor %}
         </div>
         {% else %}
-        <div class="text-center py-24 fade-up">
-            <div class="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-images text-slate-400 text-2xl"></i>
+        <!-- Default Photo Essay Grid showcasing Primetel's rich static photography collection -->
+        <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+
+            <!-- Photo 1: Outreach Clinic -->
+            <div class="break-inside-avoid rounded-2xl overflow-hidden bg-white border border-sand-300 shadow-sm fade-up">
+                <img src="{% static 'images/outreach_services.jpg' %}" alt="Mobile clinic in rural Arusha" class="w-full object-cover">
+                <div class="p-4">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-terracotta-600">Mobile Outreach</span>
+                    <p class="text-xs font-bold text-navy-950 mt-1">Village Health Camp • Monduli</p>
+                    <p class="text-[11px] text-ink-muted mt-0.5">Medical staff conducting primary screening and diagnostics in rural communities.</p>
+                </div>
             </div>
-            <h3 class="text-xl font-semibold text-dark mb-2">No Media Yet</h3>
-            <p class="text-muted">Gallery items will appear here once added via the admin panel.</p>
+
+            <!-- Photo 2: Community Dialogue -->
+            <div class="break-inside-avoid rounded-2xl overflow-hidden bg-white border border-sand-300 shadow-sm fade-up">
+                <img src="{% static 'images/primetel_about_header_men.jpg' %}" alt="Community dialogue with elders" class="w-full object-cover">
+                <div class="p-4">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-terracotta-600">Community Grounding</span>
+                    <p class="text-xs font-bold text-navy-950 mt-1">Community Elders Council</p>
+                    <p class="text-[11px] text-ink-muted mt-0.5">Collaborating with local leaders to coordinate culturally sensitive maternal care.</p>
+                </div>
+            </div>
+
+            <!-- Photo 3: Primary Clinical Care -->
+            <div class="break-inside-avoid rounded-2xl overflow-hidden bg-white border border-sand-300 shadow-sm fade-up">
+                <img src="{% static 'images/primaryhealth_care_service.jpg' %}" alt="Physician examining patient" class="w-full object-cover">
+                <div class="p-4">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-terracotta-600">Licensed Clinic</span>
+                    <p class="text-xs font-bold text-navy-950 mt-1">Direct Outpatient Diagnosis</p>
+                    <p class="text-[11px] text-ink-muted mt-0.5">Dr. Moshi examining a patient at the Monduli outpatient center.</p>
+                </div>
+            </div>
+
+            <!-- Photo 4: Mental Health Counseling -->
+            <div class="break-inside-avoid rounded-2xl overflow-hidden bg-white border border-sand-300 shadow-sm fade-up">
+                <img src="{% static 'images/mental_health_service.jpg' %}" alt="Counselling psychologist" class="w-full object-cover">
+                <div class="p-4">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-terracotta-600">Mental Health</span>
+                    <p class="text-xs font-bold text-navy-950 mt-1">Confidential Therapy Session</p>
+                    <p class="text-[11px] text-ink-muted mt-0.5">Providing empathetic counseling and emotional support in a safe environment.</p>
+                </div>
+            </div>
+
+            <!-- Photo 5: Youth School Health -->
+            <div class="break-inside-avoid rounded-2xl overflow-hidden bg-white border border-sand-300 shadow-sm fade-up">
+                <img src="{% static 'images/youth_mental_service.jpg' %}" alt="Secondary school workshop" class="w-full object-cover">
+                <div class="p-4">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-terracotta-600">Youth Education</span>
+                    <p class="text-xs font-bold text-navy-950 mt-1">School Mental Health Seminar</p>
+                    <p class="text-[11px] text-ink-muted mt-0.5">Engaging secondary school students on suicide prevention and peer mentorship.</p>
+                </div>
+            </div>
+
+            <!-- Photo 6: USSD Telehealth Delivery -->
+            <div class="break-inside-avoid rounded-2xl overflow-hidden bg-white border border-sand-300 shadow-sm fade-up">
+                <img src="{% static 'images/telemedicine_service.jpg' %}" alt="USSD phone healthcare" class="w-full object-cover">
+                <div class="p-4">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-terracotta-600">Digital Health</span>
+                    <p class="text-xs font-bold text-navy-950 mt-1">Feature Phone USSD (*149*46#)</p>
+                    <p class="text-[11px] text-ink-muted mt-0.5">Dialing low-barrier clinical triage without mobile internet.</p>
+                </div>
+            </div>
+
         </div>
         {% endif %}
+    </div>
+</section>
+
+<!-- Support strip -->
+<section class="py-16 bg-navy-950 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 fade-up">
+        <h2 class="editorial-title text-3xl sm:text-4xl font-normal mb-4">Every photograph tells a story of survival and care.</h2>
+        <p class="text-sm sm:text-base text-white/70 max-w-xl mx-auto mb-8 font-sans">
+            Support Primetel's next field mission and help bring life-saving clinical care to another community.
+        </p>
+        <a href="{% url 'donate' %}" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-terracotta-600 hover:bg-terracotta-700 text-white font-bold text-xs uppercase tracking-wider transition-colors shadow">
+            <i class="fas fa-heart text-terracotta-200"></i>
+            <span>Support Our Work</span>
+        </a>
     </div>
 </section>
 

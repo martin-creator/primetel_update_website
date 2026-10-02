@@ -5,9 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Primetel Health{% endblock %}</title>
+    <title>{% block title %}Primetel Health | Community Healthcare & Clinical Care in Tanzania{% endblock %}</title>
     <meta name="description"
-        content="{% block meta_description %}Primetel Health - Transforming healthcare access in Tanzania through technology, community care, and innovation.{% endblock %}">
+        content="{% block meta_description %}Primetel Health is a licensed medical clinic and community healthcare organization in Monduli, Arusha, delivering primary care, mental health support, mobile outreach, and low-tech digital health across Tanzania.{% endblock %}">
 
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">
@@ -15,11 +15,10 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}">
 
-    <!-- Fonts -->
+    <!-- Fonts: Editorial Serif (Newsreader) + Humanist Sans (Plus Jakarta Sans) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
@@ -31,35 +30,68 @@
             theme: {
                 extend: {
                     colors: {
+                        navy: {
+                            50: '#F0F5FA',
+                            100: '#E1EDF5',
+                            200: '#C3DCEB',
+                            300: '#95C1DC',
+                            400: '#5FA1CA',
+                            500: '#2A7FA5',
+                            600: '#005D8C',
+                            700: '#004A72',
+                            800: '#0C2E47',
+                            900: '#071A29',
+                            950: '#040E17',
+                        },
+                        sand: {
+                            50: '#FAF8F5',
+                            100: '#F5F1E9',
+                            200: '#ECE4D6',
+                            300: '#DED3BF',
+                            400: '#CBBBA3',
+                            500: '#B09C81',
+                            600: '#948065',
+                            700: '#75634E',
+                            800: '#56483A',
+                            900: '#3A3026',
+                        },
+                        terracotta: {
+                            50: '#FDF6F4',
+                            100: '#FCEBE7',
+                            200: '#F9D5CD',
+                            300: '#F2B3A5',
+                            400: '#E58570',
+                            500: '#C84F35',
+                            600: '#AD3920',
+                            700: '#8E2C17',
+                            800: '#732515',
+                            900: '#5E2114',
+                        },
+                        forest: {
+                            50: '#F1F7F4',
+                            100: '#DDEFE6',
+                            500: '#217A59',
+                            600: '#176246',
+                            700: '#134D37',
+                            800: '#113E2E',
+                        },
+                        ink: {
+                            DEFAULT: '#141E26',
+                            light: '#283642',
+                            muted: '#526270',
+                            subtle: '#788998',
+                        },
                         brand: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            200: '#bfdbfe',
-                            300: '#93c5fd',
-                            400: '#60a5fa',
+                            50: '#F0F6FA',
+                            100: '#DDECF5',
                             500: '#0056B3',
-                            600: '#004a9a',
-                            700: '#003d80',
-                            800: '#002d5f',
-                            900: '#001d3f',
-                        },
-                        accent: {
-                            50: '#fff1f2',
-                            100: '#ffe4e6',
-                            200: '#fecdd3',
-                            300: '#fda4af',
-                            400: '#fb7185',
-                            500: '#E63946',
-                            600: '#d12d3a',
-                            700: '#b91c28',
-                            800: '#9f1a24',
-                            900: '#881b22',
-                        },
-                        dark: '#0f172a',
-                        muted: '#64748b',
+                            600: '#004794',
+                            700: '#003774',
+                        }
                     },
                     fontFamily: {
-                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Newsreader', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
                     },
                 }
             }
@@ -69,12 +101,18 @@
     <style>
         body {
             overflow-x: hidden;
+            font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+        }
+
+        .editorial-title {
+            font-family: 'Newsreader', Georgia, serif;
+            letter-spacing: -0.02em;
         }
 
         .fade-up {
             opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
 
         .fade-up.visible {
@@ -83,21 +121,27 @@
         }
 
         .nav-scrolled {
-            background: rgba(15, 23, 42, 0.98) !important;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 4px 20px -2px rgba(7, 26, 41, 0.08);
+            border-bottom-color: #E8E2D7 !important;
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #60a5fa, #0056B3);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        /* Subtle paper grain texture helper */
+        .bg-paper {
+            background-color: #FAF8F5;
         }
 
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .caption-line {
+            position: relative;
+            padding-left: 1rem;
+        }
+        .caption-line::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            bottom: 0.25rem;
+            width: 2px;
+            background-color: #C84F35;
         }
     </style>
 
@@ -105,265 +149,329 @@
     {% block extra_css %}{% endblock %}
 </head>
 
-<body class="font-sans text-slate-800 bg-white antialiased">
+<body class="font-sans text-ink bg-white antialiased selection:bg-terracotta-100 selection:text-terracotta-800">
 
-    <!-- Announcement Bar -->
-    {% if site_settings.announcement_visible %}
-    <div class="bg-accent-500 text-white text-center py-2 px-4 text-sm font-medium">
-        <span>{{ site_settings.announcement_text }}</span>
-        {% if site_settings.announcement_link %}
-        <a href="{{ site_settings.announcement_link }}" class="underline ml-1 hover:text-accent-100">Learn more &rarr;</a>
-        {% endif %}
+    <!-- Top Credential & Announcement Bar -->
+    <div class="bg-navy-950 text-white text-xs border-b border-navy-800 py-2 px-4 sm:px-6">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-2.5 text-center sm:text-left">
+                <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span class="font-medium text-white/90">
+                    {% if site_settings.announcement_text %}
+                        {{ site_settings.announcement_text }}
+                    {% else %}
+                        Licensed Medical Clinic in Monduli, Arusha — Delivering Grassroots & Clinical Care across Tanzania
+                    {% endif %}
+                </span>
+                {% if site_settings.announcement_link %}
+                <a href="{{ site_settings.announcement_link }}" class="underline text-sand-300 hover:text-white transition-colors ml-1">Learn more &rarr;</a>
+                {% endif %}
+            </div>
+            <div class="hidden md:flex items-center gap-4 text-white/70 text-[11px]">
+                <span><i class="fas fa-location-dot text-terracotta-400 mr-1"></i> Monduli, Arusha</span>
+                <span>•</span>
+                <a href="tel:{{ site_settings.phone|cut:' ' }}" class="hover:text-white transition-colors"><i class="fas fa-phone text-sand-300 mr-1"></i> {{ site_settings.phone }}</a>
+                <span>•</span>
+                <a href="mailto:{{ site_settings.email }}" class="hover:text-white transition-colors"><i class="fas fa-envelope text-sand-300 mr-1"></i> {{ site_settings.email }}</a>
+            </div>
+        </div>
     </div>
-    {% endif %}
 
-    <!-- Navigation -->
-    <header id="main-nav" class="sticky top-0 w-full z-50 transition-all duration-300 bg-dark/95 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16 lg:h-[72px]">
-                <!-- Logo -->
-                <a href="{% url 'home' %}" class="flex items-center gap-3 shrink-0">
-                    <div class="w-28 h-9 bg-white rounded-md flex items-center justify-center p-1">
-                        <img src="https://i.ibb.co/6cw7cwGP/primetel-logos.png" alt="Primetel"
-                            class="w-full h-full object-contain">
+    <!-- Main Navigation Bar -->
+    <header id="main-nav" class="sticky top-0 w-full z-50 transition-all duration-200 bg-white/95 backdrop-blur-md border-b border-sand-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand Logo & Identity -->
+                <a href="{% url 'home' %}" class="flex items-center gap-3.5 group shrink-0">
+                    <div class="h-10 w-auto flex items-center">
+                        <img src="https://i.ibb.co/6cw7cwGP/primetel-logos.png" alt="Primetel Health" class="h-9 w-auto object-contain">
+                    </div>
+                    <div class="border-l border-sand-300 pl-3 hidden sm:block">
+                        <p class="text-xs font-bold text-navy-900 tracking-wider uppercase font-sans leading-none">Primetel Health</p>
+                        <p class="text-[10px] text-ink-muted leading-tight mt-0.5">Monduli • Arusha, Tanzania</p>
                     </div>
                 </a>
 
-                <!-- Desktop Nav -->
-                <nav class="hidden lg:flex items-center gap-1">
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden xl:flex items-center gap-1 font-sans text-sm">
                     {% with request.resolver_match.url_name as url_name %}
                     <a href="{% url 'home' %}"
-                        class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {% if url_name == 'home' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Home</a>
-                    <a href="{% url 'about' %}"
-                        class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {% if url_name == 'about' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">About</a>
-                    <a href="{% url 'services' %}"
-                        class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {% if url_name == 'services' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Services</a>
-                    <a href="{% url 'impact' %}"
-                        class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {% if url_name == 'impact' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Impact</a>
-                    <a href="{% url 'news_list' %}"
-                        class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {% if url_name == 'news_list' or url_name == 'news_detail' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">News</a>
-                    <a href="{% url 'annual_reports' %}"
-                        class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {% if url_name == 'annual_reports' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Annual Reports</a>
-                    <a href="{% url 'gallery' %}"
-                        class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {% if url_name == 'gallery' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Gallery</a>
-                    <a href="{% url 'get_involved' %}"
-                        class="px-4 py-2 text-sm font-medium rounded-lg transition-colors {% if url_name == 'get_involved' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Get
-                        Involved</a>
-                    {% endwith %}
-                    <a href="{% url 'contact_us' %}"
-                        class="ml-2 px-5 py-2.5 text-sm font-semibold rounded-lg bg-brand-500 text-white hover:bg-brand-600 transition-colors">
-                        Contact Us
+                        class="px-3 py-2 font-medium rounded-md transition-colors {% if url_name == 'home' %}text-navy-900 bg-sand-100 font-semibold{% else %}text-ink-light hover:text-navy-900 hover:bg-sand-50{% endif %}">
+                        Home
                     </a>
+                    <a href="{% url 'about' %}"
+                        class="px-3 py-2 font-medium rounded-md transition-colors {% if url_name == 'about' %}text-navy-900 bg-sand-100 font-semibold{% else %}text-ink-light hover:text-navy-900 hover:bg-sand-50{% endif %}">
+                        About Primetel
+                    </a>
+                    <a href="{% url 'services' %}"
+                        class="px-3 py-2 font-medium rounded-md transition-colors {% if url_name == 'services' %}text-navy-900 bg-sand-100 font-semibold{% else %}text-ink-light hover:text-navy-900 hover:bg-sand-50{% endif %}">
+                        Our Care & Services
+                    </a>
+                    <a href="{% url 'impact' %}"
+                        class="px-3 py-2 font-medium rounded-md transition-colors {% if url_name == 'impact' %}text-navy-900 bg-sand-100 font-semibold{% else %}text-ink-light hover:text-navy-900 hover:bg-sand-50{% endif %}">
+                        Impact Data
+                    </a>
+                    <a href="{% url 'news_list' %}"
+                        class="px-3 py-2 font-medium rounded-md transition-colors {% if url_name == 'news_list' or url_name == 'news_detail' %}text-navy-900 bg-sand-100 font-semibold{% else %}text-ink-light hover:text-navy-900 hover:bg-sand-50{% endif %}">
+                        Field Updates
+                    </a>
+                    <a href="{% url 'gallery' %}"
+                        class="px-3 py-2 font-medium rounded-md transition-colors {% if url_name == 'gallery' %}text-navy-900 bg-sand-100 font-semibold{% else %}text-ink-light hover:text-navy-900 hover:bg-sand-50{% endif %}">
+                        Gallery
+                    </a>
+                    <a href="{% url 'annual_reports' %}"
+                        class="px-3 py-2 font-medium rounded-md transition-colors {% if url_name == 'annual_reports' %}text-navy-900 bg-sand-100 font-semibold{% else %}text-ink-light hover:text-navy-900 hover:bg-sand-50{% endif %}">
+                        Reports
+                    </a>
+                    <a href="{% url 'get_involved' %}"
+                        class="px-3 py-2 font-medium rounded-md transition-colors {% if url_name == 'get_involved' %}text-navy-900 bg-sand-100 font-semibold{% else %}text-ink-light hover:text-navy-900 hover:bg-sand-50{% endif %}">
+                        Partner
+                    </a>
+                    {% endwith %}
                 </nav>
 
+                <!-- Desktop Action Buttons -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="{% url 'contact_us' %}"
+                        class="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-navy-800 hover:text-navy-950 hover:bg-sand-100 rounded-md transition-colors">
+                        Contact
+                    </a>
+                    <a href="{% url 'donate' %}"
+                        class="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white bg-terracotta-600 hover:bg-terracotta-700 rounded-md shadow-sm transition-all hover:shadow hover:-translate-y-0.5">
+                        <i class="fas fa-heart text-xs text-terracotta-200"></i>
+                        <span>Support Our Work</span>
+                    </a>
+                </div>
+
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="lg:hidden text-white p-2" aria-label="Open menu">
+                <button id="mobile-menu-btn" class="xl:hidden p-2 text-navy-900 hover:bg-sand-100 rounded-md focus:outline-none" aria-label="Toggle Navigation Menu">
                     <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
-                    <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12" />
+                    <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-dark border-t border-white/10">
-            <div class="px-6 py-4 space-y-1">
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobile-menu" class="hidden xl:hidden bg-white border-b border-sand-300 shadow-xl max-h-[85vh] overflow-y-auto">
+            <div class="px-6 py-6 space-y-2">
                 {% with request.resolver_match.url_name as url_name %}
                 <a href="{% url 'home' %}"
-                    class="block px-4 py-3 text-sm font-medium rounded-lg {% if url_name == 'home' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Home</a>
+                    class="block px-4 py-2.5 rounded-lg text-base font-medium {% if url_name == 'home' %}bg-sand-100 text-navy-950 font-bold{% else %}text-ink hover:bg-sand-50{% endif %}">
+                    Home
+                </a>
                 <a href="{% url 'about' %}"
-                    class="block px-4 py-3 text-sm font-medium rounded-lg {% if url_name == 'about' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">About</a>
+                    class="block px-4 py-2.5 rounded-lg text-base font-medium {% if url_name == 'about' %}bg-sand-100 text-navy-950 font-bold{% else %}text-ink hover:bg-sand-50{% endif %}">
+                    About Primetel
+                </a>
                 <a href="{% url 'services' %}"
-                    class="block px-4 py-3 text-sm font-medium rounded-lg {% if url_name == 'services' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Services</a>
+                    class="block px-4 py-2.5 rounded-lg text-base font-medium {% if url_name == 'services' %}bg-sand-100 text-navy-950 font-bold{% else %}text-ink hover:bg-sand-50{% endif %}">
+                    Our Care & Services
+                </a>
                 <a href="{% url 'impact' %}"
-                    class="block px-4 py-3 text-sm font-medium rounded-lg {% if url_name == 'impact' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Impact</a>
+                    class="block px-4 py-2.5 rounded-lg text-base font-medium {% if url_name == 'impact' %}bg-sand-100 text-navy-950 font-bold{% else %}text-ink hover:bg-sand-50{% endif %}">
+                    Impact & Outcomes
+                </a>
                 <a href="{% url 'news_list' %}"
-                    class="block px-4 py-3 text-sm font-medium rounded-lg {% if url_name == 'news_list' or url_name == 'news_detail' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">News</a>
-                <a href="{% url 'annual_reports' %}"
-                    class="block px-4 py-3 text-sm font-medium rounded-lg {% if url_name == 'annual_reports' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Annual Reports</a>
+                    class="block px-4 py-2.5 rounded-lg text-base font-medium {% if url_name == 'news_list' or url_name == 'news_detail' %}bg-sand-100 text-navy-950 font-bold{% else %}text-ink hover:bg-sand-50{% endif %}">
+                    Field Updates & News
+                </a>
                 <a href="{% url 'gallery' %}"
-                    class="block px-4 py-3 text-sm font-medium rounded-lg {% if url_name == 'gallery' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Gallery</a>
+                    class="block px-4 py-2.5 rounded-lg text-base font-medium {% if url_name == 'gallery' %}bg-sand-100 text-navy-950 font-bold{% else %}text-ink hover:bg-sand-50{% endif %}">
+                    Photo & Video Gallery
+                </a>
+                <a href="{% url 'annual_reports' %}"
+                    class="block px-4 py-2.5 rounded-lg text-base font-medium {% if url_name == 'annual_reports' %}bg-sand-100 text-navy-950 font-bold{% else %}text-ink hover:bg-sand-50{% endif %}">
+                    Annual Reports & Transparency
+                </a>
                 <a href="{% url 'get_involved' %}"
-                    class="block px-4 py-3 text-sm font-medium rounded-lg {% if url_name == 'get_involved' %}text-white bg-white/10{% else %}text-white/70 hover:text-white hover:bg-white/5{% endif %}">Get
-                    Involved</a>
+                    class="block px-4 py-2.5 rounded-lg text-base font-medium {% if url_name == 'get_involved' %}bg-sand-100 text-navy-950 font-bold{% else %}text-ink hover:bg-sand-50{% endif %}">
+                    Get Involved / Partner
+                </a>
                 <a href="{% url 'contact_us' %}"
-                    class="block px-4 py-3 text-sm font-semibold rounded-lg bg-brand-500 text-white text-center mt-2">Contact
-                    Us</a>
+                    class="block px-4 py-2.5 rounded-lg text-base font-medium {% if url_name == 'contact_us' %}bg-sand-100 text-navy-950 font-bold{% else %}text-ink hover:bg-sand-50{% endif %}">
+                    Contact Headquarters
+                </a>
                 {% endwith %}
+
+                <div class="pt-4 border-t border-sand-200 mt-4 space-y-2">
+                    <a href="{% url 'donate' %}"
+                        class="flex items-center justify-center gap-2 w-full px-5 py-3 text-sm font-bold uppercase tracking-wider text-white bg-terracotta-600 hover:bg-terracotta-700 rounded-lg text-center shadow-sm">
+                        <i class="fas fa-heart text-terracotta-200"></i>
+                        <span>Support Primetel / Donate</span>
+                    </a>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main>
+    <!-- Main Content Slot -->
+    <main class="min-h-screen">
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 pt-16 pb-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-                <!-- Brand -->
-                <div>
-                    <div class="mb-4">
-                        <div class="w-32 h-10 bg-white rounded-md flex items-center justify-center p-1">
-                            <img src="https://i.ibb.co/6cw7cwGP/primetel-logos.png" alt="Primetel" class="w-full h-full object-contain">
-                        </div>
+    <!-- Institutional Healthcare Footer -->
+    <footer class="bg-navy-950 text-white border-t border-navy-900 mt-20">
+        <!-- Editorial Notice Strip -->
+        <div class="border-b border-navy-800/80 bg-navy-900/60 py-6 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                        <i class="fas fa-shield-halved text-sm"></i>
                     </div>
-                    <p class="text-white/60 text-sm leading-relaxed mb-5">
-                        Transforming healthcare access in Tanzania through technology, community care, and innovation.
+                    <div>
+                        <p class="text-sm font-semibold text-white">Licensed Healthcare Clinic & Community Health Initiative</p>
+                        <p class="text-xs text-white/60">Registered under the Ministry of Health, United Republic of Tanzania • Operating in Monduli, Arusha</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="{% url 'annual_reports' %}" class="text-xs text-sand-300 hover:text-white underline">View Annual Reports</a>
+                    <span class="text-navy-700">•</span>
+                    <a href="{% url 'donate' %}" class="text-xs text-terracotta-300 hover:text-white underline font-semibold">Make a Contribution</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Footer Links Grid -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+                <!-- Column 1: Organization & Identity (2 cols on large) -->
+                <div class="lg:col-span-2">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="bg-white p-1.5 rounded-md h-9 flex items-center">
+                            <img src="https://i.ibb.co/6cw7cwGP/primetel-logos.png" alt="Primetel Health" class="h-6 w-auto object-contain">
+                        </div>
+                        <span class="text-sm font-bold tracking-wider uppercase text-sand-200">Primetel Health</span>
+                    </div>
+                    <p class="text-white/70 text-sm leading-relaxed mb-6 font-sans max-w-sm">
+                        Bridging the last mile in Tanzanian healthcare. We deliver compassionate clinical care, rural mobile outreach, school mental wellness, and low-tech USSD telemedicine to communities that need it most.
                     </p>
-                    <div class="flex gap-3">
+                    <div class="flex items-center gap-3">
                         {% if site_settings.instagram_url %}
-                        <a href="{{ site_settings.instagram_url }}" target="_blank"
-                            class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-brand-500 hover:text-white transition-colors text-sm">
+                        <a href="{{ site_settings.instagram_url }}" target="_blank" rel="noopener noreferrer"
+                            class="w-8 h-8 rounded-full bg-white/10 hover:bg-terracotta-600 text-white/80 hover:text-white flex items-center justify-center transition-all text-xs"
+                            aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
                         {% endif %}
                         {% if site_settings.linkedin_url %}
-                        <a href="{{ site_settings.linkedin_url }}" target="_blank"
-                            class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-brand-500 hover:text-white transition-colors text-sm">
+                        <a href="{{ site_settings.linkedin_url }}" target="_blank" rel="noopener noreferrer"
+                            class="w-8 h-8 rounded-full bg-white/10 hover:bg-navy-600 text-white/80 hover:text-white flex items-center justify-center transition-all text-xs"
+                            aria-label="LinkedIn">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                         {% endif %}
+                        <a href="https://www.youtube.com/watch?v=-WbS28O_JLY&t=23s" target="_blank" rel="noopener noreferrer"
+                            class="w-8 h-8 rounded-full bg-white/10 hover:bg-red-600 text-white/80 hover:text-white flex items-center justify-center transition-all text-xs"
+                            aria-label="YouTube Documentary">
+                            <i class="fab fa-youtube"></i>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Quick Links -->
+                <!-- Column 2: Healthcare Programs -->
                 <div>
-                    <h3 class="text-sm font-semibold uppercase tracking-wider text-white/40 mb-4">Company</h3>
-                    <ul class="space-y-2.5">
-                        <li><a href="{% url 'home' %}"
-                                class="text-sm text-white/60 hover:text-white transition-colors">Home</a></li>
-                        <li><a href="{% url 'about' %}"
-                                class="text-sm text-white/60 hover:text-white transition-colors">About Us</a></li>
-                        <li><a href="{% url 'services' %}"
-                                class="text-sm text-white/60 hover:text-white transition-colors">Services</a></li>
-                        <li><a href="{% url 'impact' %}"
-                                class="text-sm text-white/60 hover:text-white transition-colors">Impact</a></li>
-                        <li><a href="{% url 'news_list' %}"
-                                class="text-sm text-white/60 hover:text-white transition-colors">News</a></li>
-                        <li><a href="{% url 'annual_reports' %}"
-                                class="text-sm text-white/60 hover:text-white transition-colors">Annual Reports</a></li>
-                        <li><a href="{% url 'get_involved' %}"
-                                class="text-sm text-white/60 hover:text-white transition-colors">Get Involved</a></li>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4 font-sans">Our Care</h3>
+                    <ul class="space-y-2.5 text-sm text-white/70">
+                        <li><a href="{% url 'services' %}#primary-care" class="hover:text-white transition-colors">Licensed Clinic Care</a></li>
+                        <li><a href="{% url 'services' %}#community-outreach" class="hover:text-white transition-colors">Mobile Health Outreach</a></li>
+                        <li><a href="{% url 'services' %}#mental-health" class="hover:text-white transition-colors">Mental Health & Counseling</a></li>
+                        <li><a href="{% url 'services' %}#school-health" class="hover:text-white transition-colors">School & Youth Programs</a></li>
+                        <li><a href="{% url 'services' %}#telehealth-service" class="hover:text-white transition-colors">USSD Telemedicine (*149*46#)</a></li>
+                        <li><a href="{% url 'gallery' %}" class="hover:text-white transition-colors">Field Photo Archive</a></li>
                     </ul>
                 </div>
 
-                <!-- Services -->
+                <!-- Column 3: The Organization -->
                 <div>
-                    <h3 class="text-sm font-semibold uppercase tracking-wider text-white/40 mb-4">Services</h3>
-                    <ul class="space-y-2.5">
-                        <li><a href="{% url 'services' %}#primary-care"
-                                class="text-sm text-white/60 hover:text-white transition-colors">Primary Care</a></li>
-                        <li><a href="{% url 'services' %}#mental-health"
-                                class="text-sm text-white/60 hover:text-white transition-colors">Mental Health</a></li>
-                        <li><a href="{% url 'services' %}#community-outreach"
-                                class="text-sm text-white/60 hover:text-white transition-colors">Community Outreach</a>
-                        </li>
-                        <li><a href="{% url 'services' %}#school-health"
-                                class="text-sm text-white/60 hover:text-white transition-colors">Youth Programs</a></li>
-                        <li><a href="{% url 'services' %}#telehealth-service"
-                                class="text-sm text-white/60 hover:text-white transition-colors">Telehealth</a></li>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4 font-sans">The Organization</h3>
+                    <ul class="space-y-2.5 text-sm text-white/70">
+                        <li><a href="{% url 'about' %}" class="hover:text-white transition-colors">Our Story & Founder</a></li>
+                        <li><a href="{% url 'about' %}#team-section" class="hover:text-white transition-colors">Clinical & Leadership Team</a></li>
+                        <li><a href="{% url 'impact' %}" class="hover:text-white transition-colors">Impact & Statistics</a></li>
+                        <li><a href="{% url 'annual_reports' %}" class="hover:text-white transition-colors">Audits & Annual Reports</a></li>
+                        <li><a href="{% url 'news_list' %}" class="hover:text-white transition-colors">Field Dispatches & News</a></li>
+                        <li><a href="{% url 'donate' %}" class="text-terracotta-300 hover:text-white transition-colors font-medium">Support Our Work</a></li>
                     </ul>
                 </div>
 
-                <!-- Contact -->
+                <!-- Column 4: Contact & Operations -->
                 <div>
-                    <h3 class="text-sm font-semibold uppercase tracking-wider text-white/40 mb-4">Contact</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-map-marker-alt text-brand-400 mt-0.5 text-sm"></i>
-                            <span class="text-sm text-white/60">{{ site_settings.address }}</span>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4 font-sans">Headquarters</h3>
+                    <ul class="space-y-3 text-sm text-white/70">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fas fa-location-dot text-terracotta-400 mt-1 text-xs shrink-0"></i>
+                            <span>{{ site_settings.address }}</span>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-phone-alt text-brand-400 mt-0.5 text-sm"></i>
-                            <span class="text-sm text-white/60">{{ site_settings.phone }}</span>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fas fa-phone text-sand-400 mt-1 text-xs shrink-0"></i>
+                            <a href="tel:{{ site_settings.phone|cut:' ' }}" class="hover:text-white transition-colors">{{ site_settings.phone }}</a>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-envelope text-brand-400 mt-0.5 text-sm"></i>
-                            <span class="text-sm text-white/60">{{ site_settings.email }}</span>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fas fa-envelope text-sand-400 mt-1 text-xs shrink-0"></i>
+                            <a href="mailto:{{ site_settings.email }}" class="hover:text-white transition-colors truncate">{{ site_settings.email }}</a>
                         </li>
-                        <li class="flex items-start gap-3">
-                            <i class="fas fa-globe text-brand-400 mt-0.5 text-sm"></i>
-                            <span class="text-sm text-white/60">{{ site_settings.website }}</span>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fas fa-tower-broadcast text-sand-400 mt-1 text-xs shrink-0"></i>
+                            <span>USSD Code: <strong class="text-white font-mono">*149*46#</strong> (Tanzania)</span>
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <!-- Bottom Bar -->
-            <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-xs text-white/40">&copy; 2025-2026 Primetel Health. All rights reserved.</p>
-                <div class="flex gap-6">
-                    <a href="#" class="text-xs text-white/40 hover:text-white/70 transition-colors">Privacy Policy</a>
-                    <a href="#" class="text-xs text-white/40 hover:text-white/70 transition-colors">Terms of Service</a>
+            <!-- Bottom Copyright & Disclaimers -->
+            <div class="border-t border-navy-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/50">
+                <p>&copy; 2020–2026 Primetel Health. All rights reserved. Operating as a licensed healthcare organization in Tanzania.</p>
+                <div class="flex items-center gap-6">
+                    <a href="{% url 'contact_us' %}" class="hover:text-white transition-colors">Inquiries</a>
+                    <a href="{% url 'annual_reports' %}" class="hover:text-white transition-colors">Transparency</a>
+                    <a href="{% url 'donate' %}" class="hover:text-white transition-colors text-terracotta-300">Donate</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Shared Scripts -->
+    <!-- Shared Navigation & Scroll JS -->
     <script>
-        // Mobile menu toggle
+        // Mobile Drawer Toggle
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const iconOpen = document.getElementById('menu-icon-open');
         const iconClose = document.getElementById('menu-icon-close');
 
-        menuBtn.addEventListener('click', () => {
-            const isHidden = mobileMenu.classList.toggle('hidden');
-            iconOpen.classList.toggle('hidden', !isHidden);
-            iconClose.classList.toggle('hidden', isHidden);
-        });
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.toggle('hidden');
+                iconOpen.classList.toggle('hidden', !isHidden);
+                iconClose.classList.toggle('hidden', isHidden);
+            });
+        }
 
-        // Nav scroll effect
+        // Nav Scroll Effect
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('main-nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('nav-scrolled');
-            } else {
-                nav.classList.remove('nav-scrolled');
+            if (nav) {
+                if (window.scrollY > 40) {
+                    nav.classList.add('nav-scrolled');
+                } else {
+                    nav.classList.remove('nav-scrolled');
+                }
             }
         });
 
-        // Scroll-triggered fade-in animation
-        const observer = new IntersectionObserver((entries) => {
+        // Intersection Observer for subtle fade-in animations
+        const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
-        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    e.preventDefault();
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                        iconOpen.classList.remove('hidden');
-                        iconClose.classList.add('hidden');
-                    }
-                }
-            });
-        });
+        document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
     </script>
 
     {% block extra_js %}{% endblock %}
